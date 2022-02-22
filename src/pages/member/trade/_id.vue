@@ -1,0 +1,657 @@
+<style lang="scss" scoped>
+@import '../member.scss';
+.page-order-detail {
+  position: relative;
+  margin-bottom: 100px;
+  .member-content {
+    font-size: 12px;
+    @include clearfix();
+    &-left {
+      float: left;
+      width: 215px;
+      min-height: 700px;
+      border: 1px solid $color-border-gray-light;
+      border-radius: 4px;
+    }
+
+    &-right {
+      min-height: 700px;
+      float: left;
+      border: 1px solid $color-border-gray-light;
+      // // box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.1);
+      // border-radius: 4px;
+      &-limit {
+        width: 600px;
+      }
+    }
+  }
+  .btn {
+    background-color: #fff;
+    cursor: pointer;
+    border-radius: 3px;
+    height: 32px;
+    text-align: center;
+    line-height: 32px;
+    border: 1px solid $color-border-gray-light;
+    &:hover {
+      background-color: $color-border-gray-light;
+    }
+  }
+  .btn-primary {
+    background-color: $color-brand-primary;
+    border: 1px solid $color-brand-primary;
+    color: #fff;
+    &:hover {
+      background-color: $color-brand-primary;
+    }
+  }
+  .member-content-right {
+    .member-content-right-hd {
+      font-size: 14px;
+      height: 46px;
+      line-height: 45px;
+      padding: 0 20px;
+      border-bottom: 1px solid $color-border-gray-light;
+
+      .order-id {
+      }
+      .order-status {
+        margin-left: 30px;
+      }
+      .order-btn {
+        // display: inline-block;
+        float: right;
+        // width: 90px;
+      }
+    }
+    .member-content-right-bd {
+      padding: 20px;
+      .bd-border {
+        margin: 20px 0;
+        border-bottom: 1px solid $color-border-gray-light;
+      }
+      .order_message {
+        display: inline-block;
+        vertical-align: top;
+      }
+    }
+  }
+  .dailog {
+    .dailog-hd {
+      height: 36px;
+      line-height: 36px;
+      font-size: 14px;
+      padding-left: 15px;
+      border-bottom: 1px solid $color-border-gray-light;
+    }
+    .dailog-bd {
+      padding: 20px;
+      text-align: center;
+    }
+    .dailog-ft {
+      width: 100%;
+      position: absolute;
+      bottom: 0;
+      text-align: center;
+      padding-bottom: 20px;
+    }
+  }
+  .dailog-close {
+  }
+  .dailog-cancel {
+    .dailog-bd-input {
+      width: 300px;
+      display: inline-block;
+    }
+  }
+  .status-code {
+    text-align: center;
+    float: left;
+    width: 30%;
+    padding-top: 15px;
+    .status-text {
+      padding: 10px;
+      color: #f56c6c;
+      font-size: 25px;
+    }
+  }
+
+  .timeline {
+    padding-left: 150px;
+    float: right;
+    width: 65%;
+
+    // margin-top: -15px;
+    max-height: 250px;
+    overflow: auto;
+    .timeline-item {
+      position: relative;
+      padding-bottom: 20px;
+
+      .time-day {
+        margin-left: -140px;
+        position: relative;
+        top: 14px;
+      }
+
+      &:nth-last-child(1) {
+        .timeline-item__tail {
+          display: none;
+        }
+      }
+      .timeline-item__tail {
+        position: absolute;
+        left: 4px;
+        height: 100%;
+        border-left: 2px solid #e4e7ed;
+      }
+
+      .timeline-item__node {
+        position: absolute;
+        background-color: #e4e7ed;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        left: -1px;
+        width: 12px;
+        height: 12px;
+        .success {
+          color: $color-active;
+        }
+      }
+      .timeline-item__node_color {
+        background-color: white;
+      }
+      .timeline-item__wrapper {
+        position: relative;
+        padding-left: 28px;
+        top: -3px;
+      }
+    }
+  }
+  .ziti-warp {
+    padding-left: 150px;
+    float: right;
+    width: 65%;
+    padding-top: 15px;
+    .ziti-warp-content {
+      float: right;
+      max-height: 250px;
+      overflow: auto;
+      width: 85%;
+      .ziti-item {
+        text-align: left;
+        margin-bottom: 25px;
+        h4 {
+          font-size: 16px;
+          font-weight: bold;
+        }
+        p {
+          padding: 5px 0;
+        }
+      }
+    }
+  }
+  .btn-warp {
+    padding: 15px;
+
+    .btn {
+      width: 80px;
+      height: 35px;
+      color: white;
+      font-size: 14px;
+      background-color: $color-brand-primary;
+      &:hover {
+        background-color: $color-secondary-text;
+      }
+    }
+  }
+  .btn-warp-bt {
+    position: relative;
+    bottom: -30px;
+    cursor: pointer;
+    i {
+      font-size: 15px;
+    }
+  }
+  .status-log {
+  }
+}
+</style>
+
+<template>
+  <div class="page-order-detail page-member-container">
+    <div class="member-content">
+      <div class="member-content-left">
+        <smenu activeTitle="order"></smenu>
+      </div>
+      <div class="member-content-right">
+        <div class="member-content-right-body">
+          <div class="member-content-right-hd clearfix">
+            <span style="cursor: pointer" @click="clickToList"
+              ><i class="ec-icon ec-icon-back_android"></i>返回订单列表</span
+            >
+            <span class="order-id">订单：{{ orderInfo.order_id }}</span>
+            <!-- <span class="order-status">状态：{{orderStatusText[orderInfo.order_status_des]}}</span> -->
+            <!-- <div class="order-btn">
+
+              <button class="btn btn-primary" @click="clickBtn('付款')" v-if="step == 1">现在付款</button>
+              <button class="btn" @click="clickBtn('取消订单')" v-if="step == 1 || step == 2">取消订单</button>
+
+            </div> -->
+          </div>
+          <div class="member-content-right-bd">
+            <!-- 步骤条 -->
+            <!-- <SpSteps :steps="4" :step="step" :stepsText="stepsText" /> -->
+            <div class="clearfix status-log">
+              <div class="status-code">
+                订单号：{{ orderInfo.order_id }}
+                <div class="status-text">
+                  {{ isZiti ? '待自提' : orderStatusText[orderInfo.order_status_des] }}
+                </div>
+                <span v-if="isZiti">请尽快前往自提点自提</span>
+                <span v-if="!isZiti && orderInfo.order_status_des == 'NOTPAY'"
+                  ><i class="ec-icon ec-icon-time"></i>剩余{{ cancelTime }}</span
+                >
+                <div class="btn-warp">
+                  <button
+                    class="btn"
+                    @click="clickBtn('付款')"
+                    v-if="step == 1 && orderInfo.pay_type != 'point'"
+                  >
+                    付 款
+                  </button>
+                  <button class="btn" v-if="step == 3" @click="clickBtn('确认收货')">
+                    确认收货
+                  </button>
+                </div>
+                <div
+                  class="btn-warp-bt"
+                  @click="clickBtn('取消订单')"
+                  v-if="step == 1 || step == 2"
+                >
+                  <i class="ec-icon ec-icon-roundclose"> 取消订单</i>
+                </div>
+              </div>
+
+              <div class="ziti-warp clearfix" v-if="isZiti">
+                自提点
+                <div class="ziti-warp-content">
+                  <div v-for="item in zitiData" class="ziti-item">
+                    <h4 style="">{{ item.name }}</h4>
+                    <p>{{ item.store_address }}</p>
+                    <p>营业时间:{{ item.hour }}</p>
+                  </div>
+                </div>
+              </div>
+              <div class="timeline" v-else>
+                <ul class>
+                  <template v-for="(item, index) in activities">
+                    <li class="timeline-item">
+                      <span class="time-day">
+                        {{ item.AcceptTime | parseTime }}
+                      </span>
+
+                      <div class="timeline-item__tail"></div>
+                      <div
+                        class="timeline-item__node"
+                        :class="index == 0 ? 'timeline-item__node_color' : ''"
+                      >
+                        <i class="ec-icon ec-icon-roundcheck success" v-if="index == 0"></i>
+                        <!---->
+                      </div>
+                      <!---->
+                      <div class="timeline-item__wrapper">
+                        <!---->
+                        <div class="el-timeline-item__content">{{ item.AcceptStation }}</div>
+                        <div class="el-timeline-item__timestamp is-bottom"></div>
+                      </div>
+                    </li>
+                  </template>
+                </ul>
+              </div>
+            </div>
+
+            <p class="bd-border"></p>
+            <div
+              :style="{
+                width: orderStatus !== 'CANCEL' ? '45%' : '90%',
+                bordeRight: orderStatus !== 'CANCEL' ? '1px solid #e5e5e5' : 'none'
+              }"
+              class="order_message"
+            >
+              <!-- 收货人信息 -->
+              <Receive :receiveData="receiveData" />
+            </div>
+            <!-- 付款信息 -->
+            <div
+              style="width: 45%;"
+              class="order_message"
+              v-if="orderStatus && orderStatus !== 'CANCEL'"
+            >
+              <PayInfo :receiveData="receiveData"></PayInfo>
+            </div>
+
+            <p class="bd-border"></p>
+            <OrderGood
+              :orderGoodData="orderGoodData"
+              :orderTotalData="orderTotalData"
+              @change="getOrderInfo"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <SpModal v-model="dailogCancel" :height="200" :width="450">
+      <div class="dailog dailog-cancel">
+        <div class="dailog-hd">取消订单</div>
+        <div class="dailog-bd">
+          <span>订单号：{{ this.$route.params.id }}</span>
+          <div style="padding-top: 20px">
+            <!-- <span style="display:inline-block;width:100px;text-align:right">取消原因：</span>
+            <SpInput placeholder="必填：取消原因" v-model="cancelMean" class="dailog-bd-input" />-->
+            <SpForm ref="form" :model="form" :rules="rules">
+              <SpFormItem prop="cancelMean">
+                <span style="display: inline-block; width: 80px; text-align: right"
+                  >取消原因：</span
+                >
+                <SpInput
+                  class="dailog-bd-input"
+                  v-model="form.cancelMean"
+                  placeholder="必填：取消原因"
+                />
+              </SpFormItem>
+            </SpForm>
+          </div>
+        </div>
+
+        <div class="dailog-ft">
+          <button class="btn btn-primary" @click="clickBtn('订单取消确认')">确认取消</button>
+          <button class="btn" @click="clickBtn('取消')">暂不取消</button>
+        </div>
+      </div>
+    </SpModal>
+  </div>
+</template>
+
+<script>
+import smenu from './../comps/smenu'
+import Receive from './comps/receive' //收件人信息。数据key按照接口返回的给，详细看组件
+import PayInfo from './comps/payInfo' //收件人信息。数据key按照接口返回的给，详细看组件
+
+import OrderGood from './comps/order-good'
+import { getOrderInfo, orderCancel, confirmOrder } from '@/api/member'
+import { deliveryInfo } from '@/api/trade'
+
+export default {
+  data() {
+    return {
+      step: 0,
+      stepsText: [
+        '订单已生成,等待您付款',
+        '您已付款成功,等待商家发货',
+        '商家已经发货,等待您确认收货',
+        '订单完成'
+      ],
+      orderInfo: {},
+      receiveData: {}, //收货人信息
+      orderGoodData: {}, //商品信息
+      orderTotalData: {}, //总价信息
+      orderStatusText: {
+        NOTPAY: '未付款',
+        PAYED: '待发货',
+        WAIT_BUYER_CONFIRM: '待收货',
+        FAIL: '已关闭',
+        CANCEL: '已取消',
+        PAYED_WAIT_PROCESS: '退款处理中',
+        PAYED_PARTAIL: '部分发货',
+        CLOSED: '已关闭',
+        DONE: '已完成'
+      }, //状态字典
+      orderStatus: '',
+      dailogCancel: false,
+
+      form: { cancelMean: '' },
+      rules: {
+        cancelMean: [{ validate: 'required', message: '取消原因必填' }]
+      },
+      activities: [
+        {
+          AcceptStation: '0',
+          AcceptTime: '0'
+        }
+      ],
+      zitiData: [],
+      isZiti: false,
+      timer: null,
+      auto_cancel_seconds: 0,
+      cancelTime: ''
+    }
+  },
+  computed: {},
+  components: {
+    smenu,
+    Receive,
+    OrderGood,
+    PayInfo
+  },
+  created() {
+    this.getOrderInfo()
+  },
+  mounted() {
+    this.timer = setInterval(this.timers, 1000)
+  },
+  beforeDestroy() {
+    clearInterval(this.timer)
+  },
+  methods: {
+    async getOrderInfo() {
+      let { id } = this.$route.params
+      let { orderInfo, distributor, tradeInfo } = await getOrderInfo({ id })
+
+      this.zitiData = [distributor]
+      let {
+        order_status,
+        order_type,
+        pay_type,
+        point,
+        freight_type,
+        receipt_type,
+        receiver_address,
+        receiver_city,
+        receiver_district,
+        receiver_mobile,
+        receiver_name,
+        create_time,
+        receiver_state,
+        receiver_zip,
+        item_fee,
+        freight_fee,
+        total_fee,
+        order_status_des,
+        delivery_corp_name,
+        delivery_code,
+        auto_cancel_seconds,
+        order_class
+      } = orderInfo
+      this.orderGoodData = {
+        can_apply_aftersales: orderInfo.can_apply_aftersales,
+        detail: orderInfo.items,
+        pay_type,
+        order_class
+      }
+      let { payDate } = tradeInfo
+      this.orderStatus = order_status
+      this.receiveData = {
+        receipt_type,
+        receiver_address,
+        receiver_city,
+        receiver_district,
+        receiver_mobile,
+        receiver_name,
+        receiver_state,
+        receiver_zip,
+        delivery_corp_name,
+        delivery_code,
+        pay_type,
+        create_time,
+        payDate
+      }
+      // order_status_des='WAIT_BUYER_CONFIRM'
+      this.auto_cancel_seconds = auto_cancel_seconds
+      this.orderTotalData = {
+        create_time,
+        item_fee,
+        freight_fee,
+        total_fee,
+        order_status_des,
+        pay_type,
+        point,
+        freight_type,
+        point,
+        order_class
+      }
+      this.orderInfo = orderInfo
+      let activities
+      switch (order_status_des) {
+        case 'NOTPAY':
+          this.step = 1
+          activities = [
+            {
+              AcceptStation: '待支付',
+              AcceptTime: create_time
+            }
+          ]
+          break
+        case 'PAYED':
+          this.step = 2
+          activities = [
+            {
+              AcceptStation: '已付款',
+              AcceptTime: payDate
+            },
+            {
+              AcceptStation: '待支付',
+              AcceptTime: create_time
+            }
+          ]
+          break
+        case 'WAIT_BUYER_CONFIRM':
+          this.step = 3
+
+          break
+        case 'DONE':
+          this.step = 4
+          break
+        case 'SUCCESS':
+          this.step = 4
+          break
+        case 'PAYED_WAIT_PROCESS':
+          this.step = -1
+          break
+        case 'CANCEL':
+          this.step = -1
+          break
+        case 'FAIL':
+          this.step = -1
+          break
+        case 'PAYED_PARTAIL':
+          this.step = 2
+          break
+        default:
+          this.step = 0
+          break
+      }
+      this.activities = activities
+      if (this.step == 4 || this.step == 3) {
+        deliveryInfo({ order_type, order_id: id }).then((res) => {
+          activities = [
+            {
+              AcceptStation: '已付款',
+              AcceptTime: payDate
+            },
+            {
+              AcceptStation: '待支付',
+              AcceptTime: create_time
+            }
+          ]
+          this.activities = res.reverse().concat(activities)
+          console.log('----this.activities---', this.activities)
+        })
+      }
+    },
+    clickBtn(type) {
+      switch (type) {
+        case '付款':
+          this.$router.push(`/cashier?order_id=${this.$route.params.id}`)
+          break
+        case '确认收货':
+          confirmOrder({
+            order_id: this.$route.params.id
+          }).then((res) => {
+            this.$Message.success('收货成功')
+            this.getTradeList()
+          })
+
+          break
+        case '取消订单':
+          this.dailogCancel = true
+          break
+        case '取消':
+          this.dailogCancel = false
+          break
+        case '订单取消确认':
+          this.$refs['form'].validate((valid, errors) => {
+            if (valid) {
+              orderCancel({
+                order_id: this.$route.params.id,
+                cancel_reason: this.form.cancelMean
+              }).then(() => {
+                this.getOrderInfo()
+              })
+            }
+          })
+          break
+      }
+    },
+    timers() {
+      let theTime = parseInt(this.auto_cancel_seconds) // 需要转换的时间秒
+      let theTime1 = 0 // 分
+      let theTime2 = 0 // 小时
+      let theTime3 = 0 // 天
+      if (theTime > 60) {
+        theTime1 = parseInt(theTime / 60)
+        theTime = parseInt(theTime % 60)
+        if (theTime1 > 60) {
+          theTime2 = parseInt(theTime1 / 60)
+          theTime1 = parseInt(theTime1 % 60)
+          if (theTime2 > 24) {
+            //大于24小时
+            theTime3 = parseInt(theTime2 / 24)
+            theTime2 = parseInt(theTime2 % 24)
+          }
+        }
+      }
+      let result = ''
+      if (theTime > 0) {
+        result = '' + parseInt(theTime) + '秒'
+      }
+      if (theTime1 > 0) {
+        result = '' + parseInt(theTime1) + '分' + result
+      }
+      if (theTime2 > 0) {
+        result = '' + parseInt(theTime2) + '小时' + result
+      }
+      if (theTime3 > 0) {
+        result = '' + parseInt(theTime3) + '天' + result
+      }
+      this.cancelTime = result
+      this.auto_cancel_seconds--
+    },
+    clickToList() {
+      this.$router.push('/member/trade')
+    }
+  }
+}
+</script>

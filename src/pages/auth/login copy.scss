@@ -1,0 +1,20 @@
+.page-auth-login {
+  // background: url('http://images.bbc.shopex123.com/images/92/ea/db/c305b27c2f5c305ec0d37fbb0782c5b0c0e4eeb9.jpg');
+  // background-size: cover;
+  // background-position: center;
+  // height: 580px;
+  .login-con {
+    width: 500px;
+    border-radius: 5px;
+    padding: 30px 40px;
+    border: 1px solid $color-border-gray;
+    margin: 100px auto 0;
+    &__title {
+      font-size: 22px;
+      text-align: center;
+    }
+    &__bd {
+      margin-top: 20px;
+    }
+  }
+}
