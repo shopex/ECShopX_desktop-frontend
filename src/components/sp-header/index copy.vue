@@ -26,7 +26,10 @@
           </div>
         </div>
         <div class="topbar-member fr">
+          <NuxtLink to="/cart" style="margin-right:0;">我的购物车</NuxtLink>
+          <span>|</span>
           <NuxtLink to="/member/user-info">会员中心</NuxtLink>
+          <span>|</span>
           <!-- 隐藏商家中心 -->
           <!-- <NuxtLink to="/member/user-info">商家中心</NuxtLink> -->
           <NuxtLink to="/member/trade">我的订单</NuxtLink>
