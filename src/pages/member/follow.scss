@@ -55,7 +55,8 @@
             .item-logo {
               width: 100px;
               height: 100px;
-              background: red;
+              // background: red;
+              border: 1px solid #f5f6fa;
             }
             .shop-name {
               font-size: 16px;
@@ -89,6 +90,9 @@
               // background: #ffffff;
               padding: 13px 18px 13px 13px;
               color: #8c8c8c;
+              .color-icom{
+                color: #FF5D02;
+              }
             }
           }
         }

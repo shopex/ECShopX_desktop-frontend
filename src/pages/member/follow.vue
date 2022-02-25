@@ -17,149 +17,30 @@
             <div>
               <div class="content-list">
                 <!-- 列表 -->
-                <div class="content-list-item">
+                <div class="content-list-item" v-for="(item,index) of shopList" :key="index">
                   <div class="item-top">
-                    <div class="item-logo"></div>
+                    <div >
+                      <img :src="item.logo" class="item-logo" alt="">
+                    </div>
                     <div>
-                      <div class="shop-name">店铺名称</div>
-                      <div class="shop-follow">1个关注</div>
+                      <div class="shop-name">{{item.name}}</div>
+                      <div class="shop-follow">{{item.fav_num}}个关注</div>
                     </div>
                   </div>
                   <div class="item-bottom">
-                    <div class="item-bottom-left">
+                    <div class="item-bottom-left" @click="goStore(item.distributor_id)">
                       <i class="ec-icon ec-icon-shoplight"></i>
                       <span style="color: #8c8c8c;">进入店铺</span>
                     </div>
-                    <div class="item-bottom-right">
-                      <i class="ec-icon ec-icon-favor_light"></i>
-                      <span style="color: #8c8c8c;">取消关注</span>
+                    <div class="item-bottom-right" @click="collectShops(item.distributor_id)">
+                      <i v-if="iconShow" class="ec-icon ec-icon-favorfill color-icom"></i>
+                      <i v-else class="ec-icon ec-icon-favor_light"></i>
+                      <span style="color: #8c8c8c;" >取消关注</span>
                     </div>
                   </div>
                 </div>
-
-                <div class="content-list-item">
-                  <div class="item-top">
-                    <div class="item-logo"></div>
-                    <div>
-                      <div class="shop-name">店铺名称</div>
-                      <div class="shop-follow">1个关注</div>
-                    </div>
-                  </div>
-                  <div class="item-bottom">
-                    <div class="item-bottom-left">
-                      <i class="ec-icon ec-icon-shoplight"></i>
-                      <span style="color: #8c8c8c;">进入店铺</span>
-                    </div>
-                    <div class="item-bottom-right">
-                      <i class="ec-icon ec-icon-favor_light"></i>
-                      <span style="color: #8c8c8c;">取消关注</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="content-list-item">
-                  <div class="item-top">
-                    <div class="item-logo"></div>
-                    <div>
-                      <div class="shop-name">店铺名称</div>
-                      <div class="shop-follow">1个关注</div>
-                    </div>
-                  </div>
-                  <div class="item-bottom">
-                    <div class="item-bottom-left">
-                      <i class="ec-icon ec-icon-shoplight"></i>
-                      <span style="color: #8c8c8c;">进入店铺</span>
-                    </div>
-                    <div class="item-bottom-right">
-                      <i class="ec-icon ec-icon-favor_light"></i>
-                      <span style="color: #8c8c8c;">取消关注</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="content-list-item">
-                  <div class="item-top">
-                    <div class="item-logo"></div>
-                    <div>
-                      <div class="shop-name">店铺名称</div>
-                      <div class="shop-follow">1个关注</div>
-                    </div>
-                  </div>
-                  <div class="item-bottom">
-                    <div class="item-bottom-left">
-                      <i class="ec-icon ec-icon-shoplight"></i>
-                      <span style="color: #8c8c8c;">进入店铺</span>
-                    </div>
-                    <div class="item-bottom-right">
-                      <i class="ec-icon ec-icon-favor_light"></i>
-                      <span style="color: #8c8c8c;">取消关注</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="content-list-item">
-                  <div class="item-top">
-                    <div class="item-logo"></div>
-                    <div>
-                      <div class="shop-name">店铺名称</div>
-                      <div class="shop-follow">1个关注</div>
-                    </div>
-                  </div>
-                  <div class="item-bottom">
-                    <div class="item-bottom-left">
-                      <i class="ec-icon ec-icon-shoplight"></i>
-                      <span style="color: #8c8c8c;">进入店铺</span>
-                    </div>
-                    <div class="item-bottom-right">
-                      <i class="ec-icon ec-icon-favor_light"></i>
-                      <span style="color: #8c8c8c;">取消关注</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="content-list-item">
-                  <div class="item-top">
-                    <div class="item-logo"></div>
-                    <div>
-                      <div class="shop-name">店铺名称</div>
-                      <div class="shop-follow">1个关注</div>
-                    </div>
-                  </div>
-                  <div class="item-bottom">
-                    <div class="item-bottom-left">
-                      <i class="ec-icon ec-icon-shoplight"></i>
-                      <span style="color: #8c8c8c;">进入店铺</span>
-                    </div>
-                    <div class="item-bottom-right">
-                      <i class="ec-icon ec-icon-favor_light"></i>
-                      <span style="color: #8c8c8c;">取消关注</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="content-list-item">
-                  <div class="item-top">
-                    <div class="item-logo"></div>
-                    <div>
-                      <div class="shop-name">店铺名称</div>
-                      <div class="shop-follow">1个关注</div>
-                    </div>
-                  </div>
-                  <div class="item-bottom">
-                    <div class="item-bottom-left">
-                      <i class="ec-icon ec-icon-shoplight"></i>
-                      <span style="color: #8c8c8c;">进入店铺</span>
-                    </div>
-                    <div class="item-bottom-right">
-                      <i class="ec-icon ec-icon-favor_light"></i>
-                      <span style="color: #8c8c8c;">取消关注</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div></div>
               </div>
-              <div class="pagination-wrap">
+              <!-- <div class="pagination-wrap">
                 <SpPagination
                   :total="total"
                   :pageSize="pageSize"
@@ -167,7 +48,7 @@
                   @on-change="changePage"
                   :maxPage="5"
                 />
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
@@ -183,14 +64,23 @@ import smenu from './comps/smenu'
 import Tips from './comps/tips'
 
 export default {
+  async asyncData({ app }) {
+    const res = await app.$api.member.getCollectionStoreList()
+    return {
+      shopList : res.list
+    }
+  },
   components: { smenu, CollectorItem, Tips },
+
   data() {
     return {
       list: null,
       page: 1,
       pageSize: 20,
       total: 1,
-      curTypeIndex: 0
+      curTypeIndex: 0,
+      iconShow: true,
+      shopList: null
     }
   },
   computed: {
@@ -201,9 +91,26 @@ export default {
 
   mounted() {},
   methods: {
-    changePage(val) {
+    /* changePage(val) {
       this.page = val
       this.fetch()
+    }, */
+    // 进入店铺功能
+    goStore(id){
+      console.log('111111111');
+      this.$router.push({
+        path: '/shopInfo',
+        query: {
+          distributor_id: id
+        }
+      })
+    },
+    // 取消收藏
+    async collectShops(id){
+      const data = await this.$api.member.removeCollectionStore(id)
+      if (!data.message) {
+         this.shopList = this.shopList.filter(item =>item.distributor_id != id )
+      }
     }
   }
 }

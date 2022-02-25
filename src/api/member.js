@@ -156,6 +156,10 @@ export const getCollectionStoreList = (params) => {
 export const getCollectionList = (params) => {
   return req.get(`/api/h5app/wxapp/member/collect/item`, params)
 }
+// 是否收藏店铺
+export const showStoreIcon = (id) => {
+  return req.get(`/api/h5app/wxapp/member/collect/distribution/check?distributor_id=${id}`)
+}
 
 
 // 获取vip列表

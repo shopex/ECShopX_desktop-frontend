@@ -27,16 +27,35 @@ $goods-color-primary: #1f201f;
     .imgs-content {
       display: flex;
       align-items: center;
+      position: relative;
+      right: 70px;
       .goods-imgs {
-        width: 50px;
-        height: 50px;
-        border: 1px solid #f5f6fa;
+        width: 24px;
+        height: 24px;
+        border: 1px solid #fff;
         margin-right: 20px;
       }
     }
     .details-right {
       position: relative;
-      left: 120px;
+      left: 150px;
+      input{
+        width: 280px;
+        height: 32px;
+        border-radius: 20px;
+        border: 2px #FF8600 solid;
+        padding-left: 8px;
+      }
+      button{
+        width: 90px;
+        height: 32px;
+        border-radius: 20px;
+        border: 2px #FF8600 solid;
+        background: #FF8600;
+        color: #fff;
+        position: relative;
+        right: 95px;
+      }
     }
   }
   .goods-details {
@@ -50,14 +69,17 @@ $goods-color-primary: #1f201f;
       .goods-sort {
         padding: 0px 10px;
         margin-bottom: 15px;
-        border: 1px solid rgba($color: #000000, $alpha: 0.4);
+        // border: 1px solid rgba($color: gray, $alpha: 0.4);
+        // box-shadow: 0px 0px 1px gray;
         .sort-title {
-          font-size: 17px;
-          color: gray;
+          font-size: 14px;
+          background: #f5f5f5;
+          color: #646464;
           padding: 15px 10px;
-          border-bottom: 1px solid rgba($color: gray, $alpha: 0.4);
+          border: 1px solid rgba($color: gray, $alpha: 0.4);
         }
         .list-boby {
+          border: 1px solid rgba($color: gray, $alpha: 0.4);
           padding-left: 25px;
           font-size: 20px;
           .content-icon {
@@ -79,6 +101,10 @@ $goods-color-primary: #1f201f;
               color: #3b3b3b;
               display: flex;
               justify-content: space-between;
+              .next-menu-icon{
+                position: relative;
+                left: 10px;
+              }
             }
             .three-menu {
               li {

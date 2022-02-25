@@ -1,6 +1,11 @@
 .page-item-detail {
   background-color: #f5f6fa;
   .container {
+    hr{
+      border: none;
+      height: 1px;
+      background-color: #f5f6fa;
+    }
     .content-top {
       display: flex;
       margin-bottom: 20px;
@@ -42,10 +47,11 @@
       display: flex;
       align-items: center;
       background: #ffffff;
-
+      padding-bottom: 5px;
       .sort-title {
         width: 234px;
         height: 48px;
+        margin-left: 5px;
         background: #ff5d02;
         font-size: 16px;
         font-family: SourceHanSansCN-Heavy, SourceHanSansCN;
@@ -61,11 +67,19 @@
       padding-top: 20px;
       display: flex;
       background: #f5f6fa;
+      .goods-sort::-webkit-scrollbar {
+        height: 0;
+        width: 0;
+    }
       .goods-sort {
         width: 234px;
         min-height: 600px;
+        max-height: 1000px;
         padding-bottom: 15px;
         background-color: #fff;
+        overflow: hidden;
+        overflow-x: hidden;
+				overflow-y: scroll;
         .list-boby {
           padding-left: 25px;
           font-size: 20px;
@@ -91,6 +105,10 @@
               color: #3b3b3b;
               display: flex;
               justify-content: space-between;
+              .next-menu-icon{
+                position: relative;
+                left: 10px;
+              }
             }
             .three-menu {
               li {
@@ -106,20 +124,29 @@
           }
         }
       }
+      .cotent-right::-webkit-scrollbar {
+        height: 0;
+        width: 0;
+    }
 
       .cotent-right {
         display: flex;
         flex-direction: column;
-
         margin-left: 20px;
         background: #fff;
         flex: 1;
         min-height: 600px;
+        max-height: 1000px;
+        overflow: hidden;
+        overflow-x: hidden;
+				overflow-y: scroll;
         .content-nothing {
-          font-size: 50px;
+          font-size: 35px;
           text-align: center;
+          color:gray;
           line-height: 600px;
           letter-spacing: 4px;
+          
         }
 
         .right-imgs {

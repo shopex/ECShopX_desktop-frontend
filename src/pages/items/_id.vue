@@ -7,15 +7,15 @@
       <div class="goods-logo">
         <div class="details-left">
           <div class="imgs-content">
-            <div >
-               <img :src="shopInfo.logo" alt="" class="goods-imgs" />
+            <div>
+              <img :src="shopInfo.logo" alt="" class="goods-imgs" />
             </div>
-            <div>{{shopInfo.name}}</div>
+            <div>{{ shopInfo.name }}</div>
           </div>
           <div @click="collectionClick">
-             <i class="ec-icon ec-icon-favor_light left-icon"  v-if="iconShow"></i>
-              <i class="ec-icon ec-icon-favorfill color-icom"  v-else></i>
-            <span>  {{followStore}}</span>
+            <i class="ec-icon ec-icon-favor_light left-icon" v-if="iconShow"></i>
+            <i class="ec-icon ec-icon-favorfill color-icom" v-else></i>
+            <span> {{ followStore }}</span>
           </div>
         </div>
         <div class="imgs-content">
@@ -45,7 +45,7 @@
             <div class="list-boby">
               <ul>
                 <li v-for="(item, index) of menu" :key="index">
-                  <div @click="showNextClick(index)" class="content-icon">
+                  <div @click="showNextClick(index,item.category_id)" class="content-icon">
                     <div>{{ item.category_name }}</div>
                     <div>
                       <i v-if="!item.listShow" class="ec-icon ec-icon-unfold"></i>
@@ -55,16 +55,18 @@
                   <div class="list-boby-next" v-if="item.listShow && item.children.length > 0">
                     <ul>
                       <li v-for="(e, ind) of item.children" :key="ind">
-                        <div class="next-menu" @click="showTwoClick(index, ind)">
+                        <div class="next-menu" @click="showTwoClick(index, ind, e.category_id)">
                           <div>{{ e.category_name }}</div>
-                          <div>
+                          <div class="next-menu-icon">
                             <i v-if="!e.listShow" class="ec-icon ec-icon-unfold"></i>
                             <i v-else class="ec-icon ec-icon-fold"></i>
                           </div>
                         </div>
                         <div class="three-menu" v-show="e.listShow && e.children.length > 0">
                           <ul>
-                            <li  v-for="(threeMenu, a) of e.children" :key="a">{{ threeMenu.category_name }}</li>
+                            <li v-for="(threeMenu, a) of e.children" :key="a"  @click="threeMenuClick(threeMenu.category_id)">
+                              {{ threeMenu.category_name }}
+                            </li>
                           </ul>
                         </div>
                       </li>
@@ -171,10 +173,9 @@ export default {
       item_id,
       is_tdk: 1
     })
-    
 
     const val = await app.$api.shop.getShop({ distributor_id: info.distributor_id })
-    
+    const {is_fav} = await app.$api.member.showStoreIcon(info.distributor_id)
     const param = {
       distributor_id: info.distributor_id,
       company_id: info.company_id
@@ -197,7 +198,8 @@ export default {
       tdk_data: info.tdk_data,
       goodsDesc: Array.isArray(info.intro) ? info.intro : resolveLazyLoadImg(info.intro),
       menu: res,
-      shopInfo: val
+      shopInfo: val,
+      iconShow: !is_fav
     }
   },
   head() {
@@ -250,9 +252,9 @@ export default {
       listShow: false,
       inputText: '',
       meun: null,
-      shopInfo:null,
+      shopInfo: null,
       iconShow: true,
-      followStore:'关注店铺'
+      followStore: '关注店铺'
     }
   },
   computed: {
@@ -295,23 +297,23 @@ export default {
   },
   methods: {
     // 收藏店铺
-     async collectionClick(){
-      if( this.iconShow){
-        this.iconShow = false
+    async collectionClick() {
+      if (this.iconShow) {
         this.followStore = '取消店铺'
+        this.info.distributor_id = 198
         const data = await this.$api.member.addCollectionStore(this.info.distributor_id)
-        if(data){
+        if (!data.message) {
+          this.iconShow = false
           this.$Message.success('收藏成功')
         }
-      }else{
-        this.iconShow = true
+      } else {
         this.followStore = '收藏店铺'
         const data = await this.$api.member.removeCollectionStore(this.info.distributor_id)
-        if(data){
+        if (!data.message) {
+          this.iconShow = true
           this.$Message.success('取消收藏')
         }
       }
-      
     },
 
     changeTab(i) {
@@ -345,13 +347,41 @@ export default {
       this.evaluationList[index].reply.total_count = count
     },
     // 展开二级菜单
-    showNextClick(index) {
+    showNextClick(index,id) {
       this.menu[index].listShow = !this.menu[index].listShow
       this.listShow = !this.listShow
+      if (this.menu[index].children.length == 0) {
+         this.$router.push({
+            path: '/shopInfo',
+            query: {
+              distributor_id: this.info.distributor_id,
+              main_category:id
+            }
+          })
+      }
     },
     //展开三级菜单
-    showTwoClick(index, ind) {
+    showTwoClick(index, ind,id) {
       this.menu[index].children[ind].listShow = !this.menu[index].children[ind].listShow
+       if (this.menu[index].children[ind].children.length == 0) {
+         this.$router.push({
+            path: '/shopInfo',
+            query: {
+              distributor_id: this.info.distributor_id,
+              main_category:id
+            }
+          })
+      }
+    },
+    // 查找商品分类
+    threeMenuClick(id) {
+      this.$router.push({
+        path: '/shopInfo',
+        query: {
+          distributor_id: this.info.distributor_id,
+          main_category:id
+        }
+      })
     },
     // 搜索的转跳所有的商品
     goToItems() {
@@ -365,7 +395,7 @@ export default {
       this.$router.push({
         path: '/shopInfo',
         query: {
-          item_name: this.inputText,
+          keywords: this.inputText,
           distributor_id: this.info.distributor_id
         }
       })
