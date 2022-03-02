@@ -13,7 +13,7 @@
       <div class="container clearfix">
         <div class="topbar-login fl">
           <div class="no-login active">
-            <!-- <NuxtLink to="/" class="index-link">首页</NuxtLink> -->
+            <NuxtLink to="/" class="index-link">首页</NuxtLink>
             <template v-if="!userInfo">
               <NuxtLink to="/auth/login" class="topbar-login__link " style="color:#FF5D02;">请登录</NuxtLink>
               <NuxtLink to="/auth/reg" class="topbar-login__link topbar-register__link ">注册</NuxtLink>
@@ -24,6 +24,7 @@
               <span class="member-phone">{{ userInfo.memberInfo.mobile }}</span>
               <span class="exit-btn" @click="handleLogout()">退出</span>
             </template>
+            
           </div>
         </div>
         <div class="topbar-member fr">

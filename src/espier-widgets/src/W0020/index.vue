@@ -22,10 +22,10 @@
                 </div>
               </div>
               <div class="shop-item-content">
-                <linkPage class="shop-item-content_img" :to="`shopInfo?distributor_id=${shop.shop_id}`" :mode="mode">
+                <linkPage class="shop-item-content_img" :to="`shops/info?distributor_id=${shop.shop_id}`" :mode="mode">
                   <ImgWrap :src="shop.banner" :width="149" :height="246" />
                 </linkPage>
-                <linkPage class="shop-item-content_logo" :to="`shopInfo?distributor_id=${shop.shop_id}`" :mode="mode">
+                <linkPage class="shop-item-content_logo" :to="`shops/info?distributor_id=${shop.shop_id}`" :mode="mode">
                   <ImgWrap :borderRadius="40" :src="shop.logo" :width="80" :height="80" />
                 </linkPage>
                 <div class="shop-item-content_title">

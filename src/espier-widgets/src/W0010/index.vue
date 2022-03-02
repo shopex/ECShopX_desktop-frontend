@@ -133,12 +133,18 @@ export default {
   methods: {
     getCartTotal(cartInfo) {
       if (cartInfo) {
-        const totalPrice = cartInfo.reduce((prev, cur) => {
-          return Number(cur.total_fee) + prev
-        }, 0)
-        const totalCount = cartInfo.reduce((prev, cur) => {
-          return cur.cart_total_count + prev
-        }, 0)
+        let totalPrice = 0
+        let totalCount = 0
+        cartInfo.forEach((item) => {
+          totalPrice += item.list.reduce((prev, cur) => {
+            return Number(cur.total_fee) * cur.num + prev
+          }, 0)
+
+          totalCount += item.list.reduce((prev, cur) => {
+            return Number(cur.num) + prev
+          }, 0)
+        })
+
         this.cartTotal = totalCount
         return {
           totalPrice,

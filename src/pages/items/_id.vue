@@ -352,10 +352,10 @@ export default {
       this.listShow = !this.listShow
       if (this.menu[index].children.length == 0) {
          this.$router.push({
-            path: '/shopInfo',
+            path: '/shops/info',
             query: {
               distributor_id: this.info.distributor_id,
-              main_category:id
+              company_id:id
             }
           })
       }
@@ -365,10 +365,10 @@ export default {
       this.menu[index].children[ind].listShow = !this.menu[index].children[ind].listShow
        if (this.menu[index].children[ind].children.length == 0) {
          this.$router.push({
-            path: '/shopInfo',
+            path: '/shops/info',
             query: {
               distributor_id: this.info.distributor_id,
-              main_category:id
+              company_id:id
             }
           })
       }
@@ -376,10 +376,10 @@ export default {
     // 查找商品分类
     threeMenuClick(id) {
       this.$router.push({
-        path: '/shopInfo',
+        path: '/shops/info',
         query: {
           distributor_id: this.info.distributor_id,
-          main_category:id
+          company_id:id
         }
       })
     },
@@ -393,7 +393,7 @@ export default {
     // 搜索的所在的商店
     goToShopInfo() {
       this.$router.push({
-        path: '/shopInfo',
+        path: '/shops/info',
         query: {
           keywords: this.inputText,
           distributor_id: this.info.distributor_id

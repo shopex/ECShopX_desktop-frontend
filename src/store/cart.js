@@ -64,6 +64,7 @@ export const actions = {
       quantity
     )
     commit('SET_CART_INFO', info)
+    return info
   },
   async addCart({ dispatch, commit, rootState }, params) {
     const { quantity = 1, ..._params } = params

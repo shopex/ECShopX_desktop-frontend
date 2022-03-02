@@ -99,7 +99,7 @@ export default {
     goStore(id){
       console.log('111111111');
       this.$router.push({
-        path: '/shopInfo',
+        path: '/shops/info',
         query: {
           distributor_id: id
         }

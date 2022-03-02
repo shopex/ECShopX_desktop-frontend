@@ -369,7 +369,7 @@ export default {
     filterPrice() {
       const { activity_info } = this.info
       console.log("this.curSku",this.curSku)
-      const { price,member_price,act_price }=this.curSku||{} 
+      const { price,member_price,act_price }=this.curSku||{}
       if (activity_info) {
         return act_price / 100
       } else if (member_price) {
@@ -401,13 +401,18 @@ export default {
         return
       }
       const { item_id, distributor_id } = this.curSku
-      await this.$store.dispatch('cart/CART_ADD', {
+
+      const res = await this.$store.dispatch('cart/CART_ADD', {
         item_id,
         shop_type: 'distributor',
         cart_type: mode,
         distributor_id,
         quantity: this.quantity
       })
+      if (res.message) {
+        this.$Message.error(res.message)
+        return
+      }
       if (mode == 'cart') {
         this.$Message.success('成功加入购物车')
       } else {
@@ -417,4 +422,3 @@ export default {
   }
 }
 </script>
-

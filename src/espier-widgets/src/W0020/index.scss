@@ -90,7 +90,7 @@
 							font-size: 16px;
 							font-weight: 500;
 							color: #FFFFFF;
-							line-height: 24px;
+							line-height: 44px;
 						}
 						&_tag-list{
 							position: relative;
@@ -117,25 +117,22 @@
 						.goods-list-item{
 							.goods-list-item__warp{
 								float: left;
-								display:inline-block;
-								white-space: nowrap;
-								text-overflow: ellipsis;
-								overflow: hidden;
 								margin-left: 20px;
 								margin-top: 20px;
 								margin-bottom: 20px;
 								text-align: center;
 								.goods-list-item__warp_title{
-									display:inline-block;
-									white-space: nowrap;
-									text-overflow: ellipsis;
-									overflow: hidden;
+									// display:inline-block;
+									// white-space: nowrap;
+									// text-overflow: ellipsis;
+									// overflow: hidden;
 									width: 108px;
-									height: 24px;
+									height: 40px;
+									line-height: 22px;
 									font-size: 14px;
 									font-weight: 500;
 									color: #8C8C8C;
-									line-height: 21px;
+									@include mult-ellipsis(2);
 								}
 								.goods-list-item__warp_price{
 									width: 108px;

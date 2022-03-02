@@ -2,21 +2,21 @@
 
 <template>
   <div class="page-near">
-    <div class="page-near-top-container">
-      <div class="all-category">
-        <div class="all-category__btn" :style="{ backgroundColor: '#FF5D02', color: '#FFFFFF', fontWeight:'800'}"
-          @mousedown="tagClicked(-1)">
-          全部商品分类
-        </div>
-        <div class="navs-con">
-          <span class="nav-item" v-for="(item, index) in navList" :key="`nav-item__${index}`"
-            :class="{ active: index == tabIndex }" @mousedown="navListClicked(index)">
-            {{ item }}
-          </span>
+    <div class="container">
+      <div class="container__btn" :style="{ backgroundColor: '#FF5D02', color: '#FFFFFF', fontWeight:'800'}"
+        @mousedown="tagClicked(-1)">
+        全部分类
+      </div>
+      <div class="navs-con">
+        <span class="nav-item" v-for="(item, index) in navList" :key="`nav-item__${index}`"
+          :class="{ active: index == tabIndex }" @mousedown="navListClicked(index)">
+          {{ item }}
+        </span>
+        <div class="shop_serch">
+          <input class="search-input" v-model="keywords" placeholder="请输入" type="text" />
+          <i class="espier-icon espier-icon-sousuo-01" @click="shopSearch"></i>
         </div>
       </div>
-    </div>
-    <div class="container">
       <div class="near-content">
         <div class="near-content-left">
           <div class="menu">
@@ -49,11 +49,16 @@
                       {{parseFloat(shop.distance).toFixed(2)}}{{shop.distance_unit}}</span>
                   </div>
                 </div>
-                <img class="shop_list_item__banner" :src="shop.banner " />
+                <NuxtLink :to="`info?distributor_id=${shop.distributor_id}`">
+                  <img class="shop_list_item__banner" :src="shop.banner " />
+                </NuxtLink>
                 <div class="shop_list_item_content">
-                  <span class="shop_list_item_content__name">
-                    {{shop.name}}
-                  </span>
+                  <NuxtLink :to="`info?distributor_id=${shop.distributor_id}`">
+                    <span class="shop_list_item_content__name">
+                      {{shop.name}}
+                    </span>
+                  </NuxtLink>
+
                   <br />
                   <span class="shop_list_item_content__info">评论 {{shop.business}} 月销 {{shop.sales_count}}</span>
                 </div>
@@ -79,6 +84,7 @@
     data() {
       return {
         navList: ["综合排序", "销量", "距离"],
+        keywords: '',
         tagList: [],
         allShopList: [],
         shopList: [],
@@ -188,13 +194,13 @@
       },
 
       async collectShops(shop) {
-        if (shop.collection){
+        if (shop.collection) {
           const data = await this.$api.member.removeCollectionStore(shop.distributor_id)
           if (!data.message) {
             shop.collection = !shop.collection
             this.$Message.success('取消成功')
           }
-        }else{
+        } else {
           const data = await this.$api.member.addCollectionStore(shop.distributor_id)
           if (!data.message) {
             shop.collection = !shop.collection
@@ -203,7 +209,7 @@
         }
         var list = []
         this.shopList.forEach(item => {
-          if(item.distributor_id == shop.distributor_id){
+          if (item.distributor_id == shop.distributor_id) {
             item = shop
           }
           list.push(item)
@@ -258,12 +264,20 @@
         }
         this.shopList = shopList;
       },
-      reload () {
-            this.isReloadData = false;
-            this.$nextTick(() => {
-              this.isReloadData = true;
-            })
-          }
+      reload() {
+        this.isReloadData = false;
+        this.$nextTick(() => {
+          this.isReloadData = true;
+        })
+      },
+      shopSearch() {
+
+        let list = this.allShopList.filter(shop => {
+          return this.keywords == '' ? true : shop.name.includes(this.keywords)
+        })
+        this.shopList = list;
+
+      }
     }
   }
 </script>
