@@ -90,7 +90,7 @@
         .price__int,
         .price__decimal {
           font-size: 14px;
-          font-family: ArialMT;
+          // font-family: ArialMT;
           color: #333;
         }
       }
@@ -120,7 +120,7 @@
         .price__int,
         .price__decimal {
           font-size: 14px;
-          font-family: Arial-BoldMT;
+          // font-family: Arial-BoldMT;
           font-weight: 600;
           color: #000;
         }
@@ -131,7 +131,7 @@
         .delete-text {
           color: #888;
           font-size: 12px;
-          cursor: default;
+          cursor: p;
         }
       }
     }
@@ -152,36 +152,37 @@
       float: left;
       width: 100px;
       height: 100%;
-      float: left;
       color: #fff;
       text-align: center;
       line-height: 48px;
-      cursor: default;
+      cursor: pointer;
       &.disabled {
         background: $color-disabled-text !important;
       }
     }
     .left-con {
       float: left;
+			.sp-radio__label {
+			  margin: 12px 20px 0;
+			  float: left;
+			}
     }
     .right-con {
       float: right;
     }
-    .sp-radio__label {
-      margin: 12px 20px 0;
-      float: left;
-    }
+    
     .sp-radio__text {
       font-size: 12px;
       color: #666;
     }
     .text-grel-all {
+			
       font-size: 12px;
       color: #666;
       margin-left: 20px;
       margin-top: 15px;
       float: left;
-      cursor: default;
+      cursor: pointer;
     }
     .cart-col-sl {
       float: left;
@@ -204,12 +205,12 @@
       .sp-price {
         position: relative;
         top: -1px;
-      }
-      .price__symbol,
-      .price__int,
-      .price__decimal {
-        font-size: 15px;
-        color: #333;
+				.price__symbol,
+				.price__int,
+				.price__decimal {
+				  font-size: 15px;
+				  color: #333;
+				}
       }
     }
     .text-grel {
@@ -237,6 +238,26 @@
     .shop-goods-item {
       position: relative;
       background: #e8e8e8;
+			.g-wrap {
+			  margin-left: 26px;
+			  .spimg {
+			    opacity: 0.5;
+			  }
+			  .goods-name,
+			  .goods-spec {
+			    color: #b9b7b7 !important;
+			  }
+			}
+			.sp-price{
+				.price__symbol,
+				.price__int,
+				.price__decimal {
+				  color: #b9b7b7 !important;
+				}
+			}
+			.goods-action {
+			  margin-left: 280px;
+			}
     }
     .invalid-text {
       font-size: 12px;
@@ -246,24 +267,7 @@
       top: 47px;
       left: 5px;
     }
-    .g-wrap {
-      margin-left: 26px;
-      .spimg {
-        opacity: 0.5;
-      }
-      .goods-name,
-      .goods-spec {
-        color: #b9b7b7 !important;
-      }
-    }
-    .price__symbol,
-    .price__int,
-    .price__decimal {
-      color: #b9b7b7 !important;
-    }
-    .goods-action {
-      margin-left: 280px;
-    }
+    
   }
   .cart-empty {
     text-align: center;

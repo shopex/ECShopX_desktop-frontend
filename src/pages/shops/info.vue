@@ -77,7 +77,9 @@
             <div class="right-list" v-for="(item, index) in storeShopsInfo" :key="index">
               <div class="list-img">
                 <div class="show-img">
-                  <img class="show-img" :src="item.lgImgUrl" alt="" />
+                  <NuxtLink :to="`/items/${item.item_id}`">
+                    <img class="show-img" :src="item.lgImgUrl" alt="" />  
+                  </NuxtLink>
                 </div>
                 <div class="imgsInfo-list">
                   <div v-for="(itm, i) of item.pics" :key="i" @click="updateImg(index, itm)">
@@ -305,7 +307,7 @@
       async collectionClick() {
         if (this.iconShow) {
           this.iconShow = false
-          this.followStore = '取消店铺'
+          this.followStore = '取消关注'
           const data = await this.$api.member.addCollectionStore(this.storeInfo.distributor_id)
           if (data) {
             this.$Message.success('收藏成功')

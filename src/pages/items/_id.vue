@@ -12,7 +12,7 @@
             </div>
             <div>{{ shopInfo.name }}</div>
           </div>
-          <div @click="collectionClick">
+          <div class="shop_collection" @click="collectionClick">
             <i class="ec-icon ec-icon-favor_light left-icon" v-if="iconShow"></i>
             <i class="ec-icon ec-icon-favorfill color-icom" v-else></i>
             <span> {{ followStore }}</span>
@@ -299,15 +299,14 @@ export default {
     // 收藏店铺
     async collectionClick() {
       if (this.iconShow) {
-        this.followStore = '取消店铺'
-        this.info.distributor_id = 198
+        this.followStore = '取消关注'
         const data = await this.$api.member.addCollectionStore(this.info.distributor_id)
         if (!data.message) {
           this.iconShow = false
           this.$Message.success('收藏成功')
         }
       } else {
-        this.followStore = '收藏店铺'
+        this.followStore = '关注店铺'
         const data = await this.$api.member.removeCollectionStore(this.info.distributor_id)
         if (!data.message) {
           this.iconShow = true
@@ -355,7 +354,7 @@ export default {
             path: '/shops/info',
             query: {
               distributor_id: this.info.distributor_id,
-              company_id:id
+              main_category:id
             }
           })
       }
@@ -368,7 +367,7 @@ export default {
             path: '/shops/info',
             query: {
               distributor_id: this.info.distributor_id,
-              company_id:id
+              main_category:id
             }
           })
       }
@@ -379,7 +378,7 @@ export default {
         path: '/shops/info',
         query: {
           distributor_id: this.info.distributor_id,
-          company_id:id
+          main_category:id
         }
       })
     },

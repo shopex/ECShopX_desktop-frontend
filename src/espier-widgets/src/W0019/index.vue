@@ -24,7 +24,7 @@
           <ul :class="`wgt-goods_list`" :id="`wgt-goods_list__${value.uuid}`">
             <li class="goods-item" v-for="(item, index) in value.data" :key="`goods-item__${index}`"
               :style="{border:`${value.wgtShopBorder?value.wgtShopBorderWidth:0}px solid` ,borderColor:value.wgtShopBorderColor}">
-              <linkPage  class="goods-item_wrap" :mode="mode" :to="`shops/nfo?distributor_id=${item.distributor_id}`" >
+              <linkPage  class="goods-item_wrap" :mode="mode" :to="`shops/info?distributor_id=${item.distributor_id}`" >
                 <!-- :to="`shops/list?distributor_id=${item.distributor_id}`" -->
                 <div class="goods-item_img">
                   <ImgWrap :src="item.banner" :width="214" :height="130" />

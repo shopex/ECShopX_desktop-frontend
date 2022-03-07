@@ -67,8 +67,8 @@
 						&_img{
 							position: relative;
 							display:inline-block;
-							-webkit-filter: blur(10px);
-							filter: blur(10px);
+							-webkit-filter: blur(3px);
+							filter: blur(3px);
 						}
 						&_logo{
 							position: relative;
@@ -86,7 +86,7 @@
 							overflow: hidden;
 							position: relative;
 							width: 100px;
-							top: -172px;
+							top: -178px;
 							font-size: 16px;
 							font-weight: 500;
 							color: #FFFFFF;
@@ -94,7 +94,7 @@
 						}
 						&_tag-list{
 							position: relative;
-							top: -160px;
+							top: -178px;
 							height: 24px;
 							&_text{
 								display:inline-block;
@@ -118,7 +118,7 @@
 							.goods-list-item__warp{
 								float: left;
 								margin-left: 20px;
-								margin-top: 20px;
+								margin-top: 45px;
 								margin-bottom: 20px;
 								text-align: center;
 								.goods-list-item__warp_title{
@@ -126,6 +126,7 @@
 									// white-space: nowrap;
 									// text-overflow: ellipsis;
 									// overflow: hidden;
+									margin-top: 10px;
 									width: 108px;
 									height: 40px;
 									line-height: 22px;
@@ -135,6 +136,7 @@
 									@include mult-ellipsis(2);
 								}
 								.goods-list-item__warp_price{
+									margin-top: 5px;
 									width: 108px;
 									font-size: 24px;
 									font-weight: 500;

@@ -10,25 +10,17 @@
       <div class="hd-item action">操作</div>
     </div>
     <div class="cart-bd">
-      <div class="cart-shop" v-for="(shoplist, index) in list" :key="`cart-shop__${index}`">
+      <div class="cart-shop" v-for="(shop, index) in list" :key="`cart-shop__${index}`">
         <div class="cart-shop-hd" :style="{ borderBottomColor: themeColor }">
-          <div class="shop-name">店铺名称：{{ shoplist.shop_name || '' }}</div>
+          <div class="shop-name">店铺名称：{{ shop.shop_name || '' }}</div>
           <div class="shop-coupon">
-            <CouponPicker :info="shoplist" :theme="themeColor" />
+            <CouponPicker :info="shop" :theme="themeColor" />
           </div>
           <div class="g-count"></div>
         </div>
-        <div
-          class="shop-goods-item"
-          v-for="(item, sindex) in shoplist.list"
-          :key="`shop-item__${sindex}`"
-        >
-          <SpRadio
-            type="checkbox"
-            :theme="themeColor"
-            :value="item.is_checked"
-            @change="(val) => handleOnChangeCheck(val, item.cart_id)"
-          />
+        <div class="shop-goods-item" v-for="(item, sindex) in shop.list" :key="`shop-item__${sindex}`">
+          <SpRadio type="checkbox" :theme="themeColor" :value="item.is_checked"
+            @change="(val) => handleOnChangeCheck(val, item.cart_id)" />
           <div class="g-wrap">
             <nuxt-link :to="`/items/${item.item_id}`">
               <SpImg class="spimg" noSize :src="item.pics" />
@@ -40,12 +32,7 @@
             <SpPrice :value="item.price / 100"></SpPrice>
           </div>
           <div class="goods-num">
-            <SpNumInput
-              size="sm"
-              width="50"
-              @change="handleQuantityChange($event, item.cart_id)"
-              :value="item.num"
-            />
+            <SpNumInput size="sm" width="50" @change="handleQuantityChange($event, item.cart_id)" :value="item.num" />
           </div>
           <div class="goods-amount">
             <SpPrice :value="item.total_fee / 100"></SpPrice>
@@ -58,37 +45,27 @@
         <div class="cart-ft">
           <div class="cart-ft-hd">
             <div class="left-con">
-              <SpRadio
-                type="checkbox"
-                :theme="themeColor"
-                :value="allCheck"
-                @change="(val) => handleOnChangeAllCheck(val, index)"
-                >全选</SpRadio
-              >
+              <SpRadio type="checkbox" :theme="themeColor" :value="shop.is_checked"
+                @change="(val) => handleOnChangeAllCheck(val, index)">全选</SpRadio>
               <div class="text-grel-all" @click="handleRemoveAll">删除选中商品</div>
             </div>
             <div class="right-con">
               <div class="cart-col-sl">
-                已选<span class="checknum" :style="{ color: themeColor }">{{ goodsCheckNum }}</span
-                >件商品
+                已选<span class="checknum" :style="{ color: themeColor }">{{ shop.goodsCheckNum }}</span>件商品
               </div>
               <div class="diss-count">
                 已优惠：
-                <SpPrice :value="discountFee / 100" />
+                <SpPrice :value="shop.discountFee / 100" />
                 <span class="text-grel">（不含运费）</span>
               </div>
               <div class="total-price">
                 总计：
-                <SpPrice size="large" :value="totalFee / 100" />
+                <SpPrice size="large" :value="shop.totalFee / 100" />
               </div>
             </div>
           </div>
-          <div
-            class="calc-btn"
-            :class="{ disabled: goodsCheckNum == 0 }"
-            :style="{ backgroundColor: themeColor }"
-            @click="handleClickSubmit"
-          >
+          <div class="calc-btn" :class="{ disabled: shop.goodsCheckNum == 0 }" :style="{ backgroundColor: themeColor }"
+            @click="handleClickSubmit(shop)">
             去结算
           </div>
         </div>
@@ -98,21 +75,15 @@
         <SpLoading class="modal-loading__t" color="#c3c3c3" v-if="!list"></SpLoading>
       </div>
 
-      <div
-        class="cart-empty"
-        v-if="list && list.length == 0 && invalid_list && invalid_list.length == 0"
-      >
+      <div class="cart-empty" v-if="list && list.length == 0 && invalid_list && invalid_list.length == 0">
         <div class="cart-empty-con">
           <img class="cart-empty-img" src="@/assets/imgs/cart-empty.png" alt="" />
           <div class="cart-empty-info">
             <div class="txt">购物车内暂时没有商品</div>
             <nuxt-link to="/items">
-              <span
-                :style="{
+              <span :style="{
                   color: themeColor
-                }"
-                >去购物<i class="ec-icon ec-icon-right"></i
-              ></span>
+                }">去购物<i class="ec-icon ec-icon-right"></i></span>
             </nuxt-link>
           </div>
         </div>
@@ -121,11 +92,7 @@
 
     <!-- 无效商品 -->
     <div class="cart-bd invalid-cart">
-      <div
-        class="shop-goods-item"
-        v-for="(item, index) in invalid_list"
-        :key="`shop-item__${index}`"
-      >
+      <div class="shop-goods-item" v-for="(item, index) in invalid_list" :key="`shop-item__${index}`">
         <div class="invalid-text">已失效</div>
         <div class="g-wrap">
           <SpImg class="spimg" noSize :src="item.pics" />
@@ -148,143 +115,165 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
-import { mixin } from '@/mixins'
-import CartRecommend from './comps/cart-recommend'
-import CouponPicker from './comps/coupon-picker'
-export default {
-  middleware: 'authenticated',
-  mixins: [mixin],
-  components: { CartRecommend, CouponPicker },
-  data() {
-    return {
-      // list: null,
-      totalFee: 0,
-      discountFee: 0,
-      goodsCheckNum: 0,
-      allCheck: false
-      // invalid_list: []
-    }
-  },
-  computed: {
-    ...mapState({
-      list: (state) => {
-        const { cartInfo } = state.cart
-        if (!cartInfo) {
-          return null
-        } else {
-          return cartInfo.valid_cart
-        }
-      },
-      invalid_list: (state) => {
-        const { cartInfo } = state.cart
-        if (!cartInfo) {
-          return null
-        } else {
-          return cartInfo.invalid_cart
-        }
-      }
-    })
-  },
-  watch: {
-    list: {
-      handler() {
-        this.calcCartTotal()
-      },
-      deep: true
-    }
-  },
-  created() {},
-  mounted() {
-    // this.refreshCart()
-    if (this.list) {
-      this.calcCartTotal()
-    }
-  },
-  methods: {
-    ...mapActions({
-      CART_GETINFO: 'cart/CART_GETINFO'
-    }),
-    async handleOnChangeCheck(val, cart_id) {
-      await this.$api.cart.updateCheckStatus({
-        cart_id,
-        is_checked: val
-      })
-      this.CART_GETINFO()
+  import {
+    mapState,
+    mapActions
+  } from 'vuex'
+  import {
+    mixin
+  } from '@/mixins'
+  import CartRecommend from './comps/cart-recommend'
+  import CouponPicker from './comps/coupon-picker'
+  export default {
+    middleware: 'authenticated',
+    mixins: [mixin],
+    components: {
+      CartRecommend,
+      CouponPicker
     },
-    // 全选
-    async handleOnChangeAllCheck(val, index) {
-      console.log(val, index, '-----------val')
-
-      let cartIds = []
-      this.list[index].list.forEach((sitem) => {
-        cartIds.push(sitem.cart_id)
+    data() {
+      return {
+        // list: null,
+        // totalFee: 0,
+        // discountFee: 0,
+        // goodsCheckNum: 0,
+        // allCheck: false
+        // invalid_list: []
+      }
+    },
+    computed: {
+      ...mapState({
+        list: (state) => {
+          const {
+            cartInfo
+          } = state.cart
+          if (!cartInfo) {
+            return null
+          } else {
+            return cartInfo.valid_cart
+          }
+        },
+        invalid_list: (state) => {
+          const {
+            cartInfo
+          } = state.cart
+          if (!cartInfo) {
+            return null
+          } else {
+            return cartInfo.invalid_cart
+          }
+        }
       })
-      /* this.list.forEach((item) => {
-        item.list.forEach((sitem) => {
+    },
+    watch: {
+      list: {
+        handler() {
+          this.calcCartTotal()
+        },
+        deep: true
+      }
+    },
+    created() {
+			this.CART_GETINFO()
+		},
+    mounted() {
+      // this.refreshCart()
+      if (this.list) {
+        this.calcCartTotal()
+      }
+    },
+    methods: {
+      ...mapActions({
+        CART_GETINFO: 'cart/CART_GETINFO'
+      }),
+      async handleOnChangeCheck(val, cart_id) {
+        await this.$api.cart.updateCheckStatus({
+          cart_id,
+          is_checked: val
+        })
+        this.CART_GETINFO()
+      },
+      // 全选
+      async handleOnChangeAllCheck(val, index) {
+        console.log(val, index, '-----------val')
+
+        let cartIds = []
+        this.list[index].list.forEach((sitem) => {
           cartIds.push(sitem.cart_id)
         })
-      }) */
-      await this.$api.cart.updateCheckStatus({
-        cart_id: cartIds,
-        is_checked: val
-      })
-      this.CART_GETINFO()
-    },
-    // 计算购物车
-    calcCartTotal() {
-      let total = 0,
-        discount = 0,
-        allCheck = true,
-        goodsCheckNum = 0
-      this.list.forEach((item) => {
-        item.list.forEach((sitem) => {
-          if (sitem.is_checked) {
-            total += sitem.total_fee
-            discount += sitem.discount_fee
-            goodsCheckNum++
-          } else {
-            allCheck = allCheck && false
-          }
-        })
-      })
-      this.totalFee = total
-      this.discountFee = discount
-      this.allCheck = allCheck
-      this.goodsCheckNum = goodsCheckNum
-    },
-    // 数量修改
-    async handleQuantityChange(val, id) {
-      await this.$api.cart.cartNumChange({
-        cart_id: id,
-        num: val
-      })
-      this.CART_GETINFO()
-    },
-    // 删除
-    async handleRemove(cart_id) {
-      await this.$api.cart.cartDelete({ cart_id })
-      this.CART_GETINFO()
-    },
-    // 全部删除
-    async handleRemoveAll() {
-      let cartIds = []
-      this.list.forEach((item) => {
-        item.list.forEach((sitem) => {
-          if (sitem.is_checked) {
+        /* this.list.forEach((item) => {
+          item.list.forEach((sitem) => {
             cartIds.push(sitem.cart_id)
-          }
+          })
+        }) */
+        await this.$api.cart.updateCheckStatus({
+          cart_id: cartIds,
+          is_checked: val
         })
-      })
-      await this.$api.cart.cartDelete({ cart_id: cartIds })
-      this.CART_GETINFO()
-    },
-    // 去结算
-    handleClickSubmit() {
-      if (this.goodsCheckNum > 0) {
-        this.$router.push(`cart/checkout?mode=cart`)
+        this.CART_GETINFO()
+      },
+      // 计算购物车
+      calcCartTotal() {
+        let total = 0,
+          discount = 0,
+          allCheck = true,
+          goodsCheckNum = 0
+        this.list.forEach((item) => {
+          allCheck = true,
+          total = 0
+          discount = 0
+          goodsCheckNum = 0
+          item.list.forEach((sitem) => {
+            if (sitem.is_checked) {
+              total += sitem.total_fee
+              discount += sitem.discount_fee
+              goodsCheckNum++
+            } else {
+              allCheck = allCheck && false
+            }
+          })
+          item.totalFee = total
+          item.discountFee = discount
+          item.goodsCheckNum = goodsCheckNum
+          item.is_checked = allCheck
+        })
+      },
+      // 数量修改
+      async handleQuantityChange(val, id) {
+        await this.$api.cart.cartNumChange({
+          cart_id: id,
+          num: val
+        })
+        this.CART_GETINFO()
+      },
+      // 删除
+      async handleRemove(cart_id) {
+        await this.$api.cart.cartDelete({
+          cart_id
+        })
+        this.CART_GETINFO()
+      },
+      // 全部删除
+      async handleRemoveAll() {
+        let cartIds = []
+        this.list.forEach((item) => {
+          item.list.forEach((sitem) => {
+            if (sitem.is_checked) {
+              cartIds.push(sitem.cart_id)
+            }
+          })
+        })
+        await this.$api.cart.cartDelete({
+          cart_id: cartIds
+        })
+        this.CART_GETINFO()
+      },
+      // 去结算
+      handleClickSubmit(shop) {
+        if (shop.goodsCheckNum > 0) {
+          this.$router.push(`cart/checkout?mode=cart&id=${shop.shop_id}`)
+        }
       }
     }
   }
-}
 </script>
