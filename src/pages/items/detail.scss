@@ -13,13 +13,27 @@ $goods-color-primary: #1f201f;
     font-size: 20px;
     margin: 10px 0px;
     .details-left {
+			width: 394px;
       display: flex;
       align-items: center;
       .left-icon {
         margin-left: 10px;
       }
 			.shop_collection{
-				cursor: pointer;
+				.favor-content{
+					.ec-icon-favor_light{
+						font-size: 14px;
+					}
+					.ec-icon-favorfill{
+						font-size: 14px;
+					}
+					span {
+						font-size: 14px;
+						font-weight: 400;
+						color: #8C8C8C;
+						cursor: pointer;	
+					}
+				}
 			}
       .color-icom{
         margin-left: 10px;
@@ -32,12 +46,23 @@ $goods-color-primary: #1f201f;
       align-items: center;
       // position: relative;
       // right: 70px;
+			.goods-qrcode{
+				margin-right: 10px;
+			}
       .goods-imgs {
-				width: 24px;
-				height: 24px;
+				width: 64px;
+				height: 64px;
 				border: 1px solid #fff;
         margin-right: 20px;
+				margin-left: 10px;
       }
+			.phone-show{
+				padding-top: 5px;
+				width: 42px;
+				font-size: 14px;
+				font-weight: 400;
+				color: #8C8C8C;
+			}
     }
     .details-right {
       position: relative;
@@ -70,7 +95,7 @@ $goods-color-primary: #1f201f;
       width: 300px;
       margin-right: 10px;
       .goods-sort {
-        padding: 0px 10px;
+        // padding: 0px 10px;
         margin-bottom: 15px;
         // border: 1px solid rgba($color: gray, $alpha: 0.4);
         // box-shadow: 0px 0px 1px gray;
@@ -92,11 +117,13 @@ $goods-color-primary: #1f201f;
             font-family: SourceHanSansCN-Medium, SourceHanSansCN;
             font-weight: 500;
             color: #3b3b3b;
+						cursor: pointer;
           }
           .list-boby-next {
             margin-top: 10px;
             padding-left: 10px;
             .next-menu {
+							cursor: pointer;
               text-align: left;
               font-size: 16px;
               font-family: SourceHanSansCN-Normal, SourceHanSansCN;
@@ -138,7 +165,7 @@ $goods-color-primary: #1f201f;
         line-height: 50px;
         padding: 0 20px;
         color: #646464;
-        cursor: default;
+        cursor: pointer;
         &.active {
           color: #fff;
         }

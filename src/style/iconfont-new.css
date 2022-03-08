@@ -1,9 +1,9 @@
 @font-face {
   font-family: 'new_iconfont';  /* Project id 3062221 */
-  src: url('//at.alicdn.com/t/font_3062221_aavd4td8o0s.woff2?t=1644695840694') format('woff2'),
-       url('//at.alicdn.com/t/font_3062221_aavd4td8o0s.woff?t=1644695840694') format('woff'),
-       url('//at.alicdn.com/t/font_3062221_aavd4td8o0s.ttf?t=1644695840694') format('truetype'),
-       url('//at.alicdn.com/t/font_3062221_aavd4td8o0s.svg?t=1644695840694#new_iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_3062221_js4klwiz25i.woff2?t=1646756009752') format('woff2'),
+       url('//at.alicdn.com/t/font_3062221_js4klwiz25i.woff?t=1646756009752') format('woff'),
+       url('//at.alicdn.com/t/font_3062221_js4klwiz25i.ttf?t=1646756009752') format('truetype'),
+       url('//at.alicdn.com/t/font_3062221_js4klwiz25i.svg?t=1646756009752#new_iconfont') format('svg');
 }
 
 .new_iconfont {
@@ -12,6 +12,14 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-new-pc-a-lujingbeifen2:before {
+  content: "\e610";
+}
+
+.icon-new-pc-erweima:before {
+  content: "\e60f";
 }
 
 .icon-new-pc-shoucang:before {

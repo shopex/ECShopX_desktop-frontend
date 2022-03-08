@@ -48,13 +48,13 @@
               </div>
               <div class="cart-total__bd">
                 <div class="btn btn-cart" @click="handleClickCart">进入购物车</div>
-                <div
+                <!-- <div
                   class="btn btn-checkout"
                   :style="{ backgroundColor: getThemeColor, color: value.wgtTextColor }"
                   @click="handleClickCheckout"
                 >
                   结算
-                </div>
+                </div> -->
               </div>
             </div>
           </div>

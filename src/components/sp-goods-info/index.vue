@@ -53,7 +53,7 @@
   }
   .btn-collect {
     float: right;
-    cursor: default;
+    cursor: pointer;
   }
   .goodsinfo-f {
     background-color: #f5f5f5;

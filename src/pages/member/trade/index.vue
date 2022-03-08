@@ -52,7 +52,7 @@
                             <span class="ly-fn-a link-black" @click.stop="clickLink(child.order)">{{
                               child.order
                             }}</span>
-                            <span>{{ child.shop_name ? child.shop_name : '' }}</span>
+                            <span>{{ child.shop_name ? child.shop_name : '总店' }}</span>
                           </div>
                         </td>
                       </tr>
@@ -444,7 +444,7 @@ export default {
           children: item.items,
           orderStatus: item.order_status_des,
           total_fee: item.total_fee,
-          shop_name: item.shop_name,
+          shop_name: item.distributor_name,
           receiver_name: item.receiver_name,
           is_rate: item.is_rate,
           order_class: item.order_class,

@@ -9,7 +9,7 @@
     float: left;
     text-align: center;
     margin-right: 15px;
-    cursor: default;
+    cursor: pointer;
   }
   .disabled {
     background-color: #cdcdcd;

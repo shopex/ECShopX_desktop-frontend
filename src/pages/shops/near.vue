@@ -158,8 +158,9 @@
                   list
                 } = await _this.$api.member.getCollectionStoreList()
                 _this.collectShopList = list
+                _this.getShopList(params)
               }
-              _this.getShopList(params)
+
               // _this.handleSearch()
             })
             // _this.map.panTo(r.point)
@@ -182,7 +183,7 @@
         let length = list.length
         for (var i = 0; i < length; i++) {
           var shop = list[i]
-          var result = this.collectShopList.some(item => item.distributor_id === shop.distributor_id)
+          var result = this.collectShopList?this.collectShopList.some(item => item.distributor_id === shop.distributor_id):false
           if (result) {
             shop.collection = true
           } else {
@@ -191,6 +192,7 @@
           this.shopList.push(shop)
         }
         this.tagList = tagList
+        this.navListClicked(0)
       },
 
       async collectShops(shop) {
@@ -221,26 +223,25 @@
         var sortShopList = []
         switch (index) {
           case 0:
-            console.log(index)
             this.shopList.sort(function(shopA, shopB) {
-              var x = shopA.distance
-              var y = shopB.distance
-              return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+              var x = parseFloat(shopA.created)
+              var y = parseFloat(shopB.created)
+              return ((x > y) ? -1 : ((x < y) ? 1 : 0));
             });
             break
 
           case 1:
             this.shopList.sort(function(shopA, shopB) {
-              var x = shopA.sales_count
-              var y = shopB.sales_count
+              var x = parseFloat(shopA.sales_count)
+              var y = parseFloat(shopB.sales_count)
               return ((x > y) ? -1 : ((x < y) ? 1 : 0));
             });
             break
 
           case 2:
             this.shopList.sort(function(shopA, shopB) {
-              var x = shopA.distance
-              var y = shopB.distance
+              var x = parseFloat(shopA.distance)
+              var y = parseFloat(shopB.distance)
               return ((x < y) ? -1 : ((x > y) ? 1 : 0))
             });
             break
@@ -263,6 +264,8 @@
           })
         }
         this.shopList = shopList;
+        this.navListClicked(0)
+        
       },
       reload() {
         this.isReloadData = false;

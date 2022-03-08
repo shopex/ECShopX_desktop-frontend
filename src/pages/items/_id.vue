@@ -7,20 +7,24 @@
       <div class="goods-logo">
         <div class="details-left">
           <div class="imgs-content">
-            <div>
+            <div v-if="shopInfo.name">
               <img :src="shopInfo.logo" alt="" class="goods-imgs" />
             </div>
-            <div>{{ shopInfo.name }}</div>
+            <div style="width: 192px;">{{ shopInfo.name }}</div>
           </div>
           <div class="shop_collection" @click="collectionClick">
-            <i class="ec-icon ec-icon-favor_light left-icon" v-if="iconShow"></i>
-            <i class="ec-icon ec-icon-favorfill color-icom" v-else></i>
-            <span> {{ followStore }}</span>
+            <div v-if="shopInfo.name" class="favor-content">
+              <i class="ec-icon ec-icon-favor_light left-icon" v-if="iconShow"></i>
+              <i class="ec-icon ec-icon-favorfill color-icom" v-else></i>
+              <span> {{ followStore }}</span>
+            </div>
           </div>
         </div>
         <div class="imgs-content">
-          <div class="goods-imgs"></div>
-          <div>手机逛</div>
+          <div class="goods-qrcode">
+            <i class="new_iconfont icon-new-pc-erweima"></i>
+          </div>
+          <div class="phone-show">手机逛</div>
         </div>
         <div class="details-right">
           <input placeholder="请输入" v-model="inputText" type="text" />
@@ -64,7 +68,8 @@
                         </div>
                         <div class="three-menu" v-show="e.listShow && e.children.length > 0">
                           <ul>
-                            <li v-for="(threeMenu, a) of e.children" :key="a"  @click="threeMenuClick(threeMenu.category_id)">
+                            <li v-for="(threeMenu, a) of e.children" :key="a"
+                              @click="threeMenuClick(threeMenu.category_id)">
                               {{ threeMenu.category_name }}
                             </li>
                           </ul>
@@ -82,16 +87,9 @@
         </div>
         <div class="details-right">
           <div class="tab-wrap">
-            <div
-              class="tab-item"
-              :class="{ active: index == curTabIdx }"
-              :style="{
+            <div class="tab-item" :class="{ active: index == curTabIdx }" :style="{
                 backgroundColor: index == curTabIdx ? themeColor : ''
-              }"
-              v-for="(tab, index) in tabList"
-              :key="index"
-              @click="changeTab(index)"
-            >
+              }" v-for="(tab, index) in tabList" :key="index" @click="changeTab(index)">
               {{ tab }}
             </div>
           </div>
@@ -100,11 +98,7 @@
             <div class="goods-params">
               <div class="goods-brannd">品牌：{{ info.goods_brand }}</div>
               <div class="params-items">
-                <div
-                  class="params-item"
-                  v-for="(item, index) in info.item_params"
-                  :key="`params-item__${index}`"
-                >
+                <div class="params-item" v-for="(item, index) in info.item_params" :key="`params-item__${index}`">
                   {{ item.attribute_name }}：{{ item.attribute_value_name }}
                 </div>
               </div>
@@ -124,25 +118,15 @@
                 <Writing v-if="item.name === 'writing'" :dataForm="item"></Writing>
               </div>
             </div>
-            <div
-              class="goods-intro__detail"
-              v-else
-              v-html="goodsDesc"
-              v-lazy-container="{ selector: 'img' }"
-            >
+            <div class="goods-intro__detail" v-else v-html="goodsDesc" v-lazy-container="{ selector: 'img' }">
               正在加载详情...
             </div>
           </div>
 
           <div class="goods-evaluation" v-if="curTabIdx == 1">
             <div class="goods-evaluation__list">
-              <GoodsEvaluation
-                :info="item"
-                :theme="themeColor"
-                :key="index"
-                v-for="(item, index) in evaluationList"
-                @on-reply="(count) => handleReply(count, index)"
-              />
+              <GoodsEvaluation :info="item" :theme="themeColor" :key="index" v-for="(item, index) in evaluationList"
+                @on-reply="(count) => handleReply(count, index)" />
             </div>
             <div class="loading-data" v-if="evaluationList.length == 0">
               暂无评价
@@ -155,250 +139,283 @@
 </template>
 
 <script>
-import { resolveLazyLoadImg, hasValue } from '@/utils'
-import Recommend from './comps/recommend'
-import GoodsEvaluation from './comps/goods-evaluation'
-import { Film, Heading, Slider, Writing } from '@/components'
-import { mixin } from '@/mixins'
-
-export default {
-  mixins: [mixin],
-  async asyncData({ app, route, req, params, query }) {
-    const { id } = route.params
-    // const { distributor_id } = route.query
-    const { item_id } = route.query
-
-    const info = await app.$api.item.detail(id, {
-      // distributor_id,
-      item_id,
-      is_tdk: 1
-    })
-
-    const val = await app.$api.shop.getShop({ distributor_id: info.distributor_id })
-    const {is_fav} = await app.$api.member.showStoreIcon(info.distributor_id)
-    const param = {
-      distributor_id: info.distributor_id,
-      company_id: info.company_id
-    }
-    const res = await app.$api.item.getStoreClassify(param)
-    if (res) {
-      res.forEach((element) => {
-        element.listShow = false
-
-        if (element.children.length > 0) {
-          element.children.forEach((item) => {
-            item.listShow = false
-          })
-        }
-      })
-    }
-
-    return {
-      info,
-      tdk_data: info.tdk_data,
-      goodsDesc: Array.isArray(info.intro) ? info.intro : resolveLazyLoadImg(info.intro),
-      menu: res,
-      shopInfo: val,
-      iconShow: !is_fav
-    }
-  },
-  head() {
-    return {
-      title: this.tdk_data ? this.tdk_data.title : '',
-      meta: [
-        {
-          hid: 'keywords',
-          name: 'keywords',
-          content: this.tdk_data ? this.tdk_data.mate_keywords : ''
-        },
-        {
-          hid: 'description',
-          name: 'description',
-          content: this.tdk_data ? this.tdk_data.mate_description : ''
-        }
-      ]
-    }
-  },
-  components: {
-    Recommend,
-    GoodsEvaluation,
+  import {
+    resolveLazyLoadImg,
+    hasValue
+  } from '@/utils'
+  import Recommend from './comps/recommend'
+  import GoodsEvaluation from './comps/goods-evaluation'
+  import {
     Film,
     Heading,
     Slider,
     Writing
-  },
+  } from '@/components'
+  import {
+    mixin
+  } from '@/mixins'
 
-  created() {
-    this.pageType = 'itemDetail'
-  },
-  data() {
-    return {
-      curImgIdx: 0,
-      desc: null,
-      recList: null,
-      viewedItems: null,
-      curRecIdx: 0,
-      keyword: '',
-      showprice: true,
-      info: null,
-      tabList: ['商品介绍', '商品评价'],
-      curTabIdx: 0,
-      evaluationList: [],
-      evaluationTotal: 0,
-      page: 1,
-      pageSize: 20,
-      loading: false,
-      itemId: null,
-      listShow: false,
-      inputText: '',
-      meun: null,
-      shopInfo: null,
-      iconShow: true,
-      followStore: '关注店铺'
-    }
-  },
-  computed: {
-    breadcrumb() {
-      if (!this.info) return []
-      const { item_category_info } = this.info
-      let ret = [
-        {
+  export default {
+    mixins: [mixin],
+    async asyncData({
+      app,
+      route,
+      req,
+      params,
+      query
+    }) {
+      const {
+        id
+      } = route.params
+      // const { distributor_id } = route.query
+      const {
+        item_id
+      } = route.query
+
+      const info = await app.$api.item.detail(id, {
+        // distributor_id,
+        item_id,
+        is_tdk: 1
+      })
+
+      const val = await app.$api.shop.getShop({
+        distributor_id: info.distributor_id
+      })
+      const {
+        is_fav
+      } = await app.$api.member.showStoreIcon(info.distributor_id)
+      const param = {
+        distributor_id: info.distributor_id,
+        company_id: info.company_id
+      }
+      const res = await app.$api.item.getStoreClassify(param)
+      if (res) {
+        res.forEach((element) => {
+          element.listShow = false
+
+          if (element.children.length > 0) {
+            element.children.forEach((item) => {
+              item.listShow = false
+            })
+          }
+        })
+      }
+
+      return {
+        info,
+        tdk_data: info.tdk_data,
+        goodsDesc: Array.isArray(info.intro) ? info.intro : resolveLazyLoadImg(info.intro),
+        menu: res,
+        shopInfo: val,
+        iconShow: !is_fav
+      }
+    },
+    head() {
+      return {
+        title: this.tdk_data ? this.tdk_data.title : '',
+        meta: [{
+            hid: 'keywords',
+            name: 'keywords',
+            content: this.tdk_data ? this.tdk_data.mate_keywords : ''
+          },
+          {
+            hid: 'description',
+            name: 'description',
+            content: this.tdk_data ? this.tdk_data.mate_description : ''
+          }
+        ]
+      }
+    },
+    components: {
+      Recommend,
+      GoodsEvaluation,
+      Film,
+      Heading,
+      Slider,
+      Writing
+    },
+
+    created() {
+      this.pageType = 'itemDetail'
+    },
+    data() {
+      return {
+        curImgIdx: 0,
+        desc: null,
+        recList: null,
+        viewedItems: null,
+        curRecIdx: 0,
+        keyword: '',
+        showprice: true,
+        info: null,
+        tabList: ['商品介绍', '商品评价'],
+        curTabIdx: 0,
+        evaluationList: [],
+        evaluationTotal: 0,
+        page: 1,
+        pageSize: 20,
+        loading: false,
+        itemId: null,
+        listShow: false,
+        inputText: '',
+        meun: null,
+        shopInfo: null,
+        iconShow: true,
+        followStore: '关注店铺'
+      }
+    },
+    computed: {
+      breadcrumb() {
+        if (!this.info) return []
+        const {
+          item_category_info
+        } = this.info
+        let ret = [{
           name: '首页',
           url: `/`
-        }
-      ]
-      item_category_info.map((item) => {
-        ret.push({
-          name: item.category_name,
-          url: `/items?cat_id=${item.category_id}`
-        })
-        if (item.children) {
-          item.children.map((secbItem) => {
-            ret.push({
-              name: secbItem.category_name,
-              url: `/items?cat_id=${secbItem.category_id}`
-            })
-            if (secbItem.children) {
-              secbItem.children.map((threeItem) => {
-                ret.push({
-                  name: threeItem.category_name,
-                  url: `/items?cat_id=${threeItem.category_id}`
-                })
+        }]
+        item_category_info.map((item) => {
+          ret.push({
+            name: item.category_name,
+            url: `/items?cat_id=${item.category_id}`
+          })
+          if (item.children) {
+            item.children.map((secbItem) => {
+              ret.push({
+                name: secbItem.category_name,
+                url: `/items?cat_id=${secbItem.category_id}`
               })
+              if (secbItem.children) {
+                secbItem.children.map((threeItem) => {
+                  ret.push({
+                    name: threeItem.category_name,
+                    url: `/items?cat_id=${threeItem.category_id}`
+                  })
+                })
+              }
+            })
+          }
+        })
+        return ret
+      }
+    },
+    mounted() {
+      this.fetchEvaluationList()
+    },
+    methods: {
+      // 收藏店铺
+      async collectionClick() {
+        if (this.iconShow) {
+          this.followStore = '取消关注'
+          const data = await this.$api.member.addCollectionStore(this.info.distributor_id)
+          if (!data.message) {
+            this.iconShow = false
+            this.$Message.success('收藏成功')
+          }
+        } else {
+          this.followStore = '关注店铺'
+          const data = await this.$api.member.removeCollectionStore(this.info.distributor_id)
+          if (!data.message) {
+            this.iconShow = true
+            this.$Message.success('取消收藏')
+          }
+        }
+      },
+
+      changeTab(i) {
+        this.curTabIdx = i
+      },
+      async fetchEvaluationList() {
+        const {
+          id
+        } = this.$route.params
+        let params = {
+          page: this.page,
+          pageSize: this.pageSize,
+          item_id: id,
+          order_type: 'normal'
+        }
+        let {
+          list,
+          total_count
+        } = await this.$api.item.evaluationList(params)
+        if (list.length > 0) {
+          list.map((item) => {
+            item.showComment = false
+            item.showReply = false
+            item.reply_list = []
+            item.reply_comment = ''
+          })
+        }
+        this.evaluationList = list.map((item) => ({
+          ...item,
+          rate_pic: hasValue(item.rate_pic) ? item.rate_pic.split(',') : []
+        }))
+        this.evaluationTotal = total_count
+        this.loading = false
+      },
+      async handleReply(count, index) {
+        this.evaluationList[index].reply.total_count = count
+      },
+      // 展开二级菜单
+      showNextClick(index, id) {
+        this.menu[index].listShow = !this.menu[index].listShow
+        this.listShow = !this.listShow
+        if (this.menu[index].children.length == 0) {
+          this.$router.push({
+            path: '/shops/info',
+            query: {
+              distributor_id: this.info.distributor_id,
+              main_category: id
             }
           })
         }
-      })
-      return ret
-    }
-  },
-  mounted() {
-    this.fetchEvaluationList()
-  },
-  methods: {
-    // 收藏店铺
-    async collectionClick() {
-      if (this.iconShow) {
-        this.followStore = '取消关注'
-        const data = await this.$api.member.addCollectionStore(this.info.distributor_id)
-        if (!data.message) {
-          this.iconShow = false
-          this.$Message.success('收藏成功')
-        }
-      } else {
-        this.followStore = '关注店铺'
-        const data = await this.$api.member.removeCollectionStore(this.info.distributor_id)
-        if (!data.message) {
-          this.iconShow = true
-          this.$Message.success('取消收藏')
-        }
-      }
-    },
+      },
+      //展开三级菜单
+      showTwoClick(index, ind, id) {
 
-    changeTab(i) {
-      this.curTabIdx = i
-    },
-    async fetchEvaluationList() {
-      const { id } = this.$route.params
-      let params = {
-        page: this.page,
-        pageSize: this.pageSize,
-        item_id: id,
-        order_type: 'normal'
-      }
-      let { list, total_count } = await this.$api.item.evaluationList(params)
-      if (list.length > 0) {
-        list.map((item) => {
-          item.showComment = false
-          item.showReply = false
-          item.reply_list = []
-          item.reply_comment = ''
+        this.menu[index].children[ind].listShow = !this.menu[index].children[ind].listShow
+
+        if (this.menu[index].children[ind].children.length == 0) {
+          // http://localhost:3000/38
+          this.$router.push({
+            path: `/items?cat_id=${id}`,
+            query: {
+              distributor_id: this.info.distributor_id,
+              // main_category:id
+            }
+          })
+        }
+      },
+      // 查找商品分类
+      threeMenuClick(id) {
+        this.$router.push({
+          path: '/shops/info',
+          query: {
+            distributor_id: this.info.distributor_id,
+            main_category: id
+          }
+        })
+      },
+      // 搜索的转跳所有的商品
+      goToItems() {
+        this.$router.push({
+          path: '/items',
+          query: {
+            keywords: this.inputText
+          }
+        })
+      },
+      // 搜索的所在的商店
+      goToShopInfo() {
+        this.$router.push({
+          path: '/shops/info',
+          query: {
+            keywords: this.inputText,
+            distributor_id: this.info.distributor_id
+          }
         })
       }
-      this.evaluationList = list.map((item) => ({
-        ...item,
-        rate_pic: hasValue(item.rate_pic) ? item.rate_pic.split(',') : []
-      }))
-      this.evaluationTotal = total_count
-      this.loading = false
-    },
-    async handleReply(count, index) {
-      this.evaluationList[index].reply.total_count = count
-    },
-    // 展开二级菜单
-    showNextClick(index,id) {
-      this.menu[index].listShow = !this.menu[index].listShow
-      this.listShow = !this.listShow
-      if (this.menu[index].children.length == 0) {
-         this.$router.push({
-            path: '/shops/info',
-            query: {
-              distributor_id: this.info.distributor_id,
-              main_category:id
-            }
-          })
-      }
-    },
-    //展开三级菜单
-    showTwoClick(index, ind,id) {
-      this.menu[index].children[ind].listShow = !this.menu[index].children[ind].listShow
-       if (this.menu[index].children[ind].children.length == 0) {
-         this.$router.push({
-            path: '/shops/info',
-            query: {
-              distributor_id: this.info.distributor_id,
-              main_category:id
-            }
-          })
-      }
-    },
-    // 查找商品分类
-    threeMenuClick(id) {
-      this.$router.push({
-        path: '/shops/info',
-        query: {
-          distributor_id: this.info.distributor_id,
-          main_category:id
-        }
-      })
-    },
-    // 搜索的转跳所有的商品
-    goToItems() {
-      this.$router.push({
-        path: '/items',
-        query: { keywords: this.inputText }
-      })
-    },
-    // 搜索的所在的商店
-    goToShopInfo() {
-      this.$router.push({
-        path: '/shops/info',
-        query: {
-          keywords: this.inputText,
-          distributor_id: this.info.distributor_id
-        }
-      })
     }
   }
-}
 </script>
