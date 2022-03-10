@@ -416,7 +416,7 @@ export default {
       if (mode == 'cart') {
         this.$Message.success('成功加入购物车')
       } else {
-        this.$router.push('/cart/checkout?mode=fastbuy')
+        this.$router.push(`/cart/checkout?mode=fastbuy&id=${distributor_id}`)
       }
     }
   }
