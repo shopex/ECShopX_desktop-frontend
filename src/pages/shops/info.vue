@@ -25,7 +25,7 @@
       <hr />
       <!-- 商品分类 -->
       <div class="content-middle">
-        <div class="sort-title" @click="getStoreShopsInfo">商品分类</div>
+        <div class="sort-title" @click="allCategories">商品分类</div>
         <div>
           <GoodSort :data="sorts" :value="sort" :total="total" @change="changeSort" @change-price="changeSortPrice"
             @search-keyword="search">
@@ -78,7 +78,7 @@
               <div class="list-img">
                 <div class="show-img">
                   <NuxtLink :to="`/items/${item.item_id}`">
-                    <img class="show-img" :src="item.lgImgUrl" alt="" />  
+                    <img class="show-img" :src="item.lgImgUrl" alt="" />
                   </NuxtLink>
                 </div>
                 <div class="imgsInfo-list">
@@ -162,9 +162,9 @@
       const {
         keywords,
         distributor_id,
-        company_id
+        category_id
       } = route.query
-      console.log(keywords, distributor_id, company_id, '----------------------------')
+      console.log(keywords, distributor_id, category_id, '----------------------------')
       const val = await app.$api.shop.getShop({
         distributor_id: distributor_id
       })
@@ -173,7 +173,7 @@
       } = await app.$api.member.showStoreIcon(distributor_id)
       const params = {
         distributor_id: val.distributor_id,
-        company_id: val.company_id
+        category_id: val.category_id
       }
       const res = await app.$api.item.getStoreClassify(params)
       if (res) {
@@ -195,7 +195,7 @@
         keywords: keywords || '',
         // main_category: main_category || '', //商品名称
         item_type: 'normal',
-        company_id: val.company_id || ''
+        category_id: val.category_id || ''
       }
       const storeShopsInfo = await app.$api.item.list(param)
       console.log(storeShopsInfo)
@@ -264,7 +264,7 @@
         keywords: '',
         goodsSort: '',
         main_category: 0,
-        company_id: ''
+        category_id: ''
       }
     },
     methods: {
@@ -285,7 +285,7 @@
           is_tdk: 1,
           type: 0,
           goodsSort: this.goodsSort,
-          company_id: this.company_id
+          category_id: this.category_id
         }
         const storeShopsInfo = await this.$api.item.list(param)
         storeShopsInfo.list.forEach((item) => {
@@ -376,13 +376,16 @@
           })
         }
       },
-
+      allCategories(){
+        this.category_id = ''
+        this.getStoreShopsInfo()
+      },
       // 展开二级菜单
       showNextClick(index, id) {
         this.menu[index].listShow = !this.menu[index].listShow
         if (this.menu[index].children.length == 0) {
           this.page = 1
-          this.company_id = id
+          this.category_id = id
           this.getStoreShopsInfo()
         }
         // this.listShow = !this.listShow
@@ -393,14 +396,14 @@
         this.menu[index].children[ind].listShow = !this.menu[index].children[ind].listShow
         if (this.menu[index].children[ind].children.length == 0) {
           this.page = 1
-          this.company_id = id
+          this.category_id = id
           this.getStoreShopsInfo()
         }
       },
       //商品分类点击搜索
       threeMenuClick(id) {
         this.page = 1
-        this.company_id = id
+        this.category_id = id
         this.getStoreShopsInfo()
       },
 

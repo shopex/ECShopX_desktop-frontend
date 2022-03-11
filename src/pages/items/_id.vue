@@ -27,10 +27,14 @@
           </div>
           <div  class="phone-show">手机逛</div>
           <div v-show="qrcodeHover" class="goods-qrcode-content">
-            <img width="188" height="188" class="goods-qrcode-content__img"
+            <img  v-if="showDefaultQrcode" width="188" height="188" class="goods-qrcode-content__img"
             :src="qrcodePath"
-            onerror="this.src='_nuxt/src/assets/imgs/qrcode_default.png'"
+            @error="loadQrcodefailed()"
             />
+            <img v-else width="188" height="188" class="goods-qrcode-content__img"
+            src="../../assets/imgs/qrcode_default.png"
+            />
+
           </div>
         </div>
         <div class="details-right">
@@ -194,7 +198,7 @@
       } = await app.$api.member.showStoreIcon(info.distributor_id)
       const param = {
         distributor_id: info.distributor_id,
-        company_id: info.company_id
+        category_id: info.category_id
       }
       const res = await app.$api.item.getStoreClassify(param)
       if (res) {
@@ -246,6 +250,8 @@
     created() {
       this.pageType = 'itemDetail'
       this.qrcodePath = `${process.env.VUE_APP_HOST}/wechatAuth/wxapp/qrcode.png?company_id=${this.info.company_id}&page=pages/item/espier-detail&id=${this.info.item_id}`
+      // this.qrcodePath = "https://ecshopx-b2c-demo.yuanyuanke.cn/wechatAuth/wxapp/qrcode.png?company_id=1&page=pages/item/espier-detail&id=1"
+
     },
     data() {
       return {
@@ -272,7 +278,8 @@
         iconShow: true,
         followStore: '关注店铺',
         qrcodeHover: false,
-        qrcodePath: ''
+        qrcodePath: '',
+        showDefaultQrcode: true
       }
     },
     computed: {
@@ -370,6 +377,7 @@
       },
       // 展开二级菜单
       showNextClick(index, id) {
+        debugger
         this.menu[index].listShow = !this.menu[index].listShow
         this.listShow = !this.listShow
         if (this.menu[index].children.length == 0) {
@@ -400,6 +408,7 @@
       },
       // 查找商品分类
       threeMenuClick(id) {
+        debugger
         this.$router.push({
           path: '/shops/info',
           query: {
@@ -426,6 +435,9 @@
             distributor_id: this.info.distributor_id
           }
         })
+      },
+      loadQrcodefailed(){
+        this.showDefaultQrcode = !this.showDefaultQrcode
       }
     }
   }
