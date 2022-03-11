@@ -4,6 +4,7 @@
   <div class="page-item-detail">
     <div class="container">
       <SpBreadCrumb :value="breadcrumb" />
+
       <div class="goods-logo">
         <div class="details-left">
           <div class="imgs-content">
@@ -20,11 +21,17 @@
             </div>
           </div>
         </div>
-        <div class="imgs-content">
+        <div class="imgs-content" @mouseover="qrcodeHover = true" @mouseleave="qrcodeHover = false">
           <div class="goods-qrcode">
             <i class="new_iconfont icon-new-pc-erweima"></i>
           </div>
-          <div class="phone-show">手机逛</div>
+          <div  class="phone-show">手机逛</div>
+          <div v-show="qrcodeHover" class="goods-qrcode-content">
+            <img width="188" height="188" class="goods-qrcode-content__img"
+            :src="qrcodePath"
+            onerror="this.src='_nuxt/src/assets/imgs/qrcode_default.png'"
+            />
+          </div>
         </div>
         <div class="details-right">
           <input placeholder="请输入" v-model="inputText" type="text" />
@@ -32,6 +39,7 @@
           <button @click="goToItems">搜商城</button>
         </div>
       </div>
+
 
       <SpGoodsInfo :info="info" :theme="themeColor" />
 
@@ -237,6 +245,7 @@
 
     created() {
       this.pageType = 'itemDetail'
+      this.qrcodePath = `${process.env.VUE_APP_HOST}/wechatAuth/wxapp/qrcode.png?company_id=${this.info.company_id}&page=pages/item/espier-detail&id=${this.info.item_id}`
     },
     data() {
       return {
@@ -261,7 +270,9 @@
         meun: null,
         shopInfo: null,
         iconShow: true,
-        followStore: '关注店铺'
+        followStore: '关注店铺',
+        qrcodeHover: false,
+        qrcodePath: ''
       }
     },
     computed: {
@@ -348,7 +359,7 @@
           })
         }
         this.evaluationList = list.map((item) => ({
-          ...item,
+         ...item,
           rate_pic: hasValue(item.rate_pic) ? item.rate_pic.split(',') : []
         }))
         this.evaluationTotal = total_count

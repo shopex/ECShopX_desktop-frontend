@@ -144,23 +144,23 @@ ul {
   }
 }
 
-@media (max-width: 1366px) {
-  .container {
-    width: 1160px;
-  }
-}
+// @media (max-width: 1366px) {
+//   .container {
+//     width: 1160px;
+//   }
+// }
 
-@include respond(lg) {
-  .container {
-    width: 1000px;
-  }
-}
+// @include respond(lg) {
+//   .container {
+//     width: 1000px;
+//   }
+// }
 
-@include respond(md) {
-  .container {
-    width: 900px;
-  }
-}
+// @include respond(md) {
+//   .container {
+//     width: 900px;
+//   }
+// }
 
 @include respond(sm) {
   .container {

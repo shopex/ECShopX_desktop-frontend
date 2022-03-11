@@ -64,7 +64,15 @@ $goods-color-primary: #1f201f;
 				color: #8C8C8C;
 			}
     }
-    .details-right {
+    .goods-qrcode-content{
+    	width: 188px;
+    	height: 188px;
+    	// background: red;
+			position: absolute;
+			top: 160px;
+    	z-index: 999;
+    }
+		.details-right {
       position: relative;
       left: 150px;
       input{
@@ -85,7 +93,9 @@ $goods-color-primary: #1f201f;
         right: 95px;
       }
     }
-  }
+	
+	}
+	
   .goods-details {
     //text-align: center;
     @include clearfix();
@@ -191,7 +201,8 @@ $goods-color-primary: #1f201f;
       margin-bottom: 10px;
     }
   }
-  .goods-evaluation {
+ 
+	.goods-evaluation {
     &__list {
       .comps-evaluation__item {
         &:not(:last-child) {
