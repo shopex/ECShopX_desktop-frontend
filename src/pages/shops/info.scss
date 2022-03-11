@@ -138,6 +138,10 @@
                   // font-family: SourceHanSansCN-Normal, SourceHanSansCN;
                   font-weight: 400;
                   color: #8c8c8c;
+									&.active {
+										font-weight: 650;
+										color: #FF5D02;
+									}
                 }
               }
             }

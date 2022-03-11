@@ -58,6 +58,7 @@
                       <div class="three-menu" v-show="e.listShow && e.children.length > 0">
                         <ul>
                           <li v-for="(threeMenu, x) of e.children" :key="x"
+                            :class="{active:threeMenu.category_id == category_id}"
                             @click="threeMenuClick(threeMenu.category_id)">
                             {{ threeMenu.category_name }}
                           </li>
