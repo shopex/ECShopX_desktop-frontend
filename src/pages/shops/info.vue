@@ -173,8 +173,8 @@
         is_fav
       } = await app.$api.member.showStoreIcon(distributor_id)
       const params = {
-        distributor_id: val.distributor_id,
-        category_id: val.category_id
+        distributor_id: distributor_id,
+        category_id: category_id
       }
       const res = await app.$api.item.getStoreClassify(params)
       if (res) {
@@ -192,11 +192,11 @@
       const param = {
         page: 1,
         pageSize: 16,
-        distributor_id: val.distributor_id,
+        distributor_id: distributor_id,
         keywords: keywords || '',
         // main_category: main_category || '', //商品名称
         item_type: 'normal',
-        category_id: val.category_id || ''
+        category_id: category_id || ''
       }
       const storeShopsInfo = await app.$api.item.list(param)
       console.log(storeShopsInfo)

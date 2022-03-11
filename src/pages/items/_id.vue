@@ -385,7 +385,7 @@
             path: '/shops/info',
             query: {
               distributor_id: this.info.distributor_id,
-              main_category: id
+              category_id: id
             }
           })
         }
@@ -413,7 +413,7 @@
           path: '/shops/info',
           query: {
             distributor_id: this.info.distributor_id,
-            main_category: id
+            category_id: id
           }
         })
       },
