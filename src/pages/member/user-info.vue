@@ -483,7 +483,7 @@ $num-color : #FF5D02;
                     :key="`footgoods__${index}`"
                     @click="handelClickToLink(item.item_id)"
                   >
-                    <SpImg :src="item.itemData.pics.length > 0 ? item.itemData.pics[0] : ''" no-size class="img" />
+                    <SpImg :src="item.itemData.length > 0 ? (item.itemData.pics.length > 0 ? item.itemData.pics[0] : ''):''" no-size class="img" />
                     <div class="goods-con">
                       <div class="goods-name">{{ item.itemData.item_name }}</div>
                       <SpPrice class="goods-price" :value="item.itemData.price / 100" />
