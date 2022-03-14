@@ -194,7 +194,6 @@
         pageSize: 16,
         distributor_id: distributor_id,
         keywords: keywords || '',
-        // main_category: main_category || '', //商品名称
         item_type: 'normal',
         category_id: category_id || ''
       }
@@ -264,7 +263,6 @@
         followStore: '关注店铺',
         keywords: '',
         goodsSort: '',
-        main_category: 0,
         category_id: ''
       }
     },
@@ -278,7 +276,6 @@
           item_type: 'normal',
           keywords: this.keywords || '', //搜索关键词
           item_name: '', //商品名称
-          main_category: this.main_category || 0, //主类目ID
           brand_id: 0, //品牌ID
           goodsSort: 0, //排列方式
           start_price: 0, //最小金额
@@ -352,7 +349,6 @@
       search(keywords) {
         this.page = 1
         this.keywords = keywords
-        this.main_category = 0
         this.getStoreShopsInfo()
       },
       // 分页

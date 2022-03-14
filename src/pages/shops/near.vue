@@ -17,11 +17,11 @@
           <i class="espier-icon espier-icon-sousuo-01" @click="shopSearch"></i>
         </div>
       </div>
-      <div class="near-content">
+      <div class="near-content" v-loading="loading">
         <div class="near-content-left">
           <div class="menu">
             <ul class="menu-con">
-              <li class="menu-block" v-for="(item , index) in tagList">
+              <li class="menu-block" v-for="(item , index) in tagList" :key="`menu-block__${index}`">
                 <div class="menu-item" :class="{ active: index == tagIdex }" @mousedown="tagClicked(index)">
                   <span class="menu-item-title">{{item.tag_name}}</span>
                 </div>
@@ -32,7 +32,7 @@
         <div class="near-content-right">
           <div class="shop_list">
             <ul>
-              <li class="shop_list_item" v-for="(shop , index) in shopList">
+              <li class="shop_list_item" v-for="(shop , index) in shopList" :key="`shop_list_item__${index}`">
                 <div class="shop_list_item_right">
                   <div class="shop_list_item_right__concern" @click="collectShops(shop)">
                     <div class="shop_collection_not" v-if="!shop.collection">
@@ -92,6 +92,7 @@
         isReloadData: true,
         tabIndex: 0,
         tagIdex: -1,
+        loading: false
       }
     },
     computed: {},
@@ -154,14 +155,14 @@
               province = province.replace(/市/i, '')
               console.log('getAuthToken:', S.getAuthToken())
               if (S.getAuthToken()) {
+                _this.loading = true;
                 const {
                   list
                 } = await _this.$api.member.getCollectionStoreList()
                 _this.collectShopList = list
                 _this.getShopList(params)
+                _this.loading = false;
               }
-
-              // _this.handleSearch()
             })
             // _this.map.panTo(r.point)
             // console.log('您的位置：' + r.point.lng + ',' + r.point.lat)
@@ -183,7 +184,8 @@
         let length = list.length
         for (var i = 0; i < length; i++) {
           var shop = list[i]
-          var result = this.collectShopList?this.collectShopList.some(item => item.distributor_id === shop.distributor_id):false
+          var result = this.collectShopList ? this.collectShopList.some(item => item.distributor_id === shop
+            .distributor_id) : false
           if (result) {
             shop.collection = true
           } else {
@@ -265,7 +267,7 @@
         }
         this.shopList = shopList;
         this.navListClicked(0)
-        
+
       },
       reload() {
         this.isReloadData = false;

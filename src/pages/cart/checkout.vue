@@ -473,7 +473,14 @@ export default {
 
       this.$loading({ background: 'transparent' })
       try {
-        const { trade_info } = await this.$api.cart.creatOrder(params)
+
+        const { trade_info, message } = await this.$api.cart.creatOrder(params)
+        if(message){
+          this.$Message.error(message)
+          this.$loading().close()
+          return
+        }
+
         const { mode } = this.$route.query
         if (mode == 'cart') {
           this.CART_GETINFO()

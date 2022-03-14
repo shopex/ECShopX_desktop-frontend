@@ -1,6 +1,6 @@
 <style lang="scss" src="./index.scss"></style>
 <template>
-  <div class="widget-W0019" :style="widgetStyle">
+  <div class="widget-W0019" :style="widgetStyle" v-loading="loading">
     <slot></slot>
     <div class="widget-W0019-inner widget-inner" :style="widgetInnerStyle">
       <div class="widget-W0019-body widget-body" :style="widgetBodyStyle">
@@ -22,7 +22,7 @@
             </div>
           </div>
           <ul :class="`wgt-goods_list`" :id="`wgt-goods_list__${value.uuid}`">
-            <li class="goods-item" v-for="(item, index) in value.data" :key="`goods-item__${index}`"
+            <li class="goods-item" v-for="(item, index) in shopList" :key="`goods-item__${index}`"
               :style="{border:`${value.wgtShopBorder?value.wgtShopBorderWidth:0}px solid` ,borderColor:value.wgtShopBorderColor}">
               <linkPage  class="goods-item_wrap" :mode="mode" :to="`shops/info?distributor_id=${item.distributor_id}`" >
                 <!-- :to="`shops/list?distributor_id=${item.distributor_id}`" -->
@@ -104,6 +104,7 @@
       return {
         // goodsData:[],
         tabIndex: 0,
+        loading: false,
         shopList: []
       }
     },
@@ -244,6 +245,7 @@
           20
       },
       async getShopList(params) {
+        this.loading = true;
         const {
           list,
           tagList
@@ -258,6 +260,7 @@
         this.value.allTagList = JSON.parse(JSON.stringify(tagList));
         tagList.unshift({"tag_id":-1,"tag_name":"全部"})
         this.value.selectTagList = tagList;
+        this.loading = false;
       }
     }
   }

@@ -9,7 +9,7 @@
           <div class="member-content-right-header">我的订单</div>
           <div class="member-content-right-body">
             <div class="tabs-status">
-              <template v-for="tab in tabs">
+              <template v-for="(tab ,idx ) in tabs" >
                 <div
                   class="tab"
                   @click="handelClick(tab.value)"
@@ -550,10 +550,14 @@ export default {
               orderCancel({
                 order_id: this.selectItem.order,
                 cancel_reason: this.form.cancelMean
-              }).then(() => {
-                this.$Message.success('发起成功')
-                this.getTradeList()
-                this.dailogCancel = false
+              }).then((res) => {
+                if ( res.message ) {
+                  this.$Message.error(res.message)
+                } else{
+                  this.$Message.success('发起成功')
+                  this.getTradeList()
+                  this.dailogCancel = false
+                }
               })
             }
           })

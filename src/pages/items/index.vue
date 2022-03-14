@@ -73,7 +73,7 @@ export default {
     const {
       keywords,
       cat_id,
-      main_category,
+      
       brand_id,
       goodsSort,
       start_price,
@@ -85,7 +85,7 @@ export default {
       item_type: 'normal',
       keywords,
       category_id: cat_id,
-      main_category,
+      
       brand_id,
       goodsSort,
       start_price,
@@ -219,14 +219,14 @@ export default {
     async fetch(query) {
       this.loading = true
       // this.$loading({ background: "transparent" });
-      const { keywords, cat_id, main_category, brand_id, goodsSort, start_price, end_price } = query
+      const { keywords, cat_id,  brand_id, goodsSort, start_price, end_price } = query
       const params = {
         page: this.pageIndex,
         pageSize: this.pageSize,
         item_type: 'normal',
         keywords,
         category_id: cat_id,
-        main_category,
+        
         brand_id,
         goodsSort,
         start_price,
