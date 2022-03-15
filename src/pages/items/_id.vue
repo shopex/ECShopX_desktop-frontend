@@ -39,7 +39,7 @@
         </div>
         <div class="details-right">
           <input placeholder="请输入" v-model="inputText" type="text" />
-          <button @click="goToShopInfo">搜本店</button>
+          <button v-if="shopInfo.name" @click="goToShopInfo">搜本店</button>
           <button @click="goToItems">搜商城</button>
         </div>
       </div>
