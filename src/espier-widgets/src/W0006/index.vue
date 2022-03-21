@@ -136,7 +136,7 @@
 // import 'vue-draggable-resizable-gorkys/dist/VueDraggableResizable.css'
 import braidStyle from './props'
 import mixins from '../../mixins'
-// import { attrs } from '../../mixins/common-props'
+import { attrs } from '../../mixins/common-props'
 // import ImgWrap from '../../common/img-wrap'
 import { log, CreateID } from '@/utils'
 import Widgets from '../../src'
@@ -159,7 +159,7 @@ export default {
     alias: '自由面板',
     text: '自由面板',
     type: WIDGET_NAME,
-    // ...attrs,
+    ...attrs,
     height: 400,
     // 自由面板类型： header、body、footer
     comptyle: 'body',
