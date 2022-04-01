@@ -40,7 +40,7 @@
                         <th>操作</th>
                       </tr>
                     </thead>
-                    <tbody v-for="child in list">
+                    <tbody v-for="(child,index) in list" :key="index">
                       <tr class="sep-row">
                         <td colspan="5"></td>
                       </tr>
@@ -49,26 +49,17 @@
                           <div class="list-table-header">
                             <span>{{ child.date }}</span>
                             订单编号：
-                            <span class="ly-fn-a link-black" @click.stop="clickLink(child.order)">{{
-                              child.order
-                            }}</span>
+                            <span class="ly-fn-a link-black" @click.stop="clickLink(child.order)">{{ child.order}}</span>
                             <span>{{ child.shop_name ? child.shop_name : '总店' }}</span>
                           </div>
                         </td>
                       </tr>
 
-                      <template v-for="(item, index) in child.children">
-                        <tr class="tr-bd">
+                      <template >
+                        <tr class="tr-bd" v-for="(item, index) in child.children" :key="index">
                           <td>
-                            <div
-                              class="product-name"
-                              @click="clickGoodsName(item, child.order_class === 'pointsmall')"
-                            >
-                              <SpImg
-                                style="width: 70px; height: 70px; margin: 0 14px"
-                                :src="item.pic"
-                                no-size
-                              />
+                            <div class="product-name" @click="clickGoodsName(item, child.order_class === 'pointsmall')">
+                              <SpImg style="width: 70px; height: 70px; margin: 0 14px" :src="item.pic" no-size/>
                               <div class="td-product-name">
                                 <div class="p-name">
                                   <span>{{ item.item_name }}</span>
@@ -78,22 +69,14 @@
                               <PointTag v-if="child.order_class === 'pointsmall'" />
                             </div>
                             <div class="product-num">x {{ item.num }}</div>
-                            <div
-                              v-if="child.orderStatus === 'WAIT_BUYER_CONFIRM'"
-                              class="product-repair"
-                            >
+                            <div v-if="child.orderStatus === 'WAIT_BUYER_CONFIRM'" class="product-repair">
                               <!-- <span
                                 class="ly-fn-a b-color"
                                 @click="clickBtn('申请售后', item)"
                                 v-if="!item.aftersales_status && child.order_class !== 'pointsmall'"
                                 >申请售后</span
                               > -->
-                              <span
-                                class="ly-fn-a b-color"
-                                v-if="item.aftersales_status"
-                                @click="clickBtn('售后', item)"
-                                >售后</span
-                              >
+                              <span class="ly-fn-a b-color" v-if="item.aftersales_status" @click="clickBtn('售后', item)">售后</span>
                             </div>
                           </td>
 

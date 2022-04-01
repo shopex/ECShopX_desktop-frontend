@@ -3,11 +3,24 @@
 .page-order-detail {
   position: relative;
   margin-bottom: 100px;
-  
-  h4 {
-    font-size: 14px;
-    font-weight: bold;
-    padding-bottom: 10px;
+  .member-content {
+    font-size: 12px;
+    @include clearfix();
+    &-left {
+      float: left;
+      width: 215px;
+      min-height: 700px;
+      border: 1px solid $color-border-gray-light;
+      border-radius: 4px;
+    }
+    &-right {
+      min-height: 700px;
+      float: left;
+      border: 1px solid $color-border-gray-light;
+      &-limit {
+        width: 600px;
+      }
+    }
   }
   .btn {
     background-color: #fff;
@@ -122,7 +135,7 @@
 </style>
 
 <template>
-  <div class="page-order-detail member  container-member">
+  <div class="page-order-detail page-member-container">
     <div class="member-content">
       <div class="member-content-left">
         <smenu activeTitle="order"></smenu>
@@ -597,7 +610,6 @@ export default {
       }
       let res = await aftersalesInfo(obj)
       let { order_info, aftersales ,detail,aftersales_bn, aftersales_status, aftersales_type, create_time, description, reason, progress}=res
-      console.log(res,'res');
       this.orderGoodData = {...order_info,detail}
       let { receipt_type, receiver_address, receiver_city, receiver_district, receiver_mobile, receiver_name, receiver_state, receiver_zip, item_fee, freight_fee, total_fee, order_status_des, delivery_corp_name, delivery_code } = order_info
       this.receiveData = {

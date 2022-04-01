@@ -9,12 +9,8 @@
           <div class="member-content-right-header">售后订单</div>
           <div class="member-content-right-body">
             <div class="tabs-status">
-              <template v-for="tab in tabs">
-                <div
-                  class="tab"
-                  @click="handelClick(tab.value)"
-                  :class="{ active: tab.value == status }"
-                >
+              <template >
+                <div v-for="(tab,index) in tabs" :key="index" class="tab" @click="handelClick(tab.value)" :class="{ active: tab.value == status }">
                   {{ tab.label }}
                 </div>
               </template>
@@ -44,13 +40,12 @@
                     <thead>
                       <tr>
                         <th>订单详情</th>
-                        <th>收货人</th>
                         <th>金额</th>
                         <th>状态</th>
                         <th>操作</th>
                       </tr>
                     </thead>
-                    <tbody v-for="child in list">
+                    <tbody v-for="(child,index) in list" :key="index">
                       <tr class="sep-row">
                         <td colspan="5"></td>
                       </tr>
@@ -62,43 +57,30 @@
                             <span class="ly-fn-a link-black" @click.stop="clickLink(child.order)">{{
                               child.order
                             }}</span>
-                            <span>{{ child.shop_name ? child.shop_name : '总店' }}</span>
+                            <span>{{ child.distributor_info ? child.distributor_info : '总店' }}</span>
                           </div>
                         </td>
                       </tr>
-                      <template v-for="(item, index) in child.children">
-                        <tr class="tr-bd">
+                      <template>
+                        <tr class="tr-bd" v-for="(item, index) in child.children" :key="index">
                           <td>
                             <div class="product-name" @click="clickGoodsName(item)">
                               <SpImg class="spimg" :src="item.item_pic" no-size />
                               <div class="td-product-name">
                                 <div class="p-name">{{ item.item_name }}</div>
-                                <div class="p-extra">{{ item.item_spec_desc }}</div>
                               </div>
                             </div>
                             <div class="product-num">x {{ item.num }}</div>
                           </td>
                           <td v-if="index == 0" :rowspan="child.children.length || 2" colspan="1">
-                            <div class="p-get-name">
-                              <span>{{ child.receiver_name }}</span>
-                            </div>
-                          </td>
-                          <td v-if="index == 0" :rowspan="child.children.length || 2" colspan="1">
-                            <div class="product-price">
-                              ￥{{ child.refund_fee | formatPriceToHundred }}
-                            </div>
+                            <div class="product-price">￥{{ child.refund_fee | formatPriceToHundred }} </div>
                           </td>
                           <td :rowspan="child.children.length || 2" v-if="index == 0" colspan="1">
                             <div class="product-status-warp">
-                              <div
-                                class="p-status-text"
-                                :class="child.orderStatus == '1' ? 'nopay-color' : ''"
-                              >
+                              <div class="p-status-text" :class="child.orderStatus == '1' ? 'nopay-color' : ''">
                                 {{ afterStatusText[child.orderStatus] }}
                               </div>
-                              <div class="ly-fn-a b-color" @click="clickLink(child.order)">
-                                售后详情
-                              </div>
+                              <div class="ly-fn-a b-color" @click="clickLink(child.order)"> 售后详情</div>
                             </div>
                           </td>
                           <td
@@ -347,7 +329,6 @@ export default {
       }
       let { list = [], total_count = 0 } = await aftersaleList(params)
       // list.push(list[0])
-
       list = list.map((item) => {
         // let children = [item.detail]
         let obj = {
@@ -357,8 +338,7 @@ export default {
           distributor_id: item.distributor_id,
           children: item.detail,
           refund_fee: item.refund_fee,
-          // receiver_name: item.orderInfo.receiver_name,
-          // shop_name: item.orderInfo.distributor_name,
+          distributor_info: item.distributor_info.name,
           orderStatus: item.aftersales_status
         }
         return obj

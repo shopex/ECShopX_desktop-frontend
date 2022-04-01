@@ -1,7 +1,6 @@
 <style lang="scss">
 .address-item-add {
   .form {
-    padding: 20px 20px 0;
     .label-text {
       display: inline-block;
       font-size: 13px;
@@ -47,13 +46,7 @@
       cursor: pointer;
     }
     .btn-ok {
-      color: #fff;
       margin-right: 10px;
-    }
-    .btn-cancel {
-      border-radius: 3px;
-      border-width: 1px;
-      border-style: solid;
     }
   }
 }
@@ -93,14 +86,8 @@
       </SpFormItem>
     </SpForm>
     <div class="btns">
-      <div class="btn btn-ok" @click="clickSumbit" :style="{
-        borderColor: theme,
-        backgroundColor: theme
-      }">确认</div>
-      <div class="btn btn-cancel" @click="clickCancel" :style="{
-        borderColor: theme,
-        color: theme
-      }">取消</div>
+      <div class="btn btn-ok" @click="clickSumbit">确认</div>
+      <div class="btn" @click="clickCancel">取消</div>
     </div>
   </div>
 </template>

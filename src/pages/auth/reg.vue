@@ -10,7 +10,7 @@
     <div class="reg-main">
       <div class="reg-title">用户注册</div>
       <div class="auth reg">
-          <div class="reg-process" v-if="step != '3'">
+          <!-- <div class="reg-process" v-if="step != '3'">
             <div class="process-item active">
               <div class="status">
                 <span class="num">1</span>
@@ -34,11 +34,11 @@
               </div>
               <div class="text">注册成功</div>
             </div>
-          </div>
+          </div> -->
 
-          <div class="auth-form reg-form">
+          <div class="auth-form reg-form" v-if="!regSuccess">
             <SpForm ref="form-reg" :model="info" :rules="rules">
-              <template v-if="step == '1'">
+              <!-- <template v-if="step == '1'"> -->
                 <SpFormItem prop="mobile">
                   <SpInput v-model="info.mobile" placeholder="手机号" />
                 </SpFormItem>
@@ -48,7 +48,7 @@
                     <img :src="imgInfo.imageData" alt />
                   </div>
                 </SpFormItem>
-                <SpFormItem prop="vcode" class="yzm-feild">
+                <SpFormItem prop="vcode" class="vcode-feild">
                   <SpInput v-model="info.vcode" placeholder="动态验证码" />
                   <div class="vcode-btn">
                     <SpTimer
@@ -60,10 +60,10 @@
                     ></SpTimer>
                   </div>
                 </SpFormItem>
-              </template>
+              <!-- </template> -->
 
-              <template v-if="step == '2'">
-                <SpFormItem prop="password" style="margin-bottom: 38px;">
+              <!-- <template v-if="step == '2'"> -->
+                <SpFormItem prop="password">
                   <SpInput v-model="info.password" type="password" placeholder="设置密码" />
                 </SpFormItem>
                 <SpFormItem prop="password2">
@@ -86,26 +86,22 @@
                     <SpInput v-model="info[name]" :placeholder="item.name" />
                   </SpFormItem>
                 </template>
-              </template>
+              <!-- </template> -->
               <SpFormItem class="btn-container">
-                <SpButton long type="primary" @click="regBtn('form-reg')" v-if="step == '1'"
-                  >下一步</SpButton
-                >
-                <SpButton long type="primary" @click="regBtn('form-reg')" v-if="step == '2'"
-                  >注册</SpButton
-                >
-
+                <!-- <SpButton long type="primary" @click="regBtn('form-reg')" v-if="step == '1'" >下一步</SpButton >
+                <SpButton long type="primary" @click="regBtn('form-reg')" v-if="step == '2'">注册</SpButton
+                > -->
+                <SpButton long type="primary" @click="regBtn('form-reg')" >注册</SpButton >
               </SpFormItem>
             </SpForm>
           </div>
 
-          <div class="reg-complete" v-if="step == '3'">
+          <div class="reg-complete" v-if="regSuccess">
             <img class="reg-img" src="~/assets/imgs/reg-img.svg" />
             <div class="name">恭喜您 {{ this.info.username }}</div>
             <div class="vip">您已成功申请为{{ website_name }}的会员</div>
-            <SpButton class="go-to-login" long type="primary" @click="regBtn('form-reg')" v-if="step == '3'"
-              >去登录</SpButton
-            >
+            <!-- <SpButton class="go-to-login" long type="primary" @click="regBtn('form-reg')" v-if="step == '3'" >去登录</SpButton> -->
+            <SpButton class="go-to-login" long type="primary" @click="regBtn('form-reg')">去登录</SpButton>
           </div>
         </div>
     </div>
@@ -216,9 +212,10 @@ export default {
       timerMsg: '获取验证码',
       license: false,
       showModal: false,
-      step: '1',
+      // step: '1',
       registerParam: [],
-      website_name: process.env.VUE_APP_TITLE
+      website_name: process.env.VUE_APP_TITLE,
+      regSuccess:false,
     }
   },
   mounted() {
@@ -246,13 +243,9 @@ export default {
     // 注册
     async regBtn(name) {
       this.$refs[name].validate((valid, errors) => {
-        if (valid) {
-          if (this.step == '1') {
-            this.step = '2'
-          } else {
-            this.authRegsiter()
-          }
-        }
+        if(!valid) return
+
+        this.authRegsiter();
       })
     },
     redirect() {
@@ -276,8 +269,9 @@ export default {
       const { token } = await this.$api.auth.reg(query)
       S.setAuthToken(token)
       this.$store.dispatch('user/getUserInfo')
-      this.step = '3'
-      this.redirect()
+      // this.step = '3'
+      this.redirect();
+      this.regSuccess = true;
     },
     async yzmImg() {
       const img_res = await this.$api.auth.regImg({

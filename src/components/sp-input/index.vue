@@ -2,7 +2,6 @@
 
 <template>
   <div class="sp-input" :class="{'disabled': disabled}">
-
     <input
       class="sp-input__input"
       v-model="currentValue"
@@ -14,6 +13,7 @@
       @input="handleInput"
       @change="handleChange"
       :style="icon!=''?'':'padding: 10px 14px;'"
+      autocomplete="new-password"
     />
     <i :class="icon " class="sp-input__icon"></i>
     <div class="sp-input__line" v-if = "icon!=''"></div>

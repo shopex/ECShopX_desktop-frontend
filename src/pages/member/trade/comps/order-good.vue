@@ -15,8 +15,8 @@
         </tr>
       </thead>
       <tbody>
-        <template v-for="item in orderGoodData.detail">
-          <tr>
+        <template>
+          <tr v-for="(item,index) in orderGoodData.detail" :key="index">
             <td>
               <div class="table-goods-pic">
                 <SpImg style="width: 65px; height: 65px" :src="item.pic" no-size />

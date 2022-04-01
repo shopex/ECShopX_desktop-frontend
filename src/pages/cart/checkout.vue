@@ -474,7 +474,7 @@ export default {
       this.$loading({ background: 'transparent' })
       try {
 
-        const { trade_info, message } = await this.$api.cart.creatOrder(params)
+        const { order_id, message } = await this.$api.cart.creatOrder(params)
         if(message){
           this.$Message.error(message)
           this.$loading().close()
@@ -486,7 +486,7 @@ export default {
           this.CART_GETINFO()
         }
         this.$loading().close()
-        this.$router.push({ path: `/cashier?order_id=${trade_info.order_id}` })
+        this.$router.push({ path: `/cashier?order_id=${order_id}` })
       } catch (e) {
         this.$loading().close()
       }

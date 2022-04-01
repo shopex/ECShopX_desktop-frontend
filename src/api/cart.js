@@ -30,7 +30,7 @@ export function freightFee(data) {
 }
 // 购物车订单创建提交
 export function creatOrder(data) {
-  return req({ url: 'api/h5app/wxapp/order', data, method: 'POST' })
+  return req({ url: '/api/h5app/wxapp/order_new', data, method: 'POST' })
 }
 // 订单信息获取
 export const getOrderDet = (params, id) => {

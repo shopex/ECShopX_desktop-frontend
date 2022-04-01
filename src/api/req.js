@@ -47,6 +47,12 @@ function errorToast(data) {
   }
 }
 
+function errorMessage(message) {
+  if (process.client) {
+    Vue.prototype.$Message.error(message)
+  }
+}
+
 class CreateAxios {
   constructor() {
     this.created()
@@ -129,8 +135,18 @@ class CreateAxios {
         // console.log('status:', status)
         if (status === 200) {
           if (data.data) {
+            const { status_code, message } = data.data
+            if(status_code && status_code > 300){
+              errorMessage(message)
+              return Promise.reject(message)
+            }
             return data.data
           } else {
+            const { status_code, message } = data
+            if(status_code && status_code > 300){
+              errorMessage(message)
+              return Promise.reject(message)
+            }
             return Promise.reject(data)
           }
         }

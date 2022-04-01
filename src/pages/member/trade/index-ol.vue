@@ -17,12 +17,8 @@
         </div>
         <div class="member-content-right-list-body">
           <div class="tabs-status">
-            <template v-for="tab in tabs">
-              <div
-                class="tab"
-                @click="handelClick(tab.value)"
-                :class="{ active: tab.value == status }"
-              >
+            <template >
+              <div v-for="(tab,index) in tabs" :key="index" class="tab" @click="handelClick(tab.value)" :class="{ active: tab.value == status }">
                 {{ tab.label }}
               </div>
             </template>
@@ -414,7 +410,7 @@ export default {
           children: item.items,
           orderStatus: item.order_status_des,
           total_fee: item.total_fee,
-          shop_name: item.shop_name
+          distributor_name: item.distributor_name
         }
         return obj
       })

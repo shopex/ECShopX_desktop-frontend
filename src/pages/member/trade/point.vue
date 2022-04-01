@@ -8,12 +8,8 @@
         <div class="member-content-right-header">积分订单</div>
         <div class="member-content-right-body">
           <div class="tabs-status">
-            <template v-for="tab in tabs">
-              <div
-                class="tab"
-                @click="handelClick(tab.value)"
-                :class="{ active: tab.value == status }"
-              >
+            <template>
+              <div v-for="(tab,index) in tabs" :key="index" class="tab" @click="handelClick(tab.value)" :class="{ active: tab.value == status }">
                 {{ tab.label }}
               </div>
             </template>
@@ -40,7 +36,7 @@
                       <th>操作</th>
                     </tr>
                   </thead>
-                  <tbody v-for="child in list">
+                  <tbody v-for="(child,index) in list" :key="index">
                     <tr class="sep-row">
                       <td colspan="6"></td>
                     </tr>
@@ -52,13 +48,13 @@
                           <span class="ly-fn-a link-black" @click.stop="clickLink(child.order)">{{
                             child.order
                           }}</span>
-                          <span>{{ child.shop_name ? child.shop_name : '总店' }}</span>
+                          <span>{{ child.distributor_name ? child.distributor_name : '总店' }}</span>
                         </div>
                       </td>
                     </tr>
 
-                    <template v-for="(item, index) in child.children">
-                      <tr class="tr-bd">
+                    <template>
+                      <tr class="tr-bd" v-for="(item, index) in child.children" :key="index">
                         <td>
                           <div class="product-name" @click="clickGoodsName(item)">
                             <SpImg
@@ -415,7 +411,7 @@ export default {
           orderStatus: item.order_status_des,
           total_fee: item.total_fee,
           item_point: item.item_point,
-          shop_name: item.shop_name,
+          distributor_name: item.distributor_name,
           order_class: item.order_class,
           receiver_name: item.receiver_name,
           is_rate: item.is_rate

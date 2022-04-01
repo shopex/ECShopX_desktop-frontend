@@ -199,7 +199,7 @@
         </div>-->
         </div>
       </div>
-      <SpModal v-model="dailogVisible" :height="530" :width="550">
+      <SpModal v-model="dailogVisible" :width="600">
         <div slot="title" class="address-add-title">新增地址</div>
         <div class="address-add">
           <addressItemAdd
