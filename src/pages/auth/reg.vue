@@ -267,11 +267,15 @@ export default {
         user_type: 'local'
       }
       const { token } = await this.$api.auth.reg(query)
-      S.setAuthToken(token)
-      this.$store.dispatch('user/getUserInfo')
-      // this.step = '3'
-      this.redirect();
-      this.regSuccess = true;
+      if(token){
+        S.setAuthToken(token)
+        this.regSuccess = true;
+        this.$cookies.set('ECSHOPX_TOKEN', token)
+        this.$Message.success("登录成功")
+        this.$router.push('/')
+      }else{
+        this.$Message.error(message)
+      }
     },
     async yzmImg() {
       const img_res = await this.$api.auth.regImg({
