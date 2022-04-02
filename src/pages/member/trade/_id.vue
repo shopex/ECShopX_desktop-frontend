@@ -251,26 +251,13 @@
                   {{ isZiti ? '待自提' : orderStatusText[orderInfo.order_status_des] }}
                 </div>
                 <span v-if="isZiti">请尽快前往自提点自提</span>
-                <span v-if="!isZiti && orderInfo.order_status_des == 'NOTPAY'"
-                  ><i class="ec-icon ec-icon-time"></i>剩余{{ cancelTime }}</span
-                >
+                <span v-if="!isZiti && orderInfo.order_status_des == 'NOTPAY'"><i class="ec-icon ec-icon-time"></i>剩余{{ cancelTime }}
+                </span>
                 <div class="btn-warp">
-                  <button
-                    class="btn"
-                    @click="clickBtn('付款')"
-                    v-if="step == 1 && orderInfo.pay_type != 'point'"
-                  >
-                    付 款
-                  </button>
-                  <button class="btn" v-if="step == 3" @click="clickBtn('确认收货')">
-                    确认收货
-                  </button>
+                  <button class="btn" @click="clickBtn('付款')" v-if="step == 1 && orderInfo.pay_type != 'point'"> 付 款 </button>
+                  <button class="btn" v-if="step == 3" @click="clickBtn('确认收货')"> 确认收货 </button>
                 </div>
-                <div
-                  class="btn-warp-bt"
-                  @click="clickBtn('取消订单')"
-                  v-if="step == 1 || step == 2"
-                >
+                <div class="btn-warp-bt" @click="clickBtn('取消订单')" v-if="step == 1 || step == 2">
                   <i class="ec-icon ec-icon-roundclose"> 取消订单</i>
                 </div>
               </div>
@@ -278,7 +265,7 @@
               <div class="ziti-warp clearfix" v-if="isZiti">
                 自提点
                 <div class="ziti-warp-content">
-                  <div v-for="item in zitiData" class="ziti-item">
+                  <div v-for="(item,index) in zitiData" :key="index" class="ziti-item">
                     <h4 style="">{{ item.name }}</h4>
                     <p>{{ item.store_address }}</p>
                     <p>营业时间:{{ item.hour }}</p>
@@ -287,23 +274,14 @@
               </div>
               <div class="timeline" v-else>
                 <ul class>
-                  <template v-for="(item, index) in activities">
-                    <li class="timeline-item">
-                      <span class="time-day">
-                        {{ item.AcceptTime | parseTime }}
-                      </span>
-
+                  <template>
+                    <li class="timeline-item" v-for="(item, index) in activities" :key="index">
+                      <span class="time-day">{{ item.AcceptTime | parseTime }}</span>
                       <div class="timeline-item__tail"></div>
-                      <div
-                        class="timeline-item__node"
-                        :class="index == 0 ? 'timeline-item__node_color' : ''"
-                      >
+                      <div class="timeline-item__node" :class="index == 0 ? 'timeline-item__node_color' : ''">
                         <i class="ec-icon ec-icon-roundcheck success" v-if="index == 0"></i>
-                        <!---->
                       </div>
-                      <!---->
                       <div class="timeline-item__wrapper">
-                        <!---->
                         <div class="el-timeline-item__content">{{ item.AcceptStation }}</div>
                         <div class="el-timeline-item__timestamp is-bottom"></div>
                       </div>
@@ -314,31 +292,17 @@
             </div>
 
             <p class="bd-border"></p>
-            <div
-              :style="{
-                width: orderStatus !== 'CANCEL' ? '45%' : '90%',
-                bordeRight: orderStatus !== 'CANCEL' ? '1px solid #e5e5e5' : 'none'
-              }"
-              class="order_message"
-            >
+            <div :style="{ width: orderStatus !== 'CANCEL' ? '45%' : '90%', bordeRight: orderStatus !== 'CANCEL' ? '1px solid #e5e5e5' : 'none'}" class="order_message">
               <!-- 收货人信息 -->
               <Receive :receiveData="receiveData" />
             </div>
             <!-- 付款信息 -->
-            <div
-              style="width: 45%;"
-              class="order_message"
-              v-if="orderStatus && orderStatus !== 'CANCEL'"
-            >
+            <div style="width: 45%;" class="order_message" v-if="orderStatus && orderStatus !== 'CANCEL'">
               <PayInfo :receiveData="receiveData"></PayInfo>
             </div>
 
             <p class="bd-border"></p>
-            <OrderGood
-              :orderGoodData="orderGoodData"
-              :orderTotalData="orderTotalData"
-              @change="getOrderInfo"
-            />
+            <OrderGood :orderGoodData="orderGoodData" :orderTotalData="orderTotalData" @change="getOrderInfo"/>
           </div>
         </div>
       </div>
@@ -353,14 +317,8 @@
             <SpInput placeholder="必填：取消原因" v-model="cancelMean" class="dailog-bd-input" />-->
             <SpForm ref="form" :model="form" :rules="rules">
               <SpFormItem prop="cancelMean">
-                <span style="display: inline-block; width: 80px; text-align: right"
-                  >取消原因：</span
-                >
-                <SpInput
-                  class="dailog-bd-input"
-                  v-model="form.cancelMean"
-                  placeholder="必填：取消原因"
-                />
+                <span style="display: inline-block; width: 80px; text-align: right">取消原因：</span>
+                <SpInput class="dailog-bd-input" v-model="form.cancelMean" placeholder="必填：取消原因"/>
               </SpFormItem>
             </SpForm>
           </div>
@@ -382,7 +340,7 @@ import PayInfo from './comps/payInfo' //收件人信息。数据key按照接口�
 
 import OrderGood from './comps/order-good'
 import { getOrderInfo, orderCancel, confirmOrder } from '@/api/member'
-import { deliveryInfo } from '@/api/trade'
+import { deliveryInfo ,getdeliveryId} from '@/api/trade'
 
 export default {
   data() {
@@ -449,6 +407,9 @@ export default {
     async getOrderInfo() {
       let { id } = this.$route.params
       let { orderInfo, distributor, tradeInfo } = await getOrderInfo({ id })
+
+      let {list} =  await getdeliveryId({order_id:id})
+      let delivery_id = list[0].delivery_id;
 
       this.zitiData = [distributor]
       let {
@@ -565,7 +526,7 @@ export default {
       }
       this.activities = activities
       if (this.step == 4 || this.step == 3) {
-        deliveryInfo({ order_type, order_id: id }).then((res) => {
+        deliveryInfo({ delivery_id:delivery_id }).then((res) => {
           activities = [
             {
               AcceptStation: '已付款',
@@ -576,8 +537,9 @@ export default {
               AcceptTime: create_time
             }
           ]
-          this.activities = res.reverse().concat(activities)
-          console.log('----this.activities---', this.activities)
+          // this.activities = res.reverse().concat(activities)
+           this.activities = res.concat(activities)
+          // console.log('----this.activities---', this.activities)
         })
       }
     },

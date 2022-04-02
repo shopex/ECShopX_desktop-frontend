@@ -6,8 +6,12 @@ export function list (params) {
 export function createOrderRate (params) {
   return req.post(`api/h5app/wxapp/order/rate/create`, params)
 }
+export function getdeliveryId (params) {
+  return req.get(`/api/h5app/wxapp/delivery/lists`,params)
+}
 export function deliveryInfo (params) {
-  return req.get(`api/h5app/wxapp/trackerpull`,params)
+  // return req.get(`api/h5app/wxapp/trackerpull`,params)
+  return req.get(`/api/h5app/wxapp/delivery/trackerpull`,params)
 }
 export function detail (tid) {
   return req.get(`/trade.detail`, tid, { withAuth: true })
