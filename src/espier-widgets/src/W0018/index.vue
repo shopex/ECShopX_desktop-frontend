@@ -10,7 +10,7 @@
           <swiper-slide v-for="(item, index) in value.data" :key="index">
             <div class = "goods-list-wrap" v-for="(sitem,sindex) in item.data">
               <div class="goods-wrap__info">
-                <linkPage :mode="mode" :to="handleLinkPage(sitem.goods_pic)">
+                <linkPage :mode="mode" :to="`/items/${sitem.goods_id}`">
                   <div class="goods-title" :style="{color: value.wgtTitleColor , fontSize:value.wgtTitleFontSize  +'px'}">
                     {{ sitem.goods_name }}
                   </div>

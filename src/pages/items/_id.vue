@@ -17,7 +17,8 @@
             <div v-if="shopInfo.name" class="favor-content">
               <i class="ec-icon ec-icon-favor_light left-icon" v-if="iconShow"></i>
               <i class="ec-icon ec-icon-favorfill color-icom" v-else></i>
-              <span> {{ followStore }}</span>
+              <span v-if="iconShow">关注店铺</span>
+              <span v-else>取消关注</span>
             </div>
           </div>
         </div>
@@ -166,6 +167,7 @@
   import {
     mixin
   } from '@/mixins'
+  import S from '@/spx'
 
   export default {
     mixins: [mixin],
@@ -193,9 +195,8 @@
       const val = await app.$api.shop.getShop({
         distributor_id: info.distributor_id
       })
-      const {
-        is_fav
-      } = await app.$api.member.showStoreIcon(info.distributor_id)
+
+
       const param = {
         distributor_id: info.distributor_id,
         category_id: info.category_id
@@ -219,7 +220,6 @@
         goodsDesc: Array.isArray(info.intro) ? info.intro : resolveLazyLoadImg(info.intro),
         menu: res,
         shopInfo: val,
-        iconShow: !is_fav
       }
     },
     head() {
@@ -276,7 +276,6 @@
         meun: null,
         shopInfo: null,
         iconShow: true,
-        followStore: '关注店铺',
         qrcodeHover: false,
         qrcodePath: '',
         showDefaultQrcode: true
@@ -319,23 +318,35 @@
     },
     mounted() {
       this.fetchEvaluationList()
+      this.showStoreIcon()
+
+
     },
     methods: {
-      // 收藏店铺
+      async showStoreIcon (){
+        
+        if(S.getAuthToken()){
+          
+          const {
+            is_fav
+          } = await this.$api.member.showStoreIcon(this.info.distributor_id)
+              this.iconShow = is_fav
+        }
+
+      },
+      // 关注店铺
       async collectionClick() {
         if (this.iconShow) {
-          this.followStore = '取消关注'
           const data = await this.$api.member.addCollectionStore(this.info.distributor_id)
           if (!data.message) {
             this.iconShow = false
-            this.$Message.success('收藏成功')
+            this.$Message.success('关注成功')
           }
         } else {
-          this.followStore = '关注店铺'
           const data = await this.$api.member.removeCollectionStore(this.info.distributor_id)
           if (!data.message) {
             this.iconShow = true
-            this.$Message.success('取消收藏')
+            this.$Message.success('取消关注')
           }
         }
       },
