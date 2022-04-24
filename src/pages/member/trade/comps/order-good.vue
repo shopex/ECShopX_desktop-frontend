@@ -29,8 +29,11 @@
             <!-- <td>￥{{item.price|formatPriceToHundred}}</td> -->
             <td>{{ item.num }}</td>
             <td>
-              <span v-if="orderGoodData.order_class != 'pointsmall'"
+              <span v-if="orderGoodData.order_class != 'pointsmall'&& !item.aftersales_bn"
                 >￥{{ item.item_fee | formatPriceToHundred }}</span
+              >
+              <span v-else-if="orderGoodData.order_class != 'pointsmall' && item.aftersales_bn"
+                >￥{{ item.orderItem.item_fee | formatPriceToHundred }}</span
               >
               <span v-else> {{ item.point }} 积分 </span>
             </td>
@@ -217,7 +220,6 @@ export default {
       selectItem: {}
     }
   },
-
   methods: {
     clickBtn(type, item) {
       switch (type) {
