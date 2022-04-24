@@ -330,7 +330,7 @@
           const {
             is_fav
           } = await this.$api.member.showStoreIcon(this.info.distributor_id)
-              this.iconShow = is_fav
+              this.iconShow = !is_fav
         }
 
       },

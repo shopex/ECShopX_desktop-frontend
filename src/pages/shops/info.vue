@@ -13,7 +13,8 @@
             <div class="collection-shop" @click="collectionClick">
               <i class="ec-icon ec-icon-favor_light left-icon" v-if="iconShow"></i>
               <i class="ec-icon ec-icon-favorfill color-icom" v-else></i>
-              <span class="words-color"> {{ followStore }}</span>
+              <span v-if="iconShow" class="words-color"> 关注店铺</span>
+              <span v-else class="words-color" >取消关注 </span>
             </div>
           </div>
           <div class="words-color">店铺地址：{{ storeInfo.store_address || '' }}</div>
@@ -154,6 +155,7 @@
 
 <script>
   import GoodSort from '../pointitems/comps/goods-sort'
+  import S from '@/spx'
 
   export default {
     async asyncData({
@@ -169,14 +171,11 @@
       const val = await app.$api.shop.getShop({
         distributor_id: distributor_id
       })
-      const {
-        is_fav
-      } = await app.$api.member.showStoreIcon(distributor_id)
-      const params = {
+
+      const res = await app.$api.item.getStoreClassify({
         distributor_id: distributor_id,
         category_id: category_id
-      }
-      const res = await app.$api.item.getStoreClassify(params)
+      })
       if (res) {
         res.forEach((element) => {
           element.listShow = false
@@ -197,10 +196,10 @@
         item_type: 'normal',
         category_id: category_id || ''
       }
+
       const storeShopsInfo = await app.$api.item.list(param)
-      console.log(storeShopsInfo)
       storeShopsInfo.list.forEach((item) => {
-        item.pics = JSON.parse(item.pics)
+        // item.pics = JSON.parse(item.pics)
         if (item.pics.length > 4) {
           let arr = []
           arr.push(item.pics[0])
@@ -217,7 +216,7 @@
         storeInfo: val,
         logoUrl: val.logo,
         storeShopsInfo: storeShopsInfo.list,
-        iconShow: !is_fav,
+
         total: storeShopsInfo.total_count - 0
       }
     },
@@ -260,13 +259,27 @@
         addCarInfo: null,
         carNumber: 0,
         iconShow: true,
-        followStore: '关注店铺',
         keywords: '',
         goodsSort: '',
         category_id: ''
       }
+    },mounted(){
+      this.showStoreIcon()
+
     },
     methods: {
+      async showStoreIcon (){
+
+        if(S.getAuthToken()){
+
+
+          const {
+            is_fav
+          } = await this.$api.member.showStoreIcon(this.storeInfo.distributor_id)
+              this.iconShow = !is_fav
+        }
+
+      },
       //商店列表
       async getStoreShopsInfo() {
         const param = {
@@ -305,14 +318,12 @@
       async collectionClick() {
         if (this.iconShow) {
           this.iconShow = false
-          this.followStore = '取消关注'
           const data = await this.$api.member.addCollectionStore(this.storeInfo.distributor_id)
           if (data) {
             this.$Message.success('收藏成功')
           }
         } else {
           this.iconShow = true
-          this.followStore = '收藏店铺'
           const data = await this.$api.member.removeCollectionStore(this.storeInfo.distributor_id)
           if (data) {
             this.$Message.success('取消收藏')
