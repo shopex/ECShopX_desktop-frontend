@@ -289,7 +289,6 @@ const swiperOptions = {
 }
 import S from '@/spx'
 import BuyToolbar from './buy-toolbar'
-import { connect } from 'tls';
 export default {
   name: 'SpGoodsInfo',
   props: {
@@ -308,7 +307,6 @@ export default {
       curSku: null,
       selection: null,
       collected: false,
-
     }
   },
   filters: {
