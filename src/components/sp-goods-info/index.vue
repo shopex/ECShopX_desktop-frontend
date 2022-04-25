@@ -289,6 +289,7 @@ const swiperOptions = {
 }
 import S from '@/spx'
 import BuyToolbar from './buy-toolbar'
+import { connect } from 'tls';
 export default {
   name: 'SpGoodsInfo',
   props: {
@@ -306,7 +307,8 @@ export default {
       quantity: 1,
       curSku: null,
       selection: null,
-      collected: false
+      collected: false,
+
     }
   },
   filters: {
@@ -400,8 +402,9 @@ export default {
         this.$Message.error('请选择规格')
         return
       }
-      const { item_id, distributor_id } = this.curSku
-
+      // const { item_id, distributor_id } = this.curSku
+      const { item_id, distributor_id } = this.info;
+      
       const res = await this.$store.dispatch('cart/CART_ADD', {
         item_id,
         shop_type: 'distributor',
