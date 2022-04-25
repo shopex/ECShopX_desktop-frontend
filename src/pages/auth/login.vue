@@ -109,13 +109,13 @@
         立即注册<i class="ec-icon ec-icon-right"></i>
       </NuxtLink> -->
     </div>
-    <div class="trust-login">
+    <!-- <div class="trust-login">
       <div class="trust-item" v-for="(item, index) in trustLogins" :key="`trust-item__${index}`">
         <i class="ec-icon" :class="{
           'ec-icon-weixin1': item.type === 'weixin' && item.status
         }" @click="handleClickTrustLogin(item)"></i>
       </div>
-    </div>
+    </div> -->
   </div>
 </div>
 </template>
