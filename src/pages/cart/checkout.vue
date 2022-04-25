@@ -355,9 +355,6 @@ export default {
     async getFreightFee() {
       this.$loading({ background: 'transparent' })
       const params = this.getParams()
-
-      console.log("1111111111",params);
-
       try {
         const {
           items,
@@ -393,7 +390,7 @@ export default {
         promotion: 'normal',
         receipt_type: 'logistics',
       }
-      if(coupon == -1){  // 不使用优惠券需要传 not_use_coupon
+      if(coupon == -1 || coupon == ''){  // 不使用优惠券需要传 not_use_coupon
         params.not_use_coupon = 1
       }
       // 使用优惠券
