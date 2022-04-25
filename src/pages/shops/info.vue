@@ -90,7 +90,7 @@
                 </div>
               </div>
               <div>
-                <div class="price">￥{{ item.price || '' }}</div>
+                <div class="price">￥{{ item.price / 100|| '' }}</div>
                 <div class="introduce">
                   {{ item.item_name || '' }}
                 </div>

@@ -9,7 +9,7 @@
         <div class="goods-item" v-for="item in goodslike" :key="item.item_id">
           <GoodItem class="goods-img" :item="item" />
           <div class="goods-item-ft">
-            <SpPrice :value="item.price" />
+            <SpPrice :value="item.price / 100" />
             <div class="goods-buy" @click="handleClickAddToCart(item)">加入购物车</div>
           </div>
         </div>
