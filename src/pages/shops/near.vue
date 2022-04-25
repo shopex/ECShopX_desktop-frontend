@@ -153,16 +153,17 @@
                 sort_type: 1
               }
               province = province.replace(/市/i, '')
-              console.log('getAuthToken:', S.getAuthToken())
+              _this.getShopList(params)
               if (S.getAuthToken()) {
                 _this.loading = true;
                 const {
                   list
                 } = await _this.$api.member.getCollectionStoreList()
                 _this.collectShopList = list
-                _this.getShopList(params)
+                // _this.getShopList(params)
                 _this.loading = false;
               }
+              
             })
             // _this.map.panTo(r.point)
             // console.log('您的位置：' + r.point.lng + ',' + r.point.lat)
@@ -179,7 +180,7 @@
         const {
           list,
           tagList
-        } = await this.$api.shop.getNearbyShop(params)
+        } = await this.$api.item.getNearbyShop(params)
         this.allShopList = list;
         let length = list.length
         for (var i = 0; i < length; i++) {
