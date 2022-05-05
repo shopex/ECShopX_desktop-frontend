@@ -26,7 +26,7 @@
       // display: none;
       height: 0;
       overflow: hidden;
-      z-index: 999;
+      z-index: 1099;
       &:hover {
         width: 1190px;
       }
@@ -61,12 +61,13 @@
         }
         &__con {
           position: absolute;
+					z-index: 1001;
           left: 200px;
           top: 0;
           display: none;
           width: calc(100% - 200px);
           background: #F5F6FA;
-          height: 440px;
+          min-height: 420px;
         }
         &:hover {
           .category-main__btn {
@@ -160,12 +161,12 @@
     }
 		&.open {
 		  .category-list {
-		    height: 440px;
+		    height: 640px;
 		  }
 		}
 		&.hover {
 			.category-list {
-				height: 440px;
+				height: 640px;
 				transition: height 0.2s;
 				background: white;
 			}
