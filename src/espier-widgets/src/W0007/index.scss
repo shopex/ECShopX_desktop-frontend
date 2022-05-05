@@ -42,6 +42,8 @@
           width: 200px;
           cursor: pointer;
           color: inherit;
+					overflow: hidden;  /*超出宽度部分隐藏*/
+					text-overflow: ellipsis;  /*超出部分以点号代替*/
 					&__img {
 						margin-bottom: -4px;
 						// margin-right: 3px;
@@ -77,16 +79,16 @@
         }
       }
       .category-child {
+				
 				background: #F5F6FA;
 				margin-top: 16px;
         @include clearfix();
+				
         &__btn {
 					// border-bottom:3px solid #F00 !important; 
-					// width: 66px;
 					border-collapse: collapse;
           height: 54px;
           font-weight: 500;
-          text-align: center;
           padding-left: 20px;
 					padding-top: 10px;
           float: left;
@@ -95,6 +97,8 @@
 					color: #3B3B3B;
 					margin-top: 1px;
 					font-size: 14px;
+					width: 80px;
+					text-overflow: ellipsis;  /*超出部分以点号代替*/
           @include text-overflow();
           &:hover {
             // color: #ff0000;
@@ -104,6 +108,8 @@
 			.category-subchild-main{
 				border-bottom:1px dashed #000; 
 				float: left;
+				max-height: 120px;
+				overflow: hidden;  /*超出宽度部分隐藏*/
 				@include clearfix();
 				width: 850px;
 			}
@@ -119,7 +125,7 @@
 				 cursor: pointer;
 				 padding-top: 10px;
 				 margin-left: 12px;
-				 font-size: 14px;
+				 // font-size: 14px;
 				 color: #8C8C8C;
 			 }
         &__btn{
@@ -127,16 +133,21 @@
 					line-height: 21px;
 					font-weight: 400;
           float: left;
-          text-align: left;
+          text-align: center;
           cursor: pointer;
 					padding-top: 10px;
-					margin-left: 12px;
-					margin-right: 12px;
+					margin-left: 10px;
+					// padding-right: 10px;
 					font-size: 14px;
+					max-width: 70px;
+					
+					text-overflow: ellipsis;  /*超出部分以点号代替*/
 					// background-color: lightblue;
           @include text-overflow();
 					.link-page{
+						
 						&__a{
+							
 							color: #8C8C8C;
 							&:hover {
 								// background: #FF5D02;
