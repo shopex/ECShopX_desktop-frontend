@@ -77,7 +77,7 @@
             :y="child.y"
             :w="child.width + child.paddingLeft + child.paddingRight"
             :h="child.height + child.paddingTop + child.paddingBottom"
-            :z="1000"
+            :z="value.zindex?value.zindex:10000"
             :parent="true"
             :debug="false"
             :isConflictCheck="true"
@@ -164,7 +164,8 @@ export default {
     // 自由面板类型： header、body、footer
     comptyle: 'body',
     childWidgets: [],
-    grid: false
+    grid: false,
+    zindex: 1000
   },
   data() {
     return {

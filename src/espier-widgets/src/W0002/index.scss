@@ -54,6 +54,7 @@
         box-sizing: border-box;
         cursor: pointer;
         width: 214px;
+				height: auto;
         // margin: 5px 0;
         margin: 0 0 10px 20px;
         padding-bottom: 6px;
@@ -67,6 +68,8 @@
 		}
         &_wrap {
           position: relative;
+					width: 214px;
+					height: 214px;
           &::after {
             content: '';
             position: absolute;
