@@ -67,7 +67,8 @@
           display: none;
           width: calc(100% - 200px);
           background: #F5F6FA;
-          min-height: 420px;
+          // min-height: 420px;
+					height: auto;
         }
         &:hover {
           .category-main__btn {
@@ -80,9 +81,12 @@
         }
       }
       .category-child {
-				
+				position:absoule;
+				// height: auto;
+				overflow:visible;
 				background: #F5F6FA;
 				margin-top: 16px;
+				clear: both;
         @include clearfix();
 				
         &__btn {
@@ -98,7 +102,7 @@
 					color: #3B3B3B;
 					margin-top: 1px;
 					font-size: 14px;
-					width: 80px;
+					width: 110px;
 					text-overflow: ellipsis;  /*超出部分以点号代替*/
           @include text-overflow();
           &:hover {
@@ -109,10 +113,11 @@
 			.category-subchild-main{
 				border-bottom:1px dashed #000; 
 				float: left;
-				max-height: 120px;
+				// max-height: 120px;
 				overflow: hidden;  /*超出宽度部分隐藏*/
 				@include clearfix();
 				width: 850px;
+				min-height: 54px;
 			}
       .category-subchild {
         float: left;
@@ -140,7 +145,7 @@
 					margin-left: 10px;
 					// padding-right: 10px;
 					font-size: 14px;
-					max-width: 70px;
+					// max-width: 70px;
 					
 					text-overflow: ellipsis;  /*超出部分以点号代替*/
 					// background-color: lightblue;
@@ -161,14 +166,16 @@
     }
 		&.open {
 		  .category-list {
-		    height: 640px;
+		    height: auto;
+				
 		  }
 		}
 		&.hover {
 			.category-list {
-				height: 640px;
+				height: auto;
 				transition: height 0.2s;
 				background: white;
+				overflow: visible;
 			}
 			.all-category__btn{
 				color: #FFFFFF !important;	
