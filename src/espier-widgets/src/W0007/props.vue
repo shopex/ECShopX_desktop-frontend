@@ -22,17 +22,19 @@
         name="name1"
         style="overflow: auto;"
       >
-        <panelBar title="属性">
-          <attr-field label="常开：">
-            <!-- {{activeElement.hover}} -->
-            <iSwitch size="small" v-model="activeElement.hover" />
+        <panelBar title="颜色">
+          <attr-field label="商品分类背景：">
+            <color-picker v-model="activeElement.wgtTypeBackgroundColor"></color-picker>
           </attr-field>
           <div class="division"></div>
-          <attr-field label="相对位置：">
-            <InputNumber v-model="activeElement.menuTop" size="small" :min="0"></InputNumber>
+          <attr-field label="商品分类字体：">
+            <color-picker v-model="activeElement.wgtTypeLabelColor"></color-picker>
           </attr-field>
-        </panelBar>
-        <panelBar title="颜色">
+          <div class="division"></div>
+          <attr-field label="背景颜色：">
+            <color-picker v-model="activeElement.wgtBackgroundColor"></color-picker>
+          </attr-field>
+          <div class="division"></div>
           <attr-field label="背景颜色：">
             <color-picker v-model="activeElement.wgtBackgroundColor"></color-picker>
           </attr-field>
@@ -78,6 +80,11 @@
                 </span>
                 <div slot="content">
                   <Input class="nav-input" v-model="item.title" placeholder="菜单名称" />
+                  <attr-field label="字体颜色：" >
+                    <color-picker v-model="item.wgtHotKeywordTextColor"></color-picker>
+                  </attr-field>
+
+                  <div class="division"></div>
                   <dataBind v-model="item.pathData" :imgPicker="false"></dataBind>
                 </div>
               </Panel>
@@ -111,7 +118,8 @@ export default {
     handleAddNav() {
       this.activeElement.data.push({
         title: '',
-        pathData: {}
+        pathData: {},
+        wgtHotKeywordTextColor: '#333333'
       })
     },
     handleDelete(idx) {

@@ -7,10 +7,10 @@
       <div class="widget-w0007-body widget-body" :style="widgetBodyStyle">
         <!-- pageProps1: {{ pageProps }} -->
         <div :class="['all-category', !value.hover ? 'hover' : 'open']">
-          <div class="all-category__btn" :style="{ backgroundColor: '#FF5D02', color: '#FFFFFF', fontWeight:'800'}">
+          <div class="all-category__btn" :style="{ backgroundColor: value.wgtTypeBackgroundColor, color: value.wgtTypeLabelColor, fontWeight:'800'}">
             全部商品分类
           </div>
-          <div class="category-list" :style="{ top: `${value.menuTop}px`, paddingTop: '16px'}">
+          <div class="category-list" :style="{ paddingTop: '16px'}">
             <div class="category-main" v-for="item in value.categoryData" :key="`category-${item.category_id}`"
               @mouseover="btnHover = item.category_id" @mouseleave="btnHover = ''">
               <div class="category-main__btn" :style="{
@@ -54,7 +54,8 @@
         </div>
         <div class="navs-con">
           <linkPage class="nav-item" v-for="(item, idx) in value.data" :key="`nav-item__${idx}`" :mode="mode"
-            :to="handleLinkPage(item.pathData)">{{ item.title }}</linkPage>
+            :to="handleLinkPage(item.pathData)"
+            :ctitleColor="item.wgtHotKeywordTextColor">{{ item.title }}</linkPage>
         </div>
       </div>
     </div>
@@ -92,6 +93,8 @@
       height: 40,
       heightDisabled: true,
       customerThemeEnabled: true,
+      wgtTypeBackgroundColor:'#FF5D02',
+      wgtTypeLabelColor:'#FFFFFF',
       wgtBackgroundColor: '#FFFFFF',
       wgtSelectColor: '#F5F6FA',
       wgtTextColor: '#3B3B3B',
@@ -104,7 +107,7 @@
     },
     data() {
       return {
-        btnHover: true
+        btnHover: true,
       }
     },
     components: {

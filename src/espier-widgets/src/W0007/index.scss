@@ -21,6 +21,7 @@
     }
     .category-list {
       position: absolute;
+			top:24px;
       font-size: 16px;
       // width: 1000px;
       // display: none;
@@ -32,7 +33,7 @@
       }
       .category-main {
         &__btn {
-          height: 54px;
+          height: 59px;
           line-height: 24px;
           text-align: left;
 					padding-left: 20px;
@@ -54,6 +55,7 @@
 					.category-main__btn_subtitle{
 						// color: #8C8C8C;
 						font-size: 14px;
+						line-height: 28px;
 						&__first{
 							margin-left: 20px;
 						}
@@ -63,7 +65,7 @@
           position: absolute;
 					z-index: 1001;
           left: 200px;
-          top: 0;
+          top: 16px;
           display: none;
           width: calc(100% - 200px);
           background: #F5F6FA;
@@ -92,15 +94,15 @@
         &__btn {
 					// border-bottom:3px solid #F00 !important; 
 					border-collapse: collapse;
-          height: 54px;
+          height: 44px;
           font-weight: 500;
           padding-left: 20px;
-					padding-top: 10px;
+					// padding-top: 10px;
           float: left;
           text-align: left;
           cursor: pointer;
 					color: #3B3B3B;
-					margin-top: 1px;
+					margin-top: 0px;
 					font-size: 14px;
 					width: 110px;
 					text-overflow: ellipsis;  /*超出部分以点号代替*/
@@ -117,31 +119,31 @@
 				overflow: hidden;  /*超出宽度部分隐藏*/
 				@include clearfix();
 				width: 850px;
-				min-height: 54px;
+				min-height: 44px;
 			}
       .category-subchild {
         float: left;
         @include clearfix();
 			 &__line{
-				 height: 54px;
+				 height: 44px;
 				 line-height: 21px;
 				 font-weight: 400;
 				 float: left;
 				 text-align: left;
 				 cursor: pointer;
-				 padding-top: 10px;
+				 // padding-top: 10px;
 				 margin-left: 12px;
 				 // font-size: 14px;
 				 color: #8C8C8C;
 			 }
         &__btn{
-          height: 54px;
+          height: 44px;
 					line-height: 21px;
 					font-weight: 400;
           float: left;
           text-align: center;
           cursor: pointer;
-					padding-top: 10px;
+					// padding-top: 10px;
 					margin-left: 10px;
 					// padding-right: 10px;
 					font-size: 14px;
