@@ -33,15 +33,22 @@
           </attr-field>
         </panelBar>
         <panelBar title="颜色">
-          <attr-field label="主题：" labelTop>
-            <iSwitch size="small" v-model="activeElement.customerThemeEnabled" />
-            <div class="division"></div>
-            <color-picker v-model="activeElement.wgtTheme"></color-picker>
+          <attr-field label="背景颜色：">
+            <color-picker v-model="activeElement.wgtBackgroundColor"></color-picker>
           </attr-field>
           <div class="division"></div>
-          <attr-field label="字体：">
+          <attr-field label="选中颜色：">
+            <color-picker v-model="activeElement.wgtSelectColor"></color-picker>
+          </attr-field>
+          <div class="division"></div>
+          <attr-field label="标题颜色：">
             <color-picker v-model="activeElement.wgtTextColor"></color-picker>
           </attr-field>
+          <div class="division"></div>
+          <attr-field label="副标题颜色：">
+            <color-picker v-model="activeElement.wgtSubTextColor"></color-picker>
+          </attr-field>
+
         </panelBar>
         <panelBar title="分类">
           <attr-field label="分类链接：">

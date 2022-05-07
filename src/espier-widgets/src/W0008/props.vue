@@ -48,11 +48,11 @@
             <color-picker v-model="activeElement.wgtTheme"></color-picker>
           </attr-field>
           <div class="division"></div>
-          <attr-field label="字体：">
+          <attr-field label="按钮字体：">
             <color-picker v-model="activeElement.wgtTextColor"></color-picker>
           </attr-field>
           <div class="division"></div>
-          <attr-field label="字体背景：" >
+          <attr-field label="按钮背景：" >
             <color-picker v-model="activeElement.wgtTextColor1"></color-picker>
             <color-picker v-model="activeElement.wgtTextColor2"></color-picker>
           </attr-field>
