@@ -35,10 +35,6 @@
             <color-picker v-model="activeElement.wgtBackgroundColor"></color-picker>
           </attr-field>
           <div class="division"></div>
-          <attr-field label="背景颜色：">
-            <color-picker v-model="activeElement.wgtBackgroundColor"></color-picker>
-          </attr-field>
-          <div class="division"></div>
           <attr-field label="选中颜色：">
             <color-picker v-model="activeElement.wgtSelectColor"></color-picker>
           </attr-field>
