@@ -388,7 +388,6 @@
       },
       // 展开二级菜单
       showNextClick(index, id) {
-        debugger
         this.menu[index].listShow = !this.menu[index].listShow
         this.listShow = !this.listShow
         if (this.menu[index].children.length == 0) {
@@ -419,7 +418,6 @@
       },
       // 查找商品分类
       threeMenuClick(id) {
-        debugger
         this.$router.push({
           path: '/shops/info',
           query: {

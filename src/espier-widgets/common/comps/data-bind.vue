@@ -263,7 +263,7 @@ export default {
     },
     // 路径选择
     async handleClickSetPath() {
-      console.log(this.localPathData)
+      console.log("handleClickSetPath",this.localPathData)
       const res = await this.$picker('path', {
         data: JSON.parse(JSON.stringify(this.localPathData)),
         multiple: this.multiple,

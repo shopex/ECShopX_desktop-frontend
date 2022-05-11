@@ -73,7 +73,7 @@ export default {
     const {
       keywords,
       cat_id,
-      
+
       brand_id,
       goodsSort,
       start_price,
@@ -85,7 +85,7 @@ export default {
       item_type: 'normal',
       keywords,
       category_id: cat_id,
-      
+
       brand_id,
       goodsSort,
       start_price,
@@ -212,7 +212,7 @@ export default {
     },
     nextPage() {
       this.pageIndex++
-      if (this.pageIndex < Math.ceil(this.total / this.pageSize)) {
+      if (this.pageIndex <= Math.ceil(this.total / this.pageSize)) {
         this.fetch(this.$route.query)
       }
     },
@@ -226,7 +226,7 @@ export default {
         item_type: 'normal',
         keywords,
         category_id: cat_id,
-        
+
         brand_id,
         goodsSort,
         start_price,
