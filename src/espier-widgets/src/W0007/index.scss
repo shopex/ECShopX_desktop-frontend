@@ -21,7 +21,7 @@
     }
     .category-list {
       position: absolute;
-			top:24px;
+			top:40px;
       font-size: 16px;
       // width: 1000px;
       // display: none;
@@ -67,7 +67,7 @@
           position: absolute;
 					z-index: 1001;
           left: 200px;
-          top: 16px;
+          top: 0px;
           display: none;
           width: calc(100% - 200px);
           background: #F5F6FA;
@@ -89,7 +89,7 @@
 				// height: auto;
 				overflow:visible;
 				background: #F5F6FA;
-				margin-top: 16px;
+				margin-top: 0px;
 				clear: both;
         @include clearfix();
 				

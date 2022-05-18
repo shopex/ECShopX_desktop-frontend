@@ -10,7 +10,7 @@
           <div class="all-category__btn" :style="{ backgroundColor: value.wgtTypeBackgroundColor, color: value.wgtTypeLabelColor, fontWeight:'800'}">
             全部商品分类
           </div>
-          <div class="category-list" :style="{ paddingTop: '16px'}">
+          <div class="category-list" >
             <div class="category-main" v-for="item in value.categoryData" :key="`category-${item.category_id}`"
               @mouseover="btnHover = item.category_id" @mouseleave="btnHover = ''">
               <div class="category-main__btn" :style="{
