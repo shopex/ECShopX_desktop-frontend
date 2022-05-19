@@ -301,7 +301,6 @@
         const storeShopsInfo = await this.$api.item.list(param)
         storeShopsInfo.list.forEach((item) => {
           // item.pics = JSON.parse(item.pics)
-          item.pics = item.pics
           if (item.pics.length > 4) {
             let arr = []
             arr.push(item.pics[0])
