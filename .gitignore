@@ -20,4 +20,4 @@ yarn-error.log*
 *.sw?。
 nuxt/test.js
 widgets
-.nuxt
+.nuxt/*
