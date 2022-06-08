@@ -25,9 +25,10 @@
       float: left;
       margin-right: 10px;
       margin-bottom: 10px;
-      &:nth-child(4n + 4) {
-        margin-right: 0;
-      }
+      // 一行三张优惠券，设置4n导致显示问题，暂注释
+      // &:nth-child(4n + 4) {
+      //   margin-right: 0;
+      // }
     }
   }
   .coupon-toolbar {
