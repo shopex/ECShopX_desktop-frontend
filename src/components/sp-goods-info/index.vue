@@ -226,7 +226,7 @@
             }"
             >享{{ info.vipgrade_guide_title.gradeDiscount }}折</span
           >
-          <nuxt-link to="/">
+          <nuxt-link to="/member/vip">
             <span class="vip-desc"
               >{{ info.vipgrade_guide_title.guide_title_desc }}
               <i class="espier-icon espier-icon-xiangyou-01"></i>

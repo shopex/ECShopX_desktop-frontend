@@ -434,7 +434,8 @@ export default {
         delivery_corp_name,
         delivery_code,
         auto_cancel_seconds,
-        order_class
+        order_class,
+        discount_fee
       } = orderInfo
       this.orderGoodData = {
         can_apply_aftersales: orderInfo.can_apply_aftersales,
@@ -471,7 +472,8 @@ export default {
         point,
         freight_type,
         point,
-        order_class
+        order_class,
+        discount_fee
       }
       this.orderInfo = orderInfo
       let activities
@@ -553,7 +555,8 @@ export default {
             order_id: this.$route.params.id
           }).then((res) => {
             this.$Message.success('收货成功')
-            this.getTradeList()
+            // this.getTradeList()
+            this.getOrderInfo()
           })
 
           break

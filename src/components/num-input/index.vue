@@ -141,7 +141,7 @@ export default {
         return
       }
 
-      let val = this.localValue + Number(this.step)
+      let val = Number(this.localValue) + Number(this.step)
       if (val > this.maxVal) val = this.max
 
       this.setValue(val)
