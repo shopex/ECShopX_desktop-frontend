@@ -1,4 +1,9 @@
-<style lang="scss">
+<style lang="scss" scoped>
+// 添加z-index防止:after元素盖住跳转
+a{
+  position: relative;
+  z-index: 999;
+}
 </style>
 
 <template>
