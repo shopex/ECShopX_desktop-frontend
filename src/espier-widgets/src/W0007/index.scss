@@ -1,6 +1,7 @@
 .widget-w0007 {
   .all-category {
     float: left;
+	position: relative;
     &:after { 
       content: "\0020"; 
       display: block; 
