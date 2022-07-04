@@ -10,10 +10,12 @@
 <template>
   <div class="authcustom-header">
    <div class="login-header-container">
-    <img
-      class="login-header-logo"
-      referrerpolicy="no-referrer"
-      src="https://lanhu.oss-cn-beijing.aliyuncs.com/SketchPng82d0e80cee245fcf9d2458c56afe5dabeae1c543ebaa429c5c10dfc2457cb444"/>
+    <NuxtLink to="/">
+      <img
+        class="login-header-logo"
+        referrerpolicy="no-referrer"
+        src="https://lanhu.oss-cn-beijing.aliyuncs.com/SketchPng82d0e80cee245fcf9d2458c56afe5dabeae1c543ebaa429c5c10dfc2457cb444"/>
+    </NuxtLink>
       <div class="login-header-span">
         <span class="login-header-span1">还没有账号</span>
         <NuxtLink v-if="this.$route.path != '/auth/reg'" to="/auth/reg"  class="login-header-span2">免费注册</NuxtLink>
