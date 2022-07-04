@@ -115,7 +115,8 @@ export default {
   },
   head() {
     return {
-      title: this.tdk_data ? this.tdk_data.title : '',
+      // title: this.tdk_data ? this.tdk_data.title : '',
+      title: '商品列表',
       meta: [
         {
           hid: 'keywords',

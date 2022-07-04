@@ -130,6 +130,11 @@ import { YZM_LOGIN, ACCOUNT_LOGIN } from '@/consts'
 import { validate } from '@/utils'
 
 export default {
+  head() {
+    return {
+      title: '登录/注册',
+    }
+  },
   layout: 'auth_layout',
   mixins: [mixin],
   async asyncData({ app, isMobile, req }) {
