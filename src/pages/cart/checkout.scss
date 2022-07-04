@@ -12,6 +12,21 @@
     margin-bottom: 50px;
     .content-item {
       border-bottom: 1px solid $color-border-gray-light;
+      .integral{
+        display:flex;
+        .integral-rules{
+          line-height: 50px;
+          font-size:12px;
+          margin-left:20px;
+        }
+      }
+      .integral-item{
+        margin: 10px 0;
+        .integral-input{
+          margin-left: 20px;
+        }
+      }
+
       &-hd {
         height: 50px;
         line-height: 50px;

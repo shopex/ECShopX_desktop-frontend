@@ -103,7 +103,7 @@
               <SpImg class="goods-img" :src="item.pic" no-size />
               <div class="goods-name">{{ item.item_name }}</div>
               <div class="goods-price">
-                <SpPrice :value="item.price / 100" />
+                <SpPrice :value="item.price /100" />
               </div>
               <div class="goods-num">{{ `x ${item.num}` }}</div>
             </div>
@@ -160,6 +160,24 @@
             </div>
           </div>
         </div>
+        <div class="content-item">
+          <div class="integral">
+            <h4 class="content-item-hd">
+              积分抵扣
+            </h4>
+            <div class="integral-rules" style="cursor:pointer" @click="dailogIntegralVisible=true">使用规则</div>
+          </div>
+          <div>用户可用积分：{{ orderData.user_point }}；本单最大可用积分：{{ orderData.max_point }}</div>
+          <div class="integral-item">
+            <SpRadio type="checkbox" :theme="themeColor" v-model="useIntegral"  @change="handleDeducted"
+              >使用积分</SpRadio
+            >
+            <input class="integral-input" type="number" v-show="useIntegral" v-model="point_use" @blur="pointBlur">
+            <SpRadio type="checkbox" :theme="themeColor" v-model="useAllDeducted" @change="handleAllDeducted" v-show="useIntegral && (orderData.deduct_point_rule&&orderData.deduct_point_rule.full_amount)"
+              >全额抵扣</SpRadio
+            >
+          </div>
+        </div>
 
         <div class="content-item">
           <h4 class="content-item-hd">使用优惠</h4>
@@ -206,6 +224,10 @@
               <div class="label">优惠：</div>
               <div class="value"><SpPrice :value="0 - orderData.discount_fee / 100" /></div>
             </div>
+            <div class="total-row">
+              <div class="label">积分抵扣：</div>
+              <div class="value"><SpPrice :value="0 - orderData.point_fee / 100" /></div>
+            </div>
           </div>
         </div>
         <div class="content-ft">
@@ -239,6 +261,18 @@
         @clickCancel="clickCancel"
       />
     </SpModal>
+    <SpModal
+      title="积分使用规则"
+      v-model="dailogIntegralVisible"
+      :width="600"
+    >
+      <div style="height:200px;margin:20px;">
+        <div>使用条件</div>
+        <div>1、积分支付不得超出订单应付总金额的{{orderData.deduct_point_rule&&orderData.deduct_point_rule.deduct_proportion_limit}}%；</div>
+        <div>使用数量</div>
+        <div> 2、{{orderData.deduct_point_rule&&orderData.deduct_point_rule.deduct_point}}积分抵扣1元；</div>
+      </div>
+    </SpModal>
   </div>
 </template>
 
@@ -261,6 +295,7 @@ export default {
       list: [], //商品数据
       creatData: {}, //
       dailogVisible: false,
+      dailogIntegralVisible: false,
       addressInfoFrom: {}, //修改地址信息
       addType: 'post', //修改地址类型，post新增，put更新,
       params: {},
@@ -274,6 +309,10 @@ export default {
       zitiAddress: null,
       // 是否使用发票
       useInvoice: false,
+      // 是否使用积分
+      useIntegral: false,
+      // 是否全额抵扣
+      useAllDeducted: false,
       // 发票类型
       invoiceTyle: 'individual',
       // 开票信息
@@ -285,7 +324,9 @@ export default {
         bankname: '', // 银行名称
         bankaccount: '', // 银行账号
         company_phone: '' // 电话号码
-      }
+      },
+      point_use:0,    //输入的积分
+      maxPoint:0,     //可输入的最大值
     }
   },
   mounted() {
@@ -342,6 +383,36 @@ export default {
       }
       this.getFreightFee()
     },
+    // 积分输入规则
+    pointBlur(){
+      let { point_use,maxPoint } = this
+      if(point_use>maxPoint){
+        point_use = maxPoint
+      }
+      this.point_use = point_use*1
+      // 判断是否全额支付
+      if(this.point_use === this.orderData.max_point){
+        this.useAllDeducted = true
+      }else{
+        this.useAllDeducted = false
+      }
+      this.getFreightFee()
+    },
+    // 单选是否使用积分
+    handleDeducted(){
+      if(this.useIntegral===false){
+        this.point_use = 0
+        this.getFreightFee()
+        this.useAllDeducted = false   //全额抵扣单选关闭
+      }
+      console.log(this.useIntegral,"useIntegral",this.point_use);
+    },
+    // 全额支付
+    handleAllDeducted(){
+      // 全额抵扣用deduct_point字段直接赋值
+      this.point_use = this.orderData.max_point
+      this.getFreightFee()
+    },
     onChangeExpress() {
       this.getFreightFee()
     },
@@ -362,18 +433,34 @@ export default {
           discount_fee,
           freight_fee,
           total_fee,
-          totalItemNum
+          totalItemNum,
+          user_point,   //可用积分
+          max_point,    //本单可用积分
+          point_fee,    //抵扣金额
+          deduct_point_rule
         } = await this.$api.cart.freightFee(params)
         this.orderData = {
           item_fee,
           discount_fee: discount_fee,
           freight_fee,
           items_count: totalItemNum,
-          total_fee
+          total_fee,
+          user_point,
+          max_point,
+          point_fee,
+          deduct_point_rule
         }
         this.list = items
         this.getValidCoupon()
         this.$loading().close()
+        // maxPoint可输入的最大积分
+        if(user_point>max_point){
+          this.maxPoint = max_point
+        }else if(user_point<max_point){
+          this.maxPoint = user_point
+        }else{
+          this.maxPoint = max_point
+        }
       } catch (e) {
         this.$loading().close()
       }
@@ -381,18 +468,29 @@ export default {
     // 订单提交参数
     getParams() {
       const { id, mode, order_type, seckill_id, ticket } = this.$route.query
-      const { defaultAddress, coupon } = this
+      const { defaultAddress, coupon,point_use } = this
+
+      let pay_type = 'wxpaypc'
+      if(this.useAllDeducted===true && this.point_use>0){    // 判断是否积分支付
+        pay_type = 'point'
+      }else{
+        pay_type = "wxpaypc"
+      }
       let params = {
         distributor_id: id,
         cart_type: mode,
         order_type: order_type || 'normal',
-        pay_type: 'wxpaypc',
+        // pay_type: 'wxpaypc',
+        pay_type: pay_type,
         promotion: 'normal',
         receipt_type: 'logistics',
+        point_use:point_use
       }
+
       if(coupon == -1 || coupon == ''){  // 不使用优惠券需要传 not_use_coupon
         params.not_use_coupon = 1
       }
+
       // 使用优惠券
       if (coupon != -1) {
         params = {
@@ -443,7 +541,7 @@ export default {
           bankaccount,
           company_phone
         } = this.invoice_content
-        if (this.invoiceTyle == 'invoiceTyle') {
+        if (this.invoiceTyle == 'individual') {
           if (!title) {
             this.$Message.error('请填写发票抬头')
             return
@@ -460,7 +558,7 @@ export default {
         }
         const invoice_content = {
           title: this.invoiceTyle,
-          content: this.invoiceTyle == 'invoiceTyle' ? title : content,
+          content: this.invoiceTyle == 'individual' ? title : content,
           company_address,
           registration_number,
           bankname,
@@ -476,20 +574,20 @@ export default {
 
       this.$loading({ background: 'transparent' })
       try {
-
-        const { order_id, message } = await this.$api.cart.creatOrder(params)
-        if(message){
-          this.$Message.error(message)
-          this.$loading().close()
-          return
-        }
-
+        const { order_id } = await this.$api.cart.creatOrder(params)
         const { mode } = this.$route.query
         if (mode == 'cart') {
           this.CART_GETINFO()
         }
         this.$loading().close()
-        this.$router.push({ path: `/cashier?order_id=${order_id}` })
+        if(this.orderData.total_fee===0){
+          console.log(this.orderData.total_fee===0);
+          // 积分抵扣支付
+          this.$router.push({ path: `/finish/result?id=${order_id}` })
+        }else{
+          // 正常支付
+          this.$router.push({ path: `/cashier?order_id=${order_id}` })
+        }
       } catch (e) {
         this.$loading().close()
       }

@@ -78,9 +78,9 @@
   }
   .dailog {
     .dailog-hd {
-      height: 36px;
-      line-height: 36px;
-      font-size: 14px;
+      height: 50px;
+      line-height: 50px;
+      font-size: 17px;
       padding-left: 15px;
       border-bottom: 1px solid $color-border-gray-light;
     }
@@ -113,6 +113,33 @@
       padding: 10px;
       color: #f56c6c;
       font-size: 25px;
+    }
+  }
+  
+  .delivery{
+    height:260px;
+    overflow-y: auto;
+    .delivery-title{
+      padding:15px 0;
+    }
+    .delivery-item{
+      border-top: 1px dashed rgb(149, 149, 149);
+      margin:5px 10px 5px 0;
+      padding-top: 3px;
+      .delivery-info{
+        display:flex;
+        position: relative;
+        line-height: 30px;
+        .delivery-btn{
+          position: absolute;
+          right:30px;
+        }
+      }
+      .delivery-img{
+        width:60px;
+        height: 60px;
+        margin-right: 7px;
+      }
     }
   }
 
@@ -167,6 +194,59 @@
         position: relative;
         padding-left: 28px;
         top: -3px;
+      }
+    }
+  }
+  .timelineDetails{
+    float: left;
+    min-height: 300px;
+    background: #fff;
+    width: 100%;
+    padding-left: 200px;
+    padding-top: 30px;
+    .timeline-item {
+      position: relative;
+      padding-bottom: 20px;
+
+      .time-day {
+        margin-left: -140px;
+        position: relative;
+        top: 14px;
+      }
+
+      &:nth-last-child(1) {
+        .timeline-item__tail {
+          display: none;
+        }
+      }
+      .timeline-item__tail {
+        position: absolute;
+        left: 20px;
+        height: 100%;
+        border-left: 2px solid #e4e7ed;
+      }
+
+      .timeline-item__node {
+        position: absolute;
+        background-color: #e4e7ed;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        left: 15px;
+        width: 12px;
+        height: 12px;
+        .success {
+          color: $color-active;
+        }
+      }
+      .timeline-item__node_color {
+        background-color: white;
+      }
+      .timeline-item__wrapper {
+        position: relative;
+        padding-left: 43px;
+        top: -5px;
       }
     }
   }
@@ -251,19 +331,19 @@
                   {{ isZiti ? '待自提' : orderStatusText[orderInfo.order_status_des] }}
                 </div>
                 <span v-if="isZiti">请尽快前往自提点自提</span>
-                <span v-if="!isZiti && orderInfo.order_status_des == 'NOTPAY'"><i class="ec-icon ec-icon-time"></i>剩余{{ cancelTime }}
+                <span v-if="!isZiti && orderInfo.order_status_des == 'NOTPAY'">
+                  <i class="ec-icon ec-icon-time"></i>剩余{{ cancelTime }}
                 </span>
                 <div class="btn-warp">
-                  <button class="btn" @click="clickBtn('付款')" v-if="step == 1 && orderInfo.pay_type != 'point'"> 付 款 </button>
-                  <button class="btn" v-if="step == 3" @click="clickBtn('确认收货')"> 确认收货 </button>
+                  <button class="btn" @click="clickBtn('付款')" v-if="step == 1 && orderInfo.pay_type != 'point'">付 款</button>
+                  <button class="btn" v-if="step == 3" @click="clickBtn('确认收货')">确认收货</button>
                 </div>
                 <div class="btn-warp-bt" @click="clickBtn('取消订单')" v-if="step == 1 || step == 2">
                   <i class="ec-icon ec-icon-roundclose"> 取消订单</i>
                 </div>
               </div>
 
-              <div class="ziti-warp clearfix" v-if="isZiti">
-                自提点
+              <div class="ziti-warp clearfix" v-if="isZiti"> 自提点
                 <div class="ziti-warp-content">
                   <div v-for="(item,index) in zitiData" :key="index" class="ziti-item">
                     <h4 style="">{{ item.name }}</h4>
@@ -272,11 +352,35 @@
                   </div>
                 </div>
               </div>
-              <div class="timeline" v-else>
+              <!-- 部分发货判断-----写class不生效，所以用style写样式 -->
+              <!-- <div v-else-if="orderStatusText[orderInfo.order_status_des]==='部分发货' || (orderStatusText[orderInfo.order_status_des]==='待收货'&&deliveryLists.length>1)"> 所有拆分发货的数据，改判断-->
+              <div v-else-if="deliveryLists.length>1">
+                <ul class="delivery">
+                  <div class="delivery-title">{{ deliveryGoodsNum.length }}个包裹已发货</div>
+                  <template>
+                    <li class="delivery-item" v-for="(item, index) in deliveryLists" :key="index">
+                      <div class="delivery-info">
+                        <div>{{item.status_msg}}商品</div>
+                        <div style="margin-left:50px" v-show="item.delivery_corp_name!='' || item.delivery_code!=''">
+                          {{item.delivery_corp_name}}：{{item.delivery_code}}
+                        </div>
+                        <div class="delivery-btn" v-if="item.delivery_info=='' || item.delivery_info=='暂无物流信息'">{{item.delivery_info}}</div>
+                        <button class="btn delivery-btn" v-else @click="onLogisticsDetails(item)">查看物流</button>
+                      </div>
+                      <img class="delivery-img" :src="item2.pic" alt="" v-for="(item2, index2) in item.items" :key="index2">
+                      <div style="color:rgb(149 149 149);margin-top:8px">共{{item.items_num}}件商品</div>
+                    </li>
+                  </template>
+                </ul>
+              </div>
+              <div class="timeline" style="position: relative;" v-else>
                 <ul class>
                   <template>
-                    <li class="timeline-item" v-for="(item, index) in activities" :key="index">
-                      <span class="time-day">{{ item.AcceptTime | parseTime }}</span>
+                    <li style="position: absolute;left:10px" v-for="(item, index) in deliveryLists" :key="index">
+                      {{item.delivery_corp_name}}  {{item.delivery_code}}
+                    </li>
+                    <li class="timeline-item" v-for="(item, index) in activities" :key="index" style="padding-top:15px;">
+                      <span class="time-day"> {{ item.AcceptTime | parseTime }}</span>
                       <div class="timeline-item__tail"></div>
                       <div class="timeline-item__node" :class="index == 0 ? 'timeline-item__node_color' : ''">
                         <i class="ec-icon ec-icon-roundcheck success" v-if="index == 0"></i>
@@ -292,13 +396,17 @@
             </div>
 
             <p class="bd-border"></p>
-            <div :style="{ width: orderStatus !== 'CANCEL' ? '45%' : '90%', bordeRight: orderStatus !== 'CANCEL' ? '1px solid #e5e5e5' : 'none'}" class="order_message">
+            <div :style="{ width: orderStatus !== 'CANCEL' ? '45%' : '90%', bordeRight: orderStatus !== 'CANCEL' ? '1px solid #e5e5e5' : 'none' }" class="order_message">
               <!-- 收货人信息 -->
               <Receive :receiveData="receiveData" />
             </div>
             <!-- 付款信息 -->
             <div style="width: 45%;" class="order_message" v-if="orderStatus && orderStatus !== 'CANCEL'">
               <PayInfo :receiveData="receiveData"></PayInfo>
+            </div>
+            <!-- 发票信息 -->
+            <div style="width: 100%;" class="order_message" v-if="(receiveData.invoice!=null &&receiveData.invoice.length!=0)">
+              <InvoiceInfo :receiveData="receiveData"></InvoiceInfo>
             </div>
 
             <p class="bd-border"></p>
@@ -317,8 +425,14 @@
             <SpInput placeholder="必填：取消原因" v-model="cancelMean" class="dailog-bd-input" />-->
             <SpForm ref="form" :model="form" :rules="rules">
               <SpFormItem prop="cancelMean">
-                <span style="display: inline-block; width: 80px; text-align: right">取消原因：</span>
-                <SpInput class="dailog-bd-input" v-model="form.cancelMean" placeholder="必填：取消原因"/>
+                <span style="display: inline-block; width: 80px; text-align: right"
+                  >取消原因：</span
+                >
+                <SpInput
+                  class="dailog-bd-input"
+                  v-model="form.cancelMean"
+                  placeholder="必填：取消原因"
+                />
               </SpFormItem>
             </SpForm>
           </div>
@@ -330,6 +444,28 @@
         </div>
       </div>
     </SpModal>
+    <SpModal v-model="dialogLogistics" :height="500" :width="650">
+      <div class="dailog dailog-cancel">
+        <div class="dailog-hd">查看物流</div>
+        <div class="timelineDetails" style="height:500px;padding-right:20px;overflow:auto;">
+          <ul class>
+            <template>
+              <li class="timeline-item" v-for="(item, index) in deliveryListsDetails" :key="index" style="padding-top:15px;">
+                <span class="time-day"> {{ item.AcceptTime | parseTime }}</span>
+                <div class="timeline-item__tail"></div>
+                <div class="timeline-item__node" :class="index == 0 ? 'timeline-item__node_color' : ''">
+                  <i class="ec-icon ec-icon-roundcheck success" v-if="index == 0"></i>
+                </div>
+                <div class="timeline-item__wrapper">
+                  <div class="el-timeline-item__content">{{ item.AcceptStation }}</div>
+                  <div class="el-timeline-item__timestamp is-bottom"></div>
+                </div>
+              </li>
+            </template>
+          </ul>
+        </div>
+      </div>
+    </SpModal>
   </div>
 </template>
 
@@ -337,10 +473,11 @@
 import smenu from './../comps/smenu'
 import Receive from './comps/receive' //收件人信息。数据key按照接口返回的给，详细看组件
 import PayInfo from './comps/payInfo' //收件人信息。数据key按照接口返回的给，详细看组件
+import InvoiceInfo from './comps/InvoiceInfo' //发票信息
 
 import OrderGood from './comps/order-good'
-import { getOrderInfo, orderCancel, confirmOrder } from '@/api/member'
-import { deliveryInfo ,getdeliveryId} from '@/api/trade'
+import { getOrderInfo, orderCancel, confirmOrder} from '@/api/member'
+import { deliveryInfo, getdeliveryId} from '@/api/trade'
 
 export default {
   data() {
@@ -384,7 +521,11 @@ export default {
       isZiti: false,
       timer: null,
       auto_cancel_seconds: 0,
-      cancelTime: ''
+      cancelTime: '',
+      deliveryLists:[],    // 物流列表
+      deliveryGoodsNum:[],    // 发货个数
+      deliveryListsDetails:[],    // 查看物流详情
+      dialogLogistics: false,
     }
   },
   computed: {},
@@ -392,7 +533,8 @@ export default {
     smenu,
     Receive,
     OrderGood,
-    PayInfo
+    PayInfo,
+    InvoiceInfo
   },
   created() {
     this.getOrderInfo()
@@ -410,6 +552,13 @@ export default {
 
       let {list} =  await getdeliveryId({order_id:id})
       let delivery_id = list[0].delivery_id;
+      this.deliveryLists = list
+      this.deliveryGoodsNum = []
+      list.map(ele=>{
+        if(ele.status_msg=='已发货'){
+          this.deliveryGoodsNum.push(ele)
+        }
+      })
 
       this.zitiData = [distributor]
       let {
@@ -435,7 +584,10 @@ export default {
         delivery_code,
         auto_cancel_seconds,
         order_class,
-        discount_fee
+        discount_fee,
+        invoice,   //发票信息
+        point_fee,   // 积分抵扣金额
+        is_invoiced,  //开票状态
       } = orderInfo
       this.orderGoodData = {
         can_apply_aftersales: orderInfo.can_apply_aftersales,
@@ -458,7 +610,9 @@ export default {
         delivery_code,
         pay_type,
         create_time,
-        payDate
+        payDate,
+        invoice,
+        is_invoiced
       }
       // order_status_des='WAIT_BUYER_CONFIRM'
       this.auto_cancel_seconds = auto_cancel_seconds
@@ -473,7 +627,8 @@ export default {
         freight_type,
         point,
         order_class,
-        discount_fee
+        discount_fee,
+        point_fee
       }
       this.orderInfo = orderInfo
       let activities
@@ -519,16 +674,17 @@ export default {
         case 'FAIL':
           this.step = -1
           break
-        case 'PAYED_PARTAIL':
-          this.step = 2
+        case 'PAYED_PARTAIL': // 部分发货
+          // this.step = 2       //状态0可取消订单,部分发货不可取消
+          this.step = 0       //状态0不显示任何按钮，包括确认收货+取消订单等
           break
         default:
           this.step = 0
           break
       }
       this.activities = activities
-      if (this.step == 4 || this.step == 3) {
-        deliveryInfo({ delivery_id:delivery_id }).then((res) => {
+      if (this.step == 4 || this.step == 3) { 
+        deliveryInfo({delivery_id:delivery_id }).then((res) => {
           activities = [
             {
               AcceptStation: '已付款',
@@ -540,10 +696,16 @@ export default {
             }
           ]
           // this.activities = res.reverse().concat(activities)
-           this.activities = res.concat(activities)
-          // console.log('----this.activities---', this.activities)
+          this.activities = res.concat(activities)
         })
       }
+    },
+    onLogisticsDetails(val){
+      console.log(val.delivery_id);
+      this.dialogLogistics = true
+      deliveryInfo({delivery_id:val.delivery_id }).then((res) => {
+        this.deliveryListsDetails = res
+      })
     },
     clickBtn(type) {
       switch (type) {
