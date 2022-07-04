@@ -158,6 +158,8 @@
               <div class="status-steps">
                 <!-- 步骤条 -->
                 <AftersaleSteps :step="Number(aftersalesInfo.aftersales_status)+1" :stepsData="stepsData" />
+                <!-- 还未确认字段 -->
+                <!-- <AftersaleSteps :step="Number(aftersalesInfo.progress)+1" :stepsData="stepsData" /> -->
               </div>
             </div>
   
@@ -182,7 +184,7 @@
               >退款金额：{{ orderGoodData[0].items[0].refunded_fee | formatPriceToHundred}}</p> -->
               <div v-if="this.orderInfo.order_status_des !== 'DONE'">
                 <div class="btns" v-if="aftersalesInfo.progress === 0">
-                  <button class="btn btn-primary" @click="clickBtn('修改申请')">修改申请</button>
+                  <!-- <button class="btn btn-primary" @click="clickBtn('修改申请')">修改申请</button> -->
                   <button class="btn" @click="clickBtn('撤销申请')">撤销申请</button>
                 </div>
                 <div class="btns" v-if="aftersalesInfo.progress === 1">
@@ -480,7 +482,8 @@ export default {
       stepsData:[{
         icon:'ec-icon-post',
         text:'提交申请',
-        time:'2020-10-02 18:15:46'
+        // time:'2020-10-02 18:15:46'
+        time:''
       },{
         icon:'ec-icon-time',
         text:'等待审核',
@@ -611,7 +614,7 @@ export default {
       let res = await aftersalesInfo(obj)
       let { order_info, aftersales ,detail,aftersales_bn, aftersales_status, aftersales_type, create_time, description, reason, progress}=res
       this.orderGoodData = {...order_info,detail}
-      let { receipt_type, receiver_address, receiver_city, receiver_district, receiver_mobile, receiver_name, receiver_state, receiver_zip, item_fee, freight_fee, total_fee, order_status_des, delivery_corp_name, delivery_code } = order_info
+      let { receipt_type, receiver_address, receiver_city, receiver_district, receiver_mobile, receiver_name, receiver_state, receiver_zip, item_fee, freight_fee, total_fee, order_status_des, delivery_corp_name, delivery_code, freight_type, point_fee,discount_fee } = order_info
       this.receiveData = {
         receipt_type,
         receiver_address,
@@ -642,6 +645,9 @@ export default {
         freight_fee,
         total_fee,
         order_status_des,
+        freight_type,
+        point_fee,
+        discount_fee,
       }
       this.orderInfo = order_info
       
