@@ -22,7 +22,8 @@ export default {
   mixins: [mixin],
   head () {
     return {
-      title: this.pageSeo.title,
+      // title: this.pageSeo.title,
+      title: "首页",
       meta: [
         { hid: 'keywords', name: 'keywords', content: this.pageSeo.mate_keywords },
         { hid: 'description', name: 'description', content: this.pageSeo.mate_description }
@@ -59,11 +60,7 @@ export default {
   methods: {
     // ...mapActions(["initStore"])
     changeRoute(to){
-      if(to==='index'){
-        document.title = "首页"
-      }else if(to==='items'){
-        document.title = "商品列表"
-      }else if(to==='cart'){
+      if(to==='cart'){
         document.title = "购物车"
       }else if(to==='member-trade'){
         document.title = "我的订单"
@@ -77,6 +74,8 @@ export default {
         document.title = "所有订单"
       }else if(to==='member-trade-id'){
         document.title = "订单详情"
+      }else if(to==='cart-checkout'){
+        document.title = "订单信息"
       }else if(to==='member-trade-aftersale-list'){
         document.title = "售后订单"
       }else if(to==='member-trade-aftersale'){
