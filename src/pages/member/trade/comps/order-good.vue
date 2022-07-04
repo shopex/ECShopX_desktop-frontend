@@ -10,7 +10,8 @@
           <td colspan="2">商品</td>
           <!-- <td>单价(元)</td> -->
           <td colspan="1">数量</td>
-          <td colspan="1">小计</td>
+          <!-- 动态判断colspan否则ui会空出一块 -->
+          <td :colspan="!aftersale?'1':'2'">小计</td>
           <td colspan="2" style="text-align: center" v-if="!aftersale">操作</td>
         </tr>
       </thead>
@@ -224,6 +225,7 @@ export default {
       selectItem: {}
     }
   },
+
   methods: {
     clickBtn(type, item) {
       switch (type) {
