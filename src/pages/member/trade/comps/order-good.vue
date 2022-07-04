@@ -105,6 +105,10 @@
           <span class="text-right">优惠</span>
           <span class="col-lg-2">￥{{ orderTotalData.discount_fee | formatPriceToHundred }}</span>
         </div>
+        <div class="text" v-if="orderGoodData.order_class != 'pointsmall'">
+          <span class="text-right">积分抵扣</span>
+          <span class="col-lg-2">￥{{ orderTotalData.point_fee/100}}</span>
+        </div>
         <div class="text-total">
           <span class="text-right">实付金额</span>
           <span class="ly-text-red" v-if="orderGoodData.order_class != 'pointsmall'"

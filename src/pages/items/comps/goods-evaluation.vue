@@ -216,7 +216,8 @@ export default {
       replyList: [],
       showReply: false,
       showComment: false,
-      replyComment: ''
+      replyComment: '',
+      defaultImg:require('@/assets/imgs/avator.png')
     }
   },
   filters: {
