@@ -9,9 +9,9 @@
         <tr>
           <td colspan="2">商品</td>
           <!-- <td>单价(元)</td> -->
-          <td>数量</td>
-          <td>小计</td>
-          <td style="text-align: center" v-if="!aftersale">操作</td>
+          <td colspan="1">数量</td>
+          <td colspan="1">小计</td>
+          <td colspan="2" style="text-align: center" v-if="!aftersale">操作</td>
         </tr>
       </thead>
       <tbody>
