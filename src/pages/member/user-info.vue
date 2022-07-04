@@ -30,7 +30,7 @@ $num-color : #FF5D02;
       .avatar-name {
         text-align: center;
         font-size: 14px;
-        margin-top: 10px;
+        margin-top: 8px;
         .title {
           @include text-overflow();
           font-size: 13px;
@@ -385,10 +385,7 @@ $num-color : #FF5D02;
             <div class="hd-avatar">
               <img
                 class="avatar-img"
-                :src="
-                  memberInfo.avatar ||
-                    'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1986912056,513122085&fm=26&gp=0.jpg'
-                "
+                :src="memberInfo.avatar || defaultImg"
               />
               <div class="avatar-name">
                 <div>{{ memberInfo.username }}</div>
@@ -408,11 +405,13 @@ $num-color : #FF5D02;
               <div class="user-tabs">
                 <template v-for="tab in userTabs">
                   <div class="tab" :style="{ width: `${100 / userTabs.length}%` }">
-                    <h4 class="num">
-                      <span v-if="tab.icon" class="icon">{{ tab.icon }}</span>
-                      <span>{{ tab.num }}</span>
-                    </h4>
-                    <div class="title">{{ tab.title }}</div>
+                    <router-link :to="tab.link">
+                      <h4 class="num">
+                        <span v-if="tab.icon" class="icon">{{ tab.icon }}</span>
+                        <span>{{ tab.num }}</span>
+                      </h4>
+                      <div class="title">{{ tab.title }}</div>
+                    </router-link>
                   </div>
                 </template>
               </div>
@@ -483,7 +482,7 @@ $num-color : #FF5D02;
                     :key="`footgoods__${index}`"
                     @click="handelClickToLink(item.item_id)"
                   >
-                    <SpImg :src="item.itemData.length > 0 ? (item.itemData.pics.length > 0 ? item.itemData.pics[0] : ''):''" no-size class="img" />
+                    <SpImg :src="item.itemData.pics.length > 0 ? item.itemData.pics[0] : ''" no-size class="img" />
                     <div class="goods-con">
                       <div class="goods-name">{{ item.itemData.item_name }}</div>
                       <SpPrice class="goods-price" :value="item.itemData.price / 100" />
@@ -522,20 +521,20 @@ export default {
           num: 0,
           title: '优惠券',
           button: '领券',
-          link: '/'
+          link: '/member/coupon'
         },
         {
           num: 0,
           title: '积分',
           button: '赚积分',
-          link: '/'
+          link: '/member/point'
         },
         {
           icon: '￥',
           num: '0',
           title: '储值余额',
           button: '去储值',
-          link: '/'
+          link: '/member/user-info'
         }
       ],
       orderTabs: {
@@ -579,7 +578,8 @@ export default {
         guide_title: '',
         is_vip: false
       },
-      memberInfo: {}
+      memberInfo: {},
+      defaultImg:require('@/assets/imgs/avator.png')
     }
   },
   components: { smenu, goodFocus },
