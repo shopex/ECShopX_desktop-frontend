@@ -54,7 +54,7 @@
     z-index: $z-index-level-10;
     box-shadow: 2px 2px 8px #333, -2px -2px 8px #333;
     background-color: #fff;
-    border-radius: 4px;
+    // border-radius: 4px;    //边框因和下方内容衔接显示问题所以圆角去除
     margin-top: 15vh;
   }
   &__close {
