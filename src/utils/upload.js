@@ -29,26 +29,26 @@ const getToken = (params) => {
 // }
 
 const upload = {
-  aliUpload: async (item, tokenRes) => {
+  aliUpload: async (file, tokenRes) => {
     const {accessid, dir, host, policy, signature} = tokenRes
-    const filename = item.url.slice(item.url.lastIndexOf('/') + 1)
+    // console.log(file,"file");
     try {
+      const formData = new FormData()
+      formData.append('key', tokenRes.dir)
+      formData.append('policy', tokenRes.policy)
+      formData.append('OSSAccessKeyId', tokenRes.accessid)
+      formData.append('success_action_status', '200')
+      // formData.append('callback', tokenRes.callback)
+      formData.append('signature', tokenRes.signature)
+      formData.append('name', file.name)
+      formData.append('file', file)
       const res = await axios({
-        url: host,
-        filePath: item.url,
-        name: 'file',
-        formData:{
-          name: filename,
-          key: `${dir}`,
-          policy: policy,
-          OSSAccessKeyId: accessid,
-          // 让服务端返回200
-          signature: signature,
-          success_action_status: '200',
-          // 服务端回调
-          // callback: callback
-        }
+        method: 'POST',
+        url: tokenRes.host,
+        headers: { 'Content-Type': 'multipart/form-data;charset=UTF-8' },
+        data: formData
       })
+      
       if (!res) {
         return false
       }
