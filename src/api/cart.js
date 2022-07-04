@@ -36,6 +36,10 @@ export function creatOrder(data) {
 export const getOrderDet = (params, id) => {
   return req({ url: `api/h5app/wxapp/order_new/${id}`, params, method: 'GET' })
 }
+// 支付方式获取
+export const getPaymentList = (params) => {
+  return req({ url: `api/h5app/wxapp/trade/payment/list`, params, method: 'GET' })
+}
 // 支付
 export const payMent = (data) => {
   return req({ url: 'api/h5app/wxapp/payment', data, method: 'POST' })

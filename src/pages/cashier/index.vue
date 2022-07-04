@@ -97,6 +97,14 @@
                 >
                 <img :src="item.img" alt="" width="100%"/>
               </SpBtnPicker>
+              <!-- <SpBtnPicker
+                v-for="(item, index) in paymentList"
+                :value="item.pay_type_code"
+                :key="`btn-item__${index}`"
+                :theme="themeColor"
+                >
+                <img :src="item.img" alt="" width="100%"/>
+              </SpBtnPicker> -->
             </SpBtnPickerGroup>
           </div>
         </div>
@@ -142,15 +150,23 @@ export default {
     }
   },
   created() {
+    // this.getPaymentList()
     this.getOrderInfo()
   },
   methods: {
     async getOrderInfo() {
       const { order_id } = this.$route.query
-      const { pay_type, tradeId, total_fee } = await this.$api.cart.getOrderDet({}, order_id)
+      let params = {
+        pay_type:this.paymentList[0].type
+      }
+      const { pay_type, tradeId, total_fee } = await this.$api.cart.getOrderDet(params, order_id)
       this.paymentType = pay_type
-      this.tradeId = tradeId?tradeId:order_id
+      this.tradeId = tradeId
       this.total_fee = total_fee
+    },
+    async getPaymentList() {
+      const res = await this.$api.cart.getPaymentList()
+      this.paymentList = res
     },
     // 付款按钮
     async clickPayment() {
