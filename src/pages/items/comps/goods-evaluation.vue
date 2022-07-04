@@ -14,11 +14,12 @@
     .avatar-wrap {
       width: 60px;
       height: 60px;
-      background: #ccc;
+      background: #fff;
       margin-right: 10px;
       float: left;
       img {
         width: 100%;
+        height: 100%;
       }
       .hasAvatar {
         height: 100%;
@@ -144,7 +145,8 @@
 <template>
   <div class="comps-evaluation__item clearfix">
     <div class="avatar-wrap">
-      <img :src="info.avatar" :class="{ hasAvatar: info.avatar }" />
+      <!-- 商品评价默认头像 -->
+      <img :src="info.avatar.length===0?defaultImg:info.avatar" :class="{ hasAvatar: info.avatar }" />
     </div>
     <div class="comps-evaluation__main">
       <div class="name">{{ info.username }}</div>
@@ -164,6 +166,7 @@
           <span class="num">{{ info.reply.total_count }}</span>
         </div>
       </div>
+      <img :src="item" v-for="(item,index) in info.rate_pic" :key="index" style="width:100px;height:100px;margin-right:1px;" @click="viewImg(item)">
 
       <div class="reply-list" v-if="replyList.length > 0 && showReply">
         <div class="reply-item" v-for="(reply, i) in replyList" :key="`reply-item__${i}`">
@@ -196,6 +199,15 @@
         </div>
       </div>
     </div>
+    <SpModal
+      title=""
+      v-model="dialogImgVisible"
+      :width="650"
+    >
+      <div style="text-align:center">
+        <img :src="viewImgVal" alt="" style="width:500px;margin:50px 0">
+      </div>
+    </SpModal>
   </div>
 </template>
 
@@ -217,7 +229,9 @@ export default {
       showReply: false,
       showComment: false,
       replyComment: '',
-      defaultImg:require('@/assets/imgs/avator.png')
+      defaultImg:require('@/assets/imgs/avator.png'),
+      viewImgVal:"",
+      dialogImgVisible:false,
     }
   },
   filters: {
@@ -226,6 +240,10 @@ export default {
     }
   },
   methods: {
+    viewImg(item){
+      this.viewImgVal = item
+      this.dialogImgVisible = true
+    },
     async handleClickShowReply() {
       this.showReply = !this.showReply
       if(this.showReply) {
