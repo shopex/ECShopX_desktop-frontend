@@ -24,11 +24,12 @@ $sp-loading-size: 42px !default;
 
 .sp-loading {
   &__parent {
-    position: relative;
+    // position: relative;
   }
 
   &__mask {
-    position: absolute;
+    // position: absolute;
+    position: fixed;
     z-index: $z-index-toast;
     background: rgba(#fff, 0.8);
     margin: 0;
