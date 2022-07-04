@@ -224,7 +224,7 @@
     },
     head() {
       return {
-        title: this.tdk_data ? this.tdk_data.title : '',
+        title: this.tdk_data&&this.tdk_data.title=="-无" ? this.info.item_name : this.tdk_data&&this.tdk_data!="-无" ? this.tdk_data.title : '商品详情',
         meta: [{
             hid: 'keywords',
             name: 'keywords',

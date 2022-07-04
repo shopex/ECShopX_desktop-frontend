@@ -45,7 +45,7 @@ import { getHistoryList } from '@/api/member'
 export default {
   head() {
     return {
-      title: '会员中心_标品官方网站',
+      title: '我的足迹',
       meta: [
         {
           hid: 'keywords',

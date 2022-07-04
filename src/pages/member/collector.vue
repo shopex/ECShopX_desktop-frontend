@@ -64,7 +64,7 @@ import { mapState } from 'vuex'
 export default {
   head() {
     return {
-      title: '会员中心_标品官方网站',
+      title: '我的收藏',
       meta: [
         {
           hid: 'keywords',

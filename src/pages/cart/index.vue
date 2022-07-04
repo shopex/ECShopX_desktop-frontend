@@ -131,6 +131,11 @@
       CartRecommend,
       CouponPicker
     },
+    head() {
+      return {
+        title: '购物车',
+      }
+    },
     data() {
       return {
         // list: null,

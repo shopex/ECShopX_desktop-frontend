@@ -19,7 +19,7 @@
           <tr v-for="(item,index) in orderGoodData.detail" :key="index">
             <td>
               <div class="table-goods-pic">
-                <SpImg style="width: 65px; height: 65px" :src="item.item_pic" no-size />
+                <SpImg style="width: 65px; height: 65px" :src="item.pic || item.item_pic" no-size />
               </div>
             </td>
             <td>
