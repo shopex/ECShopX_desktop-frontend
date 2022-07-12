@@ -156,10 +156,7 @@ export default {
   methods: {
     async getOrderInfo() {
       const { order_id } = this.$route.query
-      let params = {
-        pay_type:this.paymentList[0].type
-      }
-      const { pay_type, tradeId, total_fee } = await this.$api.cart.getOrderDet(params, order_id)
+      const { pay_type, tradeId, total_fee } = await this.$api.cart.getOrderDet({ pay_type:this.paymentType }, order_id)
       this.paymentType = pay_type
       this.tradeId = tradeId
       this.total_fee = total_fee
