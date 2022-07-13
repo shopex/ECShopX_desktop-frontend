@@ -158,7 +158,7 @@ export default {
       const { order_id } = this.$route.query
       const { pay_type, tradeId, total_fee } = await this.$api.cart.getOrderDet({ pay_type:this.paymentType }, order_id)
       this.paymentType = pay_type
-      this.tradeId = tradeId
+      this.tradeId = tradeId?tradeId:order_id
       this.total_fee = total_fee
     },
     async getPaymentList() {
