@@ -170,7 +170,8 @@ export default {
       const { order_id } = this.$route.query
       const res = await this.$api.cart.payMent({
         order_id,
-        pay_type: this.paymentType
+        pay_type: this.paymentType,
+        return_url:'/finish/success?payment_id=' + order_id
       })
       if(this.paymentType == 'alipay') {
         const div = document.createElement('div')
