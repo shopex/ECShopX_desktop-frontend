@@ -146,11 +146,14 @@ export default {
       orderData: {},
       isPayment: true,
       app_id: null,
-      payment_id: null
+      payment_id: null,
+      home_url: ''
     }
   },
   created() {
     // this.getPaymentList()
+    console.log('-------------',window.location.origin);
+    this.home_url = window.location.origin
     this.getOrderInfo()
   },
   methods: {
@@ -171,7 +174,7 @@ export default {
       const res = await this.$api.cart.payMent({
         order_id,
         pay_type: this.paymentType,
-        return_url:'/finish/success?payment_id=' + order_id
+        return_url: this.home_url
       })
       if(this.paymentType == 'alipay') {
         const div = document.createElement('div')
