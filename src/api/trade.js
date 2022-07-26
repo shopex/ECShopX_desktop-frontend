@@ -57,3 +57,11 @@ export function logistics (params) {
 export function tradeList (params) {
   return req.post('/trade.payment.tradeList', params, { withAuth: true })
 }
+
+export function alipayCallBack (params) {
+  return req.post('/api/alipay/notify', params)
+}
+// 结算返回首页后更新订单信息
+export function aliPayResult (params) {
+  return req.get('/api/h5app/wxapp/trade/payment/alipay/result', params)
+}
