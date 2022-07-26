@@ -19,6 +19,7 @@
 import { mapState } from 'vuex'
 import { hasValue } from '@/utils'
 import { useWechatLogin } from '@/api/user'
+import { aliPayResult } from '@/api/trade'
 import S from '@/spx'
 
 export default {
@@ -51,7 +52,8 @@ export default {
     // IndexMore,
     // Banner
   },
-  created() {},
+  created() {
+  },
   computed: {
     ...mapState({
       // wgts: (state) => {
@@ -102,6 +104,11 @@ export default {
         }
       })
     }
+    
+    const query = this.$route.query;
+    if (query) {
+      this.alipayCallBack(query);
+    }
   },
   methods: {
     handleRecommendClick(recommend) {
@@ -111,6 +118,13 @@ export default {
       if (params) {
         let keywords = params.data.keyword
         this.$router.push(`/items?keywords=${keywords}`)
+      }
+    },
+    alipayCallBack(data){
+      if (data.out_trade_no != window.localStorage.getItem('payInfo')) {
+        aliPayResult(data).then(res => {
+          window.localStorage.setItem("payInfo", data.out_trade_no)
+        })
       }
     }
   }

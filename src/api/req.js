@@ -68,7 +68,6 @@ class CreateAxios {
     this.inst.interceptors.request.use((config) => {
       const isGetMethod = config.method === 'get'
       const showError = config.showError === undefined ? true : config.showError
-
       let token, companyid
 
       if (process.client) {
@@ -100,9 +99,15 @@ class CreateAxios {
       // console.log(`[COMPANY ID IS]: ${companyid}`)
       // console.log('[CONFIG DATA IS]:', config.params, config.data)
       if (isGetMethod) {
-        config.params = {
-          ...config.params,
-          company_id: companyid
+        if (config.url != '/api/h5app/wxapp/trade/payment/alipay/result') {
+          config.params = {
+            ...config.params,
+            company_id: companyid
+          }
+        } else {
+          config.params = {
+            ...config.params
+          }
         }
       } else {
         config.data = {

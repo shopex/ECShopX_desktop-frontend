@@ -152,7 +152,6 @@ export default {
   },
   created() {
     // this.getPaymentList()
-    console.log('-------------',window.location.origin);
     this.home_url = window.location.origin
     this.getOrderInfo()
   },
