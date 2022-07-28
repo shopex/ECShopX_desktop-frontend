@@ -317,12 +317,28 @@
       }
     },
     mounted() {
+      this.goodsHistorySave()
       this.fetchEvaluationList()
       this.showStoreIcon()
 
 
     },
     methods: {
+      // 存浏览记录
+      async goodsHistorySave() {
+        try {
+          let token = S.getAuthToken()
+          if(!token){
+            return
+          }
+          let params = {
+            item_id: this.info.item_id
+          }
+          await this.$api.member.postHistorySave(params)
+        } catch (error) {
+          console.log(error)
+        }
+      },
       async showStoreIcon (){
         
         if(S.getAuthToken()){
