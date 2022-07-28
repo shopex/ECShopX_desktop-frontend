@@ -204,7 +204,7 @@
                 </div>
                 <div class="coupon-date">{{ `有效期:${coupon.end_date}` }}</div>
               </SpBtnPicker>
-              <SpBtnPicker class="coupon-item not-use" :value="-1" :theme="themeColor"
+              <SpBtnPicker class="coupon-item not-use" :value="''" :theme="themeColor"
                 >不使用优惠券</SpBtnPicker
               >
             </SpBtnPickerGroup>
