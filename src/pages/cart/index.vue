@@ -12,7 +12,7 @@
     <div class="cart-bd">
       <div class="cart-shop" v-for="(shop, index) in list" :key="`cart-shop__${index}`">
         <div class="cart-shop-hd" :style="{ borderBottomColor: themeColor }">
-          <div class="shop-name">店铺名称：{{ shop.shop_name || '' }}</div>
+          <div class="shop-name" v-if="shop.shop_name">店铺名称：{{ shop.shop_name || '' }}</div>
           <div class="shop-coupon">
             <CouponPicker :info="shop" :theme="themeColor" />
           </div>
