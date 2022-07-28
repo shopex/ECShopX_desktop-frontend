@@ -40,11 +40,6 @@
             </td>
             <td
               style="text-align:center"
-              :rowspan="
-                (orderTotalData.order_status_des == 'SUCCESS' ||
-                  orderTotalData.order_status_des == 'DONE') &&
-                  orderGoodData.detail.length
-              "
             >
               <button
                 class="btn btn-primary"
