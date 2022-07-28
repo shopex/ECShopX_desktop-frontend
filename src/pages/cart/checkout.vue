@@ -101,7 +101,10 @@
               :key="`goods-list-item__${index}`"
             >
               <SpImg class="goods-img" :src="item.pic" no-size />
-              <div class="goods-name">{{ item.item_name }}</div>
+              <div class="goods-name">
+                <div class="p-name">{{ item.item_name }}</div>
+                <div class="p-extra">{{ item.item_spec_desc }}</div>
+              </div>
               <div class="goods-price">
                 <SpPrice :value="item.price /100" />
               </div>
