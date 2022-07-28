@@ -437,7 +437,8 @@ export default {
           user_point,   //可用积分
           max_point,    //本单可用积分
           point_fee,    //抵扣金额
-          deduct_point_rule
+          deduct_point_rule,
+          coupon_discount
         } = await this.$api.cart.freightFee(params)
         this.orderData = {
           item_fee,
@@ -448,7 +449,8 @@ export default {
           user_point,
           max_point,
           point_fee,
-          deduct_point_rule
+          deduct_point_rule,
+          coupon_discount
         }
         this.list = items
         this.getValidCoupon()
