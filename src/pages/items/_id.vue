@@ -6,7 +6,7 @@
       <SpBreadCrumb :value="breadcrumb" />
 
       <div class="goods-logo">
-        <div class="details-left">
+        <div class="details-left" v-if="info && info.distributor_id != 0">
           <div class="imgs-content">
             <div v-if="shopInfo.name">
               <img :src="shopInfo.logo" alt="" class="goods-imgs" />
@@ -40,7 +40,7 @@
         </div>
         <div class="details-right">
           <input placeholder="请输入" v-model="inputText" type="text" />
-          <button v-if="shopInfo.name" @click="goToShopInfo">搜本店</button>
+          <button v-if="shopInfo.name && info && info.distributor_id != 0" @click="goToShopInfo">搜本店</button>
           <button @click="goToItems">搜商城</button>
         </div>
       </div>
@@ -57,7 +57,7 @@
 
       <div class="goods-details">
         <div class="details-left">
-          <div class="goods-sort">
+          <div class="goods-sort" v-if="info && info.distributor_id != 0">
             <div class="sort-title">商品分类</div>
             <div class="list-boby">
               <ul>

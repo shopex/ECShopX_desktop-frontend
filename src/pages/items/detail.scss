@@ -7,12 +7,13 @@ $goods-color-primary: #1f201f;
   }
   .goods-logo {
 		height: 90px;
-    @include clearfix();
+    // @include clearfix();
     display: flex;
-    // justify-content: space-between;
+    justify-content: space-between;
     align-items: center;
     font-size: 20px;
     margin: 10px 0px;
+    overflow: hidden;
     .details-left {
 			width: 394px;
       display: flex;
