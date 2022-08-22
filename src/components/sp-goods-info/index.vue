@@ -53,7 +53,7 @@
   }
   .btn-collect {
     float: right;
-    cursor: pointer;
+    cursor: default;
   }
   .goodsinfo-f {
     background-color: #f5f5f5;
@@ -149,11 +149,70 @@
       margin-top: 1px;
     }
   }
+  .goodsinfo-coupons {
+    display: flex;
+    margin-bottom: 30px;
+    padding: 20px 52px 10px 24px;
+    background: linear-gradient(to bottom, #ffeff3 74%, #fffcfd);
+    .coupons-item_hd {
+      width: 70px;
+      float: left;
+      color: #888;
+    }
+    .coupons-item_bd {
+      width: 100%;
+      &-info {
+        display: flex;
+        align-items: center;
+        position: relative;
+      }
+      .coupongBtn {
+        margin-top: 40px;
+        cursor: pointer;
+        text-align: center;
+        color: #e7777f;
+      }
+      &-img {
+        width: 90px;
+      }
+      &-content {
+        display: flex;
+        margin: 0 10px;
+        .discount_title_price {
+          display: flex;
+        }
+      }
+      .center-coupon-item__price-num {
+        font-family: PingFang SC, Microsoft YaHei, '微软雅黑', Hiragino Sans GB, sans-serif;
+        .price__int {
+          color: #000;
+          font-size: 14px !important;
+          font-weight: normal !important;
+        }
+        .price__decimal {
+          color: #000;
+          font-size: 14px !important;
+          font-weight: normal !important;
+        }
+      }
+      &-footer {
+        color: #d9001b;
+        text-decoration: underline;
+        position: absolute;
+        right: 0;
+        cursor: pointer;
+      }
+      .receive {
+        color: #ec808d;
+      }
+    }
+  }
   .goodsinfo-skus {
     margin-top: 20px;
   }
   .goodsinfo-ft {
     @include clearfix();
+    margin-bottom: 20px;
     .sp-num-input {
       float: left;
       margin-right: 15px;
@@ -234,6 +293,64 @@
           </nuxt-link>
         </div>
       </div>
+      <div class="goodsinfo-coupons" v-if="couponsList">
+        <div class="coupons-item_hd">优惠券：</div>
+        <div class="coupons-item_bd">
+          <div v-for="(item, index) in showCouponsList" :key="index" class="coupons-item_bd-info">
+            <img
+              class="coupons-item_bd-img"
+              v-if="item.card_type == 'cash'"
+              src="@/assets/imgs/conpon_cash.png"
+              alt=""
+            />
+            <img
+              class="coupons-item_bd-img"
+              v-if="item.card_type == 'discount'"
+              src="@/assets/imgs/conpon_discount.png"
+              alt=""
+            />
+            <div class="coupons-item_bd-content">
+              <p v-if="item.card_type == 'discount'" class="discount_title_price">
+                {{ 10 - item.discount / 10 }}折满折优惠券
+              </p>
+              <p v-if="item.card_type == 'cash'" class="discount_title_price">
+                <SpPrice
+                  class="center-coupon-item__price-num"
+                  unit="cent"
+                  :symbol="''"
+                  :value="item.reduce_cost"
+                ></SpPrice
+                >元满减优惠券
+              </p>
+              <p v-if="item.least_cost > 0">
+                ，满<SpPrice
+                  class="center-coupon-item__price-num"
+                  unit="cent"
+                  :symbol="''"
+                  :value="item.least_cost"
+                ></SpPrice
+                >元可用
+              </p>
+              <p v-if="item.least_cost < 0 || item.least_cost == 0">，无门槛使用</p>
+            </div>
+            <p
+              class="coupons-item_bd-footer "
+              v-if="info.getted != 1 && info.getted != 2"
+              @click="handleReceive(item)"
+            >
+              领取
+            </p>
+            <p class="coupons-item_bd-footer receive" v-else-if="info.getted == 1">已领取</p>
+          </div>
+          <div v-if="couponsList.length > 4">
+            <p @click="handleOpenCoupon" class="coupongBtn">
+              {{ couponsBtn ? '展开' : '收起' }}
+              <i v-if="couponsBtn" class="espier-icon espier-icon-xiangxia-01"></i>
+              <i v-else class="espier-icon espier-icon-xiangshang-01"></i>
+            </p>
+          </div>
+        </div>
+      </div>
       <div class="promation" v-if="info.promotion_activity">
         <div class="promation-label">促销</div>
         <div class="promation-values">
@@ -307,6 +424,8 @@ export default {
       curSku: null,
       selection: null,
       collected: false,
+      couponsList: [],
+      couponsBtn: true
     }
   },
   filters: {
@@ -337,11 +456,31 @@ export default {
     if (nospec) {
       this.curSku = this.info
     }
+    this.getConponList()
   },
   mounted() {
-    console.log('getAuthToken:', S.getAuthToken())
     if (S.getAuthToken()) {
       this.getCollectionList()
+    }
+  },
+  computed: {
+    showCouponsList: {
+      get() {
+        if (this.couponsBtn) {
+          if (this.couponsList.length < 4) {
+            return this.couponsList
+          }
+          let newArr = []
+          for (let i = 0; i < 4; i++) {
+            newArr.push(this.couponsList[i])
+          }
+          return newArr
+        }
+        return this.couponsList
+      },
+      set(val) {
+        this.showCouponsList = val
+      }
     }
   },
   methods: {
@@ -368,8 +507,8 @@ export default {
     },
     filterPrice() {
       const { activity_info } = this.info
-      console.log("this.curSku",this.curSku)
-      const { price,member_price,act_price }=this.curSku||{}
+      console.log('this.curSku', this.curSku)
+      const { price, member_price, act_price } = this.curSku || {}
       if (activity_info) {
         return act_price / 100
       } else if (member_price) {
@@ -400,25 +539,51 @@ export default {
         this.$Message.error('请选择规格')
         return
       }
-      const { item_id } = this.curSku
-      const { distributor_id } = this.info;
-      
-      const res = await this.$store.dispatch('cart/CART_ADD', {
+      const { item_id, distributor_id } = this.curSku
+      await this.$store.dispatch('cart/CART_ADD', {
         item_id,
         shop_type: 'distributor',
         cart_type: mode,
         distributor_id,
         quantity: this.quantity
       })
-      if (res.message) {
-        this.$Message.error(res.message)
-        return
-      }
       if (mode == 'cart') {
         this.$Message.success('成功加入购物车')
       } else {
-        this.$router.push(`/cart/checkout?mode=fastbuy&id=${distributor_id}`)
+        this.$router.push('/cart/checkout?mode=fastbuy')
       }
+    },
+    async getConponList() {
+      const { distributor_id, itemId } = this.info
+      const coupons = await this.$api.cart.cardList({
+        distributor_id,
+        end_date: 1,
+        item_id: itemId,
+        page_size: 999
+      })
+      coupons.list.forEach((item, index) => {
+        if (item.get_limit - item.user_get_num <= 0) {
+          coupons.list[index].getted = 1
+        } else if (item.quantity - item.get_num <= 0) {
+          coupons.list[index].getted = 2
+        } else {
+          coupons.list[index].getted = 0
+        }
+      })
+      this.couponsList = coupons.list
+      console.log('this.couponsList+++++', this.couponsList)
+    },
+    // 领取优惠券
+    async handleReceive(item) {
+      await this.$api.cart.receiveCard({
+        card_id: item.card_id
+      })
+      this.$Message.success('领取成功')
+      this.getConponList()
+    },
+    // 展开优惠券
+    async handleOpenCoupon() {
+      this.couponsBtn = !this.couponsBtn
     }
   }
 }
