@@ -1,9 +1,12 @@
 <style lang="scss">
 .sp-btn-picker-group {
   @include clearfix();
+  display: flex;
+  flex-wrap: wrap;
   .sp-btn-picker {
     float: left;
     margin-right: 10px;
+    margin-bottom: 10px;
   }
 }
 </style>
