@@ -370,7 +370,7 @@ export default {
       const { activity_info } = this.info
       console.log("this.curSku",this.curSku)
       const { price,member_price,act_price }=this.curSku||{}
-      if (activity_info) {
+      if (activity_info && act_price) {
         return act_price / 100
       } else if (member_price) {
         return member_price / 100
