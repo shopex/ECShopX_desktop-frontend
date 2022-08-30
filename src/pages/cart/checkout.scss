@@ -197,6 +197,10 @@
           }
         }
         &.coupon-list {
+          .couponInfo{
+            display: flex;
+            flex-wrap: wrap;
+          }
           .not-use {
             height: 92px;
             color: #666;

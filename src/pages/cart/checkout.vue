@@ -185,7 +185,7 @@
         <div class="content-item">
           <h4 class="content-item-hd">使用优惠</h4>
           <div class="content-item-bd coupon-list">
-            <SpBtnPickerGroup v-model="coupon" @onChange="onChangeCoupon">
+            <SpBtnPickerGroup v-model="coupon" @onChange="onChangeCoupon" class="couponInfo">
               <SpBtnPicker
                 v-for="(coupon, index) in couponList"
                 class="coupon-item"
