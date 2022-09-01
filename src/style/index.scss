@@ -200,7 +200,26 @@ ul {
     }
   }
 }
+.shop-auth {
+  .auth-header {
+    padding: 20px 0;
 
+    .header-login {
+      width: 110px;
+      height: auto;
+      border-radius: 5px;
+      margin-right: 20px;
+    }
+
+    span {
+      vertical-align: top;
+      margin-top: 8px;
+      font-size: 24px;
+      color: #606266;
+      display: inline-block;
+    }
+  }
+}
 ::-webkit-input-placeholder { /* WebKit browsers */
   color: #bdbdbd;
   font-size: 12px;
