@@ -293,7 +293,7 @@
           </nuxt-link>
         </div>
       </div>
-      <div class="goodsinfo-coupons" v-if="couponsList">
+      <div class="goodsinfo-coupons" v-if="showCouponsList.length > 0">
         <div class="coupons-item_hd">优惠券：</div>
         <div class="coupons-item_bd">
           <div v-for="(item, index) in showCouponsList" :key="index" class="coupons-item_bd-info">
