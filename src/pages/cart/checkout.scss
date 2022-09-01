@@ -26,7 +26,6 @@
           margin-left: 20px;
         }
       }
-
       &-hd {
         height: 50px;
         line-height: 50px;
@@ -123,21 +122,6 @@
               font-size: 12px;
               color: #666;
               margin-right: 50px;
-              .p-name{
-                height: 36px;
-                line-height: 18px;
-                overflow: hidden;
-                color: #333;
-                text-align: left;
-              }
-              .p-extra{
-                height: 36px;
-                line-height: 18px;
-                overflow: hidden;
-                color: #333;
-                font-weight: 550;
-                text-align: left;
-              }
             }
             .goods-price {
               float: left;
@@ -213,6 +197,10 @@
           }
         }
         &.coupon-list {
+          .couponInfo{
+            display: flex;
+            flex-wrap: wrap;
+          }
           .not-use {
             height: 92px;
             color: #666;
@@ -236,6 +224,15 @@
             font-size: 26px;
             text-align: left;
             padding-left: 20px;
+            .price__symbol{
+              color: #fff;
+            }
+            .price__int{
+              color: #fff;
+            }
+            .price__decimal{
+              color: #fff;
+            }
           }
           .symbol {
             color: #fff;

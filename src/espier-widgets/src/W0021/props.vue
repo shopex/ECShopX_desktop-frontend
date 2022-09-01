@@ -1,5 +1,5 @@
 <style lang="scss">
-.widget-W0015-props {
+.widget-W0021-props {
   .delete-btn {
     float: right;
     margin-right: 10px;
@@ -56,7 +56,7 @@
 }
 </style>
 <template>
-  <div class="widget-W0015-props">
+  <div class="widget-W0021-props">
     <Tabs value="name1" :animated="false">
       <TabPane
         :label="`${activeElement.name}[${activeElement.type}]`"
@@ -88,30 +88,70 @@
             <Input v-model="activeElement.subTitle" />
           </attr-field>
           <div class="division"></div>
-          <attr-field label="标题字体：">
+          <attr-field label="副标题字体：">
             <InputNumber v-model="activeElement.wgtSubTitleFontSize" size="small" :min="0"></InputNumber>
           </attr-field>
           <div class="division"></div>
-          <attr-field label="字体颜色：">
+          <attr-field label="副标题字体颜色：">
             <color-picker  v-model="activeElement.wgtSubTextColor"  ></color-picker>
+          </attr-field>
+          <div class="division"></div>
+          <attr-field label="更多链接：" labelTop>
+            <!-- {{activeElement.moreLinkData}} -->
+            <dataBind v-model="activeElement.moreLinkData" :imgPicker="false"></dataBind>
           </attr-field>
         </panelBar>
 
         <panelBar title="优惠券列表">
           <div class="division"></div>
-          <attr-field label="选择商品：">
+          <!-- <attr-field label="选择商品："> -->
             <dataBind
-              :value="[]"
+              v-if="showGoodsList"
+              :value="activeElement.data"
               :imgPicker="false"
               :filterMenu="['coupons']"
               :multiple="true"
               :customPath="false"
-              @pathOnChange="(data) => onChangePath(data, i)"
-              activeKey="coupons_id"
+              @pathOnChange="onChangePath"
+              activeKey="card_id"
               placeholder="选择优惠券"
             ></dataBind>
-          </attr-field> 
+          <!-- </attr-field>  -->
+          <!-- {{activeElement.data}} -->
+          <!-- <Button type="primary" style="width: 100%; margin: 0 auto"
+              @click="(data) => onChangePath(data)"
+            >添加优惠券</Button
+          > -->
+          <!-- <div class="division"></div> -->
+          <div v-for="(tab, i) in activeElement.data" :key="i" style="margin-bottom: 10px;margin-top: 10px">
+            <ul>
+              <draggable v-model="activeElement.data[i]" class="list-group" ghost-class="ghost">
+                <!-- <li class="wgt-props" v-for="(item, index) in tab.goods_list" :key="`wgt-propsitem__${index}`"> -->
+                <li class="wgt-props" >
+                  <div class="">
+                    <dataBind
+                      :key="key"
+                      :value="tab.icon_url_list"
+                      :pathPicker="false"
+                      :imgData="tab.icon_url_list"
+                      :pathData="tab.pathData"
+                      :imgOnChange="handleImgOnChange.bind(this, i)"
+                      :pathOnChange="handlePathOnChange.bind(this, i)">
+                    </dataBind>
+                  </div>
+                  <div class="wgt-props_content">
+                    <h4 class="title">{{ tab.title }}</h4>
+                  </div>
+                  <div class="wgt-props_delete" @click="deleteItem(i)">
+                    <i class="mshopdesign icon-shanchu"></i>
+                  </div>
+                </li>
+              </draggable>
+            </ul>
+              <!-- :pathOnChange="handlePathOnChange.bind(activeElement.pathData)" -->
+          </div>
         </panelBar>
+        
       </TabPane>
       <TabPane label="组件样式" name="name2">
         <basic-set v-model="activeElement"></basic-set>
@@ -126,7 +166,10 @@ export default {
   name: 'W0021Props',
   props: ['activeElement'],
   data() {
-    return {}
+    return {
+      key: 0,
+      showGoodsList: true
+    }
   },
   components: {
     panelBar,
@@ -156,50 +199,97 @@ export default {
     }
   },
   methods: {
+    handleAdd() {
+      this.activeElement.data.push({
+        text: 'tab',
+        goods_id: '',
+        data: [
+          { card_id: '',  linkPage: 'coupons', linkPageLabel: '优惠券' }
+        ]
+      })
+      console.log(this.activeElement);
+    },
     handleDelete(i) {
       this.$Modal.confirm({
         title: '提示',
         content: '确定删除该项？',
         onOk: () => {
+          console.log(this.activeElement);
           if (this.activeElement.data.length > 1) {
             this.activeElement.data.splice(i, 1)
             this.$Message.success('删除成功！')
           } else {
-            this.$Message.error('请至少添加1个商品')
+            this.$Message.error('请至少添加1个优惠券')
           }
         }
       })
+      this.key = this.key + 1;
     },
-    deleteItem(i, idex) {
+    deleteItem(i) {
       this.$Modal.confirm({
         title: '提示',
-        content: '确定删除该商品？',
+        content: '确定删除该优惠券？',
         onOk: () => {
-          if (this.activeElement.data[i].data.length > 1) {
-            this.activeElement.data[i].data.splice(idex, 1)
+          this.showGoodsList = false;
+          if (this.activeElement.data.length > 1) {
+            this.activeElement.data.splice(i, 1)
             this.$Message.success('删除成功！')
+            this.$forceUpdate()
           } else {
-            this.$Message.error('请至少添加1个商品')
+            this.$Message.error('请至少添加1个优惠券')
           }
+          this.showGoodsList = true;
         }
       })
     },
-    onChangePath(data, index) {
+    onChangePath(data) {
+      this.activeElement.data = [];
       const goodsData = data.map(item => {
-        const { coupons_id, pics, price, item_name, linkPage, linkPageLabel ,title,subTitle} = item
+        const { 
+          card_id,
+          card_type,
+          icon_url_list, // 图片
+          linkPage, 
+          linkPageLabel, 
+          title, 
+          description,
+          notice,  // 卡券提示语
+          custom_url, // 自定义跳转链接
+          discount, // 折扣券打折额度（百分比)	
+          least_cost, // 满减券满多少可用
+          reduce_cost, // 满减券减多少金额 OR 兑换券启用金额
+          object_use_for, // 卡券适用对象
+        } = item
         return {
-          coupons_id,
-          coupons_pic: pics.length > 0 ? pics[0] : '',
-          price: price,
-          coupons_name: item_name,
+          card_id,
+          card_type,
+          notice,
+          icon_url_list: icon_url_list ? icon_url_list : '',
           linkPage,
           title,
-          subTitle,
-          linkPageLabel
+          description,
+          linkPageLabel,
+          custom_url,
+          discount,
+          least_cost,
+          reduce_cost,
+          object_use_for,
         }
       })
+      // this.activeElement.pathData = img
       console.log(this.activeElement.data,"this.activeElement.data11111111111111111111111");
-      this.activeElement.data[index].data = goodsData
+      this.activeElement.data = goodsData;
+      this.$forceUpdate()
+      console.log(this.activeElement.data);
+    },
+    handleImgOnChange(i,item) {
+      const list =  this.activeElement.data[i];
+      list.icon_url_list = item;
+      this.activeElement.data[i] = list ;
+    },
+    handlePathOnChange(i,item) {
+      console.log(item);
+      this.activeElement.data[i].icon_url_list = item
     }
   }
 }
