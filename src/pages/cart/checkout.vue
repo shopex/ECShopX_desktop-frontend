@@ -484,6 +484,8 @@ export default {
         distributor_id: id,
         cart_type: mode,
         order_type: order_type || 'normal',
+        seckill_id,
+        seckill_ticket: ticket,
         // pay_type: 'wxpaypc',
         pay_type: pay_type,
         promotion: 'normal',

@@ -293,7 +293,7 @@
           </nuxt-link>
         </div>
       </div>
-      <div class="goodsinfo-coupons" v-if="couponsList">
+      <div class="goodsinfo-coupons" v-if="showCouponsList.length > 0">
         <div class="coupons-item_hd">优惠券：</div>
         <div class="coupons-item_bd">
           <div v-for="(item, index) in showCouponsList" :key="index" class="coupons-item_bd-info">
@@ -509,7 +509,7 @@ export default {
       const { activity_info } = this.info
       console.log('this.curSku', this.curSku)
       const { price, member_price, act_price } = this.curSku || {}
-      if (activity_info  && act_price) {
+      if (activity_info && act_price) {
         return act_price / 100
       } else if (member_price) {
         return member_price / 100
@@ -550,7 +550,22 @@ export default {
       if (mode == 'cart') {
         this.$Message.success('成功加入购物车')
       } else {
-        this.$router.push('/cart/checkout?mode=fastbuy')
+        // this.$router.push('/cart/checkout?mode=fastbuy')
+        let url = `/cart/checkout?mode=fastbuy&id=${distributor_id}`
+        if (this.info.activity_type === 'seckill') {
+          this.$api.cart
+            .geticket({
+              item_id: item_id,
+              seckill_id: this.info.activity_info.seckill_id,
+              num: this.quantity
+            })
+            .then((res) => {
+              url = `${url}&seckill_id=${this.info.activity_info.seckill_id}&ticket=${res.ticket}&order_type=normal_seckill`
+              this.$router.push(url)
+            })
+        } else {
+          this.$router.push(url)
+        }
       }
     },
     async getConponList() {
