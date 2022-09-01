@@ -71,7 +71,9 @@ class CreateAxios {
       let token, companyid
 
       if (process.client) {
-        token = $nuxt.$cookies.get('ECSHOPX_TOKEN')
+        const { app } = CreateAxios.content
+        // 判断是否是商家入驻
+        token = config.url.indexOf('/merchant/') == -1 ? $nuxt.$cookies.get('ECSHOPX_TOKEN') : app.$cookies.get('ECSHOPX_STORE_TOKEN');
         if (process.env.VUE_APP_SAAS != 'true') {
           companyid = process.env.VUE_APP_COMPANYID
         }
@@ -81,7 +83,8 @@ class CreateAxios {
         //     : process.env.VUE_APP_COMPANYID
       } else {
         const { app, req } = CreateAxios.content
-        token = app.$cookies.get('ECSHOPX_TOKEN')
+        // 判断是否是商家入驻
+        token = config.url.indexOf('/merchant/') == -1 ? app.$cookies.get('ECSHOPX_TOKEN') : app.$cookies.get('ECSHOPX_STORE_TOKEN');
         if (process.env.VUE_APP_SAAS != 'true') {
           companyid = process.env.VUE_APP_COMPANYID
         } else {

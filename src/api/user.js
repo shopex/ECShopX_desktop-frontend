@@ -74,3 +74,10 @@ export function useWechatLogin(params={}){
 export function getLoginWayList(param={}){
   return req.get(`/api/h5app/wxapp/trustlogin/list`)
 }
+
+// 店铺入驻登录接口
+export function merchantLogin(param={}){
+  return req.post(`/api/h5app/wxapp/merchant/login`,{
+    ...param
+  })
+}
