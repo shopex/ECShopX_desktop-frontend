@@ -24,18 +24,21 @@
         <settle-form-one
           ref="settleFormOnes"
           @resule="checkResult(arguments)"
+          :formInfo="reviewInfo"
           v-if="setPage == 1"
         ></settle-form-one>
 
         <settle-form-two
           ref="settleFormTwos"
           @resule="checkResult(arguments)"
+          :formInfo="reviewInfo"
           v-if="setPage == 2"
         ></settle-form-two>
 
         <settle-form-three
           ref="settleFormThrees"
           @resule="checkResult(arguments)"
+          :formInfo="reviewInfo"
           v-if="setPage == 3"
         ></settle-form-three>
 
@@ -44,14 +47,14 @@
             《入驻协议》
           </div>
           <div class="btn-container__login">
-            <div
+            <!-- <div
               class="btn btn-fastbuy"
               v-if="setPage != 1"
               :style="{ borderColor: themeColor, color: themeColor }"
               @click="handlePrev"
             >
               上一页
-            </div>
+            </div> -->
             <div
               class="btn btn-fastbuy"
               v-if="setPage != 3"
@@ -98,13 +101,7 @@ import _debounce from 'lodash/debounce'
 import settleFormOne from '@/pages/shop/comp/settleformOne'
 import settleFormTwo from '@/pages/shop/comp/settleformTwo'
 import settleFormThree from '@/pages/shop/comp/settleformThree'
-import {
-  saveSettlementInfo,
-  settlementDetail,
-  settlementSet,
-  settlementAuditstatus,
-  getBasesetting
-} from '@/api/store'
+import { saveSettlementInfo, settlementDetail, settlementSet, getBasesetting } from '@/api/store'
 export default {
   layout: 'shop_layout',
   components: {
@@ -122,47 +119,19 @@ export default {
       setPage: 1,
       result: false,
       info: {},
-      shopTypeList: [
-        {
-          label: '测试',
-          value: '测试11'
-        },
-        {
-          label: '测试',
-          value: '测试11'
-        },
-        {
-          label: '测试',
-          value: '测试11'
-        }
-      ],
-      bussinessScopeList: [
-        {
-          label: '测试',
-          value: '测试11'
-        },
-        {
-          label: '测试',
-          value: '测试11'
-        },
-        {
-          label: '测试',
-          value: '测试11'
-        }
-      ]
+      reviewInfo: {}
     }
   },
   created() {
-    console.log(this.$cookies.get('ECSHOPX_STORE_TOKEN'))
-    // this.getAuditstatus();
-    // this.getDetail()
-    this.getSet()
+    this.getDetail()
+    this.getSet(this.$route.query.type)
     this.getBasesetInfo()
   },
   computed: {},
   methods: {
     // 获取信息回传
     checkResult(e) {
+      // 表单校验返回值
       this.result = e[0]
       if (e.length == 2) {
         this.info = Object.assign({ ...e[1] })
@@ -171,22 +140,29 @@ export default {
     // 点击下一页
     handleNext(e) {
       // 保存当前页面信息
-      // saveSettlementInfo(this.setPage, this.info)
-      // .then((res) => {
-      //   console.log(res)
-      // })
-      // .catch((err) => {
-      //   return;
-      // })
       if (this.setPage == 1) {
         this.$refs.settleFormOnes.check()
         if (this.result) {
-          this.setPage = 2
+          saveSettlementInfo(this.setPage, this.info)
+            .then((res) => {
+              console.log(res)
+              this.setPage = 2
+            })
+            .catch((err) => {
+              return
+            })
         }
       } else if (this.setPage == 2) {
         this.$refs.settleFormTwos.check()
         if (this.result) {
-          this.setPage = 3
+          saveSettlementInfo(this.setPage, this.info)
+            .then((res) => {
+              console.log(res)
+              this.setPage = 3
+            })
+            .catch((err) => {
+              return
+            })
         }
       }
     },
@@ -208,6 +184,15 @@ export default {
     // 确认提交
     clickSumbit() {
       this.$Message.success('提交成功')
+
+      saveSettlementInfo(this.setPage, this.info)
+        .then((res) => {
+          console.log(res)
+          this.setPage = 3
+        })
+        .catch((err) => {
+          return
+        })
       this.clickCancel()
     },
     // 取消提交提示框
@@ -221,19 +206,20 @@ export default {
     // 获取商户信息
     getDetail() {
       settlementDetail().then((res) => {
-        console.log(res)
+        this.reviewInfo = res
+        console.log('////////', this.reviewInfo)
       })
     },
     // 获取商户入驻当前步骤
-    getSet() {
+    getSet(type) {
       settlementSet().then((res) => {
-        this.setPage = res.step
-      })
-    },
-    // 获取商户入驻信息审核结果
-    getAuditstatus() {
-      settlementAuditstatus().then((res) => {
-        console.log(res)
+        if (res.step == 4 && !type) {
+          this.$router.push('/shop/review')
+        } else if (res.step == 4 && type) {
+          this.setPage = 1
+        } else if (res.step != 4) {
+          this.setPage = res.step
+        }
       })
     },
     // 获取商户入驻协议

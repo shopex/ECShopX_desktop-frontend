@@ -81,6 +81,7 @@
             width: calc(100% - 400px);
           }
           .sort-select,
+          .input-sort-select,
           .sp-input {
             width: 200px;
           }
@@ -92,6 +93,13 @@
             .sort-select{
               width: 100%;
             }
+          }
+        }
+        .bank_info{
+          .input-sort-select__dropdown-list{
+            border-top: 1px solid #dcdcdc;
+            top: -364px;
+            max-height: 364px;
           }
         }
       }
@@ -158,9 +166,9 @@
           }
         }
       }
-      .sort-select__dropdown-list{
-        max-height: 160px;
-      }
+      // .input-sort-select__dropdown-list{
+      //   max-height: 160px;
+      // }
     }
     .tips{
       padding-left: 140px;

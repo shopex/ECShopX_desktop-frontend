@@ -10,23 +10,20 @@
       <SpFormItem prop="shopType" class="form-select">
         <span class="label-text"><span class="must-icon">*</span>商户类型</span>
         <SpInputSelect
-          v-model="info.shopType"
+          v-model="info.merchant_type_parent_id"
           @change="chooseShopType"
           :data="shopTypeList"
+          @inputChange="changeInput"
           placeholder="请选择"
         ></SpInputSelect>
       </SpFormItem>
       <SpFormItem prop="bussinessScope" class="form-select">
         <span class="label-text"><span class="must-icon">*</span>经营范围</span>
-        <!-- <SpSelect
-          v-model="info.bussinessScope"
-          :data="bussinessScopeList"
-          placeholder="请选择"
-        ></SpSelect> -->
         <SpInputSelect
-          v-model="info.bussinessScope"
+          v-model="info.merchant_type_id"
           :data="bussinessScopeList"
           @change="chooseShopList"
+          @inputChange="changeInputBussiness"
           placeholder="请选择"
         ></SpInputSelect>
       </SpFormItem>
@@ -48,44 +45,20 @@
 import { getMerchantType } from '@/api/store'
 export default {
   components: {},
-  props: {},
+  props: { formInfo: Object },
   data() {
     return {
       themeColor: '#479EE9', // 单选按钮颜色
       rulesShow: false,
       info: {
-        shopType: '',
-        bussinessScope: '',
+        merchant_type_parent_id: '',
+        merchant_type_parent_name: '',
+        merchant_type_id: '',
+        merchant_type_name: '',
         settled_type: ''
       },
-      shopTypeList: [
-        {
-          label: '测试',
-          value: '测试11'
-        },
-        {
-          label: '测试',
-          value: '测试11'
-        },
-        {
-          label: '测试',
-          value: '测试11'
-        }
-      ],
-      bussinessScopeList: [
-        {
-          label: '测试',
-          value: '测试12'
-        },
-        {
-          label: '测试',
-          value: '测试12'
-        },
-        {
-          label: '测试',
-          value: '测试12'
-        }
-      ],
+      shopTypeList: [],
+      bussinessScopeList: [],
       typeParams: {
         page: 1,
         page_size: 10,
@@ -98,17 +71,29 @@ export default {
     }
   },
   created() {
+    console.log('this.formInfo*****', this.formInfo)
+    console.log(this.formInfo)
     this.getStoreTypeList()
+    this.getDetailInfo()
   },
-  computed: {},
   methods: {
     // 获取 商户类型列表
-    getStoreTypeList() {
+    getStoreTypeList(type = '') {
       getMerchantType(this.typeParams).then((res) => {
-        if (this.typeParams.parent_id == 0) {
-          // this.shopTypeList = res.result
-        } else {
-          this.bussinessScopeList = res.result
+        let data = []
+        res.list.forEach((item) => {
+          data.push({
+            label: item.name,
+            value: item.id,
+            company_id: item.company_id,
+            parent_id: item.parent_id
+          })
+        })
+
+        if (!type) {
+          this.shopTypeList = data
+        } else if (type == 'bussiness') {
+          this.bussinessScopeList = data
         }
       })
     },
@@ -117,24 +102,68 @@ export default {
         if (!valid) {
           this.$emit('resule', valid)
         } else {
-          this.$emit('resule', valid, this.info)
+          let data = {
+            settled_type: this.info.settled_type,
+            merchant_type_id: this.info.merchant_type_id
+              ? this.info.merchant_type_id
+              : this.info.merchant_type_parent_id
+          }
+          this.$emit('resule', valid, data)
         }
       })
     },
     // 获取选中的商户类型
     chooseShopType(item) {
-      this.typeParams.parent_id = item.label
-      this.info.shopType = item.value
-      this.typeParams.bussinessScope = ''
-      this.getStoreTypeList()
+      this.typeParams.parent_id = item.value
+      this.info.merchant_type_parent_id = item.value
+
+      this.getStoreTypeList('bussiness')
     },
     // 选中的经营范围
     chooseShopList(item) {
-      this.info.bussinessScope = item.value;
+      this.info.merchant_type_id = item.value
+    },
+    // 商户下拉框输入的信息
+    changeInput(e) {
+      this.typeParams.name = e
+      this.getStoreTypeList('bussiness')
+    },
+    // 商户下拉框输入的信息
+    changeInputBussiness(e) {
+      this.typeParams.name = e
+      this.getStoreTypeList('bussiness')
+    },
+    getDetailInfo() {
+      if (this.formInfo) {
+        const {
+          merchant_type_parent_id,
+          merchant_type_parent_name,
+          merchant_type_id,
+          merchant_type_name,
+          settled_type
+        } = this.formInfo
+        this.info = {
+          merchant_type_parent_id,
+          merchant_type_parent_name,
+          merchant_type_id,
+          merchant_type_name,
+          settled_type
+        }
+        this.typeParams.parent_id = merchant_type_parent_id
+        this.getStoreTypeList('bussiness')
+      }
+      console.log(this.info)
     }
   },
   mounted() {},
-  watch: {}
+  watch: {
+    // formInfo: {
+    //   handler(newValue, oldValue) {
+    //     this.getDetailInfo()
+    //   },
+    //   deep: true
+    // }
+  }
 }
 </script>
 <style lang="scss" scoped></style>

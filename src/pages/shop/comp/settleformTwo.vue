@@ -51,7 +51,7 @@
         <span class="label-text"> <span class="must-icon">*</span>结算银行账号</span>
         <SpInput v-model="info.card_id_mask" />
       </SpFormItem>
-      <SpFormItem prop="bank_name" v-if="info.bank_acct_type == 1" class="form-select">
+      <SpFormItem prop="bank_name" v-if="info.bank_acct_type == 1" class="form-select bank_info">
         <span class="label-text"> <span class="must-icon">*</span>结算银行</span>
         <!-- <SpSelect
           v-model="info.bank_name"
@@ -60,8 +60,9 @@
         ></SpSelect> -->
         <SpInputSelect
           v-model="info.bank_name"
-          :data="bussinessScopeList"
+          :data="bankList"
           @change="chooseBank"
+          @inputChange="changeInput"
           placeholder="请选择"
         ></SpInputSelect>
         <div v-if="!info.bank_name && rulesShow" class="form-item__error-message">
@@ -84,13 +85,13 @@
 import { getBank } from '@/api/store'
 export default {
   components: {},
-  props: {},
+  props: { formInfo: Object },
   data() {
     var unifiedCode = (rule, value, callback) => {
       let reg = /^([0-9A-HJ-NPQRTUWXY]{2}\d{6}[0-9A-HJ-NPQRTUWXY]{10}|[1-9]\d{14})$/
       if (!value) {
         callback('请填写统一社会信用代码')
-      } else if (reg.test(value)) {
+      } else if (!reg.test(value)) {
         callback('请填写正确的统一社会信用代码')
       }
       callback()
@@ -99,7 +100,7 @@ export default {
       let reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/
       if (!value) {
         callback('请输入身份证号码')
-      } else if (reg.test(value)) {
+      } else if (!reg.test(value)) {
         callback('请填写正确的身份证号码')
       }
       callback()
@@ -108,7 +109,7 @@ export default {
       let reg = /^1\d{10}$/
       if (!value) {
         callback('请输入手机号码')
-      } else if (reg.test(value)) {
+      } else if (!reg.test(value)) {
         callback('请填写正确的手机号码')
       }
       callback()
@@ -149,15 +150,6 @@ export default {
       }
       callback()
     }
-    // var bankName = (rule, value, callback) => {
-    //   console.log(this)
-    //   if (!value) {
-    //     if (this.info.bank_acct_type == 1) {
-    //       callback('请选择结算银行')
-    //     }
-    //   }
-    //   callback()
-    // }
     return {
       themeColor: '#479EE9', // 单选按钮颜色
       rulesShow: false,
@@ -165,6 +157,7 @@ export default {
         merchant_name: '',
         social_credit_code_id: '',
         regions_id: [],
+        regions: [],
         address: '',
         legal_name: '',
         legal_cert_id: '',
@@ -174,21 +167,12 @@ export default {
         bank_name: '',
         bank_mobile: ''
       },
-      shopTypeList: [
-        {
-          label: '测试',
-          value: '测试11'
-        },
-        {
-          label: '测试',
-          value: '测试11'
-        },
-        {
-          label: '测试',
-          value: '测试11'
-        }
-      ],
-      bussinessScopeList: [],
+      bankList: [],
+      searchBank: {
+        bank_name: '',
+        page: 1,
+        page_size: 10000
+      },
       accountRules: {
         merchant_name: [{ validate: companyName, message: '请填写企业名称' }],
         social_credit_code_id: [{ validate: unifiedCode }],
@@ -204,16 +188,51 @@ export default {
     }
   },
   created() {
+    if (this.formInfo) {
+      const {
+        merchant_name,
+        social_credit_code_id,
+        regions_id,
+        province,
+        city,
+        area,
+        address,
+        legal_name,
+        legal_cert_id,
+        legal_mobile,
+        bank_acct_type,
+        card_id_mask,
+        bank_name,
+        bank_mobile
+      } = this.formInfo
+      let regions = province + '-' + city + '-' + area
+      regions = regions.split('-')
+      this.info = {
+        merchant_name,
+        social_credit_code_id,
+        address,
+        legal_name,
+        legal_cert_id,
+        legal_mobile,
+        bank_acct_type,
+        card_id_mask,
+        bank_name,
+        bank_mobile,
+        regions_id: JSON.parse(regions_id),
+        regions: regions
+      }
+    }
+
     this.getBankList()
   },
   computed: {},
   methods: {
     // 获取结算银行
     getBankList() {
-      getBank().then((res) => {
+      getBank(this.searchBank).then((res) => {
         // console.log(result)
         res.list.forEach((item) => {
-          this.bussinessScopeList.push({
+          this.bankList.push({
             label: item.bank_name,
             value: item.bank_code,
             id: item.id
@@ -224,16 +243,17 @@ export default {
     check() {
       this.$refs['form-settle'].validate((valid) => {
         console.log(valid)
+        console.log(this.info)
         if (!valid) {
+          if (
+            (this.info.bank_acct_type == '1' && !this.info.bank_name) ||
+            (this.info.bank_acct_type == '2' && !this.info.bank_mobile)
+          ) {
+            this.rulesShow = true
+          }
           this.$emit('resule', valid)
         } else {
           this.$emit('resule', valid, this.info)
-        }
-        if (
-          (this.info.bank_acct_type == '1' && !this.info.bank_name) ||
-          (this.info.bank_acct_type == '2' && !this.info.bank_mobile)
-        ) {
-          this.rulesShow = true
         }
       })
     },
@@ -244,7 +264,11 @@ export default {
     },
     // 选择银行
     chooseBank(item) {
-      this.info.bank_name = item.value;
+      this.info.bank_name = item.label
+    },
+    changeInput(e) {
+      this.searchBank.bank_name = e
+      this.getBankList()
     }
   },
   mounted() {},

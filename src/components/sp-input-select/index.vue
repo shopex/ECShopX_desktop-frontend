@@ -1,11 +1,11 @@
 <style lang="scss">
-.sort-select {
+.input-sort-select {
   display: inline-block;
-  // position: relative;
+  position: relative;
   width: 100%;
 
   &.disabled {
-    .sort-select {
+    .input-sort-select {
       &__value {
         background: #f3f3f3;
         border-color: #ccc;
@@ -79,21 +79,21 @@
 </style>
 
 <template>
-  <div class="sort-select" :class="{ 'disabled': disabled }" v-on-clickaway="away">
-    <div class="sort-select__value" @click="handleClickDropDown">
-      <!-- class="sort-select__value" -->
-      <!-- <span class="sort-select__value-input" :class="currentLabel ? '' : 'placeholder'">{{
+  <div class="input-sort-select" :class="{ 'disabled': disabled }" v-on-clickaway="away">
+    <div class="input-sort-select__value" @click="handleClickDropDown">
+      <!-- class="input-sort-select__value" -->
+      <!-- <span class="input-sort-select__value-input" :class="currentLabel ? '' : 'placeholder'">{{
         currentLabel ? currentLabel : placeholder
       }}</span> -->
       <SpInput
-        class="sort-select__value-input"
-        v-model="currentValue"
+        class="input-sort-select__value-input"
+        v-model="currentLabel"
         @input="valueChange"
       ></SpInput>
       <i class="ec-icon ec-icon-unfold" :class="dropVisible ? 'active' : ''"></i>
     </div>
     <SpDpTransition>
-      <ul class="sort-select__dropdown-list" v-if="dropVisible && showList">
+      <ul class="input-sort-select__dropdown-list" v-if="dropVisible && showList">
         <li
           :class="{ 'active': item.value == value }"
           v-for="(item, index) in data"
@@ -150,7 +150,7 @@ export default {
       this.$emit('click', this.dropVisible)
     },
     change(item) {
-      console.log(item);
+      console.log(item)
       this.dropVisible = false
       this.currentValue = item.label
       this.$emit('input', item)
@@ -165,7 +165,7 @@ export default {
       this.dropVisible = false
     },
     valueChange(e) {
-      console.log(e)
+      this.$emit('inputChange', e)
     }
   }
 }

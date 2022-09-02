@@ -6,9 +6,10 @@
       <img referrerpolicy="no-referrer" src="../../assets/imgs/login_logo.png" />
     </div> -->
     <div class="login-main">
-      <div class="login-title ">
+      <img src="../../assets/imgs/black.png" alt="" />
+      <!-- <div class="login-title ">
         商家登录
-      </div>
+      </div> -->
       <!-- 账号登录 -->
       <SpForm
         class="login-con__form"
@@ -135,9 +136,9 @@ export default {
     }
   },
   created() {
-    if (this.$cookies.get('ECSHOPX_STORE_TOKEN')) {
-      this.$router.push('/shop/settleform')
-    }
+    // if (this.$cookies.get('ECSHOPX_STORE_TOKEN')) {
+    //   this.$router.push('/shop/settleform')
+    // }
     this.handleSubmit = _debounce((e) => {
       this.$refs[e].validate(async (valid, errors) => {
         if (valid) {

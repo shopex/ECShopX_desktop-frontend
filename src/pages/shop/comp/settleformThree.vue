@@ -13,7 +13,7 @@
           <template>
             <div class="spimg-item">
               <SpImg class="spimg1" v-if="info.license_url"  @click="clickUpLoad('license_url')" :src="info.license_url" no-size />
-              <SpImg class="spimg1" v-if="!info.license_url"  @click="clickUpLoad('license_url')" :src="defaultImg" no-size />
+              <SpImg class="spimg1" v-if="!info.license_url"  @click="clickUpLoad('license_url')" :src="defaultImg1" no-size />
             </div>
           </template>
           <input type="file" ref="license_url" class="input" @change="(e)=>changeUpload(e,'license_url')"></input>
@@ -30,7 +30,7 @@
           <template >
             <div class="spimg-item">
               <SpImg class="spimg1"  v-if="info.legal_certid_front_url" @click="clickUpLoad('legal_certid_front_url')" :src="info.legal_certid_front_url" no-size />
-              <SpImg class="spimg1" v-if="!info.legal_certid_front_url"  @click="clickUpLoad('legal_certid_front_url')" :src="defaultImg" no-size />
+              <SpImg class="spimg1" v-if="!info.legal_certid_front_url"  @click="clickUpLoad('legal_certid_front_url')" :src="defaultImg2" no-size />
             </div>
           </template>
           <input type="file" ref="legal_certid_front_url" class="input" @change="(e)=>changeUpload(e,'legal_certid_front_url')"></input>
@@ -42,8 +42,8 @@
         <div class="upload">
           <template >
             <div class="spimg-item">
-              <SpImg class="spimg1" v-if="info.legal_cert_id_back_url" @click="clickUpLoad('legal_cert_id_back_url')" :src="info.idCardFront" no-size />
-              <SpImg class="spimg1" v-if="!info.legal_cert_id_back_url"  @click="clickUpLoad('legal_cert_id_back_url')" :src="defaultImg" no-size />
+              <SpImg class="spimg1" v-if="info.legal_cert_id_back_url" @click="clickUpLoad('legal_cert_id_back_url')" :src="info.legal_cert_id_back_url" no-size />
+              <SpImg class="spimg1" v-if="!info.legal_cert_id_back_url"  @click="clickUpLoad('legal_cert_id_back_url')" :src="defaultImg2" no-size />
             </div>
           </template>
           <input type="file" ref="legal_cert_id_back_url" class="input" @change="(e)=>changeUpload(e,'legal_cert_id_back_url')"></input>
@@ -60,7 +60,7 @@
           <template >
             <div class="spimg-item">
               <SpImg class="spimg1" v-if="info.bank_card_front_url" @click="clickUpLoad('bank_card_front_url')" :src="info.bank_card_front_url" no-size />
-              <SpImg class="spimg1" v-if="!info.bank_card_front_url"  @click="clickUpLoad('bank_card_front_url')" :src="defaultImg" no-size />
+              <SpImg class="spimg1" v-if="!info.bank_card_front_url"  @click="clickUpLoad('bank_card_front_url')" :src="defaultImg3" no-size />
             </div>
           </template>
           <input type="file" ref="bank_card_front_url" class="input" @change="(e)=>changeUpload(e,'bank_card_front_url')"></input>
@@ -80,7 +80,7 @@
 import uploadImageFn from '@/utils/upload'
 export default {
   components: {},
-  props: {},
+  props: { formInfo: Object },
   data() {
     var businessLicenseImg = (rule, value, callback) => {
       if (!value) {
@@ -89,7 +89,9 @@ export default {
       callback()
     }
     return {
-      defaultImg: require('@/assets/imgs/cart-empty.png'),
+      defaultImg1: require('@/assets/imgs/bussiness-license.png'),
+      defaultImg2: require('@/assets/imgs/bank-card.png'),
+      defaultImg3: require('@/assets/imgs/id-card.png'),
       rulesShow: false,
       info: {
         license_url: '',
@@ -97,25 +99,25 @@ export default {
         legal_cert_id_back_url: '',
         bank_card_front_url: ''
       },
-      shopTypeList: [
-        {
-          label: '测试',
-          value: '测试11'
-        },
-        {
-          label: '测试',
-          value: '测试11'
-        },
-        {
-          label: '测试',
-          value: '测试11'
-        }
-      ],
-      accountRules: {
+      accountRules: {}
+    }
+  },
+  created() {
+    if (this.formInfo) {
+      const {
+        license_url,
+        legal_certid_front_url,
+        legal_cert_id_back_url,
+        bank_card_front_url
+      } = this.formInfo
+      this.info = {
+        license_url,
+        legal_certid_front_url,
+        legal_cert_id_back_url,
+        bank_card_front_url
       }
     }
   },
-  created() {},
   computed: {},
   methods: {
     check() {
