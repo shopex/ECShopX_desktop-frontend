@@ -1,6 +1,6 @@
 .shop-settle-login {
   // margin: 50px auto 100px;
-  background: $color-custom-theme;
+  // background: #686a67;
   height: 590px;
   align-items: center;
   display: flex;
@@ -16,8 +16,9 @@
   }
 
   .login-main {
-    background-color: rgba(255, 255, 255, 0.9);
-    width: 350px;
+    background-color: #f7eead;
+    // width: 350px;
+    display: flex;
     // height: 372px;
     justify-content: center;
     align-items: center;

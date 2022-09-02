@@ -86,7 +86,18 @@
         </div>
       </div>
     </SpModal>
-
+    <!-- 退出登录弹出框 -->
+    <!-- <SpModal v-model="dailogVisible" :width="600">
+      <div slot="title" class="confirm-title">提示</div>
+      <div class="confirm-info">
+        <p class="dialog-info">请确认是否提交审核</p>
+        <div class="btns">
+          <div class="btn" @click="clickCancel">取消</div>
+          <div class="btn btn-ok" @click="clickSumbit">确认</div>
+        </div>
+      </div>
+    </SpModal> -->
+    <!-- 隐私协议弹出框 -->
     <SpModal v-model="visiableProtocolDialog" :width="600">
       <div slot="title" class="protocol-title">提示</div>
       <div class="protocol-info">

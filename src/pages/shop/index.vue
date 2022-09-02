@@ -61,18 +61,14 @@
             <SpButton long type="primary" @click="handleSubmit('mobile_login')">登录</SpButton>
           </div>
         </SpFormItem>
+        <div class="form-link">
+          <SpRadio type="checkbox" size="small" v-model="checkLabel"></SpRadio>
+          <p>
+            阅读并同意
+            <span class="link" @click="protocolHandle">隐私协议</span>
+          </p>
+        </div>
       </SpForm>
-      <div class="form-link">
-        <SpRadio type="checkbox" size="small" v-model="checkLabel"></SpRadio>
-        <p>
-          阅读并同意
-          <span class="link" @click="protocolHandle">隐私协议</span>
-        </p>
-        <!-- <NuxtLink class="link" to="/auth/forget-password">忘记密码</NuxtLink> -->
-        <!-- <NuxtLink class="register-link" to="/auth/reg?fromlogin=true">
-        立即注册<i class="ec-icon ec-icon-right"></i>
-      </NuxtLink> -->
-      </div>
     </div>
     <SpModal v-model="visiableProtocolDialog" :width="600">
       <div slot="title" class="protocol-title">提示</div>
