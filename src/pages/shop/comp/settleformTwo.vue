@@ -53,18 +53,9 @@
       </SpFormItem>
       <SpFormItem prop="bank_name" v-if="info.bank_acct_type == 1" class="form-select bank_info">
         <span class="label-text"> <span class="must-icon">*</span>结算银行</span>
-        <!-- <SpSelect
-          v-model="info.bank_name"
-          :data="bussinessScopeList"
-          placeholder="请选择"
-        ></SpSelect> -->
-        <SpInputSelect
-          v-model="info.bank_name"
-          :data="bankList"
-          @change="chooseBank"
-          @inputChange="changeInput"
-          placeholder="请选择"
-        ></SpInputSelect>
+        <div @click="showBank">
+          <SpInput v-model="info.bank_name" :disabled="disabled" placeholder="搜索银行名称" />
+        </div>
         <div v-if="!info.bank_name && rulesShow" class="form-item__error-message">
           请请选择结算银行
         </div>
@@ -78,6 +69,35 @@
       </SpFormItem>
     </SpForm>
     <p class="tips">• 结算银行卡持卡人姓名要与负责人姓名一致</p>
+    <!-- 银行弹出框 -->
+    <SpModal v-model="dailogVisible" :width="600">
+      <div slot="title" class="confirm-title">选择结算银行</div>
+      <div class="confirm-info">
+        <SpInput v-model="searchBank.bank_name" @input="changeSearch" />
+        <div class="bank-list">
+          <SpRadioGroup v-model="info.bank_name" v-if="loading">
+            <div v-for="(item, index) in bankList" :key="index" class="bank-list-info">
+              <SpRadio size="small" :label="item.label" :theme="themeColor">{{
+                item.label
+              }}</SpRadio>
+            </div>
+          </SpRadioGroup>
+        </div>
+        <div class="pagination-wrap">
+          <SpPagination
+            :total="total"
+            :pageSize="searchBank.page_size"
+            :current="searchBank.page"
+            @on-change="changePage"
+            :maxPage="5"
+          />
+        </div>
+        <div class="btns">
+          <div class="btn" @click="clickCancel">取消</div>
+          <div class="btn btn-ok" @click="clickSumbit">确认</div>
+        </div>
+      </div>
+    </SpModal>
   </div>
 </template>
 
@@ -151,6 +171,8 @@ export default {
       callback()
     }
     return {
+      dailogVisible: false,
+      disabled: true,
       themeColor: '#479EE9', // 单选按钮颜色
       rulesShow: false,
       info: {
@@ -168,11 +190,14 @@ export default {
         bank_mobile: ''
       },
       bankList: [],
+      loading: true,
       searchBank: {
         bank_name: '',
         page: 1,
-        page_size: 10000
+        page_size: 20
       },
+      chooseBanks: '',
+      total: 0,
       accountRules: {
         merchant_name: [{ validate: companyName, message: '请填写企业名称' }],
         social_credit_code_id: [{ validate: unifiedCode }],
@@ -207,6 +232,8 @@ export default {
       } = this.formInfo
       let regions = province + '-' + city + '-' + area
       regions = regions.split('-')
+      // 保存已选中银行信息
+      this.chooseBanks = bank_name
       this.info = {
         merchant_name,
         social_credit_code_id,
@@ -218,7 +245,7 @@ export default {
         card_id_mask,
         bank_name,
         bank_mobile,
-        regions_id: JSON.parse(regions_id),
+        regions_id: regions_id ? JSON.parse(regions_id) : [],
         regions: regions
       }
     }
@@ -229,21 +256,32 @@ export default {
   methods: {
     // 获取结算银行
     getBankList() {
+      this.loading = false
+      // 将已保存的银行信息赋值给表单
+      this.info.bank_name = this.chooseBanks
       getBank(this.searchBank).then((res) => {
-        // console.log(result)
+        this.bankList = []
+        let num = 0
         res.list.forEach((item) => {
+          // 判断表单已选中的是否是在此次列表中
+          if (this.info.bank_name == item.bank_name) {
+            num++
+          }
           this.bankList.push({
             label: item.bank_name,
             value: item.bank_code,
             id: item.id
           })
         })
+        if (num <= 0) {
+          this.info.bank_name = ''
+        }
+        this.loading = true
+        this.total = res.total_count
       })
     },
     check() {
       this.$refs['form-settle'].validate((valid) => {
-        console.log(valid)
-        console.log(this.info)
         if (!valid) {
           if (
             (this.info.bank_acct_type == '1' && !this.info.bank_name) ||
@@ -268,6 +306,28 @@ export default {
     },
     changeInput(e) {
       this.searchBank.bank_name = e
+      this.getBankList()
+    },
+    showBank() {
+      this.dailogVisible = true
+    },
+    // 关闭弹出框
+    clickCancel() {
+      this.info.bank_name = this.info.bank_name ? this.info.bank_name : this.chooseBanks;
+      this.dailogVisible = false
+    },
+    clickSumbit() {
+      this.clickCancel()
+    },
+    // 页码变化
+    changePage(val) {
+      this.searchBank.page = val
+      this.getBankList()
+    },
+    // 搜索框变化
+    changeSearch(val) {
+      this.searchBank.bank_name = val
+      this.searchBank.page = 1
       this.getBankList()
     }
   },

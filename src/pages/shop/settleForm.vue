@@ -207,7 +207,6 @@ export default {
     getDetail() {
       settlementDetail().then((res) => {
         this.reviewInfo = res
-        console.log('////////', this.reviewInfo)
       })
     },
     // 获取商户入驻当前步骤
@@ -216,7 +215,7 @@ export default {
         if (res.step == 4 && !type) {
           this.$router.push('/shop/review')
         } else if (res.step == 4 && type) {
-          this.setPage = 1
+          this.setPage = 2
         } else if (res.step != 4) {
           this.setPage = res.step
         }
