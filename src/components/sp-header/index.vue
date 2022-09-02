@@ -15,8 +15,12 @@
           <div class="no-login active">
             <NuxtLink to="/" class="index-link">首页</NuxtLink>
             <template v-if="!userInfo">
-              <NuxtLink to="/auth/login" class="topbar-login__link " style="color:#FF5D02;">请登录</NuxtLink>
-              <NuxtLink to="/auth/reg" class="topbar-login__link topbar-register__link ">注册</NuxtLink>
+              <NuxtLink to="/auth/login" class="topbar-login__link " style="color:#FF5D02;"
+                >请登录</NuxtLink
+              >
+              <NuxtLink to="/auth/reg" class="topbar-login__link topbar-register__link "
+                >注册</NuxtLink
+              >
               <!-- <img src="../../assets/imgs/top.png" /> -->
             </template>
             <template v-else>
@@ -24,7 +28,6 @@
               <span class="member-phone">{{ userInfo.memberInfo.mobile }}</span>
               <span class="exit-btn" @click="handleLogout()">退出</span>
             </template>
-            
           </div>
         </div>
         <div class="topbar-member fr">
@@ -32,7 +35,9 @@
           <span>|</span>
           <NuxtLink to="/member/trade" style="margin-right:0;">我的订单</NuxtLink>
           <span>|</span>
-          <NuxtLink to="/member/user-info">会员中心</NuxtLink>
+          <NuxtLink to="/member/user-info" style="margin-right:0;" >会员中心</NuxtLink>
+          <span>|</span>
+          <NuxtLink to="/shop/settlement">商家入驻</NuxtLink>
           <!-- 隐藏商家中心 -->
           <!-- <NuxtLink to="/member/user-info">商家中心</NuxtLink> -->
 
