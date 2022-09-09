@@ -134,6 +134,9 @@ export default {
     }
   },
   created() {
+    if (!this.$cookies.get('ECSHOPX_STORE_TOKEN')) {
+      this.$router.push('/shop')
+    }
     this.getDetail()
     this.getSet(this.$route.query.type)
     this.getBasesetInfo()
@@ -194,12 +197,11 @@ export default {
     },
     // 确认提交
     clickSumbit() {
-      this.$Message.success('提交成功')
-
       saveSettlementInfo(this.setPage, this.info)
         .then((res) => {
-          console.log(res)
           this.setPage = 3
+          this.$router.push('/shop/review')
+          this.$Message.success('提交成功')
         })
         .catch((err) => {
           return

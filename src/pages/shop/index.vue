@@ -132,9 +132,9 @@ export default {
     }
   },
   created() {
-    // if (this.$cookies.get('ECSHOPX_STORE_TOKEN')) {
-    //   this.$router.push('/shop/settleform')
-    // }
+    if (this.$cookies.get('ECSHOPX_STORE_TOKEN')) {
+      this.$router.push('/shop/settleform')
+    }
     this.handleSubmit = _debounce((e) => {
       this.$refs[e].validate(async (valid, errors) => {
         if (valid) {

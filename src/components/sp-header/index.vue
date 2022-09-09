@@ -37,7 +37,7 @@
           <span>|</span>
           <NuxtLink to="/member/user-info" style="margin-right:0;" >会员中心</NuxtLink>
           <span>|</span>
-          <NuxtLink to="/shop/settlement">商家入驻</NuxtLink>
+          <NuxtLink to="/shop">商家入驻</NuxtLink>
           <!-- 隐藏商家中心 -->
           <!-- <NuxtLink to="/member/user-info">商家中心</NuxtLink> -->
 
