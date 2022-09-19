@@ -66,6 +66,7 @@ class CreateAxios {
     this.inst.defaults.baseURL = process.env.VUE_APP_API_BASE_URL || '/'
     this.inst.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
     this.inst.interceptors.request.use((config) => {
+      console.log(config);
       const isGetMethod = config.method === 'get'
       const showError = config.showError === undefined ? true : config.showError
       let token, companyid
@@ -73,7 +74,7 @@ class CreateAxios {
       if (process.client) {
         const { app } = CreateAxios.content
         // 判断是否是商家入驻
-        token = config.url.indexOf('/merchant/') == -1 ? $nuxt.$cookies.get('ECSHOPX_TOKEN') : app.$cookies.get('ECSHOPX_STORE_TOKEN');
+        token = config.url.indexOf('/merchant/') == -1 ? app.$cookies.get('ECSHOPX_TOKEN') : app.$cookies.get('ECSHOPX_STORE_TOKEN');
         if (process.env.VUE_APP_SAAS != 'true') {
           companyid = process.env.VUE_APP_COMPANYID
         }
@@ -92,7 +93,6 @@ class CreateAxios {
           config.headers['origin'] = host
         }
       }
-
       // console.log('request header:', config.headers)
       if (token) {
         config.headers.common['Authorization'] = `Bearer ${token}`

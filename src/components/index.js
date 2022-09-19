@@ -49,6 +49,7 @@ export { default as SpSteps } from './steps'
 export { default as SpHeader } from './sp-header'
 export { default as SpFooter } from './sp-footer'
 export { default as AuthHeader } from './auth-header'
+export { default as ShopHeader } from './shop-header'
 
 export { default as Film } from './template/film'
 export { default as Heading } from './template/film'

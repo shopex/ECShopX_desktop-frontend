@@ -65,7 +65,7 @@
           <SpRadio type="checkbox" size="small" v-model="checkLabel"></SpRadio>
           <p>
             阅读并同意
-            <span class="link" @click="protocolHandle">隐私协议</span>
+            <span class="link" @click="protocolHandle">入驻协议</span>
           </p>
         </div>
       </SpForm>
@@ -199,7 +199,6 @@ export default {
           yzm: yzm,
           token: imageToken
         }
-
         const { status_code, message } = await this.$api.auth.regSmsCode(params)
         if (status_code == 422) {
           this.$Message.error(message)

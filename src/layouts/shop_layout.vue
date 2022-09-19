@@ -10,7 +10,7 @@
 
 <template>
   <div class="shop-auth">
-    <!-- <auth-header /> -->
+    <shop-header v-if="show" />
     <div class="page-body">
       <Nuxt />
     </div>
@@ -25,9 +25,16 @@ import { Tracker } from '@/service'
 import { isNativeBrower } from '@/utils'
 
 export default {
+  data () {
+    return {
+      show: false
+    }
+  },
   watch: {
     $route(to, from) {
       // 对路由变化作出响应...
+      console.log('ECSHOPX_STORE_TOKEN************',this.$cookies.get('ECSHOPX_STORE_TOKEN'));
+      this.show = this.$cookies.get('ECSHOPX_STORE_TOKEN') ? true: false;
       if (!isNativeBrower()) {
         window.location.href = location.origin + to.fullPath
       }
@@ -45,6 +52,7 @@ export default {
   },
   created() {},
   mounted() {
+    this.show = this.$cookies.get('ECSHOPX_STORE_TOKEN') ? true: false;
     if (this.$device.isMobile && location.pathname !== '/h5') {
       location.href = '/h5'
     }

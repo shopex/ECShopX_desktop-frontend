@@ -2,6 +2,9 @@
   background: #eeeeee;
   min-height: 100vh;
 }
+.container-shop{
+  text-align: end;
+}
 .container{
   background: #eeeeee;
   min-height: 100vh;
@@ -101,7 +104,21 @@
             top: -364px;
             max-height: 364px;
           }
+          .bank_input{
+            /deep/.sp-input__input{
+              cursor: pointer;
+            }
+          }
         }
+      }
+      .chooseBanck{
+        height: 38px;
+        width: 200px;
+        border: 1px solid #dcdcdc;
+        font-size: 14px;
+        color: #666;
+        position: relative;
+        vertical-align: middle;
       }
       .btn-container{
         justify-content: center;

@@ -53,8 +53,8 @@
       </SpFormItem>
       <SpFormItem prop="bank_name" v-if="info.bank_acct_type == 1" class="form-select bank_info">
         <span class="label-text"> <span class="must-icon">*</span>结算银行</span>
-        <div @click="showBank">
-          <SpInput v-model="info.bank_name" :disabled="disabled" placeholder="搜索银行名称" />
+        <div @click="showBank" class="bank_input">
+          <SpInput v-model="info.bank_name" class="bank_input" placeholder="搜索银行名称" />
         </div>
         <div v-if="!info.bank_name && rulesShow" class="form-item__error-message">
           请请选择结算银行
@@ -68,12 +68,13 @@
         </div>
       </SpFormItem>
     </SpForm>
-    <p class="tips">• 结算银行卡持卡人姓名要与负责人姓名一致</p>
+    <p class="tips">• 结算银行卡持卡人姓名要与法人姓名一致</p>
     <!-- 银行弹出框 -->
     <SpModal v-model="dailogVisible" :width="600">
       <div slot="title" class="confirm-title">选择结算银行</div>
       <div class="confirm-info">
-        <SpInput v-model="searchBank.bank_name" @input="changeSearch" />
+        <!-- <SpInput v-model="searchBank.bank_name" @input="changeSearch" /> -->
+        <div class="chooseBanck" @click="changeSearch">{{searchBank.bank_name}}</div>
         <div class="bank-list">
           <SpRadioGroup v-model="info.bank_name" v-if="loading">
             <div v-for="(item, index) in bankList" :key="index" class="bank-list-info">
@@ -335,4 +336,11 @@ export default {
   watch: {}
 }
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.bank_input{
+  cursor: pointer;
+  ::v-deep.sp-input__input {
+    cursor: pointer;
+  }
+}  
+</style>

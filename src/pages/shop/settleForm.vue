@@ -47,14 +47,14 @@
             《入驻协议》
           </div>
           <div class="btn-container__login">
-            <!-- <div
+            <div
               class="btn btn-fastbuy"
               v-if="setPage != 1"
               :style="{ borderColor: themeColor, color: themeColor }"
               @click="handlePrev"
             >
               上一页
-            </div> -->
+            </div>
             <div
               class="btn btn-fastbuy"
               v-if="setPage != 3"
@@ -99,7 +99,7 @@
     </SpModal> -->
     <!-- 隐私协议弹出框 -->
     <SpModal v-model="visiableProtocolDialog" :width="600">
-      <div slot="title" class="protocol-title">提示</div>
+      <div slot="title" class="protocol-title">入驻协议</div>
       <div class="protocol-info">
         <p class="dialog-info" v-html="baseContent"></p>
       </div>
@@ -225,13 +225,13 @@ export default {
     // 获取商户入驻当前步骤
     getSet(type) {
       settlementSet().then((res) => {
-        if (res.step == 4 && !type) {
-          this.$router.push('/shop/review')
-        } else if (res.step == 4 && type) {
-          this.setPage = 2
-        } else if (res.step != 4) {
-          this.setPage = res.step
-        }
+        // if (res.step == 4 && !type) {
+        //   this.$router.push('/shop/review')
+        // } else if (res.step == 4 && type) {
+        //   this.setPage = 2
+        // } else if (res.step != 4) {
+        //   this.setPage = res.step
+        // }
       })
     },
     // 获取商户入驻协议
