@@ -44,7 +44,7 @@
             v-model="yzmLogin.vcode"
             placeholder="验证码"
             class="yzm-text"
-            @keyup.enter.native="handleSubmit('mobile_login')"
+            @keyup.enter.native="handleSubmit('merchant_login')"
           />
           <div class="btn-timer">
             <SpTimer
