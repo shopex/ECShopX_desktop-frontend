@@ -1,7 +1,7 @@
 .shop-settle-login {
   // margin: 50px auto 100px;
-  // background: #686a67;
-  height: 590px;
+  background: #eeeeee;
+  height: 100vh;
   align-items: center;
   display: flex;
   justify-content: center;
@@ -16,7 +16,9 @@
   }
 
   .login-main {
-    background-color: #f7eead;
+    border: 1px solid #ebeef5;
+    box-shadow: 0 2px 12px 0 #cccccc;
+    background-color: #FFF;
     width: 1095px;
     display: flex;
     // height: 372px;
