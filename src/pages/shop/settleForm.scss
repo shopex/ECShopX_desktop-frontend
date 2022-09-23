@@ -204,6 +204,8 @@
   .protocol-info {
     min-height: 150px;
     padding: 30px;
+    max-height: 600px;
+    overflow: auto;
   }
   .confirm-title {
     width: 100%;

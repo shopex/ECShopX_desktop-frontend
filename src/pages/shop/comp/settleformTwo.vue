@@ -73,8 +73,8 @@
     <SpModal v-model="dailogVisible" :width="600">
       <div slot="title" class="confirm-title">选择结算银行</div>
       <div class="confirm-info">
-        <!-- <SpInput v-model="searchBank.bank_name" @input="changeSearch" /> -->
-        <div class="chooseBanck" @click="changeSearch">{{searchBank.bank_name}}</div>
+        <SpInput v-model="searchBank.bank_name" @input="changeSearch" />
+        <!-- <div class="chooseBanck" @click="changeSearch">{{searchBank.bank_name}}</div> -->
         <div class="bank-list">
           <SpRadioGroup v-model="info.bank_name" v-if="loading">
             <div v-for="(item, index) in bankList" :key="index" class="bank-list-info">

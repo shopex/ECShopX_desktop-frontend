@@ -71,7 +71,7 @@
       </SpForm>
     </div>
     <SpModal v-model="visiableProtocolDialog" :width="600">
-      <div slot="title" class="protocol-title">提示</div>
+      <div slot="title" class="protocol-title">入驻协议</div>
       <div class="protocol-info">
         <p class="dialog-info" v-html="baseContent"></p>
       </div>

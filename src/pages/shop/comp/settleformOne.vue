@@ -99,7 +99,9 @@ export default {
     },
     check() {
       this.$refs['form-settle'].validate((valid) => {
+        console.log("valid----",valid);
         if (!valid) {
+          console.log();
           this.$emit('resule', valid)
         } else {
           let data = {
@@ -108,6 +110,9 @@ export default {
               ? this.info.merchant_type_id
               : this.info.merchant_type_parent_id
           }
+          console.log(this.info);
+          console.log("data");
+          console.log(data);
           this.$emit('resule', valid, data)
         }
       })
@@ -134,6 +139,7 @@ export default {
       this.getStoreTypeList('bussiness')
     },
     getDetailInfo() {
+      console.log(this.formInfo);
       if (this.formInfo) {
         const {
           merchant_type_parent_id,
