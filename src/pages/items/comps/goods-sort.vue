@@ -118,9 +118,9 @@
           </span>
         </div>
         <div class="price-wrap">
-          <SpInput class="price-input" v-model="start_price" placeholder=""></SpInput>
+          <SpInput class="price-input" v-model="start_price" placeholder="￥"></SpInput>
           <div class="line">-</div>
-          <SpInput class="price-input" v-model="end_price" placeholder=""></SpInput>
+          <SpInput class="price-input" v-model="end_price" placeholder="￥"></SpInput>
           <div class="price-btn" @click="submitPrice()">确定</div>
         </div>
       </div>

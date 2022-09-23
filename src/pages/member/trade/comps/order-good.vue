@@ -26,6 +26,7 @@
             <td>
               <p class="">{{ item.item_name }}</p>
               <p>{{ item.item_spec_desc }}</p>
+              <p class="giftTag" v-if="item.order_item_type == 'gift'"> 赠品</p>
             </td>
             <!-- <td>￥{{item.price|formatPriceToHundred}}</td> -->
             <td>{{ item.num }}</td>
@@ -303,6 +304,12 @@ export default {
       }
       td {
         padding: 10px;
+        .giftTag{
+          width: 32px;
+          background: rgb(71, 158, 233);
+          text-align: center;
+          color: #fff;
+        }
       }
     }
   }

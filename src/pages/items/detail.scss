@@ -18,10 +18,12 @@ $goods-color-primary: #1f201f;
 			width: 394px;
       display: flex;
       align-items: center;
+      justify-content: space-between;
 			.shop_collection{
-				margin-left: 32px;
+				// margin-left: 32px;
+        text-align: end;
 				.favor-content{
-					width: 78px;
+					// width: 86px;
 					.ec-icon-favor_light{
 						font-size: 14px;
 					}
