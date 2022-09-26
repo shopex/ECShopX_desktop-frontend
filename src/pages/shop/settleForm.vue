@@ -32,6 +32,7 @@
           ref="settleFormTwos"
           @resule="checkResult(arguments)"
           :formInfo="reviewInfo"
+          :typeName="nameTip"
           v-if="setPage == 2"
         ></settle-form-two>
 
@@ -130,7 +131,8 @@ export default {
       setPage: 1,
       result: false,
       info: {},
-      reviewInfo: {}
+      reviewInfo: {},
+      nameTip:''
     }
   },
   created() {
@@ -156,6 +158,7 @@ export default {
       // 保存当前页面信息
       if (this.setPage == 1) {
         this.$refs.settleFormOnes.check()
+        this.nameTip = this.info.settled_type
         if (this.result) {
           saveSettlementInfo(this.setPage, this.info)
             .then((res) => {
