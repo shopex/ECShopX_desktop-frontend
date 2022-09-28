@@ -26,7 +26,7 @@
         <SpInput class="address-input" v-model="info.address" />
       </SpFormItem>
       <SpFormItem prop="legal_name" class="form-select">
-        <span class="label-text"><span class="must-icon">*</span>法人姓名</span>
+        <span class="label-text"><span class="must-icon">*</span>{{nameTip}}姓名</span>
         <SpInput v-model="info.legal_name" />
       </SpFormItem>
       <SpFormItem prop="legal_cert_id" class="form-select">
@@ -68,13 +68,13 @@
         </div>
       </SpFormItem>
     </SpForm>
-    <p class="tips">• 结算银行卡持卡人姓名要与法人姓名一致</p>
+    <p class="tips">• 结算银行卡持卡人姓名要与{{nameTip}}姓名一致</p>
     <!-- 银行弹出框 -->
     <SpModal v-model="dailogVisible" :width="600">
       <div slot="title" class="confirm-title">选择结算银行</div>
       <div class="confirm-info">
-        <!-- <SpInput v-model="searchBank.bank_name" @input="changeSearch" /> -->
-        <div class="chooseBanck" @click="changeSearch">{{searchBank.bank_name}}</div>
+        <SpInput v-model="searchBank.bank_name" @input="changeSearch" />
+        <!-- <div class="chooseBanck" @click="changeSearch">{{searchBank.bank_name}}</div> -->
         <div class="bank-list">
           <SpRadioGroup v-model="info.bank_name" v-if="loading">
             <div v-for="(item, index) in bankList" :key="index" class="bank-list-info">
@@ -106,7 +106,7 @@
 import { getBank } from '@/api/store'
 export default {
   components: {},
-  props: { formInfo: Object },
+  props: { formInfo: Object, typeName:String },
   data() {
     var unifiedCode = (rule, value, callback) => {
       let reg = /^([0-9A-HJ-NPQRTUWXY]{2}\d{6}[0-9A-HJ-NPQRTUWXY]{10}|[1-9]\d{14})$/
@@ -199,6 +199,7 @@ export default {
       },
       chooseBanks: '',
       total: 0,
+      nameTip: '负责人',
       accountRules: {
         merchant_name: [{ validate: companyName, message: '请填写企业名称' }],
         social_credit_code_id: [{ validate: unifiedCode }],
@@ -214,6 +215,11 @@ export default {
     }
   },
   created() {
+    if (this.typeName == 'enterprise') {
+      this.nameTip = '法人';
+    }  else if (this.typeName == 'soletrader') {
+      this.nameTip = '负责人';
+    }
     if (this.formInfo) {
       const {
         merchant_name,

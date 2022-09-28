@@ -80,6 +80,15 @@ class Spx {
     localStorage.removeItem(AUTH_TOKEN);
     window.location.href = '/'
   }
+
+  logoutShop(params = {}) {
+    // $nuxt.$store.commit("user/resetInfo");
+
+    // $nuxt.$router.push( "/" );
+
+    sessionStorage.removeItem('ECSHOPX_STORE_TOKEN');
+    window.location.href = '/shop'
+  }
 }
 
 export default new Spx();

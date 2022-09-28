@@ -32,6 +32,7 @@
           ref="settleFormTwos"
           @resule="checkResult(arguments)"
           :formInfo="reviewInfo"
+          :typeName="nameTip"
           v-if="setPage == 2"
         ></settle-form-two>
 
@@ -130,7 +131,8 @@ export default {
       setPage: 1,
       result: false,
       info: {},
-      reviewInfo: {}
+      reviewInfo: {},
+      nameTip:''
     }
   },
   created() {
@@ -156,6 +158,7 @@ export default {
       // 保存当前页面信息
       if (this.setPage == 1) {
         this.$refs.settleFormOnes.check()
+        this.nameTip = this.info.settled_type
         if (this.result) {
           saveSettlementInfo(this.setPage, this.info)
             .then((res) => {
@@ -182,6 +185,7 @@ export default {
     },
     // 点击上一页
     handlePrev() {
+      this.getDetail
       if (this.setPage == 3) {
         this.setPage = 2
       } else if (this.setPage == 2) {
@@ -225,13 +229,13 @@ export default {
     // 获取商户入驻当前步骤
     getSet(type) {
       settlementSet().then((res) => {
-        // if (res.step == 4 && !type) {
-        //   this.$router.push('/shop/review')
-        // } else if (res.step == 4 && type) {
-        //   this.setPage = 2
-        // } else if (res.step != 4) {
-        //   this.setPage = res.step
-        // }
+        if (res.step == 4 && !type) {
+          this.$router.push('/shop/review')
+        } else if (res.step == 4 && type) {
+          this.setPage = 2
+        } else if (res.step != 4) {
+          this.setPage = res.step
+        }
       })
     },
     // 获取商户入驻协议

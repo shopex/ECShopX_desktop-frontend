@@ -151,7 +151,8 @@ export default {
       }
       // 大小
       let size = files[0].size /1024 ;
-      if (size > 2) {
+      console.log(size);
+      if (size > 2*1024) {
         this.$Message.error('上传图片不得大于2M')
         return false;
       } 
