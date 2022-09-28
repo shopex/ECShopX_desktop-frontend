@@ -1,6 +1,7 @@
 .page-body {
   background: #eeeeee;
   min-height: 100vh;
+  padding-bottom: 10px;
 }
 .container-shop{
   text-align: end;
@@ -53,9 +54,11 @@
     }
   }
   .settle_bd {
+    width: 1190px;
     background: #fff;
     padding-top: 20px;
-    border: 1px solid ;
+    border: 1px solid #ebeef5;
+    box-shadow: 0 2px 12px 0 #cccccc;
     .settle__form {
       .form {
         &-item {
