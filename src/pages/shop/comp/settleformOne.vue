@@ -71,6 +71,8 @@ export default {
     }
   },
   created() {
+    console.log(window.location)
+    console.log(this.$route)
     console.log('this.formInfo*****', this.formInfo)
     console.log(this.formInfo)
     this.getStoreTypeList()
