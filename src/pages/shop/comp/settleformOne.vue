@@ -130,7 +130,7 @@ export default {
     // 商户下拉框输入的信息
     changeInput(e) {
       this.typeParams.name = e
-      this.getStoreTypeList('bussiness')
+      this.getStoreTypeList()
     },
     // 商户下拉框输入的信息
     changeInputBussiness(e) {
