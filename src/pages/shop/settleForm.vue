@@ -138,6 +138,7 @@ export default {
   created() {
     if (!this.$cookies.get('ECSHOPX_STORE_TOKEN')) {
       this.$router.push('/shop')
+      return;
     }
     this.getDetail()
     this.getSet(this.$route.query.type)
@@ -185,7 +186,7 @@ export default {
     },
     // 点击上一页
     handlePrev() {
-      this.getDetail
+      this.getDetail();
       if (this.setPage == 3) {
         this.setPage = 2
       } else if (this.setPage == 2) {
@@ -223,6 +224,7 @@ export default {
     // 获取商户信息
     getDetail() {
       settlementDetail().then((res) => {
+        console.log(res);
         this.reviewInfo = res
       })
     },
@@ -232,9 +234,7 @@ export default {
         if (res.step == 4 && !type) {
           this.$router.push('/shop/review')
         } else if (res.step == 4 && type) {
-          this.setPage = 2
-        } else if (res.step != 4) {
-          this.setPage = res.step
+          this.setPage = 1
         }
       })
     },

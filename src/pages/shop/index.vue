@@ -24,8 +24,8 @@
             icon="new_iconfont icon-new-pc-zhanghu"
             v-model="yzmLogin.mobile"
             placeholder="手机号"
-            @keyup.enter.native="handleSubmit('mobile_login')"
           />
+          <!-- @keyup.enter.native="handleSubmit('mobile_login')" -->
         </SpFormItem>
         <SpFormItem prop="yzm" class="yzm-field">
           <SpInput
@@ -221,7 +221,7 @@ export default {
       let params = {}
       const { mobile, vcode } = this.yzmLogin
       if (!this.checkLabel) {
-        this.$Message.error('请查看并勾选隐私协议')
+        this.$Message.error('请查看并勾选入驻协议')
         return
       }
       params = {

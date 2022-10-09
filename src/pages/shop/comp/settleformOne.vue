@@ -162,12 +162,12 @@ export default {
   },
   mounted() {},
   watch: {
-    // formInfo: {
-    //   handler(newValue, oldValue) {
-    //     this.getDetailInfo()
-    //   },
-    //   deep: true
-    // }
+    formInfo: {
+      handler(newValue, oldValue) {
+        this.getDetailInfo()
+      },
+      deep: true
+    }
   }
 }
 </script>
