@@ -18,7 +18,7 @@
       }" @click="handleToggleLogin('account')">账号登录</div>
       <div class="tab-item" :class="{ active: isYzmLogin }" :style="{
         borderBottomColor: isYzmLogin ? '#FF5D02' : ''
-      }" @click="handleToggleLogin('yzm')">验证码的登录</div>
+      }" @click="handleToggleLogin('yzm')">验证码登录</div>
     </div>
     <!-- 账号登录 -->
     <SpForm
