@@ -137,7 +137,7 @@ export default {
       this.typeParams.name = e
       this.getStoreTypeList('bussiness')
     },
-    getDetailInfo() {
+    async getDetailInfo() {
       console.log(this.formInfo);
       if (this.formInfo) {
         const {
@@ -155,7 +155,7 @@ export default {
           settled_type
         }
         this.typeParams.parent_id = merchant_type_parent_id
-        this.getStoreTypeList('bussiness')
+        await this.getStoreTypeList('bussiness')
       }
       console.log(this.info)
     }
