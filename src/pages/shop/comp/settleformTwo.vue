@@ -217,45 +217,10 @@ export default {
   created() {
     if (this.typeName == 'enterprise') {
       this.nameTip = '法人';
-    }  else if (this.typeName == 'soletrader') {
+    } else if (this.typeName == 'soletrader') {
       this.nameTip = '负责人';
     }
-    if (this.formInfo) {
-      const {
-        merchant_name,
-        social_credit_code_id,
-        regions_id,
-        province,
-        city,
-        area,
-        address,
-        legal_name,
-        legal_cert_id,
-        legal_mobile,
-        bank_acct_type,
-        card_id_mask,
-        bank_name,
-        bank_mobile
-      } = this.formInfo
-      let regions = province + '-' + city + '-' + area
-      regions = regions.split('-')
-      // 保存已选中银行信息
-      this.chooseBanks = bank_name
-      this.info = {
-        merchant_name,
-        social_credit_code_id,
-        address,
-        legal_name,
-        legal_cert_id,
-        legal_mobile,
-        bank_acct_type,
-        card_id_mask,
-        bank_name,
-        bank_mobile,
-        regions_id: regions_id ? JSON.parse(regions_id) : [],
-        regions: regions
-      }
-    }
+    console.log('this.formInfo',this.formInfo);
 
     this.getBankList()
   },
@@ -336,10 +301,56 @@ export default {
       this.searchBank.bank_name = val
       this.searchBank.page = 1
       this.getBankList()
+    },
+    getDetailInfo() {
+      if (this.formInfo) {
+        const {
+          merchant_name,
+          social_credit_code_id,
+          regions_id,
+          province,
+          city,
+          area,
+          address,
+          legal_name,
+          legal_cert_id,
+          legal_mobile,
+          bank_acct_type,
+          card_id_mask,
+          bank_name,
+          bank_mobile
+        } = this.formInfo
+        let regions = province + '-' + city + '-' + area
+        regions = regions.split('-')
+        // 保存已选中银行信息
+        this.chooseBanks = bank_name
+        this.info = {
+          merchant_name,
+          social_credit_code_id,
+          address,
+          legal_name,
+          legal_cert_id,
+          legal_mobile,
+          bank_acct_type,
+          card_id_mask,
+          bank_name,
+          bank_mobile,
+          regions_id: regions_id ? JSON.parse(regions_id) : [],
+          regions: regions
+        }
+      }
     }
   },
   mounted() {},
-  watch: {}
+  watch: {
+    formInfo: {
+      handler(newValue, oldValue) {
+        console.log(124545);
+        this.getDetailInfo()
+      },
+      deep: true
+    }
+  }
 }
 </script>
 <style lang="scss" scoped>
