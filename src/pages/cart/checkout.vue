@@ -163,7 +163,7 @@
             </div>
           </div>
         </div>
-        <div class="content-item">
+        <div class="content-item" v-if="!orderData.is_distribution">
           <div class="integral">
             <h4 class="content-item-hd">
               积分抵扣
@@ -433,6 +433,7 @@ export default {
         const {
           items,
           item_fee,
+          is_distribution,
           discount_fee,
           freight_fee,
           total_fee,
@@ -447,6 +448,7 @@ export default {
           item_fee,
           discount_fee: discount_fee,
           freight_fee,
+          is_distribution,
           items_count: totalItemNum,
           total_fee,
           user_point,
