@@ -161,35 +161,41 @@ export default {
         this.$refs.settleFormOnes.check()
         this.nameTip = this.info.settled_type
         if (this.result) {
-          saveSettlementInfo(this.setPage, this.info)
-            .then((res) => {
-              console.log(res)
-              this.setPage = 2
-            })
-            .catch((err) => {
-              return
-            })
+          this.saveInfo();
+          this.setPage = 2
+          // saveSettlementInfo(this.setPage, this.info)
+          //   .then((res) => {
+          //     this.getDetail()
+          //   })
+          //   .catch((err) => {
+          //     return
+          //   })
         }
       } else if (this.setPage == 2) {
         this.$refs.settleFormTwos.check()
         if (this.result) {
-          saveSettlementInfo(this.setPage, this.info)
-            .then((res) => {
-              console.log(res)
-              this.setPage = 3
-            })
-            .catch((err) => {
-              return
-            })
+          this.saveInfo();
+          this.setPage = 3
+          // saveSettlementInfo(this.setPage, this.info)
+          //   .then((res) => {
+          //     this.getDetail()
+          //   })
+          //   .catch((err) => {
+          //     return
+          //   })
         }
       }
     },
     // 点击上一页
     handlePrev() {
-      this.getDetail();
+      // this.getDetail();
       if (this.setPage == 3) {
+        this.$refs.settleFormThrees.check()
+        this.saveInfo();
         this.setPage = 2
       } else if (this.setPage == 2) {
+        this.$refs.settleFormTwos.check()
+        this.saveInfo();
         this.setPage = 1
       }
     },
@@ -199,6 +205,17 @@ export default {
       if (this.result) {
         this.dailogVisible = true
       }
+    },
+    // 保存信息
+    saveInfo() {
+      console.log(this.info);
+      saveSettlementInfo(this.setPage, this.info)
+        .then((res) => {
+          this.getDetail()
+        })
+        .catch((err) => {
+          return
+        })
     },
     // 确认提交
     clickSumbit() {

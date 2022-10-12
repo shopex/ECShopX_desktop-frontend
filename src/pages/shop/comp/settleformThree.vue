@@ -103,20 +103,6 @@ export default {
     }
   },
   created() {
-    if (this.formInfo) {
-      const {
-        license_url,
-        legal_certid_front_url,
-        legal_cert_id_back_url,
-        bank_card_front_url
-      } = this.formInfo
-      this.info = {
-        license_url,
-        legal_certid_front_url,
-        legal_cert_id_back_url,
-        bank_card_front_url
-      }
-    }
   },
   computed: {},
   methods: {
@@ -171,9 +157,31 @@ export default {
         }
       })
     },
+    async getDetailInfo() {
+      if (this.formInfo) {
+        const {
+          license_url,
+          legal_certid_front_url,
+          legal_cert_id_back_url,
+          bank_card_front_url
+        } = this.formInfo
+        this.info = {
+          license_url,
+          legal_certid_front_url,
+          legal_cert_id_back_url,
+          bank_card_front_url
+        }
+      }
+    }
   },
   mounted() {},
-  watch: {}
+  watch: {
+    formInfo: {
+      handler(newValue, oldValue) {
+        this.getDetailInfo()
+      },
+      deep: true
+    }}
 }
 </script>
 <style lang="scss" scoped></style>

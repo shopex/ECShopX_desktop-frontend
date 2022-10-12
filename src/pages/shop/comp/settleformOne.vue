@@ -76,12 +76,11 @@ export default {
     console.log('this.formInfo*****', this.formInfo)
     console.log(this.formInfo)
     this.getStoreTypeList()
-    this.getDetailInfo()
   },
   methods: {
     // 获取 商户类型列表
-    getStoreTypeList(type = '') {
-      getMerchantType(this.typeParams).then((res) => {
+    async getStoreTypeList(type = '', data) {
+      await getMerchantType(this.typeParams).then((res) => {
         let data = []
         res.list.forEach((item) => {
           data.push({
@@ -91,7 +90,8 @@ export default {
             parent_id: item.parent_id
           })
         })
-
+        console.log(data);
+        console.log(type);
         if (!type) {
           this.shopTypeList = data
         } else if (type == 'bussiness') {
@@ -118,9 +118,8 @@ export default {
     },
     // 获取选中的商户类型
     chooseShopType(item) {
-      this.typeParams.parent_id = item.value
-      this.info.merchant_type_parent_id = item.value
-
+      this.typeParams.parent_id = item.value;
+      this.info.merchant_type_parent_id = item.value;
       this.getStoreTypeList('bussiness')
     },
     // 选中的经营范围
@@ -135,10 +134,9 @@ export default {
     // 商户下拉框输入的信息
     changeInputBussiness(e) {
       this.typeParams.name = e
-      this.getStoreTypeList('bussiness')
+      this.getStoreTypeList('bussiness',1212)
     },
     async getDetailInfo() {
-      console.log(this.formInfo);
       if (this.formInfo) {
         const {
           merchant_type_parent_id,
@@ -155,9 +153,8 @@ export default {
           settled_type
         }
         this.typeParams.parent_id = merchant_type_parent_id
-        await this.getStoreTypeList('bussiness')
+        this.getStoreTypeList('bussiness',4545);
       }
-      console.log(this.info)
     }
   },
   mounted() {},
