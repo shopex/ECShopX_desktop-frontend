@@ -477,7 +477,7 @@ export default {
       const { id, mode, order_type, seckill_id, ticket } = this.$route.query
       const { defaultAddress, coupon,point_use } = this
       let pay_type = 'wxpaypc'
-      if(this.useAllDeducted===true && this.point_use*10 == this.orderData.total_fee){    // 判断是否积分支付
+      if(this.point_use > 0 && this.orderData.total_fee == 0){   // 判断是否积分支付
         pay_type = 'point'
       }else{
         pay_type = "wxpaypc"
