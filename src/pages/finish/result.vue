@@ -120,7 +120,10 @@ $finish-fail-color: #e23038;
 
 <template>
   <div class="page-trade-status page-body">
-    <div class="container container-finish-success">
+    <div class="container container-finish-success" v-if="!tradeInfo">
+      <SpLoading class="modal-loading__t">加载中...</SpLoading>
+    </div>
+    <div class="container container-finish-success" v-else>
       <div
         :class="{
           'ec-icon2': true,
