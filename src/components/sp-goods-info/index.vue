@@ -539,7 +539,8 @@ export default {
         this.$Message.error('请选择规格')
         return
       }
-      const { item_id, distributor_id } = this.curSku
+      const { distributor_id } = this.info
+      const { item_id } = this.curSku
       await this.$store.dispatch('cart/CART_ADD', {
         item_id,
         shop_type: 'distributor',
