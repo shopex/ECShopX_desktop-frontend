@@ -6,7 +6,7 @@
     <div class="widget-w0007-inner widget-inner" :style="widgetInnerStyle">
       <div class="widget-w0007-body widget-body" :style="widgetBodyStyle">
         <!-- pageProps1: {{ pageProps }} -->
-        <div :class="['all-category', !value.hover ? 'hover' : 'open']">
+        <div :class="['all-category', !value.hover ? 'hover' : 'open']" @mouseover="mouseoverCategory" @mouseleave="mouseLeaveCategory">
           <div class="all-category__btn" :style="{ backgroundColor: value.wgtTypeBackgroundColor, color: value.wgtTypeLabelColor, fontWeight:'800'}">
             全部商品分类
           </div>
@@ -101,13 +101,13 @@
       wgtSubTextColor: '#8C8C8C',
       // 分类数据
       categoryData: [],
-      hover: false,
+      hover: true,
       // 展开菜单位置
       menuTop: 40
     },
     data() {
       return {
-        btnHover: true,
+        btnHover: false,
       }
     },
     components: {
@@ -119,7 +119,23 @@
     methods: {
       handleMainBtnHover() {
         this.btnHover = true
-      }
+      },
+      mouseoverCategory() {
+        if(!this.value.hover){
+          let hover = document.querySelector('.widget-w0007-body .hover .category-list')
+          hover.style.height = 'auto'
+          hover.style.overflow = 'visible'
+        }
+        console.log('mouseoverCategory',!this.value.hover);
+      },
+      mouseLeaveCategory() {
+        if(!this.value.hover){
+          let hover = document.querySelector('.widget-w0007-body .hover .category-list')
+          hover.style.height = '0'
+          hover.style.overflow = 'hidden'
+        }
+        // console.log('mouseLeaveCategory');
+      },
     }
   }
 </script>
