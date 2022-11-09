@@ -137,7 +137,7 @@ export default {
         {
           type: 'wxpaypc',
           img: wxpayImage,
-          title: '微信'
+          title: '微信支付'
         }
       ],
       paymentType: 'wxpaypc',
@@ -151,37 +151,59 @@ export default {
     }
   },
   created() {
-    // this.getPaymentList()
     this.home_url = window.location.origin
     this.getOrderInfo()
+    this.getPaymentList()
   },
   methods: {
     async getOrderInfo() {
       const { order_id } = this.$route.query
       const { pay_type, tradeId, total_fee } = await this.$api.cart.getOrderDet({ pay_type:this.paymentType }, order_id)
-      this.paymentType = pay_type
+      // this.paymentType = pay_type
       this.tradeId = tradeId?tradeId:order_id
       this.total_fee = total_fee
     },
     async getPaymentList() {
-      const res = await this.$api.cart.getPaymentList()
-      this.paymentList = res
+      let params = { platform:'pc' }
+      const res = await this.$api.cart.getPaymentList(params)
+      // 由于返回数据要用本地图片，所以循环判断替换
+      await res.map((ele)=>{
+        this.paymentList.map(ele2=>{
+          if(ele.pay_type_name==ele2.title){
+            ele2.type = ele.pay_channel || ele.pay_type_code
+          }
+          if(ele.pay_type_code==='adapay'){
+            ele2.pay_type = 'adapay'
+          }
+        })
+      })
+      this.paymentType = this.paymentList[0].type
+      // console.log(res,this.paymentType ,this.paymentList );
     },
     // 付款按钮
     async clickPayment() {
       const { order_id } = this.$route.query
-      const res = await this.$api.cart.payMent({
+      let params = {
         order_id,
-        pay_type: this.paymentType,
+        pay_type: this.paymentType,    // 支付宝/微信
         return_url: this.home_url
+      }
+      
+      // 找到支付方式的对应支付是否汇付   --如果非汇付，微信或支付宝支付使用pay_type，但有汇付pay_type是汇付字段，pay_channel是微信或支付宝支付
+      this.paymentList.map(ele=>{
+        if(ele.type==this.paymentType && ele.pay_type){
+          params.pay_type = ele.pay_type    // 汇付
+          params.pay_channel = this.paymentType    // 支付宝/微信
+        }
       })
-      if(this.paymentType == 'alipay') {
+      const res = await this.$api.cart.payMent(params)
+      if(this.paymentType == 'alipay' || this.paymentType == 'alipay_qr') {
         const div = document.createElement('div')
         div.innerHTML = res.payment // 此处form就是后台返回接收到的数据
         document.body.appendChild(div)
         document.forms['alipay_submit'].submit()
         return
-      } else if(this.paymentType == 'wxpaypc') {
+      } else if(this.paymentType == 'wxpaypc' || this.paymentType == 'wx_qr') {
         const { code_url, trade_info, appId } = res
         this.isPayment = false
         const msg = document.getElementById('qr')
