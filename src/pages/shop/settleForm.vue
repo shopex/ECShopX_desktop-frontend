@@ -188,14 +188,14 @@ export default {
     },
     // 点击上一页
     handlePrev() {
-      // this.getDetail();
+      this.getDetail();
       if (this.setPage == 3) {
-        this.$refs.settleFormThrees.check()
-        this.saveInfo();
+        // this.$refs.settleFormThrees.check()
+        // this.saveInfo();
         this.setPage = 2
       } else if (this.setPage == 2) {
-        this.$refs.settleFormTwos.check()
-        this.saveInfo();
+        // this.$refs.settleFormTwos.check()
+        // this.saveInfo();
         this.setPage = 1
       }
     },
@@ -248,7 +248,9 @@ export default {
     // 获取商户入驻当前步骤
     getSet(type) {
       settlementSet().then((res) => {
-        if (res.step == 4 && !type) {
+        if (res.step != 4) {
+          this.setPage = res.step
+        } else if (res.step == 4 && !type) {
           this.$router.push('/shop/review')
         } else if (res.step == 4 && type) {
           this.setPage = 1
