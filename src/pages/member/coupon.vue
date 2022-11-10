@@ -113,12 +113,19 @@ export default {
   },
   methods: {
     async getCouponList() {
+      /* 
+        {title: '未使用', status: '1'},
+        {title: '已使用', status: '2'},
+        {title: '已过期', status: '3'}
+      */
       let params = {
         page: this.page,
         pageSize: this.pageSize,
-        valid: this.curTypeIndex == 0 ? true : false
+        status: this.curTypeIndex+1
       }
-      const { list, total_count } = await this.$api.member.couponList(params)
+
+      // const { list, total_count } = await this.$api.member.couponList(params)
+      const { list, total_count } = await this.$api.member.getUserCardList(params)
       this.list = list || []
       this.total = total_count != undefined ? parseInt(total_count) : 0
     },

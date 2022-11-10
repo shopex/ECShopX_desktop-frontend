@@ -365,7 +365,8 @@ export default {
           }
         })
       const params = {
-        valid: true,
+        // valid: true,
+        status: 1,
         is_checkout: true,
         cart_type: mode,
         distributor_id: id,
@@ -373,7 +374,8 @@ export default {
         page_type: 'picker',
         items
       }
-      const { list } = await this.$api.member.couponList(params)
+      // const { list } = await this.$api.member.couponList(params)
+      const { list } = await this.$api.member.getUserCardList(params)
       this.couponList = list
     },
     // 获取地址列表

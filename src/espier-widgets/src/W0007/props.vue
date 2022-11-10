@@ -22,6 +22,15 @@
         name="name1"
         style="overflow: auto;"
       >
+        <panelBar title="属性">
+          <attr-field label="常开：">
+            <iSwitch size="small" v-model="activeElement.hover" />
+          </attr-field>
+          <!-- <div class="division"></div>
+          <attr-field label="相对位置：">
+            <InputNumber v-model="activeElement.menuTop" size="small" :min="0"></InputNumber>
+          </attr-field> -->
+        </panelBar>
         <panelBar title="颜色">
           <attr-field label="商品分类背景：">
             <color-picker v-model="activeElement.wgtTypeBackgroundColor"></color-picker>

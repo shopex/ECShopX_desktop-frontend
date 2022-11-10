@@ -206,10 +206,12 @@
 
 		&.hover {
 			.category-list {
-				height: auto;
+				// height: auto;
 				transition: height 0.2s;
 				background: white;
-				overflow: visible;
+				// overflow: visible;
+				height: 0;
+				overflow: hidden;
 			}
 
 			.all-category__btn {

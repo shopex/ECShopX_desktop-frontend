@@ -110,8 +110,13 @@ export const areaList = (params) => {
   return req({ url: 'api/h5app/wxapp/espier/address', params, method: 'get' })
   // return req.fetch('api/h5app/wxapp/espier/address', params, 'GET')
 }
+// 商品可用优惠券接口
 export function couponList (params = {}) {
   return req.get('/api/h5app/wxapp/user/newGetCardList', params, { withAuth: true })
+}
+// 用户优惠券接口
+export function getUserCardList (params = {}) {
+  return req.get('/api/h5app/wxapp/user/getUserCardList', params, { withAuth: true })
 }
 
 export function updateLoginPassword (params) {
