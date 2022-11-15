@@ -65,3 +65,7 @@ export function alipayCallBack (params) {
 export function aliPayResult (params) {
   return req.get('/api/h5app/wxapp/trade/payment/alipay/result', params)
 }
+// 售后原因列表
+export function reasonList (params) {
+  return req.get('/api/h5app/wxapp/aftersales/reason/list', params)
+}
