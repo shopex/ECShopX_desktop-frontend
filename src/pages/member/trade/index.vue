@@ -408,8 +408,21 @@ export default {
       this.status = status
     }
     this.getTradeList()
+    this.reasonList()
   },
   methods: {
+    async reasonList(){
+      let list = await this.$api.trade.reasonList()
+      if(list.length > 0){
+        this.reasonData = []
+        list.map(ele=>{
+          this.reasonData.push({
+            label: ele,
+            value: ele
+          })
+        })
+      }
+    },
     async getTradeList() {
       this.loading = true
       let params = {

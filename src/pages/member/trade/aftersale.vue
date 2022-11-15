@@ -135,75 +135,82 @@
 </style>
 
 <template>
-  <div class="page-order-detail page-member-container">
+  <!-- <div class="page-order-detail page-member-container">
     <div class="member-content">
       <div class="member-content-left">
         <smenu activeTitle="order"></smenu>
-      </div>
-      <div class="member-content-right">
-        <div class="member-content-right-body">
-          <div class="member-content-right-hd clearfix">
-            <span style="cursor: pointer;" @click="clickToList"><i class="ec-icon ec-icon-back_android"></i>返回售后列表</span>
-            <span class="order-id">订单：{{ orderInfo.order_id }}</span>
-          </div>
-          <div class="member-content-right-bd">
-            <div class="clearfix status-log">
-              <div class="status-code">
-                售后单号：{{ orderInfo.order_id }}
-                <div class="status-text">{{ aftersalesTypeText[aftersalesInfo.progress] }}</div>
-                <div style="color:#797979">
-                  {{aftersalesTypeTextContent[aftersalesInfo.progress]}}
+      </div> -->
+  <div class="page-order page-order-detail page-member-container">
+    <div class="container page-member-container">
+      <div class="member-content" style="display: flex;">
+        <div class="member-content-left">
+          <smenu activeTitle="order" active="trade"></smenu>
+        </div>
+        <div class="member-content-right"  style="padding: 15px 0 0 15px;">
+          <div class="member-content-right-body">
+            <div class="member-content-right-hd clearfix">
+              <span style="cursor: pointer;" @click="clickToList"><i class="ec-icon ec-icon-back_android"></i>返回售后列表</span>
+              <span class="order-id">订单：{{ orderInfo.order_id }}</span>
+            </div>
+            <div class="member-content-right-bd">
+              <div class="clearfix status-log">
+                <div class="status-code">
+                  售后单号：{{ orderInfo.order_id }}
+                  <div class="status-text">{{ aftersalesTypeText[aftersalesInfo.progress] }}</div>
+                  <div style="color:#797979">
+                    {{aftersalesTypeTextContent[aftersalesInfo.progress]}}
+                  </div>
+                </div>
+                <div class="status-steps">
+                  <!-- 步骤条 -->
+                  <AftersaleSteps :step="Number(aftersalesInfo.aftersales_status)+1" :stepsData="stepsData" />
+                  <!-- 还未确认字段 -->
+                  <!-- <AftersaleSteps :step="Number(aftersalesInfo.progress)+1" :stepsData="stepsData" /> -->
                 </div>
               </div>
-              <div class="status-steps">
-                <!-- 步骤条 -->
-                <AftersaleSteps :step="Number(aftersalesInfo.aftersales_status)+1" :stepsData="stepsData" />
-                <!-- 还未确认字段 -->
-                <!-- <AftersaleSteps :step="Number(aftersalesInfo.progress)+1" :stepsData="stepsData" /> -->
-              </div>
-            </div>
-  
-            <!-- 步骤条 -->
-            <!-- <SpSteps
-              :steps="5"
-              :step="Number(aftersalesInfo.aftersales_status)+1"
-              :stepsText="stepsText"
-            /> -->
-            <p class="bd-border"></p>
-            <div class="aftersales">
-              <h4>售后原因</h4>
-              <p>售后原因：{{ aftersalesInfo.reason }}</p>
-              <p>退款说明：{{ aftersalesInfo.description }}</p>
-              <p>售后凭证：</p>
-              <!-- <p>{{aftersalesTypeText[aftersalesInfo.progress]}}</p> -->
-              <!-- <p>退换货类型：{{aftersalesTypeText[aftersalesInfo.aftersales_type]}}</p>
-              <p>退换货编号：{{aftersalesInfo.aftersales_bn}}</p>
-              <p>申请时间：{{aftersalesInfo.create_time|parseTime}}</p> -->
-              <!-- <p
-                v-if="aftersalesInfo.progress === 6"
-              >退款金额：{{ orderGoodData[0].items[0].refunded_fee | formatPriceToHundred}}</p> -->
-              <div v-if="this.orderInfo.order_status_des !== 'DONE'">
-                <div class="btns" v-if="aftersalesInfo.progress === 0">
-                  <!-- <button class="btn btn-primary" @click="clickBtn('修改申请')">修改申请</button> -->
-                  <button class="btn" @click="clickBtn('撤销申请')">撤销申请</button>
-                </div>
-                <div class="btns" v-if="aftersalesInfo.progress === 1">
-                  <button class="btn btn-primary" @click="clickBtn('填写物流')">填写物流</button>
-                  <button class="btn" @click="clickBtn('撤销申请')">撤销申请</button>
-                </div>
-                <div class="btns" v-if="aftersalesInfo.progress === 3 || aftersalesInfo.progress === 5">
-                  <button class="btn btn-primary" @click="clickBtn('再次申请')">再次申请</button>
-                  <button class="btn" @click="clickBtn('撤销申请')">撤销申请</button>
+    
+              <!-- 步骤条 -->
+              <!-- <SpSteps
+                :steps="5"
+                :step="Number(aftersalesInfo.aftersales_status)+1"
+                :stepsText="stepsText"
+              /> -->
+              <p class="bd-border"></p>
+              <div class="aftersales">
+                <h4>售后原因</h4>
+                <p>售后原因：{{ aftersalesInfo.reason }}</p>
+                <p>退款说明：{{ aftersalesInfo.description }}</p>
+                <p>售后凭证：</p>
+                <!-- <p>{{aftersalesTypeText[aftersalesInfo.progress]}}</p> -->
+                <!-- <p>退换货类型：{{aftersalesTypeText[aftersalesInfo.aftersales_type]}}</p>
+                <p>退换货编号：{{aftersalesInfo.aftersales_bn}}</p>
+                <p>申请时间：{{aftersalesInfo.create_time|parseTime}}</p> -->
+                <!-- <p
+                  v-if="aftersalesInfo.progress === 6"
+                >退款金额：{{ orderGoodData[0].items[0].refunded_fee | formatPriceToHundred}}</p> -->
+                <div v-if="this.orderInfo.order_status_des !== 'DONE'">
+                  <div class="btns" v-if="aftersalesInfo.progress === 0">
+                    <!-- <button class="btn btn-primary" @click="clickBtn('修改申请')">修改申请</button> -->
+                    <button class="btn" @click="clickBtn('撤销申请')">撤销申请</button>
+                  </div>
+                  <div class="btns" v-if="aftersalesInfo.progress === 1">
+                    <button class="btn btn-primary" @click="clickBtn('填写物流')">填写物流</button>
+                    <button class="btn" @click="clickBtn('撤销申请')">撤销申请</button>
+                  </div>
+                  <div class="btns" v-if="aftersalesInfo.progress === 3 || aftersalesInfo.progress === 5">
+                    <button class="btn btn-primary" @click="clickBtn('再次申请')">再次申请</button>
+                    <button class="btn" @click="clickBtn('撤销申请')">撤销申请</button>
+                  </div>
                 </div>
               </div>
+              <div style="width: 45%; display: inline-block; vertical-align: top">
+                <!-- 收货人信息 -->
+                <Receive :receiveData="receiveData" />
+              </div>
+              <p class="bd-border"></p>
+            
+              <OrderGood :orderGoodData="orderGoodData" :orderTotalData="orderTotalData" :aftersale="true" @change="getInfo" />
             </div>
-            <div style="width: 45%; display: inline-block; vertical-align: top">
-               <!-- 收货人信息 -->
-              <Receive :receiveData="receiveData" />
-            </div>
-            <p class="bd-border"></p>
-           
-            <OrderGood :orderGoodData="orderGoodData" :orderTotalData="orderTotalData" :aftersale="true" @change="getInfo" />
           </div>
         </div>
       </div>

@@ -301,116 +301,123 @@
 </style>
 
 <template>
-  <div class="page-order-detail page-member-container">
+  <!-- <div class="page-order-detail page-member-container">
     <div class="member-content">
       <div class="member-content-left">
         <smenu activeTitle="order"></smenu>
-      </div>
-      <div class="member-content-right">
-        <div class="member-content-right-body">
-          <div class="member-content-right-hd clearfix">
-            <span style="cursor: pointer" @click="clickToList"
-              ><i class="ec-icon ec-icon-back_android"></i>返回订单列表</span
-            >
-            <span class="order-id">订单：{{ orderInfo.order_id }}</span>
-            <!-- <span class="order-status">状态：{{orderStatusText[orderInfo.order_status_des]}}</span> -->
-            <!-- <div class="order-btn">
+      </div> -->
+  <div class="page-order page-order-detail page-member-container">
+    <div class="container page-member-container">
+      <div class="member-content" style="display: flex;">
+        <div class="member-content-left">
+          <smenu activeTitle="order" active="trade"></smenu>
+        </div>
+        <div class="member-content-right" style="padding: 15px 0 0 15px;">
+          <div class="member-content-right-body">
+            <div class="member-content-right-hd clearfix">
+              <span style="cursor: pointer" @click="clickToList"
+                ><i class="ec-icon ec-icon-back_android"></i>返回订单列表</span
+              >
+              <span class="order-id">订单：{{ orderInfo.order_id }}</span>
+              <!-- <span class="order-status">状态：{{orderStatusText[orderInfo.order_status_des]}}</span> -->
+              <!-- <div class="order-btn">
 
-              <button class="btn btn-primary" @click="clickBtn('付款')" v-if="step == 1">现在付款</button>
-              <button class="btn" @click="clickBtn('取消订单')" v-if="step == 1 || step == 2">取消订单</button>
+                <button class="btn btn-primary" @click="clickBtn('付款')" v-if="step == 1">现在付款</button>
+                <button class="btn" @click="clickBtn('取消订单')" v-if="step == 1 || step == 2">取消订单</button>
 
-            </div> -->
-          </div>
-          <div class="member-content-right-bd">
-            <!-- 步骤条 -->
-            <!-- <SpSteps :steps="4" :step="step" :stepsText="stepsText" /> -->
-            <div class="clearfix status-log">
-              <div class="status-code">
-                订单号：{{ orderInfo.order_id }}
-                <div class="status-text">
-                  {{ isZiti ? '待自提' : orderStatusText[orderInfo.order_status_des] }}
-                </div>
-                <span v-if="isZiti">请尽快前往自提点自提</span>
-                <span v-if="!isZiti && orderInfo.order_status_des == 'NOTPAY'">
-                  <i class="ec-icon ec-icon-time"></i>剩余{{ cancelTime }}
-                </span>
-                <div class="btn-warp">
-                  <button class="btn" @click="clickBtn('付款')" v-if="step == 1 && orderInfo.pay_type != 'point'">付 款</button>
-                  <button class="btn" v-if="step == 3" @click="clickBtn('确认收货')">确认收货</button>
-                </div>
-                <div class="btn-warp-bt" @click="clickBtn('取消订单')" v-if="step == 1 || step == 2">
-                  <i class="ec-icon ec-icon-roundclose"> 取消订单</i>
-                </div>
-              </div>
-
-              <div class="ziti-warp clearfix" v-if="isZiti"> 自提点
-                <div class="ziti-warp-content">
-                  <div v-for="(item,index) in zitiData" :key="index" class="ziti-item">
-                    <h4 style="">{{ item.name }}</h4>
-                    <p>{{ item.store_address }}</p>
-                    <p>营业时间:{{ item.hour }}</p>
+              </div> -->
+            </div>
+            <div class="member-content-right-bd">
+              <!-- 步骤条 -->
+              <!-- <SpSteps :steps="4" :step="step" :stepsText="stepsText" /> -->
+              <div class="clearfix status-log">
+                <div class="status-code">
+                  订单号：{{ orderInfo.order_id }}
+                  <div class="status-text">
+                    {{ isZiti ? '待自提' : orderStatusText[orderInfo.order_status_des] }}
+                  </div>
+                  <span v-if="isZiti">请尽快前往自提点自提</span>
+                  <span v-if="!isZiti && orderInfo.order_status_des == 'NOTPAY'">
+                    <i class="ec-icon ec-icon-time"></i>剩余{{ cancelTime }}
+                  </span>
+                  <div class="btn-warp">
+                    <button class="btn" @click="clickBtn('付款')" v-if="step == 1 && orderInfo.pay_type != 'point'">付 款</button>
+                    <button class="btn" v-if="step == 3" @click="clickBtn('确认收货')">确认收货</button>
+                  </div>
+                  <div class="btn-warp-bt" @click="clickBtn('取消订单')" v-if="step == 1 || step == 2">
+                    <i class="ec-icon ec-icon-roundclose"> 取消订单</i>
                   </div>
                 </div>
-              </div>
-              <!-- 部分发货判断-----写class不生效，所以用style写样式 -->
-              <!-- <div v-else-if="orderStatusText[orderInfo.order_status_des]==='部分发货' || (orderStatusText[orderInfo.order_status_des]==='待收货'&&deliveryLists.length>1)"> 所有拆分发货的数据，改判断-->
-              <div v-else-if="deliveryLists.length>1">
-                <ul class="delivery">
-                  <div class="delivery-title">{{ deliveryGoodsNum.length }}个包裹已发货</div>
-                  <template>
-                    <li class="delivery-item" v-for="(item, index) in deliveryLists" :key="index">
-                      <div class="delivery-info">
-                        <div>{{item.status_msg}}商品</div>
-                        <div style="margin-left:50px" v-show="item.delivery_corp_name!='' || item.delivery_code!=''">
-                          {{item.delivery_corp_name}}：{{item.delivery_code}}
+
+                <div class="ziti-warp clearfix" v-if="isZiti"> 自提点
+                  <div class="ziti-warp-content">
+                    <div v-for="(item,index) in zitiData" :key="index" class="ziti-item">
+                      <h4 style="">{{ item.name }}</h4>
+                      <p>{{ item.store_address }}</p>
+                      <p>营业时间:{{ item.hour }}</p>
+                    </div>
+                  </div>
+                </div>
+                <!-- 部分发货判断-----写class不生效，所以用style写样式 -->
+                <!-- <div v-else-if="orderStatusText[orderInfo.order_status_des]==='部分发货' || (orderStatusText[orderInfo.order_status_des]==='待收货'&&deliveryLists.length>1)"> 所有拆分发货的数据，改判断-->
+                <div v-else-if="deliveryLists.length>1">
+                  <ul class="delivery">
+                    <div class="delivery-title">{{ deliveryGoodsNum.length }}个包裹已发货</div>
+                    <template>
+                      <li class="delivery-item" v-for="(item, index) in deliveryLists" :key="index">
+                        <div class="delivery-info">
+                          <div>{{item.status_msg}}商品</div>
+                          <div style="margin-left:50px" v-show="item.delivery_corp_name!='' || item.delivery_code!=''">
+                            {{item.delivery_corp_name}}：{{item.delivery_code}}
+                          </div>
+                          <div class="delivery-btn" v-if="item.delivery_info=='' || item.delivery_info=='暂无物流信息'">{{item.delivery_info}}</div>
+                          <button class="btn delivery-btn" v-else @click="onLogisticsDetails(item)">查看物流</button>
                         </div>
-                        <div class="delivery-btn" v-if="item.delivery_info=='' || item.delivery_info=='暂无物流信息'">{{item.delivery_info}}</div>
-                        <button class="btn delivery-btn" v-else @click="onLogisticsDetails(item)">查看物流</button>
-                      </div>
-                      <img class="delivery-img" :src="item2.pic" alt="" v-for="(item2, index2) in item.items" :key="index2">
-                      <div style="color:rgb(149 149 149);margin-top:8px">共{{item.items_num}}件商品</div>
-                    </li>
-                  </template>
-                </ul>
+                        <img class="delivery-img" :src="item2.pic" alt="" v-for="(item2, index2) in item.items" :key="index2">
+                        <div style="color:rgb(149 149 149);margin-top:8px">共{{item.items_num}}件商品</div>
+                      </li>
+                    </template>
+                  </ul>
+                </div>
+                <div class="timeline" style="position: relative;" v-else>
+                  <ul class>
+                    <template>
+                      <li style="position: absolute;left:10px" v-for="(item, index) in deliveryLists" :key="index">
+                        {{item.delivery_corp_name}}  {{item.delivery_code}}
+                      </li>
+                      <li class="timeline-item" v-for="(item, index) in activities" :key="index" style="padding-top:15px;">
+                        <span class="time-day"> {{ item.AcceptTime | parseTime }}</span>
+                        <div class="timeline-item__tail"></div>
+                        <div class="timeline-item__node" :class="index == 0 ? 'timeline-item__node_color' : ''">
+                          <i class="ec-icon ec-icon-roundcheck success" v-if="index == 0"></i>
+                        </div>
+                        <div class="timeline-item__wrapper">
+                          <div class="el-timeline-item__content">{{ item.AcceptStation }}</div>
+                          <div class="el-timeline-item__timestamp is-bottom"></div>
+                        </div>
+                      </li>
+                    </template>
+                  </ul>
+                </div>
               </div>
-              <div class="timeline" style="position: relative;" v-else>
-                <ul class>
-                  <template>
-                    <li style="position: absolute;left:10px" v-for="(item, index) in deliveryLists" :key="index">
-                      {{item.delivery_corp_name}}  {{item.delivery_code}}
-                    </li>
-                    <li class="timeline-item" v-for="(item, index) in activities" :key="index" style="padding-top:15px;">
-                      <span class="time-day"> {{ item.AcceptTime | parseTime }}</span>
-                      <div class="timeline-item__tail"></div>
-                      <div class="timeline-item__node" :class="index == 0 ? 'timeline-item__node_color' : ''">
-                        <i class="ec-icon ec-icon-roundcheck success" v-if="index == 0"></i>
-                      </div>
-                      <div class="timeline-item__wrapper">
-                        <div class="el-timeline-item__content">{{ item.AcceptStation }}</div>
-                        <div class="el-timeline-item__timestamp is-bottom"></div>
-                      </div>
-                    </li>
-                  </template>
-                </ul>
+
+              <p class="bd-border"></p>
+              <div :style="{ width: orderStatus !== 'CANCEL' ? '45%' : '90%', bordeRight: orderStatus !== 'CANCEL' ? '1px solid #e5e5e5' : 'none' }" class="order_message">
+                <!-- 收货人信息 -->
+                <Receive :receiveData="receiveData" />
               </div>
-            </div>
+              <!-- 付款信息 -->
+              <div style="width: 45%;" class="order_message" v-if="orderStatus && orderStatus !== 'CANCEL'">
+                <PayInfo :receiveData="receiveData"></PayInfo>
+              </div>
+              <!-- 发票信息 -->
+              <div style="width: 100%;" class="order_message" v-if="(receiveData.invoice!=null &&receiveData.invoice.length!=0)">
+                <InvoiceInfo :receiveData="receiveData"></InvoiceInfo>
+              </div>
 
-            <p class="bd-border"></p>
-            <div :style="{ width: orderStatus !== 'CANCEL' ? '45%' : '90%', bordeRight: orderStatus !== 'CANCEL' ? '1px solid #e5e5e5' : 'none' }" class="order_message">
-              <!-- 收货人信息 -->
-              <Receive :receiveData="receiveData" />
+              <p class="bd-border"></p>
+              <OrderGood :orderGoodData="orderGoodData" :orderTotalData="orderTotalData" @change="getOrderInfo"/>
             </div>
-            <!-- 付款信息 -->
-            <div style="width: 45%;" class="order_message" v-if="orderStatus && orderStatus !== 'CANCEL'">
-              <PayInfo :receiveData="receiveData"></PayInfo>
-            </div>
-            <!-- 发票信息 -->
-            <div style="width: 100%;" class="order_message" v-if="(receiveData.invoice!=null &&receiveData.invoice.length!=0)">
-              <InvoiceInfo :receiveData="receiveData"></InvoiceInfo>
-            </div>
-
-            <p class="bd-border"></p>
-            <OrderGood :orderGoodData="orderGoodData" :orderTotalData="orderTotalData" @change="getOrderInfo"/>
           </div>
         </div>
       </div>
