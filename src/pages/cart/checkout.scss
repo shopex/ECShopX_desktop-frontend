@@ -13,6 +13,7 @@
     .content-item {
       border-bottom: 1px solid $color-border-gray-light;
       .ziti-info{
+        margin-left: 10px;
         &>div{
           margin-bottom: 10px;
           &>.ziti-info-name{

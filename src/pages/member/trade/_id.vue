@@ -341,22 +341,32 @@
                 <div class="btn-warp-bt" @click="clickBtn('取消订单')" v-if="step == 1 || step == 2">
                   <i class="ec-icon ec-icon-roundclose"> 取消订单</i>
                 </div>
-                <!-- 判断是待提货及有提货码状态下 -->
+                <!-- 判断是待提货及有无提货码状态下 -->
                 <div v-if="(orderStatus=='PAYED'&&receiveData.ziti_status=='PENDING') && (zitiInfo&&zitiInfo.pickup_code)"> 
                   <h4 style="font-size:16px;font-weight: bold;">提货码：{{ zitiInfo.pickup_code }} </h4>
                   <div style="color:rgb(153 153 153);font-size:12px;font-weight: 400;">提货时请出告知店员提货验证码</div>
                 </div>
+                <div v-else-if="(orderStatus=='PAYED'&&receiveData.ziti_status=='PENDING')">
+                  <h4 style="font-size:16px;font-weight: bold;">请凭小程序订单中的自提码到门店自提</h4>
+                </div>
               </div>
 
-              <!-- 自提需求暂时不需要显示这些，所以v-if="isZiti"暂去掉 -->
-              <div class="ziti-warp clearfix" v-if="false"> 自提点
-                <div class="ziti-warp-content">
-                  <div v-for="(item,index) in zitiData" :key="index" class="ziti-item">
-                    <h4 style="">{{ item.name }}</h4>
-                    <p>{{ item.store_address }}</p>
-                    <p>营业时间:{{ item.hour }}</p>
-                  </div>
-                </div>
+              <div class="timeline" style="position: relative;" v-if="orderInfo.order_status_des==='PAYED_PENDING'">
+                <ul>
+                  <template>
+                    <li class="timeline-item" v-for="(item, index) in activities" :key="index" style="padding-top:15px;">
+                      <span class="time-day"> {{ item.AcceptTime | parseTime }}</span>
+                      <div class="timeline-item__tail"></div>
+                      <div class="timeline-item__node" :class="index == 0 ? 'timeline-item__node_color' : ''">
+                        <i class="ec-icon ec-icon-roundcheck success" v-if="index == 0"></i>
+                      </div>
+                      <div class="timeline-item__wrapper">
+                        <div class="el-timeline-item__content">{{ item.AcceptStation }}</div>
+                        <div class="el-timeline-item__timestamp is-bottom"></div>
+                      </div>
+                    </li>
+                  </template>
+                </ul>
               </div>
               <!-- 部分发货判断-----写class不生效，所以用style写样式 -->
               <!-- <div v-else-if="orderStatusText[orderInfo.order_status_des]==='部分发货' || (orderStatusText[orderInfo.order_status_des]==='待收货'&&deliveryLists.length>1)"> 所有拆分发货的数据，改判断-->
@@ -510,7 +520,7 @@ export default {
         PAYED_PARTAIL: '部分发货',
         CLOSED: '已关闭',
         DONE: '已完成',
-        // PAYED: '待自提',
+        PAYED_PENDING: '待自提',
         // PENDING: '已完成',
       }, //状态字典
       orderStatus: '',
@@ -562,7 +572,7 @@ export default {
       let { orderInfo, distributor, tradeInfo } = await getOrderInfo({ id })
 
       let {list} =  await getdeliveryId({order_id:id})
-      let delivery_id = list[0].delivery_id;
+      let delivery_id = list[0]&&list[0].delivery_id;
       this.deliveryLists = list
       this.deliveryGoodsNum = []
       list.map(ele=>{
@@ -601,6 +611,8 @@ export default {
         is_invoiced,  //开票状态
         ziti_info,    // 自提信息
         ziti_status,    // 自提状态
+        ziti_code,      // 自提码
+        end_date
       } = orderInfo
       this.orderGoodData = {
         can_apply_aftersales: orderInfo.can_apply_aftersales,
@@ -693,12 +705,41 @@ export default {
           // this.step = 2       //状态0可取消订单,部分发货不可取消
           this.step = 0       //状态0不显示任何按钮，包括确认收货+取消订单等
           break
+        case 'PAYED_PENDING':   // 待自提
+          this.step = 5
+          activities = [
+            {
+              AcceptStation: '已付款',
+              AcceptTime: payDate
+            },
+            {
+              AcceptStation: '待支付',
+              AcceptTime: create_time
+            }
+          ]
+          break
         default:
           this.step = 0
           break
       }
       this.activities = activities
-      if (this.step == 4 || this.step == 3) { 
+      if ((this.step == 4 || this.step == 3) && ziti_code) { 
+        // 自提完成时间轴
+        this.activities = [
+          {
+            AcceptStation: '已完成',
+            AcceptTime: end_date
+          },
+          {
+            AcceptStation: '已付款',
+            AcceptTime: payDate
+          },
+          {
+            AcceptStation: '待支付',
+            AcceptTime: create_time
+          }
+        ]
+      }else if (this.step == 4 || this.step == 3) { 
         deliveryInfo({delivery_id:delivery_id }).then((res) => {
           activities = [
             {

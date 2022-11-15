@@ -351,7 +351,8 @@ export default {
         PAYED_WAIT_PROCESS: '退款处理中',
         PAYED_PARTAIL: '部分发货',
         SUCCESS: '交易完成',
-        DONE: '交易完成'
+        DONE: '交易完成',
+        PAYED_PENDING: '待自提',
       },
       dailogCancel: false,
       selectItem: {},

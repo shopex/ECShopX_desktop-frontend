@@ -12,7 +12,7 @@
         <span v-if="receiveData.ziti_info">{{ receiveData.ziti_info.contract_phone }}</span>
       </div>
       <div>提货时间：
-        <span v-if="receiveData.ziti_info">{{ receiveData.ziti_info.pickup_time[0] }} - {{ receiveData.ziti_info.pickup_time[1] }}</span>
+        <span v-if="receiveData.ziti_info">{{ receiveData.ziti_info.pickup_date }} {{ receiveData.ziti_info.pickup_time[0] }} - {{ receiveData.ziti_info.pickup_time[1] }}</span>
       </div>
       <div>提货人：{{receiveData.receiver_name}}</div>
       <div>提货手机：{{receiveData.receiver_mobile}}</div>

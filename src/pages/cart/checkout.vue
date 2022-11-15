@@ -91,13 +91,23 @@
             <div class="ziti-phone">联系电话：{{ zitiAddress.phone }}</div>
           </div> -->
           <h4 class="content-item-hd">自提点信息</h4>
-          <div v-if="zitiList&&zitiList.length>0">
-            <div class="content-item-bd ziti-list" v-for="(item,index) in zitiList" :key="index">
-              <button class="ziti-list-name" @click="zitiHandle(item)">{{ item.name }}</button>
-              <div class="ziti-list-phone">联系电话：{{ item.contract_phone }}</div>
-              <div class="ziti-list-address">提货地址：{{ item.city }} {{ item.area }} {{ item.address }}</div>
-              <img :src="NavigationImg" @click="initMap(item)" style="margin-left: 35px;" />
-            </div>
+
+          <div class="content-item-bd address-list" v-if="zitiList&&zitiList.length>0">
+            <!-- defaultAddress: {{defaultAddress}} -->
+            <SpBtnPickerGroup v-model="zitiInfo.pickup_location" @onChange="zitiHandle">
+              <div class="address-item" v-for="(item, index) in zitiList" :key="`btn-item__${index}`">
+                <SpBtnPicker :value="item.id" :theme="themeColor">{{
+                  item.name
+                }}</SpBtnPicker>
+                <div class="address-item-detail">
+                  <div class="phone">联系电话：{{ item.contract_phone }}</div>
+                  <div class="d-detail">
+                    提货地址：{{ item.city }} {{ item.area }} {{ item.address }}
+                  </div>
+                  <img :src="NavigationImg" @click="initMap(item)" style="margin: 8px 35px;" />
+                </div>
+              </div>
+            </SpBtnPickerGroup>
           </div>
           <div v-else class="content-item-bd ziti-list">
             <div class="ziti-list-phone">暂无自提点</div>
@@ -299,7 +309,7 @@
       </div>
     </SpModal>
     <SpModal
-      title="查看地图坐标"
+      title="查看店铺位置"
       v-model="dailogMapVisible"
       :width="700"
     >
@@ -418,8 +428,8 @@ export default {
           ],
         });
 
-        var a = document.querySelector('canvas+div:last-child')
-        a.style.display = 'none'
+        // var a = document.querySelector('canvas+div:last-child')
+        // a.style.display = 'none'
 
       });
     },
@@ -510,10 +520,10 @@ export default {
         
         // 获取自提点列表
         const { list } = await this.$api.member.pickuplocation({
-          lat:position.point.lat,
-          lng:position.point.lng,
-          cart_type: mode,
-          isNostores: 1,
+          // lat:position.point.lat,
+          // lng:position.point.lng,
+          // cart_type: mode,
+          // isNostores: 1,
         })
         this.zitiList = list
       }
@@ -739,10 +749,17 @@ export default {
     },
     
     // 选择自提店铺回显提货时间
-    zitiHandle(val){
+    zitiHandle(){
       // this.expressType == "ziti"
-      // console.log(val);
-      this.zitiInfo.pickup_location = val.id
+      let val = null
+      this.zitiList.map(ele=>{
+        if(ele.id===this.zitiInfo.pickup_location){
+          val = ele
+        }
+      })
+      // console.log(val,this.zitiInfo.pickup_location);
+
+      // this.zitiInfo.pickup_location = val.id
       this.zitiCut = true
       this.zitiDateList = []
       this.zitiTimeList = []
