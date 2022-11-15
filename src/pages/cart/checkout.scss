@@ -12,6 +12,15 @@
     margin-bottom: 50px;
     .content-item {
       border-bottom: 1px solid $color-border-gray-light;
+      .ziti-info{
+        &>div{
+          margin-bottom: 10px;
+          &>.ziti-info-name{
+            width: 80px;
+            display: inline-block;
+          }
+        }
+      }
       .integral{
         display:flex;
         .integral-rules{
@@ -168,6 +177,29 @@
             font-size: 12px;
           }
         }
+        &.ziti-list {
+          color: #606266;
+          display: flex;
+          &>div{
+            margin-left: 45px;
+            line-height: 25px;
+          }
+          .ziti-name {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 2px;
+          }
+          .ziti-address {
+            font-size: 12px;
+          }
+          .ziti-time {
+            font-size: 12px;
+          }
+          .ziti-phone {
+            font-size: 12px;
+          }
+        }
+        
         &.invoice {
           .invoice-info {
             margin-top: 20px;

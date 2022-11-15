@@ -83,12 +83,34 @@
         </div>
 
         <div class="content-item" v-if="expressType == 'ziti'">
-          <h4 class="content-item-hd">收货信息</h4>
+         <!--  <h4 class="content-item-hd">收货信息</h4>
           <div class="content-item-bd ziti" v-if="zitiAddress">
             <div class="ziti-name">{{ zitiAddress.name }}</div>
             <div class="ziti-address">{{ zitiAddress.store_address }}</div>
             <div class="ziti-time">营业时间：{{ zitiAddress.hour }}</div>
             <div class="ziti-phone">联系电话：{{ zitiAddress.phone }}</div>
+          </div> -->
+          <h4 class="content-item-hd">自提点信息</h4>
+          <div v-if="zitiList&&zitiList.length>0">
+            <div class="content-item-bd ziti-list" v-for="(item,index) in zitiList" :key="index">
+              <button class="ziti-list-name" @click="zitiHandle(item)">{{ item.name }}</button>
+              <div class="ziti-list-phone">联系电话：{{ item.contract_phone }}</div>
+              <div class="ziti-list-address">提货地址：{{ item.city }} {{ item.area }} {{ item.address }}</div>
+              <img :src="NavigationImg" @click="initMap(item)" style="margin-left: 35px;" />
+            </div>
+          </div>
+          <div v-else class="content-item-bd ziti-list">
+            <div class="ziti-list-phone">暂无自提点</div>
+          </div>
+          <!-- <div id="containerMap" style="width: 100%;height:200px;"></div> -->
+          <div v-if="zitiCut" class="ziti-info">
+            <div>
+              <span class="ziti-info-name">提货时间：</span>
+              <SpSelect style="width: 200px;" v-model="zitiInfo.pickup_date" :data="zitiDateList" placeholder="请选择自提日期"></SpSelect>
+              <SpSelect style="width: 200px;" v-model="zitiInfo.pickup_time" :data="zitiTimeList" placeholder="请选择自提时间"></SpSelect>
+            </div>
+            <div><span class="ziti-info-name">提货人：</span><SpInput style="width: 300px;" v-model="zitiInfo.receiver_name"></SpInput></div>
+            <div><span class="ziti-info-name">手机号码：</span><SpInput style="width: 300px;" v-model="zitiInfo.receiver_mobile"></SpInput></div>
           </div>
         </div>
 
@@ -276,9 +298,17 @@
         <div> 2、{{orderData.deduct_point_rule&&orderData.deduct_point_rule.deduct_point}}积分抵扣1元；</div>
       </div>
     </SpModal>
+    <SpModal
+      title="查看地图坐标"
+      v-model="dailogMapVisible"
+      :width="700"
+    >
+      <div style="padding:30px 0;">
+        <div id="containerMap" style="width: 90%;height:450px;margin:0 auto"></div>
+      </div>
+    </SpModal>
   </div>
 </template>
-
 <script>
 import { mixin } from '@/mixins'
 import AddressItemAdd from '@/pages/member/address-item-add'
@@ -310,6 +340,17 @@ export default {
       couponList: [],
       coupon: '',
       zitiAddress: null,
+      zitiList: null,
+      zitiCut:false,
+      zitiDateList:[],    // 可选择的提货日期列表
+      zitiTimeList:[],    // 可选择的提货时间列表
+      zitiInfo:{
+        receiver_name:'',
+        receiver_mobile:'',
+        pickup_location:'',
+        pickup_date:'',
+        pickup_time:'',
+      },
       // 是否使用发票
       useInvoice: false,
       // 是否使用积分
@@ -330,6 +371,8 @@ export default {
       },
       point_use:0,    //输入的积分
       maxPoint:0,     //可输入的最大值
+      NavigationImg:'https://d1icd6shlvmxi6.cloudfront.net/gsc/2BNO0A/99/39/03/9939036895e74d208163a0b16a1956b3/images/%E9%80%89%E6%8B%A9%E9%85%8D%E9%80%81%E6%96%B9%E5%BC%8F-%E8%87%AA%E6%8F%90/u61.svg?pageId=827dd551-76dd-40e0-8e01-613a56bc9dc5',
+      dailogMapVisible:false,
     }
   },
   mounted() {
@@ -340,6 +383,47 @@ export default {
     ...mapActions({
       CART_GETINFO: 'cart/CART_GETINFO'
     }),
+    
+    initMap (val) {
+      this.dailogMapVisible = true
+      let { lat,lng } = val
+      console.log(lat,lng);
+      //定义地图中心点坐标
+      this.$nextTick(()=>{
+
+        var center = new TMap.LatLng(lat,lng)
+        var map = new TMap.Map(document.getElementById('containerMap'), {
+            center: center,//设置地图中心点坐标
+            zoom: 16,   //设置地图缩放级别
+            // pitch: 43.5,  //设置俯仰角
+            // rotation: 45    //设置地图旋转角度
+        })
+        var marker = new TMap.MultiMarker({
+          map: map,
+          styles: {
+            // 点标记样式
+            marker: new TMap.MarkerStyle({
+              width: 10, // 样式宽
+              height: 20, // 样式高
+              anchor: { x: 10, y: 30 }, // 描点位置
+            }),
+          },
+          geometries: [
+            // 点标记数据数组
+            {
+              // 标记位置(纬度，经度，高度)
+              position: center,
+              id: 'marker',
+            },
+          ],
+        });
+
+        var a = document.querySelector('canvas+div:last-child')
+        a.style.display = 'none'
+
+      });
+    },
+
     async fetchZiTiShop() {
       const { id } = this.$route.query
       const res = await this.$api.shop.getShop({ distributor_id: id })
@@ -418,7 +502,22 @@ export default {
       this.point_use = this.orderData.max_point
       this.getFreightFee()
     },
-    onChangeExpress() {
+    // 切换取货类型
+    async onChangeExpress() {
+      if(this.expressType == "ziti"){
+        const { mode } = this.$route.query
+        let position = JSON.parse(localStorage.getItem('position'))
+        
+        // 获取自提点列表
+        const { list } = await this.$api.member.pickuplocation({
+          lat:position.point.lat,
+          lng:position.point.lng,
+          cart_type: mode,
+          isNostores: 1,
+        })
+        this.zitiList = list
+      }
+
       this.getFreightFee()
     },
     onChangeAddress() {
@@ -493,7 +592,8 @@ export default {
         // pay_type: 'wxpaypc',
         pay_type: pay_type,
         promotion: 'normal',
-        receipt_type: 'logistics',
+        // receipt_type: 'logistics',
+        receipt_type: this.expressType,
         point_use:point_use
       }
 
@@ -520,6 +620,12 @@ export default {
           receiver_state: fdAddress.province
         }
       }
+      if (this.expressType == 'ziti'){
+        params = {
+          ...params,
+          ...this.zitiInfo,
+        }
+      }
       return params
     },
     // 新增收货地址
@@ -539,8 +645,30 @@ export default {
       if (this.expressType == 'logistics' && !this.defaultAddress) {
         this.$Message.error('请选择收货地址')
         return
+      }else if (this.expressType == 'ziti'){
+        const {
+          receiver_name,
+          receiver_mobile,
+          pickup_date,
+          pickup_time
+        } = this.zitiInfo
+
+        if (receiver_name.length==0) {
+          this.$Message.error('请填写提货人')
+          return
+        } else if (receiver_mobile.length==0) {
+          this.$Message.error('请填写手机号码')
+          return
+        } else if (pickup_date.length==0) {
+          this.$Message.error('请填写提货日期')
+          return
+        } else if (pickup_time.length==0) {
+          this.$Message.error('请填写提货时间')
+          return
+        }
       }
       let params = this.getParams()
+      console.log(params,"params-----------");
       if (this.useInvoice) {
         const {
           title,
@@ -608,7 +736,119 @@ export default {
     },
     clickCancel() {
       this.dailogVisible = false
-    }
+    },
+    
+    // 选择自提店铺回显提货时间
+    zitiHandle(val){
+      // this.expressType == "ziti"
+      // console.log(val);
+      this.zitiInfo.pickup_location = val.id
+      this.zitiCut = true
+      this.zitiDateList = []
+      this.zitiTimeList = []
+
+      // 选择列表--时间
+      this.zitiTimeList = []
+      val.hours.map(ele=>{
+        this.zitiTimeList.push({ label:ele[0]+'-'+ele[1], value:ele})
+      })
+      
+      // 选择列表--日期
+      this.zitiDateList = []
+      let pkc = this.dateFilter()
+      // console.log(pkc);  // 近十天的日期和事件数组
+      if(val.wait_pickup_days == 0){
+        // 选择当天领取
+        this.zitiDateList= [{ label:'今天', value:pkc[0].date}]
+      }else{
+        // 预约领取---1.该时间之后，只能选择第二天的自提时间；如上面最长预约选择只能当天自提，则该时间后下单不能选择自提。
+        let sum = this.getHours(val)?-1:0
+        // console.log(sum);  // 当前时间
+
+        // 预约领取---2.最长预约时间筛选：天数从第二天开始计算，如设置为可预约1天内订单，则买家最长可预约第二天上门自提；天为自然日。
+        let list = []
+        pkc.map((ele,index)=>{
+          // 筛选非当天的最长预约日期--index==0时为当天,sum是由上面的逻辑得到的
+          if(index>sum && index<=val.wait_pickup_days){
+            list.push({
+              label:ele.name, value:ele.date, week:ele.week
+            })
+          }
+        })
+
+        // 预约领取---3.可领取的星期几匹配
+        list.map(ele=>{
+          val.workdays.map(ele2=>{
+            if(ele.week == ele2){
+              this.zitiDateList.push(ele)
+            }
+          })
+        })
+      }
+    },
+    getHours(val){
+      let hh = new Date().getHours();
+      let mf = new Date().getMinutes() < 10 ? '0' + new Date().getMinutes() : new Date().getMinutes();
+      let res = val.latest_pickup_time.split(":")
+      // 当前时间小于指定时间
+      if(hh<res[0] && mf<res[1]){
+        return true
+      }else{
+        return false
+      }
+    },
+    // 日期与时间关联
+    dateFilter(){
+      let data=[]
+      // this.start=this.getDay(+12);
+      // this.end=this.getDay();
+      // let start=this.getDay(+12);
+      // let end=this.getDay();
+      for(let i=10;i>=0;i--){
+        data.push(this.getDay(+i))
+      }
+      var date=data.reverse()//得出一周的日期进行排序
+      this.week=date;
+      var date=this.week;
+      var pkc=[];/* 用于存储展示的日期数据 */
+      // var weekday=["星期日","星期一","星期二","星期三","星期四","星期五","星期六"];
+      var weekday=["7","1","2","3","4","5","6"];
+      date.forEach((item,index)=>{//循坏日期
+        var f=new Date(item);
+        var week=f.getDay()//计算出星期几
+        var str1=item.split('-');
+        var strs=str1[1]+'-'+str1[2];
+
+        var weeks=weekday[week]/* 将计算出来的时间带入数字得出中文 */
+        var time= Math.round(new Date(item) / 1000)//时间戳转换
+        var s={}//用于存储每个日期对象
+        s.date=item;
+        s.name=strs;
+        s.week=weeks;
+        s.times=time;
+        pkc.push(s)
+      })
+      return pkc
+    },
+    // 获取时间
+    getDay(day){
+      var today = new Date();
+      var targetday_milliseconds=today.getTime() + 1000*60*60*24*day;
+      today.setTime(targetday_milliseconds); //注意，这行是关键代码
+      var tYear = today.getFullYear();
+      var tMonth = today.getMonth();
+      var tDate = today.getDate();
+      tMonth = this.doHandleMonth(tMonth + 1);
+      tDate =  this.doHandleMonth(tDate);
+      return tYear+"-"+tMonth+"-"+tDate;
+    },
+    doHandleMonth(month){
+      var m = month;
+      if(month.toString().length == 1){
+        m =month;
+      }
+      return m;
+    },
   }
 }
 </script>

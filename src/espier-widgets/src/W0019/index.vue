@@ -210,6 +210,8 @@
               let province = addComp.province
               let city = addComp.city
               // let area = addComp.district
+              // 坐标本地存储
+              localStorage.setItem("position", JSON.stringify(r));
 
               const params = {
                 lat: r.point.lat,

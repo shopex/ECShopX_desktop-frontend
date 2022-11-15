@@ -328,10 +328,10 @@
               <div class="status-code">
                 订单号：{{ orderInfo.order_id }}
                 <div class="status-text">
-                  {{ isZiti ? '待自提' : orderStatusText[orderInfo.order_status_des] }}
+                  {{ orderStatus=='PAYED'&&receiveData.ziti_status=='PENDING'? '待自提': orderStatusText[orderInfo.order_status_des] }}
                 </div>
-                <span v-if="isZiti">请尽快前往自提点自提</span>
-                <span v-if="!isZiti && orderInfo.order_status_des == 'NOTPAY'">
+                <!-- <span v-if="orderStatus=='PAYED'&&receiveData.ziti_status=='PENDING'">请尽快前往自提点自提</span> -->
+                <span v-if="!(orderStatus=='PAYED'&&receiveData.ziti_status=='PENDING') && orderInfo.order_status_des == 'NOTPAY'">
                   <i class="ec-icon ec-icon-time"></i>剩余{{ cancelTime }}
                 </span>
                 <div class="btn-warp">
@@ -341,9 +341,15 @@
                 <div class="btn-warp-bt" @click="clickBtn('取消订单')" v-if="step == 1 || step == 2">
                   <i class="ec-icon ec-icon-roundclose"> 取消订单</i>
                 </div>
+                <!-- 判断是待提货及有提货码状态下 -->
+                <div v-if="(orderStatus=='PAYED'&&receiveData.ziti_status=='PENDING') && (zitiInfo&&zitiInfo.pickup_code)"> 
+                  <h4 style="font-size:16px;font-weight: bold;">提货码：{{ zitiInfo.pickup_code }} </h4>
+                  <div style="color:rgb(153 153 153);font-size:12px;font-weight: 400;">提货时请出告知店员提货验证码</div>
+                </div>
               </div>
 
-              <div class="ziti-warp clearfix" v-if="isZiti"> 自提点
+              <!-- 自提需求暂时不需要显示这些，所以v-if="isZiti"暂去掉 -->
+              <div class="ziti-warp clearfix" v-if="false"> 自提点
                 <div class="ziti-warp-content">
                   <div v-for="(item,index) in zitiData" :key="index" class="ziti-item">
                     <h4 style="">{{ item.name }}</h4>
@@ -476,8 +482,9 @@ import PayInfo from './comps/payInfo' //收件人信息。数据key按照接口�
 import InvoiceInfo from './comps/InvoiceInfo' //发票信息
 
 import OrderGood from './comps/order-good'
-import { getOrderInfo, orderCancel, confirmOrder} from '@/api/member'
+import { getOrderInfo, orderCancel, confirmOrder, ziticode } from '@/api/member'
 import { deliveryInfo, getdeliveryId} from '@/api/trade'
+
 
 export default {
   data() {
@@ -502,7 +509,9 @@ export default {
         PAYED_WAIT_PROCESS: '退款处理中',
         PAYED_PARTAIL: '部分发货',
         CLOSED: '已关闭',
-        DONE: '已完成'
+        DONE: '已完成',
+        // PAYED: '待自提',
+        // PENDING: '已完成',
       }, //状态字典
       orderStatus: '',
       dailogCancel: false,
@@ -518,7 +527,6 @@ export default {
         }
       ],
       zitiData: [],
-      isZiti: false,
       timer: null,
       auto_cancel_seconds: 0,
       cancelTime: '',
@@ -526,6 +534,7 @@ export default {
       deliveryGoodsNum:[],    // 发货个数
       deliveryListsDetails:[],    // 查看物流详情
       dialogLogistics: false,
+      zitiInfo: null,
     }
   },
   computed: {},
@@ -539,8 +548,10 @@ export default {
   created() {
     this.getOrderInfo()
   },
-  mounted() {
+  async mounted() {
     this.timer = setInterval(this.timers, 1000)
+    let { id } = this.$route.params
+    this.zitiInfo = await ziticode({ order_id: id })
   },
   beforeDestroy() {
     clearInterval(this.timer)
@@ -588,6 +599,8 @@ export default {
         invoice,   //发票信息
         point_fee,   // 积分抵扣金额
         is_invoiced,  //开票状态
+        ziti_info,    // 自提信息
+        ziti_status,    // 自提状态
       } = orderInfo
       this.orderGoodData = {
         can_apply_aftersales: orderInfo.can_apply_aftersales,
@@ -612,7 +625,9 @@ export default {
         create_time,
         payDate,
         invoice,
-        is_invoiced
+        is_invoiced,
+        ziti_info,
+        ziti_status
       }
       // order_status_des='WAIT_BUYER_CONFIRM'
       this.auto_cancel_seconds = auto_cancel_seconds

@@ -60,13 +60,13 @@ class CreateAxios {
   }
 
   created() {
-    console.log('CreateAxios Class created......')
+    // console.log('CreateAxios Class created......')
     this.inst = axios.create()
     this.inst.defaults.timeout = process.env.NODE_ENV === 'production' ? 10000 : 30 * 1000
     this.inst.defaults.baseURL = process.env.VUE_APP_API_BASE_URL || '/'
     this.inst.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
     this.inst.interceptors.request.use((config) => {
-      console.log(config);
+      // console.log(config);
       const isGetMethod = config.method === 'get'
       const showError = config.showError === undefined ? true : config.showError
       let token, companyid
@@ -97,7 +97,7 @@ class CreateAxios {
       if (token) {
         config.headers.common['Authorization'] = `Bearer ${token}`
       }
-      console.log('ECSHOPX_PC :', JSON.stringify(config))
+      // console.log('ECSHOPX_PC :', JSON.stringify(config))
       // console.log(`[ECSHOPX_TOKEN]: ${token}`)
       // console.log(`[COMPANY ID IS]: ${companyid}`)
       // console.log('[CONFIG DATA IS]:', config.params, config.data)
@@ -138,7 +138,7 @@ class CreateAxios {
         } = res
         if (process.server) {
           const req = res.request
-          console.log(`server request: [${req.method}] ${req.res.responseUrl}`)
+          // console.log(`server request: [${req.method}] ${req.res.responseUrl}`)
         }
         // console.log('status:', status)
         if (status === 200) {
@@ -161,7 +161,7 @@ class CreateAxios {
         return Promise.reject(reqErr(res))
       },
       (err) => {
-        console.log( 'xxx:', err )
+        // console.log( 'xxx:', err )
         // console.log(`server request error: [${req.method}] ${req.res.responseUrl}`)
         switch (err.response.status) {
           case 401:

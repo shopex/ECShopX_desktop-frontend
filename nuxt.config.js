@@ -78,7 +78,8 @@ module.exports = {
     script: [
       {
         src: process.env.VUE_APP_ADOBE ? process.env.VUE_APP_ADOBE_URL : ''
-      }
+      },
+      {src: "https://map.qq.com/api/gljs?v=1.exp&key=UZZBZ-ADN6W-VHVRB-OYRGN-M6KRK-O2BTG",  type: 'text/javascript', mode: 'client'},
     ]
   },
 

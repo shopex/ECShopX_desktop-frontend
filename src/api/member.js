@@ -196,3 +196,13 @@ export const getHistoryList = (params) => {
 export const postHistorySave = (params) => {
   return req.post(`/api/h5app/wxapp/member/browse/history/save`, params)
 }
+
+//获取自提点列表
+export const pickuplocation = (params) => {
+  return req.get(`/api/h5app/wxapp/distributor/pickuplocation`, params)
+}
+
+//获取自提点列表
+export const ziticode = (params) => {
+  return req.get(`/api/h5app/wxapp/ziticode`, params)
+}
