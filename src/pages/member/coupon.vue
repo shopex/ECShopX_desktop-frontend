@@ -121,7 +121,8 @@ export default {
       let params = {
         page: this.page,
         pageSize: this.pageSize,
-        status: this.curTypeIndex+1
+        status: this.curTypeIndex+1,
+        scope_type:'all'
       }
 
       // const { list, total_count } = await this.$api.member.couponList(params)
