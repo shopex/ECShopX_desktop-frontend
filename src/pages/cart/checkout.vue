@@ -104,7 +104,7 @@
                   <div class="d-detail">
                     提货地址：{{ item.city }} {{ item.area }} {{ item.address }}
                   </div>
-                  <img :src="NavigationImg" @click="initMap(item)" style="margin: 8px 35px;" />
+                  <img src="~/assets/imgs/map.png"  @click="initMap(item)" style="margin:0 35px;width: 30px;" />
                 </div>
               </div>
             </SpBtnPickerGroup>
@@ -381,7 +381,6 @@ export default {
       },
       point_use:0,    //输入的积分
       maxPoint:0,     //可输入的最大值
-      NavigationImg:'https://d1icd6shlvmxi6.cloudfront.net/gsc/2BNO0A/99/39/03/9939036895e74d208163a0b16a1956b3/images/%E9%80%89%E6%8B%A9%E9%85%8D%E9%80%81%E6%96%B9%E5%BC%8F-%E8%87%AA%E6%8F%90/u61.svg?pageId=827dd551-76dd-40e0-8e01-613a56bc9dc5',
       dailogMapVisible:false,
     }
   },
