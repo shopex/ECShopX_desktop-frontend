@@ -620,7 +620,14 @@ export default {
 
       let { coupon, deposit, point, vipgrade } = res
 
-      this.userTabs[0].num = coupon
+      // PC不显示已过期优惠券数量，所以请求之后减去已过期优惠券
+      const { total_count } = await this.$api.member.getUserCardList({
+        status: 3,
+        scope_type:'all'
+      })
+
+      // this.userTabs[0].num = coupon
+      this.userTabs[0].num = coupon-Number(total_count)
       this.userTabs[2].num = (deposit / 100).toFixed(2)
       this.userTabs[1].num = point
       this.vipgrade = vipgrade
