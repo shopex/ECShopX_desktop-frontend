@@ -2,7 +2,7 @@
 $color-coupon-text: #1f201f;
 .comps-coupon-item {
   position: relative;
-  width: 225px;
+  width: 260px;
   @include clearfix();
   &__up {
     position: relative;
