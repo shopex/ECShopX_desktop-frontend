@@ -163,8 +163,9 @@
                 </div>
                 <div class="status-steps">
                   <!-- 步骤条 -->
-                  <AftersaleSteps :step="Number(aftersalesInfo.aftersales_status)+1" :stepsData="stepsData" />
+                  <AftersaleSteps :step="Number(aftersalesInfo.aftersales_progress)" :stepsData="stepsData" />
                   <!-- 还未确认字段 -->
+                  <!-- <AftersaleSteps :step="Number(aftersalesInfo.aftersales_status)+1" :stepsData="stepsData" /> -->
                   <!-- <AftersaleSteps :step="Number(aftersalesInfo.progress)+1" :stepsData="stepsData" /> -->
                 </div>
               </div>
@@ -657,7 +658,124 @@ export default {
         discount_fee,
       }
       this.orderInfo = order_info
-      
+      this.processJudgment()    // 进度
+    },
+    // 进度处理事件
+    processJudgment(){
+      let { progress,aftersales_status,aftersales_type } = this.aftersalesInfo
+
+      let stepTextStatus = {
+        // 正常退款
+        1:[{
+          icon:'ec-icon-post',
+          text:'提交申请',
+          // time:'2020-10-02 18:15:46'
+          time:''
+        },{
+          icon:'ec-icon-time',
+          text:'等待审核',
+          time:''
+        },{
+          icon:'ec-icon-vipcard',
+          text:'退款成功',//审核驳回
+          time:''
+        }],
+        // 审核驳回
+        2:[{
+          icon:'ec-icon-post',
+          text:'提交申请',
+          time:''
+        },{
+          icon:'ec-icon-time',
+          text:'等待审核',
+          time:''
+        },{
+          icon:'ec-icon-vipcard',
+          text:'审核驳回',
+          time:''
+        }],
+        // 退款退款待寄回
+        3:[{
+          icon:'ec-icon-post',
+          text:'提交申请',
+          time:''
+        },{
+          icon:'ec-icon-time',
+          text:'等待审核',
+          time:''
+        },{
+          icon:'ec-icon-deliver',
+          text:'等待寄回',
+          time:''
+        },{
+          icon:'ec-icon-vipcard',
+          text:'处理退款',
+          time:''
+        }],
+        // 退款退款已寄回之后驳回
+        4:[{
+          icon:'ec-icon-post',
+          text:'提交申请',
+          time:''
+        },{
+          icon:'ec-icon-time',
+          text:'等待审核',
+          time:''
+        },{
+          icon:'ec-icon-deliver',
+          text:'等待寄回',
+          time:''
+        },{
+          icon:'ec-icon-vipcard',
+          text:'退款驳回',
+          time:''
+        }],
+        // 用户撤销或关闭
+        5:[{
+          icon:'ec-icon-post',
+          text:'提交申请',
+          time:''
+        },{
+          icon:'ec-icon-time',
+          text:'用户撤销或关闭',
+          time:''
+        }]
+      }
+      /* ------------progress字段说明：-------------
+        0 等待商家处理
+        1 商家接受申请，等待消费者回寄
+        2 消费者回寄，等待商家收货确认
+        8 商家确认收货，等待审核退款
+        3 已驳回
+        4 已处理
+        7 已撤销。已关闭
+        9 退款处理中
+        5 退款驳回
+        6 退款完成
+      */
+      // 判断售后流程
+      if(progress == 3){   // 驳回订单
+        this.stepsData = stepTextStatus[2]
+      }else if(progress == 5){
+        this.stepsData = stepTextStatus[4]
+      }else if(progress == 7){
+        this.stepsData = stepTextStatus[5]
+      }else if(aftersales_type == 'ONLY_REFUND'){     // ONLY_REFUND: '仅退款',
+        this.stepsData = stepTextStatus[1]
+      }else if(aftersales_type == 'REFUND_GOODS'){    // REFUND_GOODS: '退货退款',
+        this.stepsData = stepTextStatus[3]
+      }
+
+      let aftersales_progress = 0
+      // 判断进度
+      if(progress<2){
+        aftersales_progress = aftersales_status+1
+      }else if(progress==2 || progress == 3 || (progress==6&&aftersales_type=='ONLY_REFUND') || progress == 7){
+        aftersales_progress = 3
+      }else if(progress==5 || progress == 4 || (progress==6&&aftersales_type=='REFUND_GOODS')){
+        aftersales_progress = 4
+      }
+      this.aftersalesInfo.aftersales_progress = aftersales_progress
     },
     clickBtn(type) {
       switch (type) {

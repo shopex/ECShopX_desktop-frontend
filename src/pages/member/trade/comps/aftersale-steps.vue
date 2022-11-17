@@ -8,7 +8,6 @@
           <div></div>
           <div></div>
           <div></div>
-          <div></div>
           <i class="ec-icon ec-icon-right"></i>
         </div>
         <div class="step-content" style="width: 70px">
