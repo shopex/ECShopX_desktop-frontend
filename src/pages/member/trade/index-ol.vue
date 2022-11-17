@@ -213,7 +213,7 @@
               <div>
                 <SpForm ref="formClose" :model="formClose" :rules="rulesClose">
                   <SpFormItem prop="type">
-                    <span style="display: inline-block; width: 80px; text-align: right"
+                    <span style="display: inline-block; width: 90px; text-align: right"
                       >服务类型:</span
                     >
                     <SpSelect
@@ -224,7 +224,7 @@
                     ></SpSelect>
                   </SpFormItem>
                   <SpFormItem prop="reason">
-                    <span style="display: inline-block; width: 80px; text-align: right"
+                    <span style="display: inline-block; width: 90px; text-align: right"
                       >退款理由:</span
                     >
                     <SpSelect
@@ -235,7 +235,7 @@
                     ></SpSelect>
                   </SpFormItem>
                   <SpFormItem prop="description">
-                    <span style="display: inline-block; width: 80px; text-align: right"
+                    <span style="display: inline-block; width: 90px; text-align: right"
                       >申请退款说明:</span
                     >
                     <SpInput

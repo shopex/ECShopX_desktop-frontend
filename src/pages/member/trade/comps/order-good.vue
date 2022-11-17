@@ -128,7 +128,7 @@
           <div>
             <SpForm ref="form" :model="form" :rules="rules">
               <SpFormItem prop="num" v-if="selectItem.num != 1">
-                <span style="display: inline-block; width: 80px; text-align: right">商品数量:</span>
+                <span style="display: inline-block; width: 90px; text-align: right">商品数量:</span>
                 <SpNumInput
                   style="width: 350px"
                   v-model="form.num"
@@ -138,7 +138,7 @@
                 ></SpNumInput>
               </SpFormItem>
               <SpFormItem prop="type">
-                <span style="display: inline-block; width: 80px; text-align: right">服务类型:</span>
+                <span style="display: inline-block; width: 90px; text-align: right">服务类型:</span>
                 <SpSelect
                   style="width: 350px"
                   :data="typeData"
@@ -147,7 +147,7 @@
                 ></SpSelect>
               </SpFormItem>
               <SpFormItem prop="reason">
-                <span style="display: inline-block; width: 80px; text-align: right">退款理由:</span>
+                <span style="display: inline-block; width: 90px; text-align: right">退款理由:</span>
                 <SpSelect
                   style="width: 350px"
                   :data="reasonData"
@@ -156,7 +156,7 @@
                 ></SpSelect>
               </SpFormItem>
               <SpFormItem prop="description">
-                <span style="display: inline-block; width: 80px; text-align: right"
+                <span style="display: inline-block; width: 90px; text-align: right"
                   >申请退款说明:</span
                 >
                 <SpInput
