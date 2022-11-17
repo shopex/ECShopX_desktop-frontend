@@ -666,7 +666,7 @@ export default {
 
       let stepTextStatus = {
         // 正常退款
-        1:[{
+        0:[{
           icon:'ec-icon-post',
           text:'提交申请',
           // time:'2020-10-02 18:15:46'
@@ -681,7 +681,7 @@ export default {
           time:''
         }],
         // 审核驳回
-        2:[{
+        1:[{
           icon:'ec-icon-post',
           text:'提交申请',
           time:''
@@ -695,7 +695,7 @@ export default {
           time:''
         }],
         // 退款退款待寄回
-        3:[{
+        2:[{
           icon:'ec-icon-post',
           text:'提交申请',
           time:''
@@ -713,7 +713,7 @@ export default {
           time:''
         }],
         // 退款退款已寄回之后驳回
-        4:[{
+        3:[{
           icon:'ec-icon-post',
           text:'提交申请',
           time:''
@@ -731,7 +731,7 @@ export default {
           time:''
         }],
         // 用户撤销或关闭
-        5:[{
+        4:[{
           icon:'ec-icon-post',
           text:'提交申请',
           time:''
@@ -755,15 +755,15 @@ export default {
       */
       // 判断售后流程
       if(progress == 3){   // 驳回订单
-        this.stepsData = stepTextStatus[2]
-      }else if(progress == 5){
-        this.stepsData = stepTextStatus[4]
-      }else if(progress == 7){
-        this.stepsData = stepTextStatus[5]
-      }else if(aftersales_type == 'ONLY_REFUND'){     // ONLY_REFUND: '仅退款',
         this.stepsData = stepTextStatus[1]
-      }else if(aftersales_type == 'REFUND_GOODS'){    // REFUND_GOODS: '退货退款',
+      }else if(progress == 5){
         this.stepsData = stepTextStatus[3]
+      }else if(progress == 7){
+        this.stepsData = stepTextStatus[4]
+      }else if(aftersales_type == 'ONLY_REFUND'){     // ONLY_REFUND: '仅退款',
+        this.stepsData = stepTextStatus[0]
+      }else if(aftersales_type == 'REFUND_GOODS'){    // REFUND_GOODS: '退货退款',
+        this.stepsData = stepTextStatus[2]
       }
 
       let aftersales_progress = 0
