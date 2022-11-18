@@ -140,7 +140,6 @@ export default {
       this.$router.push('/shop')
       return;
     }
-    this.getDetail()
     this.getSet(this.$route.query.type)
     this.getBasesetInfo()
   },
@@ -248,6 +247,9 @@ export default {
     // 获取商户入驻当前步骤
     getSet(type) {
       settlementSet().then((res) => {
+        if (res.step != 1) {
+          this.getDetail()
+        }
         if (res.step != 4) {
           this.setPage = res.step
         } else if (res.step == 4 && !type) {
