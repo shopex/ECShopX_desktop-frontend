@@ -519,10 +519,10 @@ export default {
         
         // 获取自提点列表
         const { list } = await this.$api.member.pickuplocation({
-          // lat:position.point.lat,
-          // lng:position.point.lng,
-          // cart_type: mode,
-          // isNostores: 1,
+          lat:position.point.lat,
+          lng:position.point.lng,
+          cart_type: mode,
+          isNostores: 1,
         })
         this.zitiList = list
       }
