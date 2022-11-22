@@ -116,7 +116,7 @@
           <div v-if="zitiCut" class="ziti-info">
             <div>
               <span class="ziti-info-name">提货时间：</span>
-              <SpSelect style="width: 200px;" v-model="zitiInfo.pickup_date" :data="zitiDateList" placeholder="请选择自提日期"></SpSelect>
+              <SpSelect style="width: 200px;" v-model="zitiInfo.pickup_date" :data="zitiDateList" placeholder="请选择自提日期" @change="changeZitiDate"></SpSelect>
               <SpSelect style="width: 200px;" v-model="zitiInfo.pickup_time" :data="zitiTimeList" placeholder="请选择自提时间"></SpSelect>
             </div>
             <div><span class="ziti-info-name">提货人：</span><SpInput style="width: 300px;" v-model="zitiInfo.receiver_name"></SpInput></div>
@@ -514,7 +514,7 @@ export default {
     // 切换取货类型
     async onChangeExpress() {
       if(this.expressType == "ziti"){
-        const { mode } = this.$route.query
+        const { mode,id } = this.$route.query
         let position = JSON.parse(localStorage.getItem('position'))
         
         // 获取自提点列表
@@ -523,6 +523,7 @@ export default {
           lng:position.point.lng,
           cart_type: mode,
           isNostores: 1,
+          distributor_id:id
         })
         this.zitiList = list
       }
@@ -746,19 +747,26 @@ export default {
     clickCancel() {
       this.dailogVisible = false
     },
-    
+    // 选择日期后
+    changeZitiDate(){
+      this.zitiInfo.pickup_time = ''
+      var day = new Date().getDate();
+      let pickup_date = this.zitiInfo.pickup_date.substring(8,10)
+      if(day == pickup_date){
+        this.getTimeFil()   // 当天的话重新筛选时间
+      }
+    },
     // 选择自提店铺回显提货时间
     zitiHandle(){
       // this.expressType == "ziti"
       let val = null
+      // 获取选中店铺数据
       this.zitiList.map(ele=>{
         if(ele.id===this.zitiInfo.pickup_location){
           val = ele
         }
       })
       // console.log(val,this.zitiInfo.pickup_location);
-
-      // this.zitiInfo.pickup_location = val.id
       this.zitiCut = true
       this.zitiDateList = []
       this.zitiTimeList = []
@@ -801,6 +809,21 @@ export default {
           })
         })
       }
+    },
+    getTimeFil(){
+      let hh = new Date().getHours();
+      let mf = new Date().getMinutes() < 10 ? '0' + new Date().getMinutes() : new Date().getMinutes();
+      let time = String(hh) + String(mf) 
+      let list = []
+      this.zitiTimeList.map(ele=>{
+        if(time < ele.value[1].replace(':','')){    // 筛选可选的时间段中当前时间已不可选的时间段
+          list.push({ label:ele.value[0]+'-'+ele.value[1], value:ele.value})
+        }
+      })
+      if(list.length==0){
+        list.push({ label:'无可选时间段', value:'',disabled:true})
+      }
+      this.zitiTimeList = list
     },
     getHours(val){
       let hh = new Date().getHours();
