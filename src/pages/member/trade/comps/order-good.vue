@@ -223,11 +223,24 @@ export default {
   },
 
   methods: {
+    async reasonList(){
+      let list = await this.$api.trade.reasonList()
+      if(list.length > 0){
+        this.reasonData = []
+        list.map(ele=>{
+          this.reasonData.push({
+            label: ele,
+            value: ele
+          })
+        })
+      }
+    },
     clickBtn(type, item) {
       switch (type) {
         case '申请售后':
           this.selectItem = item
           this.dailogClose = true
+          this.reasonList()
           break
         case '售后':
           this.$router.push(

@@ -2,18 +2,20 @@
   <div>
     <div class="receive-wrap" v-if="receiveData.receipt_type=='ziti'">
       <h4>自提信息</h4>
-      <div>自提点：
-        <span v-if="receiveData.ziti_info">{{ receiveData.ziti_info.name }}</span>
-      </div>
-      <div>自提地址：
-        <span v-if="receiveData.ziti_info">{{ receiveData.ziti_info.city }} {{ receiveData.ziti_info.area }} {{ receiveData.ziti_info.address }}</span>
-      </div>
-      <div>联系电话：
-        <span v-if="receiveData.ziti_info">{{ receiveData.ziti_info.contract_phone }}</span>
-      </div>
-      <div>提货时间：
-        <span v-if="receiveData.ziti_info">{{ receiveData.ziti_info.pickup_date }} {{ receiveData.ziti_info.pickup_time[0] }} - {{ receiveData.ziti_info.pickup_time[1] }}</span>
-      </div>
+      <span v-if="receiveData.ziti_info">
+        <div>自提点：
+          <span>{{ receiveData.ziti_info.name }}</span>
+        </div>
+        <div>自提地址：
+          <span>{{ receiveData.ziti_info.city }} {{ receiveData.ziti_info.area }} {{ receiveData.ziti_info.address }}</span>
+        </div>
+        <div>联系电话：
+          <span>{{ receiveData.ziti_info.contract_phone }}</span>
+        </div>
+        <div>提货时间：
+          <span>{{ receiveData.ziti_info.pickup_date }} {{ receiveData.ziti_info.pickup_time[0] }} - {{ receiveData.ziti_info.pickup_time[1] }}</span>
+        </div>
+      </span>
       <div>提货人：{{receiveData.receiver_name}}</div>
       <div>提货手机：{{receiveData.receiver_mobile}}</div>
     </div>
