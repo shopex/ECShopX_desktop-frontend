@@ -522,7 +522,7 @@ export default {
           lat:position.point.lat,
           lng:position.point.lng,
           cart_type: mode,
-          isNostores: 1,
+          // isNostores: 1,
           distributor_id:id
         })
         this.zitiList = list
@@ -828,7 +828,7 @@ export default {
     getHoursFil(val){
       let hh = new Date().getHours();
       let mf = new Date().getMinutes() < 10 ? '0' + new Date().getMinutes() : new Date().getMinutes();
-      let timeCurrent = String(hh) + String(mf) 
+      let timeCurrent = String(hh) + String(mf)
       let res = val.latest_pickup_time.replace(':','')
       // console.log(res,"res",timeCurrent);
       // 当前时间小于指定时间
