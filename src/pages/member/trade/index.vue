@@ -154,10 +154,11 @@
                               >
                                 评价
                               </div>
+                              <!-- PAYED_PENDING-待自提 -->
                               <div
                                 class="ly-fn-a"
                                 @click="clickBtn('取消订单', child)"
-                                v-if="child.orderStatus == 'NOTPAY' || child.orderStatus == 'PAYED'"
+                                v-if="child.orderStatus == 'NOTPAY' || child.orderStatus == 'PAYED' || child.orderStatus == 'PAYED_PENDING'"
                               >
                                 取消订单
                               </div>
@@ -326,7 +327,7 @@ export default {
         { label: '全部', value: '0' },
         { label: '待付款', value: '5' },
         { label: '待收货', value: '1' },
-        { label: '待自提', value: '6' },
+        { label: '待自提', value: '4' },
         { label: '待评价', value: '3' }
         // { label: '售后', value: '10' },
         // { label: '已完成', value: '11' },
