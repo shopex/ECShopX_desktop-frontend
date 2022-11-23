@@ -522,7 +522,7 @@ export default {
           lat:position.point.lat,
           lng:position.point.lng,
           cart_type: mode,
-          // isNostores: 1,
+          // isNostores: 1,   // 请求全部
           distributor_id:id
         })
         this.zitiList = list
