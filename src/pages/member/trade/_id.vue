@@ -728,7 +728,7 @@ export default {
           break
       }
       this.activities = activities
-      if ((this.step == 4 || this.step == 3) && ziti_code) { 
+      if (this.step == 4 && ziti_code && ziti_code!=0) { 
         // 自提完成时间轴
         this.activities = [
           {

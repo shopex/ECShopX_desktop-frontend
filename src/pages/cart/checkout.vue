@@ -786,7 +786,7 @@ export default {
         this.zitiDateList= [{ label:'今天', value:pkc[0].date}]
       }else{
         // 预约领取---1.该时间之后，只能选择第二天的自提时间；如上面最长预约选择只能当天自提，则该时间后下单不能选择自提。
-        let sum = this.getHours(val)?-1:0
+        let sum = this.getHoursFil(val)?-1:0
         // console.log(sum);  // 当前时间
 
         // 预约领取---2.最长预约时间筛选：天数从第二天开始计算，如设置为可预约1天内订单，则买家最长可预约第二天上门自提；天为自然日。
@@ -825,12 +825,14 @@ export default {
       }
       this.zitiTimeList = list
     },
-    getHours(val){
+    getHoursFil(val){
       let hh = new Date().getHours();
       let mf = new Date().getMinutes() < 10 ? '0' + new Date().getMinutes() : new Date().getMinutes();
-      let res = val.latest_pickup_time.split(":")
+      let timeCurrent = String(hh) + String(mf) 
+      let res = val.latest_pickup_time.replace(':','')
+      // console.log(res,"res",timeCurrent);
       // 当前时间小于指定时间
-      if(hh<res[0] && mf<res[1]){
+      if(timeCurrent < res){
         return true
       }else{
         return false
