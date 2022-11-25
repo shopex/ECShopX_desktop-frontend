@@ -13,6 +13,7 @@
           ></div>
           <linkPage
             class="nav-item"
+            :ctitleColor="value.wgtTextColor"
             v-for="(item, idx) in value.data"
             :key="`nav-item__${idx}`"
             :mode="mode"
@@ -67,7 +68,7 @@ export default {
     height: 40,
     heightDisabled: true,
     wgtTheme: '#000000ff',
-    wgtTextColor: '#ffffffff'
+    wgtTextColor: '#000000ff'
   },
   data() {
     return {
