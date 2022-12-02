@@ -585,6 +585,8 @@ export default {
                 reason: this.formClose.reason,
                 description: this.formClose.description
               }
+              // 目前写死退货退款-快递寄回（return_type = 'logistics'）
+              params.return_type = this.formClose.type=="REFUND_GOODS"? "logistics": ""
               creatAftersales(params).then(() => {
                 this.$Message.success('发起成功')
                 this.dailogClose = false
