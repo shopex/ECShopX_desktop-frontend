@@ -524,6 +524,7 @@ export default {
                 reason: this.formClose.reason,
                 description: this.formClose.description
               }
+              params.return_type = this.formClose.type=="REFUND_GOODS"? "logistics": ""
               creatAftersales(params).then(() => {
                 this.$Message.success('发起成功')
                 this.dailogClose = false

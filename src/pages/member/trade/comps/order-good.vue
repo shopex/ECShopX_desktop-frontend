@@ -260,6 +260,7 @@ export default {
                 reason: this.form.reason,
                 description: this.form.description
               }
+              params.return_type = this.form.type=="REFUND_GOODS"? "logistics": ""
               creatAftersales(params).then(() => {
                 this.$Message.success('发起成功')
                 this.$emit('change')

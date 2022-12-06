@@ -824,6 +824,7 @@ export default {
                     this.getInfo()
                   })
                 } else {
+                  params.return_type = this.formClose.type=="REFUND_GOODS"? "logistics": ""
                   creatAftersales(params).then(() => {
                     this.$Message.success('发起成功')
                     this.getInfo()
