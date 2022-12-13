@@ -138,7 +138,7 @@
                 <div class="p-extra">{{ item.item_spec_desc }}</div>
               </div>
               <div class="goods-price">
-                <SpPrice :value="item.price /100" />
+                <SpPrice :value="item.price / 100" />
               </div>
               <div class="goods-num">{{ `x ${item.num}` }}</div>
             </div>

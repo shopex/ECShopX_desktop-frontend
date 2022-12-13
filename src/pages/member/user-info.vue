@@ -404,7 +404,8 @@ $num-color : #FF5D02;
             <div class="hd-tabs">
               <div class="user-tabs">
                 <template v-for="tab in userTabs">
-                  <div class="tab" :style="{ width: `${100 / userTabs.length}%` }">
+                  <!-- <div class="tab" :style="{ width: `${100 / userTabs.length}%` }"> -->
+                  <div class="tab" :style="{ width: `${100 / (userTabs.length-1)}%` }" v-show="tab.title!='储值余额'">
                     <router-link :to="tab.link">
                       <h4 class="num">
                         <span v-if="tab.icon" class="icon">{{ tab.icon }}</span>
