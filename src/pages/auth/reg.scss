@@ -15,7 +15,7 @@ $reg-pic-w: 555px;
 	.reg-main{
 		background-color: rgba(255, 255, 255, 0.9);
 		width: 350px;
-		height: 410px;
+		height: 430px;
 		justify-content: center;
 		align-items: center;
 		top: 82px;;
@@ -208,6 +208,14 @@ $reg-pic-w: 555px;
 				}
 			}
 		}
+		.reg-protocol {
+			padding: 0 24px;
+			margin-bottom: 16px;
+			.protocol {
+				color: #FF5A00;
+				cursor: pointer;
+			}
+		}
 		.reg-complete {
 				text-align: center;
 				padding: 0 24px;
@@ -243,3 +251,19 @@ $reg-pic-w: 555px;
 	}
 }
 
+.protocol-title {
+	width: 100%;
+	height: 40px;
+	background-color: #eeeeee;
+	border-radius: 8px 8px 0 0;
+	line-height: 40px;
+	text-align: center;
+}
+.protocol-body {
+	padding-bottom: 10px;
+	.protocol-content {
+		padding: 10px;
+		height: 500px;
+		overflow-y: auto;
+	}
+}

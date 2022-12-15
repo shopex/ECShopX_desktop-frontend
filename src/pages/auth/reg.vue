@@ -86,8 +86,12 @@
                     <SpInput v-model="info[name]" :placeholder="item.name" />
                   </SpFormItem>
                 </template>
+                <div class="reg-protocol">
+                  <SpRadio type="checkbox" size="small" v-model="isCkeckTips" theme="#337ab7"/>
+                  已阅读并同意<span class="protocol" @click="handleShowModal('register')">《注册协议》</span>和<span class="protocol" @click="handleShowModal('privacy')">《隐私政策》</span>
+                </div>
               <!-- </template> -->
-              <SpFormItem class="btn-container">
+              <SpFormItem class="btn-container" style="margin-top: 10px;">
                 <!-- <SpButton long type="primary" @click="regBtn('form-reg')" v-if="step == '1'" >下一步</SpButton >
                 <SpButton long type="primary" @click="regBtn('form-reg')" v-if="step == '2'">注册</SpButton
                 > -->
@@ -105,6 +109,15 @@
           </div>
         </div>
     </div>
+    <SpModal v-model="showModal" @Cancel="handleCloseModal" :width="600">
+      <div class="protocol-title">{{protocolType == 'register' ? '《注册协议》' : '《隐私政策》'}}</div>
+      <div class="protocol-body">
+        <div class="protocol-content">
+          <div v-if="protocolType == 'register'" v-html="registerContent" v-lazy-container="{ selector: 'img' }"></div>
+          <div v-else v-html="privacyContent" v-lazy-container="{ selector: 'img' }"></div>
+        </div>
+      </div>
+    </SpModal>
     </div>
 </template>
 <script>
@@ -216,13 +229,29 @@ export default {
       registerParam: [],
       website_name: process.env.VUE_APP_TITLE,
       regSuccess:false,
+      isCkeckTips: false,
+      showModal: false,
+      protocolType: "register",
+      registerContent: "",
+      privacyContent: "",
     }
   },
   mounted() {
     this.yzmImg()
+    this.getRuleInfo()
     // this.getRegisterParam()
   },
   methods: {
+    async getRuleInfo () {
+      const { content: registerContent } = await this.$api.auth.getRuleInfo({
+        type: 'member_register'
+      })
+      const { content: privacyContent } = await this.$api.auth.getRuleInfo({
+        type: 'privacy'
+      })
+      this.registerContent = registerContent;
+      this.privacyContent = privacyContent;
+    },
     async getRegisterParam() {
       const res = await this.$api.auth.getRegisterParam()
       this.registerParam = res
@@ -242,11 +271,22 @@ export default {
     },
     // 注册
     async regBtn(name) {
+      if(!this.isCkeckTips) {
+        this.$Message.error("请先同意注册协议和隐私协议");
+        return
+      }
       this.$refs[name].validate((valid, errors) => {
         if(!valid) return
 
         this.authRegsiter();
       })
+    },
+    handleShowModal(type) {
+      this.protocolType = type;
+      this.showModal = true;
+    },
+    handleCloseModal() {
+      this.showModal = false;
     },
     redirect() {
       const { redirectUrl, fromlogin } = this.$route.query

@@ -64,3 +64,8 @@ export function regEmail (params = {}) {
 export function bindWechatPhone(params={}){
   return req.post('/api/h5app/wxapp/member/bind',params)
 }
+
+// 协议信息获取
+export function getRuleInfo (params = {}) {
+  return req.get('/api/h5app/wxapp/shops/protocol', params)
+}
