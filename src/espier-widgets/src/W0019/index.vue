@@ -174,13 +174,19 @@
 
         console.log(JSON.stringify(shopList));
       },
-      loadScript() {
+      /* loadScript() {
         let script = document.createElement('script')
         script.type = 'text/javascript'
         script.charset = 'utf-8'
         script.src = `https://api.map.baidu.com/api?v=2.0&ak=${baiduKey}&callback=init`
         document.body.appendChild(script)
         console.log("动态加载SDK");
+      }, */
+      loadScript () {
+        let body = document.getElementsByTagName('body')[0];
+        let script = document.createElement('script');
+        script.setAttribute('src',`https://api.map.baidu.com/api?v=2.0&ak=${baiduKey}&callback=init`);
+        body.appendChild(script);
       },
       initMap(id) {
         console.log("地图初始化");
