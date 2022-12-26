@@ -29,7 +29,7 @@ export default {
   },
   data() {
     return {
-      invoiceInfo:this.receiveData.invoice||[]
+      invoiceInfo:this.receiveData.invoice||{}
     }
   },
   computed: {
