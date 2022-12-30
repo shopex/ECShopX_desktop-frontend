@@ -143,6 +143,12 @@
               <div class="goods-num">{{ `x ${item.num}` }}</div>
             </div>
           </div>
+          <div>
+            <SpInput
+            placeholder="给商家留言：选填"
+            v-model="remark"
+            ></SpInput>
+          </div>
         </div>
 
         <div class="content-item">
@@ -382,6 +388,7 @@ export default {
       point_use:0,    //输入的积分
       maxPoint:0,     //可输入的最大值
       dailogMapVisible:false,
+      remark:'',
     }
   },
   mounted() {
@@ -604,6 +611,7 @@ export default {
         promotion: 'normal',
         // receipt_type: 'logistics',
         receipt_type: this.expressType,
+        remark: this.remark,
         point_use:point_use
       }
 
