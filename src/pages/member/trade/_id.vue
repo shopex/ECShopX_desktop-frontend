@@ -74,6 +74,14 @@
         display: inline-block;
         vertical-align: top;
       }
+      .remark_info{
+        padding: 0 10px;
+        h4{
+          font-size: 14px;
+          font-weight: bold;
+          padding-bottom: 10px;
+        }
+      }
     }
   }
   .dailog {
@@ -428,9 +436,15 @@
               <div style="width: 100%;" class="order_message" v-if="(receiveData.invoice!=null &&receiveData.invoice.length!=0)">
                 <InvoiceInfo :receiveData="receiveData"></InvoiceInfo>
               </div>
+              <div style="width: 100%;" class="order_message remark_info" v-if="remark">
+                <p class="bd-border"></p>
+                <h4>备注</h4>
+                <p>{{remark}}</p>
+              </div>
 
               <p class="bd-border"></p>
               <OrderGood :orderGoodData="orderGoodData" :orderTotalData="orderTotalData" @change="getOrderInfo"/>
+
             </div>
           </div>
         </div>
@@ -550,6 +564,7 @@ export default {
       deliveryListsDetails:[],    // 查看物流详情
       dialogLogistics: false,
       zitiInfo: null,
+      remark:''
     }
   },
   computed: {},
@@ -617,8 +632,10 @@ export default {
         ziti_info,    // 自提信息
         ziti_status,    // 自提状态
         ziti_code,      // 自提码
-        end_date
+        end_date,
+        remark ,  // 备注
       } = orderInfo
+      this.remark = remark;
       this.orderGoodData = {
         can_apply_aftersales: orderInfo.can_apply_aftersales,
         detail: orderInfo.items,
