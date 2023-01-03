@@ -144,10 +144,16 @@
       window.init = () => {
         this.initMap()
       }
-
     },
     mounted() {
-      this.loadScript();
+      // 判断是否pc端（调用方法）
+      if(this.$route.name == "index"){
+        this.loadScript();
+        // console.log(this.$route,"route111111111");
+      }else{
+        this.getShopListAdmin();
+        // console.log(this.$route,"route2222222222");
+      }
     },
     methods: {
       handleOverShow(index) {
@@ -174,19 +180,13 @@
 
         console.log(JSON.stringify(shopList));
       },
-      /* loadScript() {
+      loadScript() {
         let script = document.createElement('script')
         script.type = 'text/javascript'
         script.charset = 'utf-8'
         script.src = `https://api.map.baidu.com/api?v=2.0&ak=${baiduKey}&callback=init`
         document.body.appendChild(script)
         console.log("动态加载SDK");
-      }, */
-      loadScript () {
-        let body = document.getElementsByTagName('body')[0];
-        let script = document.createElement('script');
-        script.setAttribute('src',`https://api.map.baidu.com/api?v=2.0&ak=${baiduKey}&callback=init`);
-        body.appendChild(script);
       },
       initMap(id) {
         console.log("地图初始化");
@@ -258,6 +258,29 @@
           list,
           tagList
         } = await this.$api.item.getNearbyShop(params)
+        this.value.data = [];
+        this.shopList = list;
+
+        let length = list.length>=10?10:list.length
+        for (var i = 0; i < length; i++) {
+          this.value.data.push(list[i])
+        }
+        this.value.allTagList = JSON.parse(JSON.stringify(tagList));
+        tagList.unshift({"tag_id":-1,"tag_name":"全部"})
+        this.value.selectTagList = tagList;
+        this.loading = false;
+      },
+      // 给装修器和管理端专用的方法
+      async getShopListAdmin() {
+        const {
+          list,
+          tagList
+        } = await this.$api.item.getNearbyShop({
+          show_discount: 1,
+          company_id: 1,
+          type: 1,
+          sort_type: 1
+        })
         this.value.data = [];
         this.shopList = list;
 
