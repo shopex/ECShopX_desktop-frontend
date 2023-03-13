@@ -230,7 +230,7 @@
           goodsCheckNum = 0
           item.list.forEach((sitem) => {
             if (sitem.is_checked) {
-              total += sitem.total_fee
+              total += Number(sitem.total_fee)
               discount += sitem.discount_fee
               goodsCheckNum++
             } else {
