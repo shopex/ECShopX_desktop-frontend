@@ -187,6 +187,13 @@ $goods-color-primary: #1f201f;
       }
 			.goods-intro{
 				color: red;
+        &__detail {
+          text-align: left;
+          img {
+            width: 100%;
+            display: block;
+          }
+        } 
 			}
     }
   }
