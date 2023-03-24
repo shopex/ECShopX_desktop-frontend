@@ -114,7 +114,8 @@
         }
 				&_logo {
 				  position: relative;
-					left: 77px;
+				  display: inline-block;
+					// left: 77px;
 					top: -30px;
 				  .img-wrap {
 						border-radius:35px;
