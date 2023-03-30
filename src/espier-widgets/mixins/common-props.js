@@ -127,7 +127,7 @@ const LinkMaps = (item) => {
 
   switch (item.linkPage) {
     case 'goods':
-      linkPath = `/items/${item.goods_id}`
+      linkPath = `/items/${item.itemId}`
       break
     case 'page':
       linkPath = item.url
