@@ -19,6 +19,7 @@ import W0018 from './W0018'
 import W0019 from './W0019'
 import W0020 from './W0020'
 import W0021 from './W0021'
+import W0022 from './W0022'
 
 export default {
   W0000,
@@ -42,4 +43,5 @@ export default {
   W0019,
   W0020,
   W0021,
+  W0022,
 }
