@@ -206,9 +206,10 @@ export default {
     },
     onChangePath(data) {
       const goodsData = data.map(item => {
-        const { goods_id,pics, price, item_name, linkPage, linkPageLabel ,market_price} = item
+        const { goods_id, itemId, pics, price, item_name, linkPage, linkPageLabel ,market_price} = item
         return {
           goods_id,
+          itemId,
           goods_pic: pics.length > 0 ? pics[0] : '',
           price: price,
           goods_name: item_name,
