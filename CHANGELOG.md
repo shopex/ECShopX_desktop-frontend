@@ -2,6 +2,67 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.10.1](https://git.ishopex.cn/onex/ecshopx-newpc/compare/v3.10.0...v3.10.1) (2023-03-14)
+
+## [3.10.0](https://git.ishopex.cn/onex/ecshopx-newpc/compare/v3.9.0...v3.10.0) (2023-02-09)
+
+## [3.9.0](https://git.ishopex.cn/onex/ecshopx-newpc/compare/v3.8.0...v3.9.0) (2023-01-05)
+
+## [3.8.0](https://git.ishopex.cn/onex/ecshopx-newpc/compare/v3.7.0...v3.8.0) (2022-12-15)
+
+## [3.7.0](https://git.ishopex.cn/onex/ecshopx-newpc/compare/v3.6.1...v3.7.0) (2022-11-24)
+
+## [3.6.0](https://git.ishopex.cn/onex/ecshopx-newpc/compare/v3.4.0...v3.6.0) (2022-10-31)
+
+## [3.5.0](https://git.ishopex.cn/onex/ecshopx-newpc/compare/v3.4.0...v3.5.0) (2022-09-29)
+
+## [3.4.0](https://git.ishopex.cn/onex/ecshopx-newpc/compare/v3.3.0...v3.4.0) (2022-09-16)
+
+## [3.3.0](https://git.ishopex.cn/onex/ecshopx-newpc/compare/v3.2.1...v3.3.0) (2022-08-31)
+
+### [3.2.1](https://git.ishopex.cn/onex/ecshopx-newpc/compare/v3.2.0...v3.2.1) (2022-08-25)
+
+## [3.2.0](https://git.ishopex.cn/onex/ecshopx-newpc/compare/v3.1.0...v3.2.0) (2022-08-04)
+
+## [3.1.0](https://git.ishopex.cn/onex/ecshopx-newpc/compare/v3.0.0...v3.1.0) (2022-07-21)
+
+
+### Features
+
+* 3.1.0 ([ef0bff5](https://git.ishopex.cn/onex/ecshopx-newpc/commit/ef0bff5862e674cba3e42f7f02d4ebb24efdee4b))
+
+## [2.10.0](https://git.ishopex.cn/onex/ecshopx-newpc/compare/v2.9.0...v2.10.0) (2022-06-23)
+
+
+### Features
+
+* 2.10.0 ([0099412](https://git.ishopex.cn/onex/ecshopx-newpc/commit/0099412d996328a8d91e654adfeb0e0cfcdac553))
+
+## [2.9.0](https://git.ishopex.cn/onex/ecshopx-newpc/compare/v2.8.0...v2.9.0) (2022-06-09)
+
+
+### Features
+
+* 2.9.0 ([484948c](https://git.ishopex.cn/onex/ecshopx-newpc/commit/484948ca8650d0858909e67fb408d9fcf4cf43c9))
+
+## [2.8.0](https://git.ishopex.cn/onex/ecshopx-newpc/compare/v2.7.0...v2.8.0) (2022-05-26)
+
+
+### Features
+
+* 2.8.0 ([9671a24](https://git.ishopex.cn/onex/ecshopx-newpc/commit/9671a24740c3692c534b644da377a96d6c9a693f))
+
+## [2.7.0](https://git.ishopex.cn/onex/ecshopx-newpc/compare/v2.6.3...v2.7.0) (2022-05-12)
+
+
+### Features
+
+* 2.7.0 ([db36624](https://git.ishopex.cn/onex/ecshopx-newpc/commit/db36624112ce32d8d73183b565d239b3bd390c9c))
+
+### [2.6.3](https://git.ishopex.cn/onex/ecshopx-newpc/compare/v2.6.2...v2.6.3) (2022-05-09)
+
+### [2.6.2](https://git.ishopex.cn/onex/ecshopx-newpc/compare/v2.6.1...v2.6.2) (2022-05-09)
+
 ### [1.1.1](https://git.ishopex.cn/onex/ecshopx-newpc/compare/v1.1.0...v1.1.1) (2021-05-13)
 
 
