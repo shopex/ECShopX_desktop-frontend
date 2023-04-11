@@ -191,9 +191,10 @@ export default {
         filterMenu: ['goods'],
         activeKey: 'goods_id'
       })
-      const { goods_id,pics, price, item_name, linkPage, linkPageLabel ,market_price} = data
+      const { goods_id, itemId, pics, price, item_name, linkPage, linkPageLabel ,market_price} = data
       const goodsData = {
         goods_id,
+        itemId,
         goods_pic: pics.length > 0 ? pics[0] : '',
         price: price,
         goods_name: item_name,
