@@ -389,7 +389,7 @@ $num-color : #FF5D02;
               />
               <div class="avatar-name">
                 <div>{{ memberInfo.username }}</div>
-                <div class="title">{{ vipgrade.guide_title }}</div>
+                <div class="title" v-if="vipgrade.is_vip">{{ vipgrade.guide_title }}</div>
               </div>
               <div class="avatar-info">
                 <div class="title">尊享VIP
