@@ -90,12 +90,20 @@ export default {
       const { activeElement } = this
       data.forEach((item, index) => {
         console.log(JSON.stringify(item))
-        const obj = item.pathData
-          ? item
-          : {
-              ...item,
-              pathData: {}
-            }
+        // const obj = item.pathData
+        //   ? item
+        //   : {
+        //       ...item,
+        //       pathData: {}
+        //     }
+        const obj = {
+          pathData: {},
+          ...this.activeElement.data[index],
+          heightPer: item.heightPer,
+          leftPer: item.leftPer,
+          topPer: item.topPer,
+          widthPer: item.widthPer
+        }
         Vue.set(activeElement.data, index, obj)
       })
     },
