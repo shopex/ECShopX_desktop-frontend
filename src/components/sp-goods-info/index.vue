@@ -273,7 +273,7 @@
         <div class="r-w">
           <div class="r-c-label">{{ info | FilterPriceLabel }}</div>
           <SpPrice :value="filterPrice(info)" size="large" />
-          <SpPrice class="market-price" :value="info.market_price / 100" />
+          <SpPrice class="market-price" :value="(curSku ? curSku.market_price : info.market_price) / 100" />
         </div>
         <div class="r-w open-vip" v-if="info.vipgrade_guide_title">
           开通
