@@ -739,7 +739,7 @@ export default {
         if(this.orderData.total_fee===0){
           console.log(this.orderData.total_fee===0);
           // 积分抵扣支付
-          this.$router.push({ path: `/finish/result?id=${order_id}` })
+          this.$router.push({ path: `/finish/result?order_id=${order_id}` })
         }else{
           // 正常支付
           this.$router.push({ path: `/cashier?order_id=${order_id}` })
