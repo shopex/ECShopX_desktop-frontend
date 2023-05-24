@@ -226,8 +226,8 @@ export default {
       }
     },
     async fetch() {
-      const { id } = this.$route.query
-      const { orderInfo, tradeInfo } = await getOrderInfo({ id })
+      const { order_id } = this.$route.query
+      const { orderInfo, tradeInfo } = await getOrderInfo({ id: order_id })
       const { order_class } = orderInfo
       const { tradeState, orderId } = tradeInfo
       this.tradeState = tradeState === 'SUCCESS' ? 1 : 0
