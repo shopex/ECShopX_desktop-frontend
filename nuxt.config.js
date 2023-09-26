@@ -101,9 +101,9 @@ module.exports = {
     // '~/plugins/analytics',
     '~/plugins/axios',
     { src: '~/plugins/vue-swiper.js' },
-    { src: '~plugins/vue-infinite-scroll', ssr: false }, 
+    { src: '~plugins/vue-infinite-scroll', ssr: false },
     { src: '~/plugins/route', ssr: true }
-   
+
   ],
 
   serverMiddleware: [],
