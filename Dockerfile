@@ -30,7 +30,7 @@ COPY package*.json ./
 # RUN npm config set registry https://registry.npmmirror.com && npm config set @shopex:registry http://registry.npm.ishopex.cn
 # RUN npm config set sass_binary_site https://npm.taobao.org/mirrors/node-sass/ && npm config set @shopex:registry http://registry.npm.ishopex.cn
 RUN npm config set registry https://registry.npmmirror.com && npm config set sass_binary_site https://npm.taobao.org/mirrors/node-sass/ && npm config set @shopex:registry http://registry.npm.ishopex.cn
-RUN npm ci
+RUN npm i
 
 COPY . .
 
