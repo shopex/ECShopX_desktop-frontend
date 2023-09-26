@@ -1,4 +1,7 @@
-FROM node:12.19.1-alpine3.12 AS builder
+FROM node:lts-alpine3.9
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories \
+    && apk --no-cache add ca-certificates tzdata
+
     
 ARG CMD
 ARG VUE_APP_TITLE
@@ -24,8 +27,8 @@ ENV VUE_APP_SAAS ${VUE_APP_SAAS}
 WORKDIR /app
 COPY package*.json ./
 
-#RUN npm config set registry https://registry.npm.taobao.org && npm config set @shopex:registry http://registry.npm.ishopex.cn
-RUN npm config set registry https://registry.npmmirror.com && npm config set sass_binary_site https://npm.taobao.org/mirrors/node-sass/ && npm config set @shopex:registry http://registry.npm.ishopex.cn
+RUN npm config set registry https://registry.npmmirror.com && npm config set @shopex:registry http://registry.npm.ishopex.cn
+# RUN npm config set registry https://registry.npmmirror.com && npm config set sass_binary_site https://npm.taobao.org/mirrors/node-sass/ && npm config set @shopex:registry http://registry.npm.ishopex.cn
 RUN npm ci
 
 COPY . .
