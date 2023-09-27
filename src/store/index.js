@@ -113,8 +113,8 @@ export const actions = {
       // console.log("[token]:", token);
       // S.set("token", token);
 
-      const token = app.$cookies.get('ECSHOPX_TOKEN')
-      commit('user/setToken', token)
+      // const token = app.$cookies.get('ECSHOPX_TOKEN')
+      // commit('user/setToken', token)
     } catch (e) {
       // console.error(e)
     }
