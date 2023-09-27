@@ -126,6 +126,8 @@ class CreateAxios {
           return qs.stringify(data)
         }
       ]
+
+      console.log('interceptors.request:', config)
       return config
     })
 

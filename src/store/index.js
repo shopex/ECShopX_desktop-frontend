@@ -107,7 +107,7 @@ export const actions = {
     // }catch(err){
     //   console.log(err)
     // }
-
+    console.log('req.headers', req.headers)
     try {
       // const token = unescape(cookie.match(reg)[2]);
       // console.log("[token]:", token);
