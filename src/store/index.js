@@ -118,7 +118,7 @@ export const actions = {
     } catch (e) {
       // console.error(e)
     }
-
+    console.log('promise staring...')
     const [headerTemplate, bodyTemplate, footerTemplate, seoInfo] = await Promise.all([
       app.$api.theme.getHeaderOrFooter({
         page_name: 'header'
@@ -129,7 +129,7 @@ export const actions = {
       } ),
       app.$api.global.getGlobalTdk()
     ] )
-
+    console.log('promise ending...')
     commit('setSeoInfo', seoInfo)
 
     const _bodyTemplate = []

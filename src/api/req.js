@@ -66,6 +66,7 @@ class CreateAxios {
     this.inst.defaults.baseURL = process.env.VUE_APP_API_BASE_URL || '/'
     this.inst.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
     this.inst.interceptors.request.use((config) => {
+      console.log('interceptors.request 1:', config)
       // console.log(config);
       const isGetMethod = config.method === 'get'
       const showError = config.showError === undefined ? true : config.showError
@@ -127,7 +128,7 @@ class CreateAxios {
         }
       ]
 
-      console.log('interceptors.request:', config)
+      console.log('interceptors.request 2:', config)
       return config
     })
 

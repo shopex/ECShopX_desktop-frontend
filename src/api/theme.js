@@ -17,6 +17,7 @@ export function getTemplateContent(params) {
 
 // 获取头部尾部
 export function getHeaderOrFooter(params) {
+  console.log('getHeaderOrFooter', params);
   let url = "/api/h5app/wxapp/pctemplate/getHeaderOrFooter";
   return req.get(url, {
     ...params
