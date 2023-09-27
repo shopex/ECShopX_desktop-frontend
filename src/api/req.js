@@ -136,9 +136,10 @@ class CreateAxios {
           status,
           config: { showError }
         } = res
+        console.log('interceptors:', status)
         if (process.server) {
           const req = res.request
-          // console.log(`server request: [${req.method}] ${req.res.responseUrl}`)
+          console.log(`server request: [${req.method}] ${req.res.responseUrl}`)
         }
         // console.log('status:', status)
         if (status === 200) {
