@@ -11,8 +11,8 @@
 <template>
 
   <div class="system-auth">
-    <auth-header :logo="logo"/>
-    <div class="page-body" :style="{ background: `url(${bg}) no-repeat center center` }">
+    <auth-header :logo="logo" />
+    <div class="page-body" :style="{ backgroundImage: `url(${bg})` }">
       <Nuxt />
     </div>
     <sp-footer />
@@ -25,6 +25,8 @@ import "@/main";
 import { mapActions, mapState } from "vuex";
 import { Tracker } from "@/service";
 import { isNativeBrower } from "@/utils";
+import backgroundImage from '@/assets/imgs/login_background.png'
+import logoImage from '@/assets/imgs/login_yundian.jpg'
 
 export default {
   data() {
@@ -71,13 +73,19 @@ export default {
     },
 
     async getPic() {
-      console.log(window.location.host, 123)
       const params = { domain: window.location.host }
       const { background, logo } = await this.$api.shop.getLoginPic(params)
-      this.bg = background
-      this.logo = logo
+      this.bg = background || backgroundImage
+      this.logo = logo || logoImage
     }
-  },
+  }
 
 };
 </script>
+<style lang="scss" scoped>
+.page-body {
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+</style>
