@@ -1,26 +1,14 @@
-# espier-pc-v2
+node版本: v12.20.1
+package-lock.json 文件请勿删除
 
-## 项目安装
-```
+# 安装依赖
 npm install
-```
-### 开发环境
-```
+
+# 启动
 npm run dev
-```
-### 编译不同模版
-```
-npm run dev --t=custome
-```
 
-### 生产环境
-```
+# 打包
 npm run build
-```
 
-
-### 运行测试
-```
-npm run test
-```
-
+# 启动打包后的项目
+npm run start
