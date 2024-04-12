@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.14.1](https://git.ishopex.cn/onex/ecshopx-newpc/compare/v3.14.0...v3.14.1) (2024-04-12)
+
+
+### Features
+
+* 登录页logo、背景图，支持后台配置 ([4ff9b07](https://git.ishopex.cn/onex/ecshopx-newpc/commit/4ff9b07cea9c71e9cbaa29466a250d47d1dbbac5))
+
 ## [3.14.0](https://git.ishopex.cn/onex/ecshopx-newpc/compare/v3.13.5...v3.14.0) (2024-03-11)
 
 ### [3.13.5](https://git.ishopex.cn/onex/ecshopx-newpc/compare/v3.13.4...v3.13.5) (2024-03-10)
