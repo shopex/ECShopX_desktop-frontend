@@ -1,12 +1,12 @@
 <style lang="scss" src="./reg.scss"></style>
 <template>
   <div class="page-auth-reg container">
-    <div class="reg-logo">
+    <!-- <div class="reg-logo">
       <img
         referrerpolicy="no-referrer"
         src="../../assets/imgs/login_logo.png"
       />
-    </div>
+    </div> -->
     <div class="reg-main">
       <div class="reg-title">用户注册</div>
       <div class="auth reg">

@@ -11,8 +11,8 @@
 <template>
 
   <div class="system-auth">
-    <auth-header/>
-    <div class="page-body" >
+    <auth-header :logo="logo"/>
+    <div class="page-body" :style="{ background: `url(${bg}) no-repeat center center` }">
       <Nuxt />
     </div>
     <sp-footer />
@@ -22,11 +22,16 @@
 
 <script>
 import "@/main";
-import { mapActions,mapState } from "vuex";
+import { mapActions, mapState } from "vuex";
 import { Tracker } from "@/service";
 import { isNativeBrower } from "@/utils";
 
 export default {
+  data() {
+    return {
+      bg: ''
+    }
+  },
   watch: {
     $route(to, from) {
       // 对路由变化作出响应...
@@ -35,7 +40,7 @@ export default {
       }
     }
   },
-   computed: {
+  computed: {
     ...mapState({
       userInfo: state => state.user.userInfo,
       wgts: state => {
@@ -46,6 +51,7 @@ export default {
     })
   },
   created() {
+    this.getPic()
   },
   mounted() {
     if (this.$device.isMobile && location.pathname !== "/h5") {
@@ -57,12 +63,19 @@ export default {
     });
   },
   methods: {
-     handleCallback(params) {
-      if(params){
-        let keywords=params.data.keyword
+    handleCallback(params) {
+      if (params) {
+        let keywords = params.data.keyword
         this.$router.push(`/items?keywords=${keywords}`)
       }
+    },
 
+    async getPic() {
+      console.log(window.location.host, 123)
+      const params = { domain: window.location.host }
+      const { background, logo } = await this.$api.shop.getLoginPic(params)
+      this.bg = background
+      this.logo = logo
     }
   },
 

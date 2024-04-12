@@ -14,7 +14,7 @@
       <img
         class="login-header-logo"
         referrerpolicy="no-referrer"
-        src="https://lanhu.oss-cn-beijing.aliyuncs.com/SketchPng82d0e80cee245fcf9d2458c56afe5dabeae1c543ebaa429c5c10dfc2457cb444"/>
+        :src="logo"/>
     </NuxtLink>
       <div class="login-header-span">
         <span class="login-header-span1">还没有账号</span>
@@ -42,6 +42,9 @@ export default {
       showSubNav: null,
       message: ""
     };
+  },
+  props: {
+    logo: ''
   },
   watch: {
     $route() {

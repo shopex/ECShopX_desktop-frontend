@@ -1,8 +1,10 @@
 .system-auth{
-	background-color: #FF9916;
+	// background-color: #FF9916;
 	.page-body{
 		height: 690px;
 		align-items: center;
-		width: 1190px;
+		// width: 1190px;
+		width: 100%;
+		min-width: 1190px;
 	}
 }

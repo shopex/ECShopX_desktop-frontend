@@ -15,3 +15,7 @@ export function getShop (params = {}) {
 export function getNearbyShop (params) {
   return req.get('/api/h5app/wxapp/distributor/list', params,{ withAuth: true })
 }
+// 获取登录页图片
+export function getLoginPic(params) {
+  return req.get('/api/h5app/wxapp/shops/setting', params)
+}

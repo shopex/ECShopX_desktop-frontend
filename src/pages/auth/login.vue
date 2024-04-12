@@ -2,12 +2,12 @@
 
 <template>
 <div class="page-auth-login container">
-  <div class="login-logo">
-    <img
+  <!--<div class="login-logo">
+     <img
       referrerpolicy="no-referrer"
       src="../../assets/imgs/login_logo.png"
-    />
-  </div>
+    /> 
+  </div> -->
   <div class="login-main">
     <div class="login-title ">
       用户登录

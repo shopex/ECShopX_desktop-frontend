@@ -2,12 +2,12 @@
 
 <template>
   <div class="page-password container">
-    <div class="form-logo">
+    <!-- <div class="form-logo">
       <img
         referrerpolicy="no-referrer"
         src="../../assets/imgs/login_logo.png"
       />
-    </div>
+    </div> -->
     <div class="form-main">
       <div class="form-title">忘记密码</div>
       <SpForm ref="form-forget-password" :model="info" :rules="rules">
