@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.15.1](https://git.ishopex.cn/onex/ecshopx-newpc/compare/v3.15.0...v3.15.1) (2024-07-12)
+
+
+### Bug Fixes
+
+* 添加储值支付 ([c74f28c](https://git.ishopex.cn/onex/ecshopx-newpc/commit/c74f28cd9b5ec1bffed7ed225e737d258ef8440a))
+
 ## [3.15.0](https://git.ishopex.cn/onex/ecshopx-newpc/compare/v3.14.1...v3.15.0) (2024-07-08)
 
 ### [3.14.1](https://git.ishopex.cn/onex/ecshopx-newpc/compare/v3.14.0...v3.14.1) (2024-04-12)
