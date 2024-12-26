@@ -123,7 +123,7 @@
       font-size: 25px;
     }
   }
-  
+
   .delivery{
     height:260px;
     overflow-y: auto;
@@ -295,8 +295,18 @@
       }
     }
   }
+
+  .btn-warp2 {
+    display: flex;
+    justify-content: center;
+    .btn {
+      width: auto;
+      padding: 0 12px;
+      margin-right: 8px;
+    }
+  }
   .btn-warp-bt {
-    position: relative;
+    // position: relative;
     bottom: -30px;
     cursor: pointer;
     i {
@@ -348,15 +358,16 @@
                 <span v-if="!(orderStatus=='PAYED'&&receiveData.ziti_status=='PENDING') && orderInfo.order_status_des == 'NOTPAY'">
                   <i class="ec-icon ec-icon-time"></i>剩余{{ cancelTime }}
                 </span>
-                <div class="btn-warp">
+                <div class="btn-warp btn-warp2">
                   <button class="btn" @click="clickBtn('付款')" v-if="step == 1 && orderInfo.pay_type != 'point'">付 款</button>
+                  <button class="btn" @click="clickBtn('付款')" v-if="step == 1 && orderInfo.pay_type != 'point' && orderStatus == 'NOTPAY' && orderInfo.offline_pay_check_status == 2"> 修改付款凭证</button>
                   <button class="btn" v-if="step == 3" @click="clickBtn('确认收货')">确认收货</button>
                 </div>
                 <div class="btn-warp-bt" @click="clickBtn('取消订单')" v-if="step == 1 || step == 2">
                   <i class="ec-icon ec-icon-roundclose"> 取消订单</i>
                 </div>
                 <!-- 判断是待提货及有无提货码状态下 -->
-                <div v-if="(orderStatus=='PAYED'&&receiveData.ziti_status=='PENDING') && (zitiInfo&&zitiInfo.pickup_code)"> 
+                <div v-if="(orderStatus=='PAYED'&&receiveData.ziti_status=='PENDING') && (zitiInfo&&zitiInfo.pickup_code)">
                   <h4 style="font-size:16px;font-weight: bold;">提货码：{{ zitiInfo.pickup_code }} </h4>
                   <div style="color:rgb(153 153 153);font-size:12px;font-weight: 400;">提货时请出告知店员提货验证码</div>
                 </div>
@@ -430,7 +441,7 @@
               </div>
               <!-- 付款信息 -->
               <div style="width: 45%;" class="order_message" v-if="orderStatus && orderStatus !== 'CANCEL'">
-                <PayInfo :receiveData="receiveData"></PayInfo>
+                <PayInfo :receiveData="receiveData" @viewCertificate="clickBtn('付款','isView')"></PayInfo>
               </div>
               <!-- 发票信息 -->
               <div style="width: 100%;" class="order_message" v-if="(receiveData.invoice!=null &&receiveData.invoice.length!=0)">
@@ -633,6 +644,8 @@ export default {
         ziti_status,    // 自提状态
         ziti_code,      // 自提码
         end_date,
+        offline_pay_name,
+        offline_pay_check_status,
         remark ,  // 备注
       } = orderInfo
       this.remark = remark;
@@ -656,6 +669,8 @@ export default {
         delivery_corp_name,
         delivery_code,
         pay_type,
+        offline_pay_name,
+        offline_pay_check_status,
         create_time,
         payDate,
         invoice,
@@ -745,7 +760,7 @@ export default {
           break
       }
       this.activities = activities
-      if (this.step == 4 && ziti_code && ziti_code!=0) { 
+      if (this.step == 4 && ziti_code && ziti_code!=0) {
         // 自提完成时间轴
         this.activities = [
           {
@@ -761,7 +776,7 @@ export default {
             AcceptTime: create_time
           }
         ]
-      }else if (this.step == 4 || this.step == 3) { 
+      }else if (this.step == 4 || this.step == 3) {
         deliveryInfo({delivery_id:delivery_id }).then((res) => {
           activities = [
             {
@@ -785,10 +800,14 @@ export default {
         this.deliveryListsDetails = res
       })
     },
-    clickBtn(type) {
+    clickBtn(type,isView) {
       switch (type) {
         case '付款':
-          this.$router.push(`/cashier?order_id=${this.$route.params.id}`)
+          let _url = `/cashier?order_id=${this.$route.params.id}&has_check=${this.orderInfo.offline_pay_check_status !== null}`;
+          if(isView){
+            _url += '&isView=true'
+          }
+          this.$router.push(_url)
           break
         case '确认收货':
           confirmOrder({

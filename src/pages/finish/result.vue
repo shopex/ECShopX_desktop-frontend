@@ -125,6 +125,7 @@ $finish-fail-color: #e23038;
     </div>
     <div class="container container-finish-success" v-else>
       <div
+        v-if="!isOfflinePay"
         :class="{
           'ec-icon2': true,
           'ec-icon2-chenggong': tradeState === 1,
@@ -133,7 +134,16 @@ $finish-fail-color: #e23038;
       ></div>
       <div class="content-right-wrapper">
         <div class="trade-status__title">
-          订单支付{{ tradeState === 1 ? '成功' : '失败' }}！我们将尽快为您处理
+          <template v-if="!isOfflinePay">
+            订单支付{{ tradeState === 1 ? '成功' : '失败' }}！我们将尽快为您处理
+          </template>
+          <template v-if="isOfflinePay">
+            {{
+              offlinePayCheckStatus == 0 ?
+              '等待商家确认支付' :
+              `订单支付${ tradeState === 1 ? '成功' : '失败' }！我们将尽快为您处理`
+            }}
+          </template>
         </div>
         <div class="trade-status__content">
           <div class="trade-status__orderinfo">
@@ -180,7 +190,9 @@ export default {
       //1 普通商品 2 积分商品
       orderClass: 1,
       totalFee: 0,
-      guessLikeList: []
+      guessLikeList: [],
+      isOfflinePay: false,
+      offlinePayCheckStatus: null
     }
   },
   methods: {
@@ -234,6 +246,8 @@ export default {
       this.orderId = orderId
       this.tradeInfo = tradeInfo
       this.orderClass = order_class === 'normal' ? 1 : 2
+      this.isOfflinePay = orderInfo.pay_type == 'offline_pay'
+      this.offlinePayCheckStatus = orderInfo.offline_pay_check_status
     },
     setRouteParams() {
       const { order_id, order_class, total_fee, pay_status } = this.$route.query

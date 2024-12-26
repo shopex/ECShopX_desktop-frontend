@@ -122,6 +122,13 @@
                                 付款
                               </div>
                               <div
+                                class="btn btn-primary btn-long-txt"
+                                @click="clickBtn('付款', child)"
+                                v-if="child.orderStatus == 'NOTPAY' && child.offlinePayCheckStatus == 2"
+                              >
+                                修改付款凭证
+                              </div>
+                              <div
                                 class="btn btn-primary"
                                 @click="clickBtn('确认收货', child)"
                                 v-if="child.orderStatus == 'WAIT_BUYER_CONFIRM'"
@@ -441,6 +448,7 @@ export default {
           order: item.order_id,
           children: item.items,
           orderStatus: item.order_status_des,
+          offlinePayCheckStatus: item.offline_pay_check_status,
           total_fee: item.total_fee,
           shop_name: item.distributor_name,
           receiver_name: item.receiver_name,
@@ -519,7 +527,7 @@ export default {
     clickBtn(type, item) {
       switch (type) {
         case '付款':
-          this.$router.push(`/cashier?order_id=${item.order}`)
+          this.$router.push(`/cashier?order_id=${item.order}&has_check=${item.offlinePayCheckStatus !== null}`)
           break
         case '确认收货':
           confirmOrder({
@@ -833,10 +841,16 @@ export default {
   width: 70px;
   text-align: center;
   line-height: 32px;
+  // padding: 6px 0;
+  // box-sizing: border-box;
   border: 1px solid $color-border-gray-light;
   &:hover {
     background-color: $color-border-gray-light;
   }
+}
+.btn-long-txt{
+  height: auto;
+  line-height: inherit;
 }
 .btn-primary {
   background-color: $color-brand-primary;

@@ -156,3 +156,25 @@ export function geticket(params) {
     ...params
   })
 }
+
+//获取收款账户
+export function getBackaccount(params) {
+  return req.get('/api/h5app/wxapp/order/offline/backaccount', {
+    ...params
+  })
+}
+
+//上传凭证
+export function uploadVoucher(params) {
+  return req.post('/api/h5app/wxapp/order/offline/upload/voucher', params)
+}
+
+//更新凭证
+export function updateVoucher(params) {
+  return req.post('/api/h5app/wxapp/order/offline/update/voucher', params)
+}
+
+//获取凭证
+export function getVoucher(params) {
+  return req.get('/api/h5app/wxapp/order/offline/get/voucher', params)
+}

@@ -124,6 +124,24 @@
           </div>
         </div>
 
+        <div class="content-body clearfix">
+        <div class="content-item">
+          <h4 class="content-item-hd">选择支付方式</h4>
+          <div class="content-item-bd address">
+            <!-- expressType: {{expressType}} -->
+            <SpBtnPickerGroup v-model="paymentType" @onChange="onChangePaymentType">
+              <SpBtnPicker
+                v-for="(item, index) in paymentTypeList"
+                :value="item.value"
+                :key="`btn-item__${index}`"
+                :theme="themeColor"
+                >{{ item.name }}</SpBtnPicker
+              >
+            </SpBtnPickerGroup>
+          </div>
+        </div>
+        </div>
+
         <div class="content-item">
           <h4 class="content-item-hd">商品清单</h4>
           <div class="content-item-bd goods-list">
@@ -355,6 +373,8 @@ export default {
       curAddress: null,
       couponList: [],
       coupon: '',
+      paymentType: 'wxpaypc',
+      paymentTypeList: [{name:'在线支付',value:'wxpaypc'},{name:'线下支付',value:'offline_pay'}],
       zitiAddress: null,
       zitiList: null,
       zitiCut:false,
@@ -399,7 +419,7 @@ export default {
     ...mapActions({
       CART_GETINFO: 'cart/CART_GETINFO'
     }),
-    
+
     initMap (val) {
       this.dailogMapVisible = true
       let { lat,lng } = val
@@ -480,6 +500,9 @@ export default {
       // const { list } = await this.$api.member.getUserCardList(params)
       this.couponList = list
     },
+    onChangePaymentType(){
+
+    },
     // 获取地址列表
     async getAddressList() {
       const { list } = await this.$api.member.addressList()
@@ -525,7 +548,7 @@ export default {
       if(this.expressType == "ziti"){
         const { mode,id } = this.$route.query
         let position = JSON.parse(localStorage.getItem('position'))
-        
+
         // 获取自提点列表
         const { list } = await this.$api.member.pickuplocation({
           lat:position.point.lat,
@@ -597,11 +620,13 @@ export default {
       const { id, mode, order_type, seckill_id, ticket } = this.$route.query
       const { defaultAddress, coupon,point_use } = this
       let pay_type = 'wxpaypc'
+
       if(this.point_use > 0 && this.orderData.total_fee == 0){   // 判断是否积分支付
         pay_type = 'point'
       }else{
-        pay_type = "wxpaypc"
+        pay_type = this.paymentType
       }
+
       let params = {
         distributor_id: id,
         cart_type: mode,
@@ -786,7 +811,7 @@ export default {
       val.hours.map(ele=>{
         this.zitiTimeList.push({ label:ele[0]+'-'+ele[1], value:ele})
       })
-      
+
       // 选择列表--日期
       this.zitiDateList = []
       let pkc = this.dateFilter()
@@ -823,7 +848,7 @@ export default {
     getTimeFil(){
       let hh = new Date().getHours();
       let mf = new Date().getMinutes() < 10 ? '0' + new Date().getMinutes() : new Date().getMinutes();
-      let time = String(hh) + String(mf) 
+      let time = String(hh) + String(mf)
       let list = []
       this.zitiTimeList.map(ele=>{
         if(time < ele.value[1].replace(':','')){    // 筛选可选的时间段中当前时间已不可选的时间段
