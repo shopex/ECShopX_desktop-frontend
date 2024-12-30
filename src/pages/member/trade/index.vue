@@ -117,7 +117,7 @@
                               <div
                                 class="btn btn-primary"
                                 @click="clickBtn('付款', child)"
-                                v-if="child.orderStatus == 'NOTPAY'"
+                                v-if="child.offlinePayCheckStatus != 0 && child.orderStatus == 'NOTPAY' "
                               >
                                 付款
                               </div>
@@ -165,7 +165,7 @@
                               <div
                                 class="ly-fn-a"
                                 @click="clickBtn('取消订单', child)"
-                                v-if="child.orderStatus == 'NOTPAY' || child.orderStatus == 'PAYED' || child.orderStatus == 'PAYED_PENDING'"
+                                v-if="child.offlinePayCheckStatus != 0 && (child.orderStatus == 'NOTPAY' || child.orderStatus == 'PAYED' || child.orderStatus == 'PAYED_PENDING')"
                               >
                                 取消订单
                               </div>

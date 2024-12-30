@@ -421,7 +421,7 @@ export default {
       const { order_id } = this.$route.query
       const accountRes = await this.$api.cart.getVoucher({order_id})
       console.log('accountRes',accountRes);
-      const {bank_account_name,id,check_status,remark,update_time,bank_account_no,bank_name,china_ums_no,pay_sn,voucher_pic,transfer_remark} = accountRes;
+      const {bank_account_id,id,check_status,remark,update_time,bank_account_no,bank_name,china_ums_no,pay_sn,voucher_pic,transfer_remark} = accountRes;
       this.transferInfo = {
         ...this.transferInfo,
         pay_sn,
@@ -434,7 +434,7 @@ export default {
         remark,
         update_time:moment(update_time * 1000).format('YYYY-MM-DD HH:mm:ss')
       }
-      this.accountId = this.accountList.find(item=>item.bank_account_name ==  bank_account_name)?.id
+      this.accountId = bank_account_id
 
     },
     async getBackaccount(){
@@ -539,15 +539,12 @@ export default {
     async handleVoucherFunc(){
       const { has_check, order_id } = this.$route.query
       console.log(this.transferInfo,this.isPayment,order_id)
-      const {bank_account_name,bank_account_no,bank_name,china_ums_no} = this.accountList.find(item=>item.id ==  this.accountId) ?? {}
+      // const {bank_account_name,bank_account_no,bank_name,china_ums_no} = this.accountList.find(item=>item.id ==  this.accountId) ?? {}
       const params = {
         ...this.transferInfo,
-
         order_id,
-        bank_account_name,
-        bank_account_no,
-        bank_name,china_ums_no,
-        pay_fee:this.transferInfo.total_fee
+        bank_account_id: this.accountId,
+        pay_fee: this.transferInfo.total_fee
       }
       console.log('params',params)
       if(has_check == 'true'){

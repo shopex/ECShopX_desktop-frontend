@@ -140,7 +140,7 @@ $finish-fail-color: #e23038;
           <template v-if="isOfflinePay">
             {{
               offlinePayCheckStatus == 0 ?
-              '等待商家确认支付' :
+              '待商家确认' :
               `订单支付${ tradeState === 1 ? '成功' : '失败' }！我们将尽快为您处理`
             }}
           </template>

@@ -352,18 +352,18 @@
               <div class="status-code">
                 订单号：{{ orderInfo.order_id }}
                 <div class="status-text">
-                  {{ orderStatus=='PAYED'&&receiveData.ziti_status=='PENDING'? '待自提': orderStatusText[orderInfo.order_status_des] }}
+                  {{orderStatusTextFunc()}}
                 </div>
                 <!-- <span v-if="orderStatus=='PAYED'&&receiveData.ziti_status=='PENDING'">请尽快前往自提点自提</span> -->
                 <span v-if="!(orderStatus=='PAYED'&&receiveData.ziti_status=='PENDING') && orderInfo.order_status_des == 'NOTPAY'">
                   <i class="ec-icon ec-icon-time"></i>剩余{{ cancelTime }}
                 </span>
                 <div class="btn-warp btn-warp2">
-                  <button class="btn" @click="clickBtn('付款')" v-if="step == 1 && orderInfo.pay_type != 'point'">付 款</button>
+                  <button class="btn" @click="clickBtn('付款')" v-if="step == 1 && orderInfo.pay_type != 'point' && orderInfo.offline_pay_check_status != '0'">付 款</button>
                   <button class="btn" @click="clickBtn('付款')" v-if="step == 1 && orderInfo.pay_type != 'point' && orderStatus == 'NOTPAY' && orderInfo.offline_pay_check_status == 2"> 修改付款凭证</button>
                   <button class="btn" v-if="step == 3" @click="clickBtn('确认收货')">确认收货</button>
                 </div>
-                <div class="btn-warp-bt" @click="clickBtn('取消订单')" v-if="step == 1 || step == 2">
+                <div class="btn-warp-bt" @click="clickBtn('取消订单')" v-if="(step == 1 || step == 2) && orderInfo.offline_pay_check_status != '0'">
                   <i class="ec-icon ec-icon-roundclose"> 取消订单</i>
                 </div>
                 <!-- 判断是待提货及有无提货码状态下 -->
@@ -838,6 +838,16 @@ export default {
           })
           break
       }
+    },
+    orderStatusTextFunc(){
+      if(this.orderStatus=='PAYED'&& this.receiveData.ziti_status=='PENDING'){
+        return '待自提'
+      }else if(this.orderInfo.offline_pay_check_status == 0){
+        return '待商家确认'
+      }else{
+        return this.orderStatusText[this.orderInfo.order_status_des]
+      }
+
     },
     timers() {
       let theTime = parseInt(this.auto_cancel_seconds) // 需要转换的时间秒
