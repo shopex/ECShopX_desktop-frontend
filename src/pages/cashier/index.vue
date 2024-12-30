@@ -264,6 +264,7 @@
                 :value="item.id"
                 :key="`btn-item__${index}`"
                 :theme="themeColor"
+                :disabled="isView"
               >
               <div class="account-box">
                 <img class="account-box-left" :src="item.pic" alt="" width="100%" />
@@ -307,10 +308,10 @@
                 <div class="upload">
                     <input type="file" ref="input" class="input" @change="(e)=>changeUpload(e)"></input>
                         <div  v-for="(pic,idx) in transferInfo.voucher_pic" class="spimg-item" :key="idx" >
-                            <SpImg class="spimg1" :src="pic" no-size  />
-                            <div class="spimg-item-delete" @click="handlePicDelete(idx)">x</div>
+                            <SpImg class="spimg1" :src="pic" no-size @click="handleVerPicClick(pic)"   />
+                            <div class="spimg-item-delete" v-if='!isView' @click="handlePicDelete(idx)">x</div>
                         </div>
-                    <div class="input-icon" v-if="this.transferInfo.voucher_pic.length < 6" @click="clickUpLoad()"><i class="ec-icon ec-icon-camera"></i></div>
+                    <div class="input-icon" v-if="!isView && this.transferInfo.voucher_pic.length < 6" @click="clickUpLoad()"><i class="ec-icon ec-icon-camera"></i></div>
                 </div>
                 <div v-if="!transferInfo.voucher_pic.length && rulesShow" class="form-item__error-message">
                   请选择凭证图片
@@ -456,6 +457,10 @@ export default {
         this.paymentType = pay_type
       }
 
+    },
+    handleVerPicClick(url){
+      if(!this.isView)return
+      window.open(url,'_blank')
     },
     async getPaymentList() {
       let params = { platform: 'pc' }
