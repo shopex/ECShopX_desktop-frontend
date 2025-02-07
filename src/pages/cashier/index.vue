@@ -316,7 +316,7 @@
                 <div v-if="!transferInfo.voucher_pic.length && rulesShow" class="form-item__error-message">
                   请选择凭证图片
                 </div>
-                <div class="upload-pic-tips">支持png、jpg、gif、jpeg格式文件</div>
+                <div class="upload-pic-tips">最多上传6张图片（支持png、jpg、gif、jpeg格式文件）</div>
               </SpFormItem>
 
             </SpForm>

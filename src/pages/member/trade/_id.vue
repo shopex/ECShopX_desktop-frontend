@@ -41,6 +41,8 @@
     background-color: $color-brand-primary;
     border: 1px solid $color-brand-primary;
     color: #fff;
+    box-shadow: 1px 1px 4px #888888;
+    box-shadow: 1px 1px 4px #888888;
     &:hover {
       background-color: $color-brand-primary;
     }
