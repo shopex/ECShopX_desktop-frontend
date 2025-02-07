@@ -196,7 +196,7 @@ export default {
     }
   },
   methods: {
-    fetch() {
+    fetchLikeList() {
       this.$api.item
         .getGuessLikeGoods({
           item_id: id

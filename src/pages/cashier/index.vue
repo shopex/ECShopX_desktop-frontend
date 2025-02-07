@@ -406,17 +406,17 @@ export default {
     this.initFunc()
   },
   methods: {
-  async initFunc(){
-    this.home_url = window.location.origin
-    const { has_check,isView } = this.$route.query
-    this.isView = isView
-    await this.getPaymentList()
-    await this.getOrderInfo()
-    await this.getBackaccount()
-    if(has_check == 'true'){
-      //编辑,数据回显
-      this.getVoucher()
-    }
+    async initFunc(){
+      this.home_url = window.location.origin
+      const { has_check,isView } = this.$route.query
+      this.isView = isView
+      await this.getPaymentList()
+      await this.getOrderInfo()
+      await this.getBackaccount()
+      if(has_check == 'true'){
+        //编辑,数据回显
+        this.getVoucher()
+      }
     },
     async getVoucher(){
       const { order_id } = this.$route.query
