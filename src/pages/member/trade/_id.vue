@@ -41,10 +41,13 @@
     background-color: $color-brand-primary;
     border: 1px solid $color-brand-primary;
     color: #fff;
-    box-shadow: 1px 1px 4px #888888;
     &:hover {
       background-color: $color-brand-primary;
     }
+  }
+  .func-btn{
+    box-shadow: 1px 1px 4px #888888;
+    border: none;
   }
   .member-content-right {
     .member-content-right-hd {
@@ -360,9 +363,9 @@
                   <i class="ec-icon ec-icon-time"></i>剩余{{ cancelTime }}
                 </span>
                 <div class="btn-warp btn-warp2">
-                  <button class="btn" @click="clickBtn('付款')" v-if="step == 1 && orderInfo.pay_type != 'point' && orderInfo.offline_pay_check_status != '0'">付 款</button>
-                  <button class="btn" @click="clickBtn('付款')" v-if="step == 1 && orderInfo.pay_type != 'point' && orderStatus == 'NOTPAY' && orderInfo.offline_pay_check_status == 2"> 修改付款凭证</button>
-                  <button class="btn" v-if="step == 3" @click="clickBtn('确认收货')">确认收货</button>
+                  <button class="btn func-btn" @click="clickBtn('付款')" v-if="step == 1 && orderInfo.pay_type != 'point' && orderInfo.offline_pay_check_status != '0'">付 款</button>
+                  <button class="btn func-btn" @click="clickBtn('付款')" v-if="step == 1 && orderInfo.pay_type != 'point' && orderStatus == 'NOTPAY' && orderInfo.offline_pay_check_status == 2"> 修改付款凭证</button>
+                  <button class="btn func-btn" v-if="step == 3" @click="clickBtn('确认收货')">确认收货</button>
                 </div>
                 <div class="btn-warp-bt" @click="clickBtn('取消订单')" v-if="(step == 1 || step == 2) && orderInfo.offline_pay_check_status != '0'">
                   <i class="ec-icon ec-icon-roundclose"> 取消订单</i>
@@ -467,7 +470,7 @@
         <div class="dailog-hd">取消订单</div>
         <div class="dailog-bd">
           <span>订单号：{{ this.$route.params.id }}</span>
-          <div style="padding-top: 20px">
+          <div style="padding: 20px 0 10px 0">
             <!-- <span style="display:inline-block;width:100px;text-align:right">取消原因：</span>
             <SpInput placeholder="必填：取消原因" v-model="cancelMean" class="dailog-bd-input" />-->
             <SpForm ref="form" :model="form" :rules="rules">
