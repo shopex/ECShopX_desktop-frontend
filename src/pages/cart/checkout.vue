@@ -547,12 +547,12 @@ export default {
     async onChangeExpress() {
       if(this.expressType == "ziti"){
         const { mode,id } = this.$route.query
-        let position = JSON.parse(localStorage.getItem('position'))
+        let position = JSON.parse(localStorage.getItem('position')) || {}
 
         // 获取自提点列表
         const { list } = await this.$api.member.pickuplocation({
-          lat:position.point.lat,
-          lng:position.point.lng,
+          lat:position?.point?.lat,
+          lng:position?.point?.lng,
           cart_type: mode,
           // isNostores: 1,   // 请求全部
           distributor_id:id
