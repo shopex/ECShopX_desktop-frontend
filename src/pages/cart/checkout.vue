@@ -548,7 +548,7 @@ export default {
       if (this.expressType == 'logistics') {
         await this.getFreightFee()
       }
-      if (this.pointPayFirst) { // 后端打开默认积分开关
+      if (this.pointPayFirst && this.useIntegral) { // 后端打开默认积分开关
         this.point_use = this.expressType == 'ziti' ? this.orderData.max_point_ziti : this.orderData.max_point
         this.isFirstCalc = true
       } else {
