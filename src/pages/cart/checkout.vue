@@ -409,6 +409,8 @@ export default {
       maxPoint:0,     //可输入的最大值
       dailogMapVisible:false,
       remark:'',
+      isFirstCalc: true, // 是否第一次计算
+      pointPayFirst: false, //是否使用积分支付
     }
   },
   mounted() {
@@ -532,9 +534,16 @@ export default {
     handleDeducted(){
       if(this.useIntegral===false){
         this.point_use = 0
-        this.getFreightFee()
         this.useAllDeducted = false   //全额抵扣单选关闭
+      } else {
+        if (this.pointPayFirst) { // 后端打开默认积分开关
+          this.point_use = this.expressType == 'ziti' ? this.orderData.max_point_ziti : this.orderData.max_point
+          this.isFirstCalc = true
+        } else {
+          this.point_use = 0
+        }
       }
+      this.getFreightFee()
       console.log(this.useIntegral,"useIntegral",this.point_use);
     },
     // 全额支付
@@ -548,7 +557,6 @@ export default {
       if(this.expressType == "ziti"){
         const { mode,id } = this.$route.query
         let position = JSON.parse(localStorage.getItem('position')) || {}
-
         // 获取自提点列表
         const { list } = await this.$api.member.pickuplocation({
           lat:position?.point?.lat,
@@ -559,7 +567,12 @@ export default {
         })
         this.zitiList = list
       }
-
+      if (this.pointPayFirst) { // 后端打开默认积分开关
+        this.point_use = this.expressType == 'ziti' ? this.orderData.max_point_ziti : this.orderData.max_point
+        this.isFirstCalc = true
+      } else {
+        this.point_use = 0
+      }
       this.getFreightFee()
     },
     onChangeAddress() {
@@ -583,9 +596,11 @@ export default {
           totalItemNum,
           user_point,   //可用积分
           max_point,    //本单可用积分
+          max_point_ziti=0,
           point_fee,    //抵扣金额
           deduct_point_rule,
-          coupon_discount
+          coupon_discount,
+          point_rule
         } = await this.$api.cart.freightFee(params)
         this.orderData = {
           item_fee,
@@ -596,6 +611,7 @@ export default {
           total_fee,
           user_point,
           max_point,
+          max_point_ziti,
           point_fee,
           deduct_point_rule,
           coupon_discount
@@ -604,12 +620,16 @@ export default {
         this.getValidCoupon()
         this.$loading().close()
         // maxPoint可输入的最大积分
-        if(user_point>max_point){
-          this.maxPoint = max_point
-        }else if(user_point<max_point){
+        const max_point_value = this.expressType === 'ziti' ? max_point_ziti : max_point
+        if(user_point<max_point_value){
           this.maxPoint = user_point
         }else{
-          this.maxPoint = max_point
+          this.maxPoint = max_point_value
+        }
+        this.pointPayFirst = Number(point_rule?.point_pay_first) > 0
+        if(this.isFirstCalc && this.pointPayFirst){
+          this.point_use = Math.min(max_point_value,user_point)
+          this.isFirstCalc = false
         }
       } catch (e) {
         this.$loading().close()
