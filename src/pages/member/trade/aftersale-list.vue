@@ -41,6 +41,7 @@
                       <tr>
                         <th>订单详情</th>
                         <th>金额</th>
+                        <th>积分</th>
                         <th>状态</th>
                         <th>操作</th>
                       </tr>
@@ -74,6 +75,9 @@
                           </td>
                           <td v-if="index == 0" :rowspan="child.children.length || 2" colspan="1">
                             <div class="product-price">￥{{ child.refund_fee | formatPriceToHundred }} </div>
+                          </td>
+                          <td v-if="index == 0" :rowspan="child.children.length || 2" colspan="1">
+                            <div class="product-price">{{ child.refund_point }}</div>
                           </td>
                           <td :rowspan="child.children.length || 2" v-if="index == 0" colspan="1">
                             <div class="product-status-warp">
@@ -338,6 +342,7 @@ export default {
           distributor_id: item.distributor_id,
           children: item.detail,
           refund_fee: item.refund_fee,
+          refund_point: item.refund_point,
           distributor_info: item.distributor_info.name,
           orderStatus: item.aftersales_status
         }
