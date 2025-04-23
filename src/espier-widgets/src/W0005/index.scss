@@ -51,13 +51,11 @@
     }
   }
 
-
-
   .goods-wrap {
     display: none;
     &.active {
       display: block;
-    } 
+    }
     &:after {
       content: '\0020';
       display: block;

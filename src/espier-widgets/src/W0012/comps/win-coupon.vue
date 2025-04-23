@@ -105,30 +105,34 @@
           :key="`swiper-item__${sindex}`"
         >
           <!-- <linkPage :mode="mode" :to="handleLinkPage(sitem.pathData)"> -->
-            <div class="coupon-item" v-if="value[index].data[sindex]" @click="handleClickGetCoupon(value[0].data[sindex])">
-              <div class="coupon-item__img">
-                <!-- imgUrl: {{value[index].data[sindex]}} -->
-                <div class="default-img" v-if="value[index].data[sindex].imgUrl == ''"></div>
-                <img v-else :src="value[index].data[sindex].imgUrl" alt="" />
-              </div>
-              <div class="coupon-item__info">
-                <div class="title">{{ value[index].data[sindex].title }}</div>
-                <div class="desc">{{ value[index].data[sindex].description }}</div>
-              </div>
-              <div class="coupon-item__desc">
-                <goodsPrice
-                  :value="value[0].data[sindex].reduce_cost / 100"
-                  noDecimal
-                  v-if="value[0].data[sindex].card_type == 'cash'"
-                />
-                <div class="discount-wrap" v-if="value[0].data[sindex].card_type == 'discount'">
-                  <span class="discount-amount">{{
-                    `${(100 - value[0].data[sindex].discount) / 10}`
-                  }}</span>
-                  <span class="discount-unit">折</span>
-                </div>
+          <div
+            class="coupon-item"
+            v-if="value[index].data[sindex]"
+            @click="handleClickGetCoupon(value[0].data[sindex])"
+          >
+            <div class="coupon-item__img">
+              <!-- imgUrl: {{value[index].data[sindex]}} -->
+              <div class="default-img" v-if="value[index].data[sindex].imgUrl == ''"></div>
+              <img v-else :src="value[index].data[sindex].imgUrl" alt="" />
+            </div>
+            <div class="coupon-item__info">
+              <div class="title">{{ value[index].data[sindex].title }}</div>
+              <div class="desc">{{ value[index].data[sindex].description }}</div>
+            </div>
+            <div class="coupon-item__desc">
+              <goodsPrice
+                :value="value[0].data[sindex].reduce_cost / 100"
+                noDecimal
+                v-if="value[0].data[sindex].card_type == 'cash'"
+              />
+              <div class="discount-wrap" v-if="value[0].data[sindex].card_type == 'discount'">
+                <span class="discount-amount">{{
+                  `${(100 - value[0].data[sindex].discount) / 10}`
+                }}</span>
+                <span class="discount-unit">折</span>
               </div>
             </div>
+          </div>
           <!-- </linkPage> -->
         </div>
       </swiper-slide>
@@ -193,7 +197,7 @@ export default {
   },
   watch: {
     'value': {
-      handler: function(nval, oval) {
+      handler: function (nval, oval) {
         this.reloadSwiper = false
         this.$nextTick((vm) => {
           this.reloadSwiper = true
@@ -212,12 +216,12 @@ export default {
   created() {},
   methods: {
     async handleClickGetCoupon(coupon) {
-      if(this.isRenderMode()) {
+      if (this.isRenderMode()) {
         await this.$api.cart.receiveCard({
           card_id: coupon.card_id
         })
         this.$Message.success('领取成功')
-        }
+      }
     }
   }
 }

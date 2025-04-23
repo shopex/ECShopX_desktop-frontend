@@ -19,7 +19,11 @@
           />
           <div
             class="search-icon"
-            :style="{ backgroundColor: getThemeColor, color: value.wgtTextColor , background: `linear-gradient(90deg, ${value.wgtTextColor1} 0%, ${value.wgtTextColor2} 100%)` }"
+            :style="{
+              backgroundColor: getThemeColor,
+              color: value.wgtTextColor,
+              background: `linear-gradient(90deg, ${value.wgtTextColor1} 0%, ${value.wgtTextColor2} 100%)`
+            }"
             @click="handleClickSearch"
             v-if="value.isShowBtn"
           >
@@ -123,7 +127,7 @@ export default {
   },
   mounted() {},
   watch: {
-    'value.data': function(nval, oval) {
+    'value.data': function (nval, oval) {
       if (nval.length == 0) {
         this.value.height = 38
       } else {

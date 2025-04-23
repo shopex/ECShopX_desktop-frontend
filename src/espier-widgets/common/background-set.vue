@@ -1,6 +1,6 @@
 <template>
   <div>
-    <attr-field :label="name" :tag="true" style="margin-bottom: 10px;">
+    <attr-field :label="name" :tag="true" style="margin-bottom: 10px">
       <RadioGroup v-model="t_radio">
         <Radio label="color">
           <span>纯色</span>

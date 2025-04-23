@@ -30,7 +30,7 @@
 <script>
 import { isFunction } from '@/utils'
 
-const matchesSelectorToParentElements = function(el, selector, baseNode) {
+const matchesSelectorToParentElements = function (el, selector, baseNode) {
   let node = el
 
   const matchesSelectorFunc = [
@@ -75,59 +75,59 @@ export default {
     w: {
       type: Number,
       default: 100,
-      validator: function(val) {
+      validator: function (val) {
         return val > 0
       }
     },
     h: {
       type: Number,
       default: 100,
-      validator: function(val) {
+      validator: function (val) {
         return val > 0
       }
     },
     minw: {
       type: Number,
       default: 10,
-      validator: function(val) {
+      validator: function (val) {
         return val >= 0
       }
     },
     minh: {
       type: Number,
       default: 10,
-      validator: function(val) {
+      validator: function (val) {
         return val >= 0
       }
     },
     x: {
       type: Number,
       default: 0,
-      validator: function(val) {
+      validator: function (val) {
         return typeof val === 'number'
       }
     },
     y: {
       type: Number,
       default: 0,
-      validator: function(val) {
+      validator: function (val) {
         return typeof val === 'number'
       }
     },
     z: {
       type: [String, Number],
       default: 'auto',
-      validator: function(val) {
+      validator: function (val) {
         let valid = typeof val === 'string' ? val === 'auto' : val >= 0
         return valid
       }
     },
     handles: {
       type: Array,
-      default: function() {
+      default: function () {
         return ['tl', 'tm', 'tr', 'mr', 'br', 'bm', 'bl', 'ml']
       },
-      validator: function(val) {
+      validator: function (val) {
         var s = new Set(['tl', 'tm', 'tr', 'mr', 'br', 'bm', 'bl', 'ml'])
 
         return new Set(val.filter((h) => s.has(h))).size === val.length
@@ -144,13 +144,13 @@ export default {
     axis: {
       type: String,
       default: 'both',
-      validator: function(val) {
+      validator: function (val) {
         return ['x', 'y', 'both'].indexOf(val) !== -1
       }
     },
     grid: {
       type: Array,
-      default: function() {
+      default: function () {
         return [1, 1]
       }
     },
@@ -164,7 +164,7 @@ export default {
     }
   },
 
-  created: function() {
+  created: function () {
     this.parentX = 0
     this.parentW = 9999
     this.parentY = 0
@@ -185,7 +185,7 @@ export default {
     this.elmW = 0
     this.elmH = 0
   },
-  mounted: function() {
+  mounted: function () {
     document.documentElement.addEventListener('mousemove', this.handleMove, true)
     document.documentElement.addEventListener('mousedown', this.deselect, true)
     document.documentElement.addEventListener('mouseup', this.handleUp, true)
@@ -203,7 +203,7 @@ export default {
 
     this.reviewDimensions()
   },
-  beforeDestroy: function() {
+  beforeDestroy: function () {
     document.documentElement.removeEventListener('mousemove', this.handleMove, true)
     document.documentElement.removeEventListener('mousedown', this.deselect, true)
     document.documentElement.removeEventListener('mouseup', this.handleUp, true)
@@ -215,7 +215,7 @@ export default {
     document.documentElement.removeEventListener('touchstart', this.deselect, true)
   },
 
-  data: function() {
+  data: function () {
     return {
       top: this.y,
       left: this.x,
@@ -230,7 +230,7 @@ export default {
   },
 
   methods: {
-    reviewDimensions: function() {
+    reviewDimensions: function () {
       // if ( !this.resizable ) {
       //     this.width = 'auto'
       //     this.height = 'auto'
@@ -272,7 +272,7 @@ export default {
 
       this.$emit('resizing', this.left, this.top, this.width, this.height)
     },
-    elmDown: function(e) {
+    elmDown: function (e) {
       if (e.button === 1 || e.button === 2) {
         return
       }
@@ -301,7 +301,7 @@ export default {
         }
       }
     },
-    deselect: function(e) {
+    deselect: function (e) {
       if (e.type.indexOf('touch') !== -1) {
         this.mouseX = e.changedTouches[0].clientX
         this.mouseY = e.changedTouches[0].clientY
@@ -325,7 +325,7 @@ export default {
         }
       }
     },
-    handleDown: function(handle, e) {
+    handleDown: function (handle, e) {
       console.log('[draggableResizable] handleDown: ', handle)
       this.handle = handle
 
@@ -336,7 +336,7 @@ export default {
 
       this.resizing = true
     },
-    fillParent: function(e) {
+    fillParent: function (e) {
       if (!this.parent || !this.resizable || !this.maximize) return
 
       let done = false
@@ -394,7 +394,7 @@ export default {
 
       window.requestAnimationFrame(animate)
     },
-    handleMove: function(e) {
+    handleMove: function (e) {
       // console.log( '[draggableResizable] handleMove' )
       if (
         this.resizableAxis === 'x' &&
@@ -511,7 +511,7 @@ export default {
         this.$emit('dragging', this.left, this.top)
       }
     },
-    handleUp: function(e) {
+    handleUp: function (e) {
       // console.log( 'handleUp' )
       if (e.type.indexOf('touch') !== -1) {
         this.lastMouseX = e.changedTouches[0].clientX
@@ -533,7 +533,7 @@ export default {
   },
 
   computed: {
-    style: function() {
+    style: function () {
       return {
         top: this.top + 'px',
         left: this.left + 'px',
@@ -545,26 +545,26 @@ export default {
   },
 
   watch: {
-    active: function(val) {
+    active: function (val) {
       this.enabled = val
     },
-    x: function(val) {
+    x: function (val) {
       // console.log( '[draggableResizable] x: ', val )
       this.left = val
     },
-    y: function(val) {
+    y: function (val) {
       // console.log( '[draggableResizable] y: ', val )
       this.top = val
     },
-    h: function(val) {
+    h: function (val) {
       // console.log( '[draggableResizable] h: ', val )
       this.height = val
     },
-    w: function(val) {
+    w: function (val) {
       // console.log( '[draggableResizable] w: ', val )
       this.width = val
     },
-    z: function(val) {
+    z: function (val) {
       if (val >= 0 || val === 'auto') {
         this.zIndex = val
       }

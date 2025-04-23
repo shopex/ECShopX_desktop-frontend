@@ -140,13 +140,62 @@ export default {
       {
         text: 'tab1',
         data: [
-          { goods_id: '', goods_pic: '', price: 0, goods_name: '商品名称', linkPage: 'goods', linkPageLabel: '商品' },
-          { goods_id: '', goods_pic: '', price: 0, goods_name: '商品名称', linkPage: 'goods', linkPageLabel: '商品' },
-          { goods_id: '', goods_pic: '', price: 0, goods_name: '商品名称', linkPage: 'goods', linkPageLabel: '商品' },
-          { goods_id: '', goods_pic: '', price: 0, goods_name: '商品名称', linkPage: 'goods', linkPageLabel: '商品' },
-          { goods_id: '', goods_pic: '', price: 0, goods_name: '商品名称', linkPage: 'goods', linkPageLabel: '商品' },
-          { goods_id: '', goods_pic: '', price: 0, goods_name: '商品名称', linkPage: 'goods', linkPageLabel: '商品' },
-          { goods_id: '', goods_pic: '', price: 0, goods_name: '商品名称', linkPage: 'goods', linkPageLabel: '商品' }
+          {
+            goods_id: '',
+            goods_pic: '',
+            price: 0,
+            goods_name: '商品名称',
+            linkPage: 'goods',
+            linkPageLabel: '商品'
+          },
+          {
+            goods_id: '',
+            goods_pic: '',
+            price: 0,
+            goods_name: '商品名称',
+            linkPage: 'goods',
+            linkPageLabel: '商品'
+          },
+          {
+            goods_id: '',
+            goods_pic: '',
+            price: 0,
+            goods_name: '商品名称',
+            linkPage: 'goods',
+            linkPageLabel: '商品'
+          },
+          {
+            goods_id: '',
+            goods_pic: '',
+            price: 0,
+            goods_name: '商品名称',
+            linkPage: 'goods',
+            linkPageLabel: '商品'
+          },
+          {
+            goods_id: '',
+            goods_pic: '',
+            price: 0,
+            goods_name: '商品名称',
+            linkPage: 'goods',
+            linkPageLabel: '商品'
+          },
+          {
+            goods_id: '',
+            goods_pic: '',
+            price: 0,
+            goods_name: '商品名称',
+            linkPage: 'goods',
+            linkPageLabel: '商品'
+          },
+          {
+            goods_id: '',
+            goods_pic: '',
+            price: 0,
+            goods_name: '商品名称',
+            linkPage: 'goods',
+            linkPageLabel: '商品'
+          }
         ]
       }
     ],

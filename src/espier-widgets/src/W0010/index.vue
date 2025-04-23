@@ -8,12 +8,18 @@
         <div class="minicart-wrap">
           <div
             class="minicart-btn"
-            :style="{ backgroundColor: getThemeColor, color: value.wgtTextColor ,border: `${value.wgtBorderRadius}px solid ${value.wgtAaaa}`}"
+            :style="{
+              backgroundColor: getThemeColor,
+              color: value.wgtTextColor,
+              border: `${value.wgtBorderRadius}px solid ${value.wgtAaaa}`
+            }"
           >
-          <i class="new_iconfont icon-new-pc-cart" :style="{color: value.wgtTextColor}"></i>
-          我的购物车
+            <i class="new_iconfont icon-new-pc-cart" :style="{ color: value.wgtTextColor }"></i>
+            我的购物车
 
-            <span class="count" v-if="true" :style="{ background: value.wgtTextColor }">{{cartTotal}}</span>
+            <span class="count" v-if="true" :style="{ background: value.wgtTextColor }">{{
+              cartTotal
+            }}</span>
           </div>
           <div class="minicart-list" v-if="isRenderMode()">
             <div class="cart-main-wrap">
@@ -93,8 +99,8 @@ export default {
     data: {},
     wgtTheme: '#000000ff',
     wgtTextColor: '#ffffffff',
-    wgtAaaa:'#ffffffff',
-    wgtBorderRadius:0,
+    wgtAaaa: '#ffffffff',
+    wgtBorderRadius: 0
   },
   components: {
     goodsPrice,

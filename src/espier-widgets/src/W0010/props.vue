@@ -20,7 +20,11 @@
           </attr-field>
           <div class="division"></div>
           <attr-field label="边框大小：">
-            <InputNumber v-model="activeElement.wgtBorderRadius" size="small" :min="0"></InputNumber>
+            <InputNumber
+              v-model="activeElement.wgtBorderRadius"
+              size="small"
+              :min="0"
+            ></InputNumber>
           </attr-field>
           <div class="division"></div>
           <attr-field label="边框颜色：">
@@ -56,7 +60,7 @@ export default {
   },
   watch: {
     'value.fontSize': {
-      handler: function(nval, oval) {
+      handler: function (nval, oval) {
         this.activeElement.height = Math.floor(this.activeElement.fontSize / 0.6)
       },
       deep: true

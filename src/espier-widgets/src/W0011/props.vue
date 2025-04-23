@@ -20,7 +20,7 @@
               v-model="activeElement.fontSize"
               :transfer="true"
               size="small"
-              style="width:82px"
+              style="width: 82px"
               @on-change="handleOnChangeFontSize"
               @on-open-change="handldeOnOpenChange"
             >
@@ -122,7 +122,7 @@ export default {
   },
   watch: {
     'value.fontSize': {
-      handler: function(nval, oval) {
+      handler: function (nval, oval) {
         this.activeElement.height = Math.floor(this.activeElement.fontSize / 0.6)
       },
       deep: true

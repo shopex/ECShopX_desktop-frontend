@@ -47,11 +47,11 @@
           </linkPage>
         </div>
         <div class="card-bd">
-          <WinDisplay1 v-if="value.styleType == 0" v-model="value.data[0]" :mode="mode"/>
-          <WinDisplay2 v-if="value.styleType == 1" v-model="value.data[1]" :mode="mode"/>
-          <WinDisplay3 v-if="value.styleType == 2" v-model="value.data[2]" :mode="mode"/>
-          <WinGoods v-if="value.styleType == 3" v-model="value.data[3]" :mode="mode"/>
-          <WinCoupon v-if="value.styleType == 4" v-model="value.data[4]" :mode="mode"/>
+          <WinDisplay1 v-if="value.styleType == 0" v-model="value.data[0]" :mode="mode" />
+          <WinDisplay2 v-if="value.styleType == 1" v-model="value.data[1]" :mode="mode" />
+          <WinDisplay3 v-if="value.styleType == 2" v-model="value.data[2]" :mode="mode" />
+          <WinGoods v-if="value.styleType == 3" v-model="value.data[3]" :mode="mode" />
+          <WinCoupon v-if="value.styleType == 4" v-model="value.data[4]" :mode="mode" />
         </div>
       </div>
     </div>
@@ -111,12 +111,45 @@ export default {
         { imgUrl: '', pathData: {} }
       ],
       // 商品分组
-      [{ type: 'goods', data: [
-        { goods_id: '', goods_pic: '', price: 0, goods_name: '商品名称', linkPage: 'goods', linkPageLabel: '商品' },
-        { goods_id: '', goods_pic: '', price: 0, goods_name: '商品名称', linkPage: 'goods', linkPageLabel: '商品' },
-        { goods_id: '', goods_pic: '', price: 0, goods_name: '商品名称', linkPage: 'goods', linkPageLabel: '商品' },
-        { goods_id: '', goods_pic: '', price: 0, goods_name: '商品名称', linkPage: 'goods', linkPageLabel: '商品' }
-      ] }],
+      [
+        {
+          type: 'goods',
+          data: [
+            {
+              goods_id: '',
+              goods_pic: '',
+              price: 0,
+              goods_name: '商品名称',
+              linkPage: 'goods',
+              linkPageLabel: '商品'
+            },
+            {
+              goods_id: '',
+              goods_pic: '',
+              price: 0,
+              goods_name: '商品名称',
+              linkPage: 'goods',
+              linkPageLabel: '商品'
+            },
+            {
+              goods_id: '',
+              goods_pic: '',
+              price: 0,
+              goods_name: '商品名称',
+              linkPage: 'goods',
+              linkPageLabel: '商品'
+            },
+            {
+              goods_id: '',
+              goods_pic: '',
+              price: 0,
+              goods_name: '商品名称',
+              linkPage: 'goods',
+              linkPageLabel: '商品'
+            }
+          ]
+        }
+      ],
       // 优惠券分组
       [{ type: 'coupon', data: [] }]
     ]

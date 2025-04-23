@@ -77,7 +77,7 @@
             :y="child.y"
             :w="child.width + child.paddingLeft + child.paddingRight"
             :h="child.height + child.paddingTop + child.paddingBottom"
-            :z="value.zindex?value.zindex:10000"
+            :z="value.zindex ? value.zindex : 10000"
             :parent="true"
             :debug="false"
             :isConflictCheck="true"
@@ -145,7 +145,27 @@ import { mapMutations, mapState } from 'vuex'
 
 // import { mixin as clickaway } from 'vue-clickaway'
 const WIDGET_NAME = 'W0006'
-const WIDGET_IN_LAYOUT = ['W0001', 'W0003', 'W0011', 'W0007', 'W0008', 'W0010', 'W0012', 'W0013',, 'W0014', 'W0015', 'W0016', 'W0017', 'W0018','W0019',,'W0020','W0021', 'W0022']
+const WIDGET_IN_LAYOUT = [
+  'W0001',
+  'W0003',
+  'W0011',
+  'W0007',
+  'W0008',
+  'W0010',
+  'W0012',
+  'W0013',
+  ,
+  'W0014',
+  'W0015',
+  'W0016',
+  'W0017',
+  'W0018',
+  'W0019',
+  ,
+  'W0020',
+  'W0021',
+  'W0022'
+]
 
 export default {
   name: WIDGET_NAME,

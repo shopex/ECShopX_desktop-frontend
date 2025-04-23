@@ -1,7 +1,7 @@
 .widget-w0008 {
   &.focus-active {
     // .widget-body {
-    //   left: 
+    //   left:
     //   width: 500px !important;
     // }
   }
@@ -9,10 +9,10 @@
     // height: calc(100% - 30px);
     border-style: solid;
     border-width: 1px;
-	border: solid #666;
-	border-width: 1px 1px;
+    border: solid #666;
+    border-width: 1px 1px;
     position: relative;
-	border-radius: 20px;
+    border-radius: 20px;
     .espier-icon-sousuo-01 {
       position: absolute;
       font-size: 20px;
@@ -23,7 +23,7 @@
       // width: calc(100% - 100px);
       height: 36px;
       padding: 6px 10px 6px 40px;
-			border-radius: 20px;
+      border-radius: 20px;
       border: 0;
       &:focus {
         outline: none;
@@ -37,8 +37,8 @@
       line-height: 36px;
       font-size: 14px;
       cursor: pointer;
-			border: 1px ;
-			border-radius: 38px;
+      border: 1px;
+      border-radius: 38px;
     }
   }
   .hot-keyword {
@@ -50,14 +50,14 @@
     &__item {
       margin: 0 8px;
       position: relative;
-      &:hover{
-      	.link-page{
-      		&__a{
-      			&:hover {
-      				color: #FF5D02!important;
-      			}
-      		}
-      	}
+      &:hover {
+        .link-page {
+          &__a {
+            &:hover {
+              color: #ff5d02 !important;
+            }
+          }
+        }
       }
       &:not(:last-child) {
         // &::after {

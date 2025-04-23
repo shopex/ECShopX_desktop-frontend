@@ -27,10 +27,7 @@
             >
               <div class="goods-list-wrap" v-for="(sitem, sindex) in item.data">
                 <div class="goods-image">
-                  <linkPage
-                    :mode="mode"
-                    :to="`/items/${sitem.goods_id}`"
-                  >
+                  <linkPage :mode="mode" :to="`/items/${sitem.goods_id}`">
                     <ImgWrap
                       :src="sitem.goods_pic"
                       :width="sindex == 0 ? 400 : 150"
@@ -53,10 +50,7 @@
                       >{{ tag.tag_name }}
                     </span>
                   </div> -->
-                  <goodsPrice
-                    size="large"
-                    :value="sitem.price / 100"
-                  ></goodsPrice>
+                  <goodsPrice size="large" :value="sitem.price / 100"></goodsPrice>
                 </div>
               </div>
 
@@ -139,13 +133,69 @@ export default {
       {
         text: 'tab1',
         data: [
-          { goods_id: '', goods_pic: '', price: 0, goods_name: '商品名称', tagList: [], linkPage: 'goods', linkPageLabel: '商品' },
-          { goods_id: '', goods_pic: '', price: 0, goods_name: '商品名称', tagList: [], linkPage: 'goods', linkPageLabel: '商品' },
-          { goods_id: '', goods_pic: '', price: 0, goods_name: '商品名称', tagList: [], linkPage: 'goods', linkPageLabel: '商品' },
-          { goods_id: '', goods_pic: '', price: 0, goods_name: '商品名称', tagList: [], linkPage: 'goods', linkPageLabel: '商品' },
-          { goods_id: '', goods_pic: '', price: 0, goods_name: '商品名称', tagList: [], linkPage: 'goods', linkPageLabel: '商品' },
-          { goods_id: '', goods_pic: '', price: 0, goods_name: '商品名称', tagList: [], linkPage: 'goods', linkPageLabel: '商品' },
-          { goods_id: '', goods_pic: '', price: 0, goods_name: '商品名称', tagList: [], linkPage: 'goods', linkPageLabel: '商品' }
+          {
+            goods_id: '',
+            goods_pic: '',
+            price: 0,
+            goods_name: '商品名称',
+            tagList: [],
+            linkPage: 'goods',
+            linkPageLabel: '商品'
+          },
+          {
+            goods_id: '',
+            goods_pic: '',
+            price: 0,
+            goods_name: '商品名称',
+            tagList: [],
+            linkPage: 'goods',
+            linkPageLabel: '商品'
+          },
+          {
+            goods_id: '',
+            goods_pic: '',
+            price: 0,
+            goods_name: '商品名称',
+            tagList: [],
+            linkPage: 'goods',
+            linkPageLabel: '商品'
+          },
+          {
+            goods_id: '',
+            goods_pic: '',
+            price: 0,
+            goods_name: '商品名称',
+            tagList: [],
+            linkPage: 'goods',
+            linkPageLabel: '商品'
+          },
+          {
+            goods_id: '',
+            goods_pic: '',
+            price: 0,
+            goods_name: '商品名称',
+            tagList: [],
+            linkPage: 'goods',
+            linkPageLabel: '商品'
+          },
+          {
+            goods_id: '',
+            goods_pic: '',
+            price: 0,
+            goods_name: '商品名称',
+            tagList: [],
+            linkPage: 'goods',
+            linkPageLabel: '商品'
+          },
+          {
+            goods_id: '',
+            goods_pic: '',
+            price: 0,
+            goods_name: '商品名称',
+            tagList: [],
+            linkPage: 'goods',
+            linkPageLabel: '商品'
+          }
         ]
       }
     ],
@@ -180,18 +230,18 @@ export default {
   },
   created() {
     // 数据兼容处理
-    if(this.isRenderMode()) {
+    if (this.isRenderMode()) {
       const { data } = this.value
-      data.forEach(item => {
-        item.data.forEach(goods => {
-          if(!goods.goods_id) {
+      data.forEach((item) => {
+        item.data.forEach((goods) => {
+          if (!goods.goods_id) {
             goods = {
-              goods_id: '', 
-              goods_pic: '', 
-              price: 0, 
-              goods_name: '商品名称', 
-              tagList: [], 
-              linkPage: 'goods', 
+              goods_id: '',
+              goods_pic: '',
+              price: 0,
+              goods_name: '商品名称',
+              tagList: [],
+              linkPage: 'goods',
               linkPageLabel: '商品'
             }
           }
@@ -200,8 +250,6 @@ export default {
       // console.log(JSON.stringify(data))
       // this.getGoodsItems()
     }
-
-    
   },
   methods: {
     callback() {},
@@ -212,7 +260,7 @@ export default {
       if (this.isRenderMode()) {
         this.$router.push(LinkMaps[item.linkPage](item))
       }
-    },
+    }
     // async getGoodsItems() {
     //   const { data } = this.value
     //   const itemIds = []

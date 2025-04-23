@@ -58,10 +58,7 @@
 <template>
   <div class="widget-W0021-props">
     <Tabs value="name1" :animated="false">
-      <TabPane
-        :label="`${activeElement.name}[${activeElement.type}]`"
-        name="name1"
-      >
+      <TabPane :label="`${activeElement.name}[${activeElement.type}]`" name="name1">
         <panelBar title="标题设置">
           <attr-field label="主标题：">
             <Input v-model="activeElement.text" />
@@ -72,14 +69,18 @@
           </attr-field>
           <div class="division"></div>
           <attr-field label="标题字体：">
-            <InputNumber v-model="activeElement.wgtTitleFontSize" size="small" :min="0"></InputNumber>
+            <InputNumber
+              v-model="activeElement.wgtTitleFontSize"
+              size="small"
+              :min="0"
+            ></InputNumber>
           </attr-field>
           <div class="division"></div>
           <attr-field label="字体颜色：">
-            <color-picker  v-model="activeElement.wgtTextColor"  ></color-picker>
+            <color-picker v-model="activeElement.wgtTextColor"></color-picker>
           </attr-field>
           <div class="division"></div>
-          <attr-field label="圆角：" >
+          <attr-field label="圆角：">
             <iSwitch size="small" v-model="activeElement.wgtBorderRadius" />
           </attr-field>
 
@@ -89,11 +90,15 @@
           </attr-field>
           <div class="division"></div>
           <attr-field label="副标题字体：">
-            <InputNumber v-model="activeElement.wgtSubTitleFontSize" size="small" :min="0"></InputNumber>
+            <InputNumber
+              v-model="activeElement.wgtSubTitleFontSize"
+              size="small"
+              :min="0"
+            ></InputNumber>
           </attr-field>
           <div class="division"></div>
           <attr-field label="副标题字体颜色：">
-            <color-picker  v-model="activeElement.wgtSubTextColor"  ></color-picker>
+            <color-picker v-model="activeElement.wgtSubTextColor"></color-picker>
           </attr-field>
           <div class="division"></div>
           <attr-field label="更多链接：" labelTop>
@@ -105,17 +110,17 @@
         <panelBar title="优惠券列表">
           <div class="division"></div>
           <!-- <attr-field label="选择商品："> -->
-            <dataBind
-              v-if="showGoodsList"
-              :value="activeElement.data"
-              :imgPicker="false"
-              :filterMenu="['coupons']"
-              :multiple="true"
-              :customPath="false"
-              @pathOnChange="onChangePath"
-              activeKey="card_id"
-              placeholder="选择优惠券"
-            ></dataBind>
+          <dataBind
+            v-if="showGoodsList"
+            :value="activeElement.data"
+            :imgPicker="false"
+            :filterMenu="['coupons']"
+            :multiple="true"
+            :customPath="false"
+            @pathOnChange="onChangePath"
+            activeKey="card_id"
+            placeholder="选择优惠券"
+          ></dataBind>
           <!-- </attr-field>  -->
           <!-- {{activeElement.data}} -->
           <!-- <Button type="primary" style="width: 100%; margin: 0 auto"
@@ -123,11 +128,15 @@
             >添加优惠券</Button
           > -->
           <!-- <div class="division"></div> -->
-          <div v-for="(tab, i) in activeElement.data" :key="i" style="margin-bottom: 10px;margin-top: 10px">
+          <div
+            v-for="(tab, i) in activeElement.data"
+            :key="i"
+            style="margin-bottom: 10px; margin-top: 10px"
+          >
             <ul>
               <draggable v-model="activeElement.data[i]" class="list-group" ghost-class="ghost">
                 <!-- <li class="wgt-props" v-for="(item, index) in tab.goods_list" :key="`wgt-propsitem__${index}`"> -->
-                <li class="wgt-props" >
+                <li class="wgt-props">
                   <div class="">
                     <dataBind
                       :key="key"
@@ -136,7 +145,8 @@
                       :imgData="tab.icon_url_list"
                       :pathData="tab.pathData"
                       :imgOnChange="handleImgOnChange.bind(this, i)"
-                      :pathOnChange="handlePathOnChange.bind(this, i)">
+                      :pathOnChange="handlePathOnChange.bind(this, i)"
+                    >
                     </dataBind>
                   </div>
                   <div class="wgt-props_content">
@@ -148,10 +158,9 @@
                 </li>
               </draggable>
             </ul>
-              <!-- :pathOnChange="handlePathOnChange.bind(activeElement.pathData)" -->
+            <!-- :pathOnChange="handlePathOnChange.bind(activeElement.pathData)" -->
           </div>
         </panelBar>
-        
       </TabPane>
       <TabPane label="组件样式" name="name2">
         <basic-set v-model="activeElement"></basic-set>
@@ -160,7 +169,7 @@
   </div>
 </template>
 <script>
-import { panelBar, attrField, dataBind,colorPicker } from '../../common/comps'
+import { panelBar, attrField, dataBind, colorPicker } from '../../common/comps'
 import basicSet from '../../common/basic-set'
 export default {
   name: 'W0021Props',
@@ -180,7 +189,7 @@ export default {
   },
   watch: {
     'activeElement.data': {
-      handler: function(nval, oval) {
+      handler: function (nval, oval) {
         // setTimeout(() => {
         //   this.activeElement.height =
         //     60 + document.getElementById(`goods-wrap__${this.activeElement.uuid}_0`).clientHeight
@@ -189,7 +198,7 @@ export default {
       deep: true
     },
     'activeElement.width': {
-      handler: function(nval, oval) {
+      handler: function (nval, oval) {
         setTimeout(() => {
           this.activeElement.height =
             60 + document.getElementById(`goods-wrap__${this.activeElement.uuid}_0`).clientHeight
@@ -203,18 +212,16 @@ export default {
       this.activeElement.data.push({
         text: 'tab',
         goods_id: '',
-        data: [
-          { card_id: '',  linkPage: 'coupons', linkPageLabel: '优惠券' }
-        ]
+        data: [{ card_id: '', linkPage: 'coupons', linkPageLabel: '优惠券' }]
       })
-      console.log(this.activeElement);
+      console.log(this.activeElement)
     },
     handleDelete(i) {
       this.$Modal.confirm({
         title: '提示',
         content: '确定删除该项？',
         onOk: () => {
-          console.log(this.activeElement);
+          console.log(this.activeElement)
           if (this.activeElement.data.length > 1) {
             this.activeElement.data.splice(i, 1)
             this.$Message.success('删除成功！')
@@ -223,14 +230,14 @@ export default {
           }
         }
       })
-      this.key = this.key + 1;
+      this.key = this.key + 1
     },
     deleteItem(i) {
       this.$Modal.confirm({
         title: '提示',
         content: '确定删除该优惠券？',
         onOk: () => {
-          this.showGoodsList = false;
+          this.showGoodsList = false
           if (this.activeElement.data.length > 1) {
             this.activeElement.data.splice(i, 1)
             this.$Message.success('删除成功！')
@@ -238,27 +245,27 @@ export default {
           } else {
             this.$Message.error('请至少添加1个优惠券')
           }
-          this.showGoodsList = true;
+          this.showGoodsList = true
         }
       })
     },
     onChangePath(data) {
-      this.activeElement.data = [];
-      const goodsData = data.map(item => {
-        const { 
+      this.activeElement.data = []
+      const goodsData = data.map((item) => {
+        const {
           card_id,
           card_type,
           icon_url_list, // 图片
-          linkPage, 
-          linkPageLabel, 
-          title, 
+          linkPage,
+          linkPageLabel,
+          title,
           description,
-          notice,  // 卡券提示语
+          notice, // 卡券提示语
           custom_url, // 自定义跳转链接
-          discount, // 折扣券打折额度（百分比)	
+          discount, // 折扣券打折额度（百分比)
           least_cost, // 满减券满多少可用
           reduce_cost, // 满减券减多少金额 OR 兑换券启用金额
-          object_use_for, // 卡券适用对象
+          object_use_for // 卡券适用对象
         } = item
         return {
           card_id,
@@ -273,22 +280,22 @@ export default {
           discount,
           least_cost,
           reduce_cost,
-          object_use_for,
+          object_use_for
         }
       })
       // this.activeElement.pathData = img
-      console.log(this.activeElement.data,"this.activeElement.data11111111111111111111111");
-      this.activeElement.data = goodsData;
+      console.log(this.activeElement.data, 'this.activeElement.data11111111111111111111111')
+      this.activeElement.data = goodsData
       this.$forceUpdate()
-      console.log(this.activeElement.data);
+      console.log(this.activeElement.data)
     },
-    handleImgOnChange(i,item) {
-      const list =  this.activeElement.data[i];
-      list.icon_url_list = item;
-      this.activeElement.data[i] = list ;
+    handleImgOnChange(i, item) {
+      const list = this.activeElement.data[i]
+      list.icon_url_list = item
+      this.activeElement.data[i] = list
     },
-    handlePathOnChange(i,item) {
-      console.log(item);
+    handlePathOnChange(i, item) {
+      console.log(item)
       this.activeElement.data[i].icon_url_list = item
     }
   }

@@ -22,7 +22,7 @@
 </style>
 <template>
   <div class="img-wrap" :style="{ width: `${width}px`, height: `${height}px` }">
-    <img v-if="src" :src="src"  :style="{borderRadius: `${borderRadius}px`}"/>
+    <img v-if="src" :src="src" :style="{ borderRadius: `${borderRadius}px` }" />
     <span v-else>{{ `${width}px * ${height}px` }}</span>
   </div>
 </template>
@@ -35,7 +35,7 @@ export default {
     width: Number,
     height: Number,
     borderRadius: {
-      type:Number,
+      type: Number,
       default: 0
     }
   },

@@ -5,13 +5,16 @@
     <slot></slot>
     <div class="widget-W0018-inner widget-inner" :style="widgetInnerStyle">
       <div class="widget-W0018-body widget-body" :style="widgetBodyStyle">
-        <span class="swiper-container-title">{{value.mainTitle}}</span>
+        <span class="swiper-container-title">{{ value.mainTitle }}</span>
         <swiper class="swiper-container" v-if="reloadSwiper" :options="swiperOption">
           <swiper-slide v-for="(item, index) in value.data" :key="index">
-            <div class = "goods-list-wrap" v-for="(sitem,sindex) in item.data">
+            <div class="goods-list-wrap" v-for="(sitem, sindex) in item.data">
               <div class="goods-wrap__info">
                 <linkPage :mode="mode" :to="`/items/${sitem.goods_id}`">
-                  <div class="goods-title" :style="{color: value.wgtTitleColor , fontSize:value.wgtTitleFontSize  +'px'}">
+                  <div
+                    class="goods-title"
+                    :style="{ color: value.wgtTitleColor, fontSize: value.wgtTitleFontSize + 'px' }"
+                  >
                     {{ sitem.goods_name }}
                   </div>
                   <div class="goods-item_price">
@@ -19,25 +22,21 @@
                       class="mkt-price"
                       :theme="value.wgtPriceColor"
                       :value="sitem.price / 100"
-                      :afontSize = 'value.wgtPriceFontSize'
-                      marginTop = '1'
-                      :toFixed = "value.wgtToFixed"
+                      :afontSize="value.wgtPriceFontSize"
+                      marginTop="1"
+                      :toFixed="value.wgtToFixed"
                     ></goodsPrice>
                     <goodsPrice
                       class="mkt-original-price"
-                      theme = "#8C8C8C"
+                      theme="#8C8C8C"
                       :value="sitem.market_price / 100"
-                      :afontSize = 'value.wgtPriceFontSize-4'
-                      marginTop = '1'
-                      :toFixed = "value.wgtToFixed"
+                      :afontSize="value.wgtPriceFontSize - 4"
+                      marginTop="1"
+                      :toFixed="value.wgtToFixed"
                     ></goodsPrice>
                   </div>
                   <!-- <div class="goods-image"> -->
-                    <ImgWrap
-                      :src="sitem.goods_pic"
-                      :width="90"
-                      :height="90"
-                    />
+                  <ImgWrap :src="sitem.goods_pic" :width="90" :height="90" />
                   <!-- </div> -->
                 </linkPage>
               </div>
@@ -45,7 +44,7 @@
           </swiper-slide>
           <div
             class="swiper-pagination"
-            :class="[value.styleType,paginationAlign.textAlign]"
+            :class="[value.styleType, paginationAlign.textAlign]"
             :style="paginationAlign"
             slot="pagination"
           ></div>
@@ -109,26 +108,146 @@ export default {
     data: [
       {
         data: [
-          {goods_id : '', goods_pic : '', price : 1231, market_price: 3333, goods_name : '流行饰品1',brief :"璀璨夺目甄选好礼", tagList : [], linkPage : 'goods', linkPageLabel : '商品' },
-          {goods_id : '', goods_pic : '', price : 4234, market_price: 3333, goods_name : '大牌腕表2',brief :"璀璨夺目甄选好礼", tagList : [], linkPage : 'goods', linkPageLabel : '商品' },
-          {goods_id : '', goods_pic : '', price : 68.9, market_price: 3333, goods_name : '眼镜烟具3',brief :"璀璨夺目甄选好礼", tagList : [], linkPage : 'goods', linkPageLabel : '商品' },
-          {goods_id : '', goods_pic : '', price : 220, market_price: 3333, goods_name : '黄金珠宝4',brief :"璀璨夺目甄选好礼", tagList : [], linkPage : 'goods', linkPageLabel : '商品', }
+          {
+            goods_id: '',
+            goods_pic: '',
+            price: 1231,
+            market_price: 3333,
+            goods_name: '流行饰品1',
+            brief: '璀璨夺目甄选好礼',
+            tagList: [],
+            linkPage: 'goods',
+            linkPageLabel: '商品'
+          },
+          {
+            goods_id: '',
+            goods_pic: '',
+            price: 4234,
+            market_price: 3333,
+            goods_name: '大牌腕表2',
+            brief: '璀璨夺目甄选好礼',
+            tagList: [],
+            linkPage: 'goods',
+            linkPageLabel: '商品'
+          },
+          {
+            goods_id: '',
+            goods_pic: '',
+            price: 68.9,
+            market_price: 3333,
+            goods_name: '眼镜烟具3',
+            brief: '璀璨夺目甄选好礼',
+            tagList: [],
+            linkPage: 'goods',
+            linkPageLabel: '商品'
+          },
+          {
+            goods_id: '',
+            goods_pic: '',
+            price: 220,
+            market_price: 3333,
+            goods_name: '黄金珠宝4',
+            brief: '璀璨夺目甄选好礼',
+            tagList: [],
+            linkPage: 'goods',
+            linkPageLabel: '商品'
+          }
         ]
       },
       {
         data: [
-          {goods_id : '', goods_pic : '', price : 1231, market_price: 3333, goods_name : '流行饰品1',brief :"璀璨夺目甄选好礼", tagList : [], linkPage : 'goods', linkPageLabel : '商品' },
-          {goods_id : '', goods_pic : '', price : 4234, market_price: 3333, goods_name : '大牌腕表2',brief :"璀璨夺目甄选好礼", tagList : [], linkPage : 'goods', linkPageLabel : '商品' },
-          {goods_id : '', goods_pic : '', price : 68.9, market_price: 3333, goods_name : '眼镜烟具3',brief :"璀璨夺目甄选好礼", tagList : [], linkPage : 'goods', linkPageLabel : '商品' },
-          {goods_id : '', goods_pic : '', price : 220, market_price: 3333, goods_name : '黄金珠宝4',brief :"璀璨夺目甄选好礼", tagList : [], linkPage : 'goods', linkPageLabel : '商品', }
+          {
+            goods_id: '',
+            goods_pic: '',
+            price: 1231,
+            market_price: 3333,
+            goods_name: '流行饰品1',
+            brief: '璀璨夺目甄选好礼',
+            tagList: [],
+            linkPage: 'goods',
+            linkPageLabel: '商品'
+          },
+          {
+            goods_id: '',
+            goods_pic: '',
+            price: 4234,
+            market_price: 3333,
+            goods_name: '大牌腕表2',
+            brief: '璀璨夺目甄选好礼',
+            tagList: [],
+            linkPage: 'goods',
+            linkPageLabel: '商品'
+          },
+          {
+            goods_id: '',
+            goods_pic: '',
+            price: 68.9,
+            market_price: 3333,
+            goods_name: '眼镜烟具3',
+            brief: '璀璨夺目甄选好礼',
+            tagList: [],
+            linkPage: 'goods',
+            linkPageLabel: '商品'
+          },
+          {
+            goods_id: '',
+            goods_pic: '',
+            price: 220,
+            market_price: 3333,
+            goods_name: '黄金珠宝4',
+            brief: '璀璨夺目甄选好礼',
+            tagList: [],
+            linkPage: 'goods',
+            linkPageLabel: '商品'
+          }
         ]
       },
       {
         data: [
-          {goods_id : '', goods_pic : '', price : 1231, market_price: 3333, goods_name : '流行饰品1',brief :"璀璨夺目甄选好礼", tagList : [], linkPage : 'goods', linkPageLabel : '商品' },
-          {goods_id : '', goods_pic : '', price : 4234, market_price: 3333, goods_name : '大牌腕表2',brief :"璀璨夺目甄选好礼", tagList : [], linkPage : 'goods', linkPageLabel : '商品' },
-          {goods_id : '', goods_pic : '', price : 68.9, market_price: 3333, goods_name : '眼镜烟具3',brief :"璀璨夺目甄选好礼", tagList : [], linkPage : 'goods', linkPageLabel : '商品' },
-          {goods_id : '', goods_pic : '', price : 220, market_price: 3333, goods_name : '黄金珠宝4',brief :"璀璨夺目甄选好礼", tagList : [], linkPage : 'goods', linkPageLabel : '商品', }
+          {
+            goods_id: '',
+            goods_pic: '',
+            price: 1231,
+            market_price: 3333,
+            goods_name: '流行饰品1',
+            brief: '璀璨夺目甄选好礼',
+            tagList: [],
+            linkPage: 'goods',
+            linkPageLabel: '商品'
+          },
+          {
+            goods_id: '',
+            goods_pic: '',
+            price: 4234,
+            market_price: 3333,
+            goods_name: '大牌腕表2',
+            brief: '璀璨夺目甄选好礼',
+            tagList: [],
+            linkPage: 'goods',
+            linkPageLabel: '商品'
+          },
+          {
+            goods_id: '',
+            goods_pic: '',
+            price: 68.9,
+            market_price: 3333,
+            goods_name: '眼镜烟具3',
+            brief: '璀璨夺目甄选好礼',
+            tagList: [],
+            linkPage: 'goods',
+            linkPageLabel: '商品'
+          },
+          {
+            goods_id: '',
+            goods_pic: '',
+            price: 220,
+            market_price: 3333,
+            goods_name: '黄金珠宝4',
+            brief: '璀璨夺目甄选好礼',
+            tagList: [],
+            linkPage: 'goods',
+            linkPageLabel: '商品'
+          }
         ]
       }
     ],
@@ -139,10 +258,10 @@ export default {
     trigger: 'click',
     arrow: 'never',
     wgtTitleFontSize: 14,
-    wgtTitleColor:"#3B3B3B",
+    wgtTitleColor: '#3B3B3B',
     mainTitle: '最新热卖',
     wgtPriceFontSize: 20,
-    wgtPriceColor:"#FF0036",
+    wgtPriceColor: '#FF0036',
     wgtToFixed: 2,
     color: '#ffffff',
     activeColor: '#8391a5'
@@ -167,12 +286,8 @@ export default {
           el: '.swiper-pagination',
           type: 'custom',
           renderCustom: (swiper, current, total) => {
-            const {
-              styleType,
-              pointDefaultColor,
-              pointActiveColor,
-              customerThemeEnabled
-            } = this.value
+            const { styleType, pointDefaultColor, pointActiveColor, customerThemeEnabled } =
+              this.value
             let html = ''
             switch (styleType) {
               case 'style1':
@@ -225,7 +340,7 @@ export default {
           }
         },
         on: {
-          slideChange: function() {
+          slideChange: function () {
             // console.log('this.activeIndex: ', this.activeIndex)
             // 索引问题
             if (this.activeIndex == _self.value.data.length + 1) {
@@ -254,7 +369,7 @@ export default {
   },
   watch: {
     value: {
-      handler: function(nval, oval) {
+      handler: function (nval, oval) {
         this.reloadSwiper = false
         const { autoplay, autoplaySpeed } = this.value
         const _autoplay = autoplay ? { delay: autoplaySpeed } : false

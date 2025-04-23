@@ -99,7 +99,7 @@
       <TabPane
         :label="`${activeElement.name}[${activeElement.type}]`"
         name="name1"
-        style="overflow: auto;"
+        style="overflow: auto"
       >
         <panelBar title="基本设置">
           <attr-field label="主标题：">
@@ -172,11 +172,11 @@
 
           <!-- 商品 -->
           <div v-if="activeElement.styleType == 3">
-            <Button type="primary" style="width:100%;margin:0 auto" @click="handleAddGoods"
+            <Button type="primary" style="width: 100%; margin: 0 auto" @click="handleAddGoods"
               >添加商品</Button
             >
             <div class="division"></div>
-            <div v-for="(tab, i) in activeElement.data[3]" :key="i" style="margin-bottom:10px;">
+            <div v-for="(tab, i) in activeElement.data[3]" :key="i" style="margin-bottom: 10px">
               <Collapse>
                 <Panel :name="i.toString()">
                   {{ `商品组${i + 1}` }}
@@ -217,11 +217,11 @@
 
           <!-- 优惠券 -->
           <div v-if="activeElement.styleType == 4">
-            <Button type="primary" style="width:100%;margin:0 auto" @click="handleAddCoupon"
+            <Button type="primary" style="width: 100%; margin: 0 auto" @click="handleAddCoupon"
               >添加优惠券</Button
             >
             <div class="division"></div>
-            <div v-for="(tab, i) in activeElement.data[4]" :key="i" style="margin-bottom:10px;">
+            <div v-for="(tab, i) in activeElement.data[4]" :key="i" style="margin-bottom: 10px">
               <Collapse>
                 <Panel :name="i.toString()">
                   {{ `优惠券组${i + 1}` }}
@@ -316,10 +316,38 @@ export default {
         this.activeElement.data[3].push({
           type: 'goods',
           data: [
-            { goods_id: '', goods_pic: '', price: 0, goods_name: '商品名称', linkPage: 'goods', linkPageLabel: '商品' },
-            { goods_id: '', goods_pic: '', price: 0, goods_name: '商品名称', linkPage: 'goods', linkPageLabel: '商品' },
-            { goods_id: '', goods_pic: '', price: 0, goods_name: '商品名称', linkPage: 'goods', linkPageLabel: '商品' },
-            { goods_id: '', goods_pic: '', price: 0, goods_name: '商品名称', linkPage: 'goods', linkPageLabel: '商品' }
+            {
+              goods_id: '',
+              goods_pic: '',
+              price: 0,
+              goods_name: '商品名称',
+              linkPage: 'goods',
+              linkPageLabel: '商品'
+            },
+            {
+              goods_id: '',
+              goods_pic: '',
+              price: 0,
+              goods_name: '商品名称',
+              linkPage: 'goods',
+              linkPageLabel: '商品'
+            },
+            {
+              goods_id: '',
+              goods_pic: '',
+              price: 0,
+              goods_name: '商品名称',
+              linkPage: 'goods',
+              linkPageLabel: '商品'
+            },
+            {
+              goods_id: '',
+              goods_pic: '',
+              price: 0,
+              goods_name: '商品名称',
+              linkPage: 'goods',
+              linkPageLabel: '商品'
+            }
           ]
         })
       } else {
@@ -350,11 +378,11 @@ export default {
       })
       const { goods_id, itemId, pics, price, item_name, linkPage, linkPageLabel } = data
       const goodsData = {
-        goods_id, 
+        goods_id,
         itemId,
-        goods_pic: pics.length > 0 ? pics[0] : '', 
-        price: price, 
-        goods_name: item_name, 
+        goods_pic: pics.length > 0 ? pics[0] : '',
+        price: price,
+        goods_name: item_name,
         linkPage,
         linkPageLabel
       }
@@ -405,14 +433,14 @@ export default {
       }
     },
     onChangePath(data, index) {
-      const goodsData = data.map(item => {
+      const goodsData = data.map((item) => {
         const { goods_id, itemId, pics, price, item_name, linkPage, linkPageLabel } = item
         return {
-          goods_id, 
+          goods_id,
           itemId,
-          goods_pic: pics.length > 0 ? pics[0] : '', 
-          price: price, 
-          goods_name: item_name, 
+          goods_pic: pics.length > 0 ? pics[0] : '',
+          price: price,
+          goods_name: item_name,
           linkPage,
           linkPageLabel
         }

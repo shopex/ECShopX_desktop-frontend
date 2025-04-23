@@ -18,7 +18,7 @@
       <TabPane
         :label="`${activeElement.name}[${activeElement.type}]`"
         name="name1"
-        style="overflow: auto;"
+        style="overflow: auto"
       >
         <panelBar title="基本设置">
           <attr-field label="主标题：">
@@ -83,7 +83,12 @@
         </panelBar>
         <panelBar title="字体设置">
           <attr-field label="标题字体：">
-            <InputNumber v-model="activeElement.wgtTitleFontSize" size="small" :min="0" :max="27"></InputNumber>
+            <InputNumber
+              v-model="activeElement.wgtTitleFontSize"
+              size="small"
+              :min="0"
+              :max="27"
+            ></InputNumber>
           </attr-field>
           <div class="division"></div>
           <attr-field label="标题颜色：">
@@ -91,11 +96,20 @@
           </attr-field>
           <div class="division"></div>
           <attr-field label="价格字体：">
-            <InputNumber v-model="activeElement.wgtPriceFontSize" size="small" :min="0"></InputNumber>
+            <InputNumber
+              v-model="activeElement.wgtPriceFontSize"
+              size="small"
+              :min="0"
+            ></InputNumber>
           </attr-field>
           <div class="division"></div>
           <attr-field label="保留小数：">
-            <InputNumber v-model="activeElement.wgtToFixed" size="small" :min="0" :max ="2"></InputNumber>
+            <InputNumber
+              v-model="activeElement.wgtToFixed"
+              size="small"
+              :min="0"
+              :max="2"
+            ></InputNumber>
           </attr-field>
           <div class="division"></div>
           <attr-field label="价格颜色：">
@@ -103,9 +117,10 @@
           </attr-field>
         </panelBar>
         <panelBar title="商品列表">
-          <Button type="primary" @click="handleAdd" style="width:100%;margin:0 auto;"
-            >添加标签商品</Button>
-          <div v-for="(item, i) in activeElement.data" :key="i" style="margin-top:10px;">
+          <Button type="primary" @click="handleAdd" style="width: 100%; margin: 0 auto"
+            >添加标签商品</Button
+          >
+          <div v-for="(item, i) in activeElement.data" :key="i" style="margin-top: 10px">
             <Collapse>
               <Panel :name="i.toString()">
                 标签{{ Number(i) + 1 }}
@@ -114,19 +129,19 @@
                 </span>
                 <div slot="content">
                   <!-- {{item.pathData}} -->
-                 <div class="division"></div>
-                 <attr-field label="选择商品：">
-                   <dataBind
-                     :value="item.data"
-                     :imgPicker="false"
-                     :filterMenu="['goods']"
-                     :multiple="true"
-                     :customPath="false"
-                     @pathOnChange="(data) => onChangePath(data, i)"
-                     activeKey="goods_id"
-                     placeholder="选择商品"
-                   ></dataBind>
-                 </attr-field>
+                  <div class="division"></div>
+                  <attr-field label="选择商品：">
+                    <dataBind
+                      :value="item.data"
+                      :imgPicker="false"
+                      :filterMenu="['goods']"
+                      :multiple="true"
+                      :customPath="false"
+                      @pathOnChange="(data) => onChangePath(data, i)"
+                      activeKey="goods_id"
+                      placeholder="选择商品"
+                    ></dataBind>
+                  </attr-field>
                 </div>
               </Panel>
             </Collapse>
@@ -147,7 +162,7 @@ export default {
   props: ['activeElement'],
   data() {
     return {
-      data:{},
+      data: {},
       test: '',
       styleList: [
         { img: require('./img/11.png'), label: '样式一', value: 'style1' },
@@ -172,10 +187,50 @@ export default {
       if (this.activeElement.data.length < 5) {
         this.activeElement.data.push({
           data: [
-            {goods_id : '', goods_pic : '', price : 1231, market_price: 3333, goods_name : '流行饰品1',brief :"璀璨夺目甄选好礼", tagList : [], linkPage : 'goods', linkPageLabel : '商品' },
-            {goods_id : '', goods_pic : '', price : 4234, market_price: 3333, goods_name : '大牌腕表2',brief :"璀璨夺目甄选好礼", tagList : [], linkPage : 'goods', linkPageLabel : '商品' },
-            {goods_id : '', goods_pic : '', price : 68.9, market_price: 3333, goods_name : '眼镜烟具3',brief :"璀璨夺目甄选好礼", tagList : [], linkPage : 'goods', linkPageLabel : '商品' },
-            {goods_id : '', goods_pic : '', price : 220, market_price: 3333, goods_name : '黄金珠宝4',brief :"璀璨夺目甄选好礼", tagList : [], linkPage : 'goods', linkPageLabel : '商品', }
+            {
+              goods_id: '',
+              goods_pic: '',
+              price: 1231,
+              market_price: 3333,
+              goods_name: '流行饰品1',
+              brief: '璀璨夺目甄选好礼',
+              tagList: [],
+              linkPage: 'goods',
+              linkPageLabel: '商品'
+            },
+            {
+              goods_id: '',
+              goods_pic: '',
+              price: 4234,
+              market_price: 3333,
+              goods_name: '大牌腕表2',
+              brief: '璀璨夺目甄选好礼',
+              tagList: [],
+              linkPage: 'goods',
+              linkPageLabel: '商品'
+            },
+            {
+              goods_id: '',
+              goods_pic: '',
+              price: 68.9,
+              market_price: 3333,
+              goods_name: '眼镜烟具3',
+              brief: '璀璨夺目甄选好礼',
+              tagList: [],
+              linkPage: 'goods',
+              linkPageLabel: '商品'
+            },
+            {
+              goods_id: '',
+              goods_pic: '',
+              price: 220,
+              market_price: 3333,
+              goods_name: '黄金珠宝4',
+              brief: '璀璨夺目甄选好礼',
+              tagList: [],
+              linkPage: 'goods',
+              linkPageLabel: '商品'
+            }
           ]
         })
       } else {
@@ -203,8 +258,19 @@ export default {
       this.activeElement.data[idx].pathData = item
     },
     onChangePath(data, index) {
-      const goodsData = data.map(item => {
-        const { goods_id, itemId, pics, price, item_name, linkPage, linkPageLabel ,title,brief,market_price} = item
+      const goodsData = data.map((item) => {
+        const {
+          goods_id,
+          itemId,
+          pics,
+          price,
+          item_name,
+          linkPage,
+          linkPageLabel,
+          title,
+          brief,
+          market_price
+        } = item
         return {
           goods_id,
           itemId,

@@ -42,15 +42,24 @@
 </style>
 
 <template>
-  <span :class="classes" :style="{ color: theme ,fontSize:afontSize + 'px'}">
+  <span :class="classes" :style="{ color: theme, fontSize: afontSize + 'px' }">
     <!-- {{ value < 0 ? '-' : '' }} -->
     <template v-if="isValid">
-      <span v-if="!noSymbol" class="price__symbol" :style = "{fontSize:afontSize - (marginTop != 5 ? 0 : 4) +'px' ,marginTop:marginTop+'px'}"> {{ symbol }}</span>
+      <span
+        v-if="!noSymbol"
+        class="price__symbol"
+        :style="{
+          fontSize: afontSize - (marginTop != 5 ? 0 : 4) + 'px',
+          marginTop: marginTop + 'px'
+        }"
+      >
+        {{ symbol }}</span
+      >
       <span class="price__int">{{ priceVals.int }}</span>
       <span class="price__decimal" v-if="!noDecimal && priceVals.decimal !== undefined"
         >.{{ priceVals.decimal }}</span
       >
-      <span class="price__append" v-if="appendText" >{{ appendText }}"</span>
+      <span class="price__append" v-if="appendText">{{ appendText }}"</span>
     </template>
     <template v-else>{{ defaultValue }}</template>
   </span>
@@ -92,16 +101,16 @@ export default {
       type: String,
       default: '#e1251b'
     },
-    afontSize:{
-      type: [String,Number],
+    afontSize: {
+      type: [String, Number],
       default: 18
     },
-    marginTop:{
-      type: [String,Number],
+    marginTop: {
+      type: [String, Number],
       default: 5
     },
-    toFixed:{
-      type: [String,Number],
+    toFixed: {
+      type: [String, Number],
       default: 2
     }
   },

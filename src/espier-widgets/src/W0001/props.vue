@@ -18,7 +18,7 @@
       <TabPane
         :label="`${activeElement.name}[${activeElement.type}]`"
         name="name1"
-        style="overflow: auto;"
+        style="overflow: auto"
       >
         <panelBar title="基本设置">
           <attr-field label="自动播放：">
@@ -78,10 +78,10 @@
           </attr-field>
         </panelBar>
         <panelBar title="轮播列表">
-          <Button type="primary" @click="handleAdd" style="width:100%;margin:0 auto;"
+          <Button type="primary" @click="handleAdd" style="width: 100%; margin: 0 auto"
             >添加轮播项</Button
           >
-          <div v-for="(item, i) in activeElement.data" :key="i" style="margin-top:10px;">
+          <div v-for="(item, i) in activeElement.data" :key="i" style="margin-top: 10px">
             <Collapse>
               <Panel :name="i.toString()">
                 轮播项{{ Number(i) + 1 }}

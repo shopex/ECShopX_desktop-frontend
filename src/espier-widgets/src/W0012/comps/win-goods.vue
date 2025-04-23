@@ -96,11 +96,7 @@
         :key="`swiper-item__${sindex}`"
       >
         <linkPage :mode="mode" :to="handleLinkPage(sitem.pathData)">
-          <ImgWrap
-            :src="value[0].data[sindex].goods_pic"
-            :width="174"
-            :height="140"
-          />
+          <ImgWrap :src="value[0].data[sindex].goods_pic" :width="174" :height="140" />
           <div class="wingoods-info">
             <div class="goods-title">
               {{ `${value[0].data[sindex].goods_name}` }}
@@ -123,16 +119,10 @@
             :key="`swiper-item__${sindex}`"
           >
             <linkPage :mode="mode" :to="handleLinkPage(sitem.pathData)">
-              <ImgWrap
-                :src="value[index].data[sindex].goods_pic"
-                :width="174"
-                :height="140"
-              />
+              <ImgWrap :src="value[index].data[sindex].goods_pic" :width="174" :height="140" />
               <div class="wingoods-info">
                 <div class="goods-title">
-                  {{
-                    `${value[index].data[sindex].goods_name}`
-                  }}
+                  {{ `${value[index].data[sindex].goods_name}` }}
                 </div>
                 <goodsPrice
                   class="goods-price"
@@ -186,7 +176,7 @@ export default {
   },
   watch: {
     'value': {
-      handler: function(nval, oval) {
+      handler: function (nval, oval) {
         this.reloadSwiper = false
         this.$nextTick((vm) => {
           this.reloadSwiper = true

@@ -5,8 +5,14 @@
     <div class="widget-W0017-inner widget-inner" :style="widgetInnerStyle">
       <div class="widget-W0017-body widget-body" :style="widgetBodyStyle">
         <div class="wgt-goodstab_tab">
-          <div class="title " :style="{ backgroundColor: value.wgtBackgroundColor,borderRadius:`${value.wgtBorderRadius?'15px':'0px'}`}">
-              <span class="title-span" :style="{color:value.wgtTextColor }">{{ value.text }}</span>
+          <div
+            class="title"
+            :style="{
+              backgroundColor: value.wgtBackgroundColor,
+              borderRadius: `${value.wgtBorderRadius ? '15px' : '0px'}`
+            }"
+          >
+            <span class="title-span" :style="{ color: value.wgtTextColor }">{{ value.text }}</span>
           </div>
           <ul class="tabList">
             <a
@@ -21,56 +27,50 @@
         </div>
         <div class="wgt-goodstab_goods">
           <div class="goods-main-img">
-            <linkPage
-              :mode="mode"
-              :to="handleLinkPage(value.pathData)"
-            >
-              <ImgWrap
-                :src="value.goods_pic"
-                :width="290"
-                :height="480"
-              />
+            <linkPage :mode="mode" :to="handleLinkPage(value.pathData)">
+              <ImgWrap :src="value.goods_pic" :width="290" :height="480" />
             </linkPage>
           </div>
-         <div class="wgt-goodstab_goods_scroll">
-             <div
-               v-for="(item, index) in value.data"
-               :class="[`goods-wrap`, { active: index == tabIndex }]"
-               :id="`goods-wrap__${value.uuid}_${index}`"
-               :key="`goods-wrap__${index}`"
-             >
-               <div class="goods-list-wrap" v-for="(sitem) in item.data">
-                 <div class="goods-wrap__info">
-                   <div class="goods-title" :style="{color: value.wgtTitleColor , fontSize:value.wgtTitleFontSize  +'px'}">
-                     {{ sitem.goods_name }}
-                   </div>
-                   <div class="goods-sub-title" :style="{color: value.wgtSubTitleColor, fontSize:value.wgtSubTitleFontSize  +'px'}">
-                     {{ sitem.brief }}
-                   </div>
+          <div class="wgt-goodstab_goods_scroll">
+            <div
+              v-for="(item, index) in value.data"
+              :class="[`goods-wrap`, { active: index == tabIndex }]"
+              :id="`goods-wrap__${value.uuid}_${index}`"
+              :key="`goods-wrap__${index}`"
+            >
+              <div class="goods-list-wrap" v-for="sitem in item.data">
+                <div class="goods-wrap__info">
+                  <div
+                    class="goods-title"
+                    :style="{ color: value.wgtTitleColor, fontSize: value.wgtTitleFontSize + 'px' }"
+                  >
+                    {{ sitem.goods_name }}
+                  </div>
+                  <div
+                    class="goods-sub-title"
+                    :style="{
+                      color: value.wgtSubTitleColor,
+                      fontSize: value.wgtSubTitleFontSize + 'px'
+                    }"
+                  >
+                    {{ sitem.brief }}
+                  </div>
 
-                   <div class="goods-image">
-                     <linkPage
-                       :mode="mode"
-                       :to="`/items/${sitem.goods_id}`"
-                     >
-                     <ImgWrap
-                       :src="sitem.goods_pic"
-                       :width="190"
-                       :height="150"
-                     />
-                     </linkPage>
-                 </div>
-                 </div>
-               </div>
-             </div>
-           </div>
-         </div>
+                  <div class="goods-image">
+                    <linkPage :mode="mode" :to="`/items/${sitem.goods_id}`">
+                      <ImgWrap :src="sitem.goods_pic" :width="190" :height="150" />
+                    </linkPage>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 <script>
-
 import braidStyle from './props'
 import mixins from '../../mixins'
 import ImgWrap from '../../common/img-wrap'
@@ -102,11 +102,11 @@ export default {
     widthDisabled: true,
     heightDisabled: true,
     wgtTextColor: '#ffffffff',
-    wgtBackgroundColor:'#FF5D02',
+    wgtBackgroundColor: '#FF5D02',
     wgtBorderRadius: false,
-    wgtTitleColor: "#3B3B3B",
+    wgtTitleColor: '#3B3B3B',
     wgtTitleFontSize: 18,
-    wgtSubTitleColor: "#8C8C8C",
+    wgtSubTitleColor: '#8C8C8C',
     wgtSubTitleFontSize: 16,
 
     data: [
@@ -114,10 +114,46 @@ export default {
         text: '精选',
         goods_id: '',
         data: [
-          {goods_id : '', goods_pic : '', price : 1231, goods_name : '流行饰品1',brief :"璀璨夺目甄选好礼", tagList : [], linkPage : 'goods', linkPageLabel : '商品' },
-          {goods_id : '', goods_pic : '', price : 4234, goods_name : '大牌腕表2',brief :"璀璨夺目甄选好礼", tagList : [], linkPage : 'goods', linkPageLabel : '商品' },
-          {goods_id : '', goods_pic : '', price : 68.9, goods_name : '眼镜烟具3',brief :"璀璨夺目甄选好礼", tagList : [], linkPage : 'goods', linkPageLabel : '商品' },
-          {goods_id : '', goods_pic : '', price : 220, goods_name : '黄金珠宝4',brief :"璀璨夺目甄选好礼", tagList : [], linkPage : 'goods', linkPageLabel : '商品', }
+          {
+            goods_id: '',
+            goods_pic: '',
+            price: 1231,
+            goods_name: '流行饰品1',
+            brief: '璀璨夺目甄选好礼',
+            tagList: [],
+            linkPage: 'goods',
+            linkPageLabel: '商品'
+          },
+          {
+            goods_id: '',
+            goods_pic: '',
+            price: 4234,
+            goods_name: '大牌腕表2',
+            brief: '璀璨夺目甄选好礼',
+            tagList: [],
+            linkPage: 'goods',
+            linkPageLabel: '商品'
+          },
+          {
+            goods_id: '',
+            goods_pic: '',
+            price: 68.9,
+            goods_name: '眼镜烟具3',
+            brief: '璀璨夺目甄选好礼',
+            tagList: [],
+            linkPage: 'goods',
+            linkPageLabel: '商品'
+          },
+          {
+            goods_id: '',
+            goods_pic: '',
+            price: 220,
+            goods_name: '黄金珠宝4',
+            brief: '璀璨夺目甄选好礼',
+            tagList: [],
+            linkPage: 'goods',
+            linkPageLabel: '商品'
+          }
         ]
       }
     ],
@@ -150,12 +186,11 @@ export default {
     }
   },
   created() {
-
     // 数据兼容处理
     if (this.isRenderMode()) {
       const { data } = this.value
-      data.forEach( item => {
-        item.data.forEach(goods => {
+      data.forEach((item) => {
+        item.data.forEach((goods) => {
           if (!goods.goods_id) {
             goods = {
               goods_id: '',

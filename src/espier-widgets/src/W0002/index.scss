@@ -54,22 +54,22 @@
         box-sizing: border-box;
         cursor: pointer;
         width: 214px;
-				height: auto;
+        height: auto;
         // margin: 5px 0;
         margin: 0 0 10px 20px;
         padding-bottom: 6px;
         background: #fff;
-		.goods-item_price{
-			.mkt-original-price{
-				margin-left:20px;
-				overflow-wrap: break-word;
-				text-decoration: line-through;
-			}
-		}
+        .goods-item_price {
+          .mkt-original-price {
+            margin-left: 20px;
+            overflow-wrap: break-word;
+            text-decoration: line-through;
+          }
+        }
         &_wrap {
           position: relative;
-					width: 214px;
-					height: 214px;
+          width: 214px;
+          height: 214px;
           &::after {
             content: '';
             position: absolute;
@@ -116,13 +116,13 @@
           padding: 0 4px;
           height: 40px;
           line-height: 22px;
-					font-weight: 500;
-					color: #3B3B3B;
+          font-weight: 500;
+          color: #3b3b3b;
           @include mult-ellipsis(2);
         }
         &_price {
-					margin-top: 8px;
-					padding: 0 10px;
+          margin-top: 8px;
+          padding: 0 10px;
         }
       }
     }

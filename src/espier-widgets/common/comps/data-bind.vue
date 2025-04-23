@@ -167,9 +167,9 @@ export default {
       type: Boolean,
       default: true
     },
-    maxSelsect:{
-      type: [String , Number],
-      default:30
+    maxSelsect: {
+      type: [String, Number],
+      default: 30
     }
   },
   data() {
@@ -263,7 +263,7 @@ export default {
     },
     // 路径选择
     async handleClickSetPath() {
-      console.log("handleClickSetPath",this.localPathData)
+      console.log('handleClickSetPath', this.localPathData)
       const res = await this.$picker('path', {
         data: JSON.parse(JSON.stringify(this.localPathData)),
         multiple: this.multiple,

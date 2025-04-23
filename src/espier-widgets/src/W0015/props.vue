@@ -58,10 +58,7 @@
 <template>
   <div class="widget-W0015-props">
     <Tabs value="name1" :animated="false">
-      <TabPane
-        :label="`${activeElement.name}[${activeElement.type}]`"
-        name="name1"
-      >
+      <TabPane :label="`${activeElement.name}[${activeElement.type}]`" name="name1">
         <panelBar title="标题设置">
           <attr-field label="标题：">
             <Input v-model="activeElement.text" />
@@ -72,14 +69,12 @@
           </attr-field>
           <div class="division"></div>
           <attr-field label="字体颜色：">
-            <color-picker  v-model="activeElement.wgtTextColor"  ></color-picker>
+            <color-picker v-model="activeElement.wgtTextColor"></color-picker>
           </attr-field>
           <div class="division"></div>
-          <attr-field label="圆角：" >
+          <attr-field label="圆角：">
             <iSwitch size="small" v-model="activeElement.wgtBorderRadius" />
           </attr-field>
-
-
         </panelBar>
 
         <panelBar title="商品设置">
@@ -88,11 +83,20 @@
           </attr-field>
           <div class="division"></div>
           <attr-field label="标题字体：">
-            <InputNumber v-model="activeElement.wgtTitleFontSize" size="small" :min="0"></InputNumber>
+            <InputNumber
+              v-model="activeElement.wgtTitleFontSize"
+              size="small"
+              :min="0"
+            ></InputNumber>
           </attr-field>
           <div class="division"></div>
           <attr-field label="保留小数：">
-            <InputNumber v-model="activeElement.wgtToFixed" size="small" :min="0" :max ="2"></InputNumber>
+            <InputNumber
+              v-model="activeElement.wgtToFixed"
+              size="small"
+              :min="0"
+              :max="2"
+            ></InputNumber>
           </attr-field>
           <div class="division"></div>
           <attr-field label="价格颜色：">
@@ -100,14 +104,18 @@
           </attr-field>
           <div class="division"></div>
           <attr-field label="价格字体：">
-            <InputNumber v-model="activeElement.wgtPriceFontSize" size="small" :min="0"></InputNumber>
+            <InputNumber
+              v-model="activeElement.wgtPriceFontSize"
+              size="small"
+              :min="0"
+            ></InputNumber>
           </attr-field>
         </panelBar>
 
-
         <panelBar title="标签列表">
           <Button type="primary" style="width: 100%; margin: 0 auto" @click="handleAdd"
-            >添加标签商品</Button>
+            >添加标签商品</Button
+          >
           <div class="division"></div>
           <div v-for="(tab, i) in activeElement.data" :key="i" style="margin-bottom: 10px">
             <Collapse>
@@ -169,7 +177,7 @@
   </div>
 </template>
 <script>
-import { panelBar, attrField, dataBind,colorPicker } from '../../common/comps'
+import { panelBar, attrField, dataBind, colorPicker } from '../../common/comps'
 import basicSet from '../../common/basic-set'
 export default {
   name: 'W0015Props',
@@ -186,7 +194,7 @@ export default {
   },
   watch: {
     'activeElement.data': {
-      handler: function(nval, oval) {
+      handler: function (nval, oval) {
         // setTimeout(() => {
         //   this.activeElement.height =
         //     60 + document.getElementById(`goods-wrap__${this.activeElement.uuid}_0`).clientHeight
@@ -195,7 +203,7 @@ export default {
       deep: true
     },
     'activeElement.width': {
-      handler: function(nval, oval) {
+      handler: function (nval, oval) {
         setTimeout(() => {
           this.activeElement.height =
             60 + document.getElementById(`goods-wrap__${this.activeElement.uuid}_0`).clientHeight
@@ -209,18 +217,117 @@ export default {
       this.activeElement.data.push({
         text: 'tab',
         data: [
-          { goods_id: '', goods_pic: '', price: 123, goods_name: '产品标题文案0',subTitle:"副标题文案最多控制副标题文案最多控制副标题文案最多控制副行内副标题文案最多控制2行内", tagList: [], linkPage: 'goods', linkPageLabel: '商品' },
-          { goods_id: '', goods_pic: '', price: 1231, goods_name: '产品标题文案1',subTitle:"副标题文案最多控制2行内", tagList: [], linkPage: 'goods', linkPageLabel: '商品' },
-          { goods_id: '', goods_pic: '', price: 4234, goods_name: '产品标题文案2',subTitle:"副标题文案最多控制2行内", tagList: [], linkPage: 'goods', linkPageLabel: '商品' },
-          { goods_id: '', goods_pic: '', price: 68.9, goods_name: '产品标题文案3',subTitle:"副标题文案最多控制2行内", tagList: [], linkPage: 'goods', linkPageLabel: '商品' },
-          { goods_id: '', goods_pic: '', price: 220, goods_name: '产品标题文案4',subTitle:"副标题文案最多控制2行内", tagList: [], linkPage: 'goods', linkPageLabel: '商品' },
-          { goods_id: '', goods_pic: '', price: 320, goods_name: '产品标题文案5',subTitle:"副标题文案最多控制2行内", tagList: [], linkPage: 'goods', linkPageLabel: '商品' },
-          { goods_id: '', goods_pic: '', price: 99.99, goods_name: '产品标题文案6',subTitle:"副标题文案最多控制2行内", tagList: [], linkPage: 'goods', linkPageLabel: '商品' },
-          { goods_id: '', goods_pic: '', price: 22.22, goods_name: '产品标题文案7',subTitle:"副标题文案最多控制2行内", tagList: [], linkPage: 'goods', linkPageLabel: '商品' },
-          { goods_id: '', goods_pic: '', price: 1230, goods_name: '产品标题文案8',subTitle:"副标题文案最多控制2行内", tagList: [], linkPage: 'goods', linkPageLabel: '商品' },
-          { goods_id: '', goods_pic: '', price: 320, goods_name: '产品标题文案9',subTitle:"副标题文案最多控制2行内", tagList: [], linkPage: 'goods', linkPageLabel: '商品' },
-          { goods_id: '', goods_pic: '', price: 22.22, goods_name: '产品标题文案10',subTitle:"副标题文案最多控制2行内", tagList: [], linkPage: 'goods', linkPageLabel: '商品' }
-
+          {
+            goods_id: '',
+            goods_pic: '',
+            price: 123,
+            goods_name: '产品标题文案0',
+            subTitle:
+              '副标题文案最多控制副标题文案最多控制副标题文案最多控制副行内副标题文案最多控制2行内',
+            tagList: [],
+            linkPage: 'goods',
+            linkPageLabel: '商品'
+          },
+          {
+            goods_id: '',
+            goods_pic: '',
+            price: 1231,
+            goods_name: '产品标题文案1',
+            subTitle: '副标题文案最多控制2行内',
+            tagList: [],
+            linkPage: 'goods',
+            linkPageLabel: '商品'
+          },
+          {
+            goods_id: '',
+            goods_pic: '',
+            price: 4234,
+            goods_name: '产品标题文案2',
+            subTitle: '副标题文案最多控制2行内',
+            tagList: [],
+            linkPage: 'goods',
+            linkPageLabel: '商品'
+          },
+          {
+            goods_id: '',
+            goods_pic: '',
+            price: 68.9,
+            goods_name: '产品标题文案3',
+            subTitle: '副标题文案最多控制2行内',
+            tagList: [],
+            linkPage: 'goods',
+            linkPageLabel: '商品'
+          },
+          {
+            goods_id: '',
+            goods_pic: '',
+            price: 220,
+            goods_name: '产品标题文案4',
+            subTitle: '副标题文案最多控制2行内',
+            tagList: [],
+            linkPage: 'goods',
+            linkPageLabel: '商品'
+          },
+          {
+            goods_id: '',
+            goods_pic: '',
+            price: 320,
+            goods_name: '产品标题文案5',
+            subTitle: '副标题文案最多控制2行内',
+            tagList: [],
+            linkPage: 'goods',
+            linkPageLabel: '商品'
+          },
+          {
+            goods_id: '',
+            goods_pic: '',
+            price: 99.99,
+            goods_name: '产品标题文案6',
+            subTitle: '副标题文案最多控制2行内',
+            tagList: [],
+            linkPage: 'goods',
+            linkPageLabel: '商品'
+          },
+          {
+            goods_id: '',
+            goods_pic: '',
+            price: 22.22,
+            goods_name: '产品标题文案7',
+            subTitle: '副标题文案最多控制2行内',
+            tagList: [],
+            linkPage: 'goods',
+            linkPageLabel: '商品'
+          },
+          {
+            goods_id: '',
+            goods_pic: '',
+            price: 1230,
+            goods_name: '产品标题文案8',
+            subTitle: '副标题文案最多控制2行内',
+            tagList: [],
+            linkPage: 'goods',
+            linkPageLabel: '商品'
+          },
+          {
+            goods_id: '',
+            goods_pic: '',
+            price: 320,
+            goods_name: '产品标题文案9',
+            subTitle: '副标题文案最多控制2行内',
+            tagList: [],
+            linkPage: 'goods',
+            linkPageLabel: '商品'
+          },
+          {
+            goods_id: '',
+            goods_pic: '',
+            price: 22.22,
+            goods_name: '产品标题文案10',
+            subTitle: '副标题文案最多控制2行内',
+            tagList: [],
+            linkPage: 'goods',
+            linkPageLabel: '商品'
+          }
         ]
       })
     },
@@ -271,8 +378,18 @@ export default {
       this.$set(this.activeElement.data[index].data, sindex, goodsData)
     },
     onChangePath(data, index) {
-      const goodsData = data.map(item => {
-        const { goods_id, itemId, pics, price, item_name, linkPage, linkPageLabel ,title,subTitle} = item
+      const goodsData = data.map((item) => {
+        const {
+          goods_id,
+          itemId,
+          pics,
+          price,
+          item_name,
+          linkPage,
+          linkPageLabel,
+          title,
+          subTitle
+        } = item
         return {
           goods_id,
           itemId,

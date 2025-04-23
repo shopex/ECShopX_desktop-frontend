@@ -116,12 +116,8 @@ export default {
           el: '.swiper-pagination',
           type: 'custom',
           renderCustom: (swiper, current, total) => {
-            const {
-              styleType,
-              pointDefaultColor,
-              pointActiveColor,
-              customerThemeEnabled
-            } = this.value
+            const { styleType, pointDefaultColor, pointActiveColor, customerThemeEnabled } =
+              this.value
             let html = ''
             switch (styleType) {
               case 'style1':
@@ -174,7 +170,7 @@ export default {
           }
         },
         on: {
-          slideChange: function() {
+          slideChange: function () {
             // console.log('this.activeIndex: ', this.activeIndex)
             // 索引问题
             if (this.activeIndex == _self.value.data.length + 1) {
@@ -203,7 +199,7 @@ export default {
   },
   watch: {
     value: {
-      handler: function(nval, oval) {
+      handler: function (nval, oval) {
         this.reloadSwiper = false
         const { autoplay, autoplaySpeed } = this.value
         const _autoplay = autoplay ? { delay: autoplaySpeed } : false

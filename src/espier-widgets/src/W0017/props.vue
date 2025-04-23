@@ -58,10 +58,7 @@
 <template>
   <div class="widget-W0017-props">
     <Tabs value="name1" :animated="false">
-      <TabPane
-        :label="`${activeElement.name}[${activeElement.type}]`"
-        name="name1"
-      >
+      <TabPane :label="`${activeElement.name}[${activeElement.type}]`" name="name1">
         <panelBar title="标题设置">
           <attr-field label="标题：">
             <Input v-model="activeElement.text" />
@@ -72,10 +69,10 @@
           </attr-field>
           <div class="division"></div>
           <attr-field label="字体颜色：">
-            <color-picker  v-model="activeElement.wgtTextColor"  ></color-picker>
+            <color-picker v-model="activeElement.wgtTextColor"></color-picker>
           </attr-field>
           <div class="division"></div>
-          <attr-field label="圆角：" >
+          <attr-field label="圆角：">
             <iSwitch size="small" v-model="activeElement.wgtBorderRadius" />
           </attr-field>
         </panelBar>
@@ -85,7 +82,11 @@
           </attr-field>
           <div class="division"></div>
           <attr-field label="标题字体：">
-            <InputNumber v-model="activeElement.wgtTitleFontSize" size="small" :min="0"></InputNumber>
+            <InputNumber
+              v-model="activeElement.wgtTitleFontSize"
+              size="small"
+              :min="0"
+            ></InputNumber>
           </attr-field>
           <div class="division"></div>
           <attr-field label="副标题颜色：">
@@ -93,17 +94,20 @@
           </attr-field>
           <div class="division"></div>
           <attr-field label="副标题字体：">
-            <InputNumber v-model="activeElement.wgtSubTitleFontSize" size="small" :min="0"></InputNumber>
+            <InputNumber
+              v-model="activeElement.wgtSubTitleFontSize"
+              size="small"
+              :min="0"
+            ></InputNumber>
           </attr-field>
         </panelBar>
         <panelBar title="主商品">
-
-            <dataBind
-              :imgData="activeElement.goods_pic"
-              :pathData="activeElement.pathData"
-              :imgOnChange="handleImgOnChange.bind(activeElement.goods_pic)"
-              :pathOnChange="handlePathOnChange.bind(activeElement.pathData)"
-            ></dataBind>
+          <dataBind
+            :imgData="activeElement.goods_pic"
+            :pathData="activeElement.pathData"
+            :imgOnChange="handleImgOnChange.bind(activeElement.goods_pic)"
+            :pathOnChange="handlePathOnChange.bind(activeElement.pathData)"
+          ></dataBind>
         </panelBar>
         <panelBar title="标签列表">
           <Button type="primary" style="width: 100%; margin: 0 auto" @click="handleAdd"
@@ -123,7 +127,6 @@
                   </attr-field>
                   <div class="division"></div>
                   <attr-field label="选择商品：">
-
                     <dataBind
                       :value="tab.data"
                       :imgPicker="false"
@@ -134,7 +137,6 @@
                       activeKey="goods_id"
                       placeholder="选择商品"
                     ></dataBind>
-
                   </attr-field>
                   <!-- <div class="tip">
                     {{ `图片分辨率：${activeElement.imgWidth}px * ${activeElement.imgHeight}px` }}
@@ -172,7 +174,7 @@
   </div>
 </template>
 <script>
-import { panelBar, attrField, dataBind,colorPicker } from '../../common/comps'
+import { panelBar, attrField, dataBind, colorPicker } from '../../common/comps'
 import basicSet from '../../common/basic-set'
 export default {
   name: 'W0017Props',
@@ -189,7 +191,7 @@ export default {
   },
   watch: {
     'activeElement.data': {
-      handler: function(nval, oval) {
+      handler: function (nval, oval) {
         // setTimeout(() => {
         //   this.activeElement.height =
         //     60 + document.getElementById(`goods-wrap__${this.activeElement.uuid}_0`).clientHeight
@@ -198,7 +200,7 @@ export default {
       deep: true
     },
     'activeElement.width': {
-      handler: function(nval, oval) {
+      handler: function (nval, oval) {
         setTimeout(() => {
           this.activeElement.height =
             60 + document.getElementById(`goods-wrap__${this.activeElement.uuid}_0`).clientHeight
@@ -213,10 +215,47 @@ export default {
         text: 'tab',
         goods_id: '',
         data: [
-          { goods_id: '', goods_pic: '', price: 123, goods_name: '产品标题文案0',brief:"副标题文案最多控制副标题文案最多控制副标题文案最多控制副标题文案最多控制行内副标题文案最多控制2行内", tagList: [], linkPage: 'goods', linkPageLabel: '商品' },
-          { goods_id: '', goods_pic: '', price: 1231, goods_name: '产品标题文案1',brief:"副标题文案最多控制2行内", tagList: [], linkPage: 'goods', linkPageLabel: '商品' },
-          { goods_id: '', goods_pic: '', price: 4234, goods_name: '产品标题文案2',brief:"副标题文案最多控制2行内", tagList: [], linkPage: 'goods', linkPageLabel: '商品' },
-          { goods_id: '', goods_pic: '', price: 68.9, goods_name: '产品标题文案3',brief:"副标题文案最多控制2行内", tagList: [], linkPage: 'goods', linkPageLabel: '商品' },
+          {
+            goods_id: '',
+            goods_pic: '',
+            price: 123,
+            goods_name: '产品标题文案0',
+            brief:
+              '副标题文案最多控制副标题文案最多控制副标题文案最多控制副标题文案最多控制行内副标题文案最多控制2行内',
+            tagList: [],
+            linkPage: 'goods',
+            linkPageLabel: '商品'
+          },
+          {
+            goods_id: '',
+            goods_pic: '',
+            price: 1231,
+            goods_name: '产品标题文案1',
+            brief: '副标题文案最多控制2行内',
+            tagList: [],
+            linkPage: 'goods',
+            linkPageLabel: '商品'
+          },
+          {
+            goods_id: '',
+            goods_pic: '',
+            price: 4234,
+            goods_name: '产品标题文案2',
+            brief: '副标题文案最多控制2行内',
+            tagList: [],
+            linkPage: 'goods',
+            linkPageLabel: '商品'
+          },
+          {
+            goods_id: '',
+            goods_pic: '',
+            price: 68.9,
+            goods_name: '产品标题文案3',
+            brief: '副标题文案最多控制2行内',
+            tagList: [],
+            linkPage: 'goods',
+            linkPageLabel: '商品'
+          }
         ]
       })
     },
@@ -254,7 +293,7 @@ export default {
         filterMenu: ['goods'],
         activeKey: 'goods_id'
       })
-      const { goods_id, itemId, pics, price, item_name, linkPage, linkPageLabel ,brief} = data
+      const { goods_id, itemId, pics, price, item_name, linkPage, linkPageLabel, brief } = data
       const goodsData = {
         goods_id,
         itemId,
@@ -268,8 +307,9 @@ export default {
       this.$set(this.activeElement.data[index].data, sindex, goodsData)
     },
     onChangePath(data, index) {
-      const goodsData = data.map(item => {
-        const { goods_id, itemId, pics, price, item_name, linkPage, linkPageLabel ,title,brief} = item
+      const goodsData = data.map((item) => {
+        const { goods_id, itemId, pics, price, item_name, linkPage, linkPageLabel, title, brief } =
+          item
         return {
           goods_id,
           itemId,

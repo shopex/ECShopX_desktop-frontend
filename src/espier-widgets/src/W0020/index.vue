@@ -4,11 +4,26 @@
     <slot></slot>
     <div class="widget-W0020-inner widget-inner" :style="widgetInnerStyle">
       <div class="widget-W0020-body widget-body" :style="widgetBodyStyle">
-        <div class="wgt-shop_title" :id="`wgt-shop_title__${value.uuid}`" v-show="!value.wgtHiddenTitle">
-          <div class="name" :class="{ 'bg-null': !value.titleBackground }"
-            :style="{ textAlign: value.titleAlign ,background: `linear-gradient(90deg, ${value.wgtBackgroundColor1} 0%, ${value.wgtBackgroundColor2} 100%)` ,fontSize:value.wgtTitleFontSize+'px'}">
-            <linkPage class="more" :ctitleColor="value.wgtTitleColor" :mode="mode"
-              :to="handleLinkPage(value.moreLinkData)">
+        <div
+          class="wgt-shop_title"
+          :id="`wgt-shop_title__${value.uuid}`"
+          v-show="!value.wgtHiddenTitle"
+        >
+          <div
+            class="name"
+            :class="{ 'bg-null': !value.titleBackground }"
+            :style="{
+              textAlign: value.titleAlign,
+              background: `linear-gradient(90deg, ${value.wgtBackgroundColor1} 0%, ${value.wgtBackgroundColor2} 100%)`,
+              fontSize: value.wgtTitleFontSize + 'px'
+            }"
+          >
+            <linkPage
+              class="more"
+              :ctitleColor="value.wgtTitleColor"
+              :mode="mode"
+              :to="handleLinkPage(value.moreLinkData)"
+            >
               {{ value.text }}
             </linkPage>
           </div>
@@ -22,35 +37,59 @@
                 </div>
               </div>
               <div class="shop-item-content">
-                <linkPage class="shop-item-content_img" :to="`shops/info?distributor_id=${shop.shop_id}`" :mode="mode">
+                <linkPage
+                  class="shop-item-content_img"
+                  :to="`shops/info?distributor_id=${shop.shop_id}`"
+                  :mode="mode"
+                >
                   <ImgWrap :src="shop.banner" :width="149" :height="246" />
                 </linkPage>
-                <linkPage class="shop-item-content_logo" :to="`shops/info?distributor_id=${shop.shop_id}`" :mode="mode">
+                <linkPage
+                  class="shop-item-content_logo"
+                  :to="`shops/info?distributor_id=${shop.shop_id}`"
+                  :mode="mode"
+                >
                   <ImgWrap :borderRadius="40" :src="shop.logo" :width="80" :height="80" />
                 </linkPage>
                 <div class="shop-item-content_title">
-                  {{shop.shop_name}}
+                  {{ shop.shop_name }}
                 </div>
                 <div class="shop-item-content_tag-list">
-                  <span class="shop-item-content_tag-list_text" v-for="(tag , index) in shop.tag_list"
-                    :key="`goods-tag__${index}`">{{tag.tag_name}}</span>
+                  <span
+                    class="shop-item-content_tag-list_text"
+                    v-for="(tag, index) in shop.tag_list"
+                    :key="`goods-tag__${index}`"
+                    >{{ tag.tag_name }}</span
+                  >
                 </div>
               </div>
               <div class="goods-list">
-                <div class="goods-list-item" v-for="(item , idx) in shop.goods_list" :key="`goods-list-item${idx}`">
+                <div
+                  class="goods-list-item"
+                  v-for="(item, idx) in shop.goods_list"
+                  :key="`goods-list-item${idx}`"
+                >
                   <div class="goods-list-item__warp" v-if="showItem(item)">
-                    <linkPage class="goods-list-item__warp_img" :to="`items/${item.goods_id}`" :mode="mode">
+                    <linkPage
+                      class="goods-list-item__warp_img"
+                      :to="`items/${item.goods_id}`"
+                      :mode="mode"
+                    >
                       <ImgWrap :to="122" :src="item.goods_pic" :width="118" :height="118" />
                     </linkPage>
                     <div class="goods-list-item__warp_title">
                       {{ item.goods_name }}
                     </div>
                     <div class="goods-list-item__warp_price">
-                      <goodsPrice class="mkt-price" :afontSize='14' marginTop='1' :theme="value.wgtPriceColor"
-                        :value="item.price / 100"></goodsPrice>
+                      <goodsPrice
+                        class="mkt-price"
+                        :afontSize="14"
+                        marginTop="1"
+                        :theme="value.wgtPriceColor"
+                        :value="item.price / 100"
+                      ></goodsPrice>
                     </div>
                   </div>
-
                 </div>
               </div>
             </div>
@@ -61,18 +100,14 @@
   </div>
 </template>
 <script>
-  import {
-    goodsPrice
-  } from '../../common/comps'
-  import braidStyle from './props'
-  import mixins from '../../mixins'
-  import {
-    attrs
-  } from '../../mixins/common-props'
-  import ImgWrap from '../../common/img-wrap'
-  import linkPage from '../../common/linkpage'
+import { goodsPrice } from '../../common/comps'
+import braidStyle from './props'
+import mixins from '../../mixins'
+import { attrs } from '../../mixins/common-props'
+import ImgWrap from '../../common/img-wrap'
+import linkPage from '../../common/linkpage'
 
-  const WIDGET_NAME = 'W0020'
+const WIDGET_NAME = 'W0020'
 
 export default {
   name: WIDGET_NAME,
@@ -96,14 +131,16 @@ export default {
     height: 430,
     heightDisabled: true,
     moreLinkData: {},
-    data: [{
+    data: [
+      {
         shop_id: '',
         shop_name: '小米旗舰店1',
         shop_pic: '',
         pathData: {},
         banner: '',
         logo: '',
-        tag_list: [{
+        tag_list: [
+          {
             tag_id: '',
             tag_name: '店铺标签1'
           },
@@ -112,7 +149,8 @@ export default {
             tag_name: '店铺标签2'
           }
         ],
-        goods_list: [{
+        goods_list: [
+          {
             goods_id: '',
             goods_pic: '',
             price: 1799,
@@ -145,7 +183,8 @@ export default {
         banner: '',
         logo: '',
         pathData: {},
-        tag_list: [{
+        tag_list: [
+          {
             tag_id: '',
             tag_name: '店铺标签1'
           },
@@ -154,7 +193,8 @@ export default {
             tag_name: '店铺标签2'
           }
         ],
-        goods_list: [{
+        goods_list: [
+          {
             goods_id: '',
             goods_pic: '',
             price: 1799,
@@ -206,19 +246,18 @@ export default {
   computed: {},
   watch: {
     'value.data': {
-      handler: function(nval, oval) {},
+      handler: function (nval, oval) {},
       deep: true
     }
   },
   created() {},
   mounted() {},
   methods: {
-    showItem(item){
-
-      if(this.value.wgtHideUnselectedItems){
-        if(item.goods_id != ''){
+    showItem(item) {
+      if (this.value.wgtHideUnselectedItems) {
+        if (item.goods_id != '') {
           return true
-        }else{
+        } else {
           return false
         }
       }
@@ -226,9 +265,8 @@ export default {
       return true
     },
     shopClicked(shop) {
-
       return '商铺详情'
-    },
+    }
   }
 }
 </script>

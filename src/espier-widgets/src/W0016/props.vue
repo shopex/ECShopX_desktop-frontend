@@ -99,7 +99,7 @@
       <TabPane
         :label="`${activeElement.name}[${activeElement.type}]`"
         name="name1"
-        style="overflow: auto;"
+        style="overflow: auto"
       >
         <panelBar title="基本设置">
           <attr-field label="主标题：">
@@ -111,14 +111,18 @@
           </attr-field>
           <div class="division"></div>
           <attr-field label="标题字体：">
-            <InputNumber v-model="activeElement.wgtTitleFontSize" size="small" :min="0"></InputNumber>
+            <InputNumber
+              v-model="activeElement.wgtTitleFontSize"
+              size="small"
+              :min="0"
+            ></InputNumber>
           </attr-field>
           <div class="division"></div>
           <attr-field label="字体颜色：">
-            <color-picker  v-model="activeElement.wgtTitleColor"  ></color-picker>
+            <color-picker v-model="activeElement.wgtTitleColor"></color-picker>
           </attr-field>
           <div class="division"></div>
-          <attr-field label="圆角：" >
+          <attr-field label="圆角：">
             <iSwitch size="small" v-model="activeElement.wgtBorderRadius" />
           </attr-field>
 
@@ -128,11 +132,15 @@
           </attr-field>
           <div class="division"></div>
           <attr-field label="标题字体：">
-            <InputNumber v-model="activeElement.wgtSubTitleFontSize" size="small" :min="0"></InputNumber>
+            <InputNumber
+              v-model="activeElement.wgtSubTitleFontSize"
+              size="small"
+              :min="0"
+            ></InputNumber>
           </attr-field>
           <div class="division"></div>
           <attr-field label="字体颜色：">
-            <color-picker  v-model="activeElement.wgtSubTextColor"  ></color-picker>
+            <color-picker v-model="activeElement.wgtSubTextColor"></color-picker>
           </attr-field>
           <div class="division"></div>
 
@@ -175,7 +183,7 @@
   </div>
 </template>
 <script>
-import { panelBar, attrField, dataBind, colorPicker} from '../../common/comps'
+import { panelBar, attrField, dataBind, colorPicker } from '../../common/comps'
 import basicSet from '../../common/basic-set'
 import selectPicker from '../../common/select-picker'
 import img10 from './img/10.png'
@@ -185,9 +193,7 @@ export default {
   data() {
     return {
       test: '',
-      styleList: [
-        { img: img10, label: '商品图片', value: 0 },
-      ]
+      styleList: [{ img: img10, label: '商品图片', value: 0 }]
     }
   },
   computed: {
@@ -202,7 +208,7 @@ export default {
     basicSet,
     dataBind,
     selectPicker,
-    colorPicker,
+    colorPicker
     // imgPicker
   },
   methods: {
@@ -212,7 +218,7 @@ export default {
     },
     handlePathOnChange(didx, index, item) {
       this.activeElement.data[didx][index].pathData = item
-    },
+    }
   }
 }
 </script>

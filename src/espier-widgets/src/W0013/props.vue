@@ -20,7 +20,7 @@
       <TabPane
         :label="`${activeElement.name}[${activeElement.type}]`"
         name="name1"
-        style="overflow: auto;"
+        style="overflow: auto"
       >
         <panelBar title="颜色">
           <attr-field label="菜单选中：">

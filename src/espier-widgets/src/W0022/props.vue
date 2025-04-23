@@ -20,7 +20,7 @@
       <TabPane
         :label="`${activeElement.name}[${activeElement.type}]`"
         name="name1"
-        style="overflow: auto;"
+        style="overflow: auto"
       >
         <panelBar title="属性">
           <attr-field label="常开：">
@@ -55,7 +55,6 @@
           <attr-field label="副标题颜色：">
             <color-picker v-model="activeElement.wgtSubTextColor"></color-picker>
           </attr-field>
-
         </panelBar>
         <panelBar title="分类">
           <attr-field label="分类链接：">
@@ -85,7 +84,7 @@
                 </span>
                 <div slot="content">
                   <Input class="nav-input" v-model="item.title" placeholder="菜单名称" />
-                  <attr-field label="字体颜色：" >
+                  <attr-field label="字体颜色：">
                     <color-picker v-model="item.wgtHotKeywordTextColor"></color-picker>
                   </attr-field>
 

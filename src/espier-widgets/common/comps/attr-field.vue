@@ -34,7 +34,7 @@
 
 <template>
   <div class="attr-field" :class="{ 'align-item-top': labelTop }">
-    <div class="attr-field__label" :class="{ tag: tag }" :style="{width:`${width}px`}">
+    <div class="attr-field__label" :class="{ tag: tag }" :style="{ width: `${width}px` }">
       <span>{{ label }}</span>
     </div>
     <div class="attr-field__content">
@@ -58,8 +58,8 @@ export default {
       type: Boolean,
       default: false
     },
-    width:{
-      type:[String , Number],
+    width: {
+      type: [String, Number],
       default: 70
     }
   },

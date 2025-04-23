@@ -149,7 +149,7 @@ export default {
   },
   watch: {
     'activeElement.data': {
-      handler: function(nval, oval) {
+      handler: function (nval, oval) {
         setTimeout(() => {
           this.activeElement.height =
             60 + document.getElementById(`goods-wrap__${this.activeElement.uuid}_0`).clientHeight
@@ -158,7 +158,7 @@ export default {
       deep: true
     },
     'activeElement.width': {
-      handler: function(nval, oval) {
+      handler: function (nval, oval) {
         setTimeout(() => {
           this.activeElement.height =
             60 + document.getElementById(`goods-wrap__${this.activeElement.uuid}_0`).clientHeight
@@ -172,13 +172,69 @@ export default {
       this.activeElement.data.push({
         text: 'tab',
         data: [
-          { goods_id: '', goods_pic: '', price: 0, goods_name: '商品名称', tagList: [], linkPage: 'goods', linkPageLabel: '商品' },
-          { goods_id: '', goods_pic: '', price: 0, goods_name: '商品名称', tagList: [], linkPage: 'goods', linkPageLabel: '商品' },
-          { goods_id: '', goods_pic: '', price: 0, goods_name: '商品名称', tagList: [], linkPage: 'goods', linkPageLabel: '商品' },
-          { goods_id: '', goods_pic: '', price: 0, goods_name: '商品名称', tagList: [], linkPage: 'goods', linkPageLabel: '商品' },
-          { goods_id: '', goods_pic: '', price: 0, goods_name: '商品名称', tagList: [], linkPage: 'goods', linkPageLabel: '商品' },
-          { goods_id: '', goods_pic: '', price: 0, goods_name: '商品名称', tagList: [], linkPage: 'goods', linkPageLabel: '商品' },
-          { goods_id: '', goods_pic: '', price: 0, goods_name: '商品名称', tagList: [], linkPage: 'goods', linkPageLabel: '商品' }
+          {
+            goods_id: '',
+            goods_pic: '',
+            price: 0,
+            goods_name: '商品名称',
+            tagList: [],
+            linkPage: 'goods',
+            linkPageLabel: '商品'
+          },
+          {
+            goods_id: '',
+            goods_pic: '',
+            price: 0,
+            goods_name: '商品名称',
+            tagList: [],
+            linkPage: 'goods',
+            linkPageLabel: '商品'
+          },
+          {
+            goods_id: '',
+            goods_pic: '',
+            price: 0,
+            goods_name: '商品名称',
+            tagList: [],
+            linkPage: 'goods',
+            linkPageLabel: '商品'
+          },
+          {
+            goods_id: '',
+            goods_pic: '',
+            price: 0,
+            goods_name: '商品名称',
+            tagList: [],
+            linkPage: 'goods',
+            linkPageLabel: '商品'
+          },
+          {
+            goods_id: '',
+            goods_pic: '',
+            price: 0,
+            goods_name: '商品名称',
+            tagList: [],
+            linkPage: 'goods',
+            linkPageLabel: '商品'
+          },
+          {
+            goods_id: '',
+            goods_pic: '',
+            price: 0,
+            goods_name: '商品名称',
+            tagList: [],
+            linkPage: 'goods',
+            linkPageLabel: '商品'
+          },
+          {
+            goods_id: '',
+            goods_pic: '',
+            price: 0,
+            goods_name: '商品名称',
+            tagList: [],
+            linkPage: 'goods',
+            linkPageLabel: '商品'
+          }
         ]
       })
     },
@@ -218,25 +274,25 @@ export default {
       })
       const { goods_id, itemId, pics, price, item_name, linkPage, linkPageLabel } = data
       const goodsData = {
-        goods_id, 
+        goods_id,
         itemId,
-        goods_pic: pics.length > 0 ? pics[0] : '', 
-        price: price, 
-        goods_name: item_name, 
+        goods_pic: pics.length > 0 ? pics[0] : '',
+        price: price,
+        goods_name: item_name,
         linkPage,
         linkPageLabel
       }
       this.$set(this.activeElement.data[index].data, sindex, goodsData)
     },
     onChangePath(data, index) {
-      const goodsData = data.map(item => {
+      const goodsData = data.map((item) => {
         const { goods_id, itemId, pics, price, item_name, linkPage, linkPageLabel } = item
         return {
-          goods_id, 
+          goods_id,
           itemId,
-          goods_pic: pics.length > 0 ? pics[0] : '', 
-          price: price, 
-          goods_name: item_name, 
+          goods_pic: pics.length > 0 ? pics[0] : '',
+          price: price,
+          goods_name: item_name,
           linkPage,
           linkPageLabel
         }

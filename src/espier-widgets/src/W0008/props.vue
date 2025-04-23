@@ -25,7 +25,7 @@
       <TabPane
         :label="`${activeElement.name}[${activeElement.type}]`"
         name="name1"
-        style="overflow: auto;"
+        style="overflow: auto"
       >
         <panelBar title="基本设置">
           <attr-field label="搜索显示：">
@@ -52,7 +52,7 @@
             <color-picker v-model="activeElement.wgtTextColor"></color-picker>
           </attr-field>
           <div class="division"></div>
-          <attr-field label="按钮背景：" >
+          <attr-field label="按钮背景：">
             <color-picker v-model="activeElement.wgtTextColor1"></color-picker>
             <color-picker v-model="activeElement.wgtTextColor2"></color-picker>
           </attr-field>
@@ -73,7 +73,7 @@
                 </span>
                 <div slot="content">
                   <Input class="hotword-input" v-model="item.title" placeholder="热门关键字" />
-                  <attr-field label="字体颜色：" >
+                  <attr-field label="字体颜色：">
                     <color-picker v-model="item.wgtHotKeywordTextColor"></color-picker>
                   </attr-field>
                   <dataBind v-model="item.pathData" :imgPicker="false"></dataBind>

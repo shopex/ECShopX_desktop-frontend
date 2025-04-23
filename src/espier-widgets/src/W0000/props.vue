@@ -27,7 +27,7 @@
 <template>
   <div class="widget-w0000-props">
     <Tabs value="name1" :animated="false">
-      <TabPane label="页面配置" name="name1" style="overflow: auto;">
+      <TabPane label="页面配置" name="name1" style="overflow: auto">
         <panelBar title="设置">
           <attrField label="背景：">
             <colorPicker v-model="activeElement.backgroundColor"></colorPicker>

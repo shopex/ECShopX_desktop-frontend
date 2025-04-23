@@ -10,7 +10,7 @@
   <div class="font-set">
     <panelBar title="字体设置">
       <attrField label="大小" :tag="true">
-        <Select v-model="value.fontSize" :transfer="true" size="small" style="width:82px">
+        <Select v-model="value.fontSize" :transfer="true" size="small" style="width: 82px">
           <Option v-for="item in fontSizeList" :value="item.value" :key="item.value">{{
             item.label
           }}</Option>

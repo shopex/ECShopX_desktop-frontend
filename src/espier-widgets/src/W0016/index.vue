@@ -7,29 +7,28 @@
     .link-page {
       margin-top: 22px;
       display: inline-block;
-      width:100%;
+      width: 100%;
     }
     .title {
       font-weight: 800;
       display: inline-block;
       margin-right: 12px;
-      padding : 1px 20px;
+      padding: 1px 20px;
       line-height: 27px;
       font-family: SourceHanSansCN-Heavy, SourceHanSansCN;
     }
     .t-icon {
       vertical-align: middle;
       position: relative;
-
     }
     .subtitle {
-      float:right;
+      float: right;
       font-size: 14px;
       color: #999;
       display: inline-block;
       position: relative;
-      right:10px;
-      top:3px;
+      right: 10px;
+      top: 3px;
     }
   }
   .card-bd {
@@ -44,13 +43,21 @@
       <div class="widget-w0016-body widget-body" :style="widgetBodyStyle">
         <div class="card-hd">
           <linkPage :mode="mode" :to="handleLinkPage(value.linkPath)">
-            <span class="title" :style="{backgroundColor: value.wgtBackgroundColor,borderRadius:`${value.wgtBorderRadius?'15px':'0px'}`,color:value.wgtTitleColor ,fontSize:value.wgtTitleFontSize+'px'}">{{ value.mainTitle }}</span>
+            <span
+              class="title"
+              :style="{
+                backgroundColor: value.wgtBackgroundColor,
+                borderRadius: `${value.wgtBorderRadius ? '15px' : '0px'}`,
+                color: value.wgtTitleColor,
+                fontSize: value.wgtTitleFontSize + 'px'
+              }"
+              >{{ value.mainTitle }}</span
+            >
             <span class="subtitle">{{ value.subTitle }}</span>
           </linkPage>
         </div>
         <div class="card-bd">
-          <WinDisplay1 v-if="value.styleType == 0" v-model="value.data[0]" :mode="mode"/>
-
+          <WinDisplay1 v-if="value.styleType == 0" v-model="value.data[0]" :mode="mode" />
         </div>
       </div>
     </div>
@@ -62,7 +69,6 @@ import mixins from '../../mixins'
 import { attrs } from '../../mixins/common-props'
 import linkPage from '../../common/linkpage'
 import WinDisplay1 from './comps/win-display-1'
-
 
 const WIDGET_NAME = 'W0016'
 
@@ -86,12 +92,12 @@ export default {
     height: 422,
     widthDisabled: true,
     heightDisabled: true,
-    wgtBackgroundColor:"#33C900",
+    wgtBackgroundColor: '#33C900',
     mainTitle: '营销橱窗',
-    wgtTitleFontSize:18,
-    wgtTitleColor:"#FFFFFF",
+    wgtTitleFontSize: 18,
+    wgtTitleColor: '#FFFFFF',
     wgtSubTitleFontSize: 16,
-    wgtSubTextColor:"#8C8C8C",
+    wgtSubTextColor: '#8C8C8C',
 
     subTitle: '看新奇好物',
     linkPath: '', // 标题链接
@@ -114,8 +120,7 @@ export default {
   },
   components: {
     linkPage,
-    WinDisplay1,
-
+    WinDisplay1
   },
   computed: {},
   mounted() {},

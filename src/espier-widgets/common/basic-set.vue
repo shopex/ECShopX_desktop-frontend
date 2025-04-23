@@ -222,7 +222,7 @@ export default {
     })
   },
   watch: {
-    'value.imgUrl': async function(nval, oval) {
+    'value.imgUrl': async function (nval, oval) {
       const { width, height } = await this.readImgData()
       console.log(`img info width: ${width}, height: ${height}`)
       this.imgWidth = width
@@ -238,7 +238,7 @@ export default {
     //   }
     // },
     sliderWidth: {
-      handler: function(nval, oval) {
+      handler: function (nval, oval) {
         if (nval != oval) {
           this.value.width = nval
           this.onChangeWidth()
@@ -247,7 +247,7 @@ export default {
       deep: true
     },
     sliderHeight: {
-      handler: function(nval, oval) {
+      handler: function (nval, oval) {
         if (nval != oval) {
           this.value.height = nval
           this.onChangeHeight()
@@ -322,7 +322,7 @@ export default {
       return new Promise((resolve) => {
         var image = new Image()
         image.src = this.value.imgUrl
-        image.onload = function() {
+        image.onload = function () {
           log.debug('[plugin styleWhHeight] readImgData', this.width, this.height)
           resolve({ width: this.width, height: this.height })
         }

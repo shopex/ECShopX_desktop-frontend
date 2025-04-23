@@ -56,10 +56,10 @@
             </li>
           </ul>
         </panelBar>
-      <div class="division"></div>
-      <attr-field label="视图层级">
-        <InputNumber v-model="activeElement.zindex" size="small" :min="0"></InputNumber>
-      </attr-field>
+        <div class="division"></div>
+        <attr-field label="视图层级">
+          <InputNumber v-model="activeElement.zindex" size="small" :min="0"></InputNumber>
+        </attr-field>
       </TabPane>
       <!-- <TabPane label="动画" name="name2">
         <panel-bar title="动画设置">

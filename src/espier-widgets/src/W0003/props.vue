@@ -69,7 +69,7 @@ export default {
   },
   watch: {
     'activeElement.imgUrl': {
-      handler: function(nval, oval) {
+      handler: function (nval, oval) {
         if (!nval) {
           this.activeElement.data.splice(0, this.activeElement.data.length)
         }

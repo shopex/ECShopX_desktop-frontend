@@ -84,7 +84,11 @@
           </attrField>
           <div class="division"></div>
           <attr-field label="标题字体：">
-            <InputNumber v-model="activeElement.wgtTitleFontSize" size="small" :min="0"></InputNumber>
+            <InputNumber
+              v-model="activeElement.wgtTitleFontSize"
+              size="small"
+              :min="0"
+            ></InputNumber>
           </attr-field>
           <div class="division"></div>
           <attr-field label="标题颜色：">
@@ -97,7 +101,11 @@
           </attr-field>
           <div class="division"></div>
           <attr-field label="价格字体：">
-            <InputNumber v-model="activeElement.wgtPriceFontSize" size="small" :min="0"></InputNumber>
+            <InputNumber
+              v-model="activeElement.wgtPriceFontSize"
+              size="small"
+              :min="0"
+            ></InputNumber>
           </attr-field>
           <div class="division"></div>
           <attr-field label="价格颜色：">
@@ -151,7 +159,7 @@
   </div>
 </template>
 <script>
-import { panelBar, attrField, dataBind, colorPicker} from '../../common/comps'
+import { panelBar, attrField, dataBind, colorPicker } from '../../common/comps'
 import basicSet from '../../common/basic-set'
 export default {
   name: 'W0002Props',
@@ -191,7 +199,8 @@ export default {
         filterMenu: ['goods'],
         activeKey: 'goods_id'
       })
-      const { goods_id, itemId, pics, price, item_name, linkPage, linkPageLabel ,market_price} = data
+      const { goods_id, itemId, pics, price, item_name, linkPage, linkPageLabel, market_price } =
+        data
       const goodsData = {
         goods_id,
         itemId,
@@ -206,8 +215,9 @@ export default {
       this.$set(this.activeElement.data, index, goodsData)
     },
     onChangePath(data) {
-      const goodsData = data.map(item => {
-        const { goods_id, itemId, pics, price, item_name, linkPage, linkPageLabel ,market_price} = item
+      const goodsData = data.map((item) => {
+        const { goods_id, itemId, pics, price, item_name, linkPage, linkPageLabel, market_price } =
+          item
         return {
           goods_id,
           itemId,

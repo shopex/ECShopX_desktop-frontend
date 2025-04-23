@@ -8,9 +8,18 @@
           <div
             class="name"
             :class="{ 'bg-null': !value.titleBackground }"
-            :style="{ textAlign: value.titleAlign ,background: `linear-gradient(90deg, ${value.wgtBackgroundColor1} 0%, ${value.wgtBackgroundColor2} 100%)` ,fontSize:value.wgtTitleFontSize+'px'}"
+            :style="{
+              textAlign: value.titleAlign,
+              background: `linear-gradient(90deg, ${value.wgtBackgroundColor1} 0%, ${value.wgtBackgroundColor2} 100%)`,
+              fontSize: value.wgtTitleFontSize + 'px'
+            }"
           >
-            <linkPage class="more" :ctitleColor="value.wgtTitleColor" :mode="mode" :to="handleLinkPage(value.moreLinkData)"  >
+            <linkPage
+              class="more"
+              :ctitleColor="value.wgtTitleColor"
+              :mode="mode"
+              :to="handleLinkPage(value.moreLinkData)"
+            >
               {{ value.text }}
             </linkPage>
           </div>
@@ -33,16 +42,14 @@
                   class="mkt-price"
                   :theme="value.wgtPriceColor"
                   :value="item.price / 100"
-                  :afontSize = 'value.wgtPriceFontSize'
+                  :afontSize="value.wgtPriceFontSize"
                 ></goodsPrice>
                 <goodsPrice
                   class="mkt-original-price"
-                  theme = "#8C8C8C"
+                  theme="#8C8C8C"
                   :value="item.market_price / 100"
-                  :afontSize = 'value.wgtPriceFontSize - 4'
-
+                  :afontSize="value.wgtPriceFontSize - 4"
                 ></goodsPrice>
-
               </div>
             </linkPage>
           </li>
@@ -85,20 +92,60 @@ export default {
     height: 400,
     heightDisabled: true,
     data: [
-      { goods_id: '', goods_pic: '', price: 123, market_price: 333, goods_name: '商品名5商品名5商品名5商品名5商品名5商品名5', linkPage: 'goods', linkPageLabel: '商品' },
-      { goods_id: '', goods_pic: '', price: 123.20, market_price: 333, goods_name: '商品名称4', linkPage: 'goods', linkPageLabel: '商品' },
-      { goods_id: '', goods_pic: '', price: 990, market_price: 333, goods_name: '商品名称3', linkPage: 'goods', linkPageLabel: '商品' },
-      { goods_id: '', goods_pic: '', price: 123, market_price: 233, goods_name: '商品名称2', linkPage: 'goods', linkPageLabel: '商品' },
-      { goods_id: '', goods_pic: '', price: 1230,market_price: 4234, goods_name: '商品名称1', linkPage: 'goods', linkPageLabel: '商品' }
+      {
+        goods_id: '',
+        goods_pic: '',
+        price: 123,
+        market_price: 333,
+        goods_name: '商品名5商品名5商品名5商品名5商品名5商品名5',
+        linkPage: 'goods',
+        linkPageLabel: '商品'
+      },
+      {
+        goods_id: '',
+        goods_pic: '',
+        price: 123.2,
+        market_price: 333,
+        goods_name: '商品名称4',
+        linkPage: 'goods',
+        linkPageLabel: '商品'
+      },
+      {
+        goods_id: '',
+        goods_pic: '',
+        price: 990,
+        market_price: 333,
+        goods_name: '商品名称3',
+        linkPage: 'goods',
+        linkPageLabel: '商品'
+      },
+      {
+        goods_id: '',
+        goods_pic: '',
+        price: 123,
+        market_price: 233,
+        goods_name: '商品名称2',
+        linkPage: 'goods',
+        linkPageLabel: '商品'
+      },
+      {
+        goods_id: '',
+        goods_pic: '',
+        price: 1230,
+        market_price: 4234,
+        goods_name: '商品名称1',
+        linkPage: 'goods',
+        linkPageLabel: '商品'
+      }
     ],
     titleAlign: 'center',
     titleBackground: true,
-    wgtBackgroundColor1:"#FF5A00",
-    wgtBackgroundColor2:"#FF8600",
+    wgtBackgroundColor1: '#FF5A00',
+    wgtBackgroundColor2: '#FF8600',
     wgtTitleFontSize: 28,
-    wgtTitleColor:"#FFFFFF",
+    wgtTitleColor: '#FFFFFF',
     wgtPriceFontSize: 18,
-    wgtPriceColor:"#FF0036",
+    wgtPriceColor: '#FF0036'
   },
   data() {
     return {
@@ -110,9 +157,7 @@ export default {
     linkPage,
     ImgWrap
   },
-  computed: {
-
-  },
+  computed: {},
   watch: {
     // 'value.columnNums': {
     //   handler: function(nval, oval) {
@@ -123,7 +168,7 @@ export default {
     //   deep: true
     // },
     'value.data': {
-      handler: function(nval, oval) {
+      handler: function (nval, oval) {
         setTimeout(() => {
           this.changeWgtHeight()
         }, 100)
@@ -142,9 +187,7 @@ export default {
   created() {
     // this.getGoodsItems()
   },
-  mounted() {
-
-  },
+  mounted() {},
   methods: {
     changeWgtHeight() {
       this.value.height =
@@ -153,9 +196,9 @@ export default {
         20
     },
     async getGoodsItems() {
-      if(this.isRenderMode()) {
+      if (this.isRenderMode()) {
         const { data } = this.value
-        const itemIds = data.map(item => item.goods_id)
+        const itemIds = data.map((item) => item.goods_id)
         const { list } = await this.$api.item.list({
           item_id: itemIds,
           page: 1,
@@ -163,9 +206,9 @@ export default {
           distributor_id: 0,
           item_type: 'normal'
         })
-        data.forEach(item => {
-          const fd = list.find(li => li.goods_id == item.goods_id)
-          if(fd) {
+        data.forEach((item) => {
+          const fd = list.find((li) => li.goods_id == item.goods_id)
+          if (fd) {
             item['goods_pic'] = fd.pics.length > 0 ? fd.pics[0] : ''
             item['price'] = fd.price
             item['goods_name'] = fd.item_name
