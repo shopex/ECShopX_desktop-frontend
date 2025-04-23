@@ -1,6 +1,6 @@
 {
   "name": "ecshopx-pc",
-  "version": "3.19.3",
+  "version": "3.19.4",
   "private": true,
   "repository": "https://git.ishopex.cn/onex/ecshopx-newpc.git",
   "scripts": {
