@@ -82,9 +82,9 @@
             <div>{{ item.addrdetail }}</div>
             <div>
               (
-              <span>收货人：</span>
+              <span>{{ $t('comps.member-address-picker.617682-0') }}</span>
               <span class="name-label">{{ item.name }}</span>
-              <span>手机：</span>
+              <span>{{ $t('comps.member-address-picker.617682-1') }}</span>
               <span>{{ item.mobile }}</span>
               )
             </div>
@@ -93,7 +93,7 @@
             <div>{{ item.addrdetail }}</div>
             <div>
               (
-              <span>地址名称：</span>
+              <span>{{ $t('comps.member-address-picker.617682-2') }}</span>
               <span>{{ item.storename }}</span>
               )
             </div>
@@ -101,43 +101,43 @@
         </SpRadio>
       </div>
       <template v-if="!isBag">
-        <SpRadio type="checkbox" class="use-new-address" :label="-1">使用新收货地址</SpRadio>
+        <SpRadio type="checkbox" class="use-new-address" :label="-1">{{ $t('comps.member-address-picker.617682-3') }}</SpRadio>
       </template>
       <div class="new-address__wrap">
         <SpForm ref="form-address" :model="info" :rules="rules">
           <template v-if="addrId == -1 && !isBag">
             <SpFormItem prop="name">
-              <p class="form-label">收货人</p>
+              <p class="form-label">{{ $t('comps.member-address-picker.617682-4') }}</p>
               <div class="form-value">
-                <SpInput v-model="info.name" placeholder="请输入收货人的姓名" />
+                <SpInput v-model="info.name" :placeholder="$t('comps.member-address-picker.617682-5')" />
               </div>
             </SpFormItem>
             <SpFormItem prop="phone">
-              <p class="form-label">手机号</p>
+              <p class="form-label">{{ $t('comps.member-address-picker.617682-6') }}</p>
               <div class="form-value">
                 <SpInput
                   v-model="info.phone"
-                  placeholder="请输入联络电话/手机号码"
+                  :placeholder="$t('comps.member-address-picker.617682-7')"
                   :maxlength="11"
                 />
               </div>
             </SpFormItem>
             <SpFormItem>
-              <p class="form-label">所在城市</p>
+              <p class="form-label">{{ $t('comps.member-address-picker.617682-8') }}</p>
               <div class="form-value">
                 <SpAddressPicker v-model="info.address"></SpAddressPicker>
               </div>
             </SpFormItem>
             <SpFormItem prop="address">
-              <p class="form-label">详细地址</p>
+              <p class="form-label">{{ $t('comps.member-address-picker.617682-9') }}</p>
               <div class="form-value">
-                <SpInput v-model="info.addressdetail" placeholder="请输入详细地址" />
+                <SpInput v-model="info.addressdetail" :placeholder="$t('comps.member-address-picker.617682-10')" />
               </div>
             </SpFormItem>
             <SpFormItem>
-              <p class="form-label">邮编</p>
+              <p class="form-label">{{ $t('comps.member-address-picker.617682-11') }}</p>
               <div class="form-value">
-                <SpInput v-model="info.zcode" placeholder="请输入邮编" />
+                <SpInput v-model="info.zcode" :placeholder="$t('comps.member-address-picker.617682-12')" />
               </div>
             </SpFormItem>
           </template>
@@ -148,7 +148,7 @@
                 :disabled="!addrId"
                 long
                 @click="addressSubmit('form-address')"
-                >确认收货信息</SpButton
+                >{{ $t('comps.member-address-picker.617682-13') }}</SpButton
               >
             </div>
           </SpFormItem>
@@ -186,15 +186,15 @@ export default {
         zcode: ''
       },
       rules: {
-        name: [{ validate: 'required', message: '请输入收货人姓名' }],
+        name: [{ validate: 'required', message: this.$t('comps.member-address-picker.617682-14') }],
         phone: [
-          { validate: 'required', message: '请输入11位手机号' },
+          { validate: 'required', message: this.$t('comps.member-address-picker.617682-15') },
           {
             validate: (rule, val, cb) => cb(!/\d{11}/.test(val) ? rule.message : ''),
-            message: '请输入11位手机号'
+            message: this.$t('comps.member-address-picker.617682-15')
           }
         ],
-        address: [{ validate: 'required', message: '请输入详细地址' }]
+        address: [{ validate: 'required', message: this.$t('comps.member-address-picker.617682-10') }]
       },
       pay_type: '',
       addrId: this.value ? this.value.addr_id : -1

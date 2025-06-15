@@ -215,18 +215,18 @@ $color-coupon-text: #1f201f;
     <span class="semicircle semicircle-l"></span>
     <span class="semicircle semicircle-r"></span>
     <div class="comps-coupon-item__price-wrap">
-      <div class="comps-coupon-item__price" v-if="info.card_type == 'discount'">{{ (100 - info.discount)/10 }}折</div>
+      <div class="comps-coupon-item__price" v-if="info.card_type == 'discount'">{{ (100 - info.discount)/10 }}{{ $t('comps.coupon-item.071194-0') }}</div>
       <div class="comps-coupon-item__price" v-if="info.card_type == 'cash'">
         <SpPrice class="comps-coupon-item__price-num" unit="cent" :value="info.reduce_cost"></SpPrice>
       </div>
-      <div class="comps-coupon-item__price" v-if="info.card_type == 'gift'">兑换券</div>
+      <div class="comps-coupon-item__price" v-if="info.card_type == 'gift'">{{ $t('comps.coupon-item.071194-1') }}</div>
     </div>
     <div class="comps-coupon-item__desc">
       <div class="title" v-if="info.card_type != 'gift'">
         【{{info.title}}】
-        <span>满{{info.least_cost > 0 ? info.least_cost/100 : 0.01}}可用</span>
+        <span>{{ $t('comps.coupon-item.071194-2') }}{{info.least_cost > 0 ? info.least_cost/100 : 0.01}}{{ $t('comps.coupon-item.071194-3') }}</span>
       </div>
-      <div class="time">{{info.begin_date}} 至 {{info.end_date}}</div>
+      <div class="time">{{info.begin_date}} {{ $t('comps.coupon-item.071194-4') }} {{info.end_date}}</div>
     </div>
   </div>
   <div class="comps-coupon-item__down">

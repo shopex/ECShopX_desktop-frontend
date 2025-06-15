@@ -12,15 +12,15 @@
         <img class="share-goods__qr" :src="props.info.shareQR">
         <h4 class="share-goods__title">{{ props.info.title }}</h4>
         <SpPrice class="share-goods__price" :value="props.info.price"/>
-        <a :href="props.info.downUrl" class="btn-share-download">下载</a>
+        <a :href="props.info.downUrl" class="btn-share-download">{{ $t('src.panel.829852-0') }}</a>
       </div>
       <div class="share-goods__line">
-        <div class="share-goods__line-hd">分享链接：</div>
+        <div class="share-goods__line-hd">{{ $t('src.panel.829852-1') }}</div>
         <div class="share-goods__line-bd"><a :href="props.info.shareUrl">{{ props.info.shareUrl }}</a></div>
       </div>
       <div class="share-goods__line">
-        <div class="share-goods__line-hd">分享说明：</div>
-        <div class="share-goods__line-bd">可下载图片或者复制链接分享至第三方平台</div>
+        <div class="share-goods__line-hd">{{ $t('src.panel.829852-2') }}</div>
+        <div class="share-goods__line-bd">{{ $t('src.panel.829852-3') }}</div>
       </div>
     </div>
     <SpLoading

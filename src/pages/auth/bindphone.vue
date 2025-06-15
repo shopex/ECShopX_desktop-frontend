@@ -4,23 +4,23 @@
 <template>
   <div class="page-bind page-body">
     <div class="auth bind">
-      <p class="auth-title">绑定手机号</p>
+      <p class="auth-title">{{ $t('auth.bindphone.270187-0') }}</p>
       <div class="clearfix">
         <div class="auth-form bind-form">
           <SpForm ref="form-bind" :model="info" :rules="rules">
             <SpFormItem prop="account">
-              <span class="label-text">手机号/电子邮箱</span>
+              <span class="label-text">{{ $t('auth.bindphone.270187-1') }}</span>
               <SpInput v-model="info.account" />
             </SpFormItem>
             <SpFormItem prop="yzm">
-              <span class="label-text">图片验证码</span>
+              <span class="label-text">{{ $t('auth.bindphone.270187-2') }}</span>
               <div class="yzm-img" @click="handleClickImgcode">
                 <img :src="imgInfo.base64Image" alt />
               </div>
               <SpInput v-model="info.yzm" />
             </SpFormItem>
             <SpFormItem prop="vcode">
-              <span class="label-text">动态验证码</span>
+              <span class="label-text">{{ $t('auth.bindphone.270187-3') }}</span>
               <div class="vcode-btn">
                 <SpTimer
                   :onStart="handleTimerStart"
@@ -35,7 +35,7 @@
 
             <SpFormItem class="btn-container">
               <div class="btn-container__login">
-                <SpButton class="button-dark" @click="loginSubmit('form-bind')">确定</SpButton>
+                <SpButton class="button-dark" @click="loginSubmit('form-bind')">{{ $t('auth.bindphone.270187-4') }}</SpButton>
               </div>
             </SpFormItem>
           </SpForm>
@@ -63,12 +63,12 @@ export default {
         vcode: ''
       },
       rules: {
-        account: [{ validate: 'required', message: '手机号填写错误' }],
-        yzm: [{ validate: 'required', message: '图形验证码填写错误' }],
-        vcode: [{ validate: 'required', message: '短信验证码填写错误' }]
+        account: [{ validate: 'required', message: this.$t('auth.bindphone.270187-5') }],
+        yzm: [{ validate: 'required', message: this.$t('auth.bindphone.270187-6') }],
+        vcode: [{ validate: 'required', message: this.$t('auth.bindphone.270187-7') }]
       },
       imgInfo: {},
-      timerMsg: '获取验证码',
+      timerMsg: this.$t('auth.bindphone.270187-8'),
       license: false,
       message: ''
     }
@@ -106,7 +106,7 @@ export default {
     handleLoginSuccess(accessToken) {
       S.setAuthToken(accessToken)
       this.initStore()
-      this.$Message.success('绑定成功')
+      this.$Message.success(this.$t('auth.bindphone.270187-9'))
       setTimeout(() => {
         this.$redirect({ key: 'auth_redirect' })
       }, 2000)
@@ -140,14 +140,14 @@ export default {
         send_sms_token: res_verify.verifyAccount_token
       }
       await this.$api.auth.regSmsCode(query_sms)
-      this.$Message.success('发送成功')
+      this.$Message.success(this.$t('auth.bindphone.270187-10'))
       cb()
     },
     handleUpdateTimer(e) {
-      this.timerMsg = `${e}秒后重发`
+      this.timerMsg = this.$t('auth.bindphone.270187-11', [])
     },
     handleTimerStop() {
-      this.timerMsg = `重发验证码`
+      this.timerMsg = this.$t('auth.bindphone.270187-12')
     }
   }
 }

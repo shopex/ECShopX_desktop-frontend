@@ -33,14 +33,14 @@
 <template>
   <div class="page-trade-status page-body">
     <div class="container">
-      <div class="trade-status__title">支付成功</div>
+      <div class="trade-status__title">{{ $t('finish.success.925932-0') }}</div>
       <div class="trade-status__content">
-        <p>谢谢您的惠顾。</p>
-        <p v-if="tradeInfo" class="trade-status__info">订单号：{{ tradeInfo.tid }}</p>
+        <p>{{ $t('finish.success.925932-1') }}</p>
+        <p v-if="tradeInfo" class="trade-status__info">{{ $t('finish.success.925932-2') }}{{ tradeInfo.tid }}</p>
       </div>
       <div class="trade-status__actions">
-        <SpButton type="primary" @click="handleNavigate('/member/trade')">查看订单</SpButton>
-        <SpButton type="primary" @click="handleNavigate('/')">返回主页</SpButton>
+        <SpButton type="primary" @click="handleNavigate('/member/trade')">{{ $t('finish.success.925932-3') }}</SpButton>
+        <SpButton type="primary" @click="handleNavigate('/')">{{ $t('finish.success.925932-4') }}</SpButton>
       </div>
     </div>
   </div>

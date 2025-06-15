@@ -1,5 +1,5 @@
 <template>
-  <div>微信登录</div>
+  <div>{{ $t('auth.wx-login.520434-0') }}</div>
 </template>
 
 <script>

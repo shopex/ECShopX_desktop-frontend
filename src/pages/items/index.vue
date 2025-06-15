@@ -34,7 +34,7 @@
         <div class="empty-con">
           <img class="empty-img" src="~/assets/imgs/empty.png" alt="" />
           <div class="empty-info">
-            <div class="txt">没有搜索到相应商品</div>
+            <div class="txt">{{ $t('items.index.172234-0') }}</div>
           </div>
         </div>
       </div>
@@ -116,7 +116,7 @@ export default {
   head() {
     return {
       // title: this.tdk_data ? this.tdk_data.title : '',
-      title: '商品列表',
+      title: this.$t('items.index.172234-1'),
       meta: [
         {
           hid: 'keywords',
@@ -149,11 +149,11 @@ export default {
       breadcrumb: [],
       sort: 'all',
       sorts: [
-        { label: '综合', value: 'all' },
-        { label: '销量', value: '1' },
-        { label: '上新', value: '4' },
-        { label: '价格降序', value: '2' },
-        { label: '价格升序', value: '3' }
+        { label: this.$t('items.index.172234-2'), value: 'all' },
+        { label: this.$t('items.index.172234-3'), value: '1' },
+        { label: this.$t('items.index.172234-4'), value: '4' },
+        { label: this.$t('items.index.172234-5'), value: '2' },
+        { label: this.$t('items.index.172234-6'), value: '3' }
       ],
       start_price: null,
       end_price: null,

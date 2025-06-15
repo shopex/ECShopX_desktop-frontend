@@ -11,7 +11,7 @@
 
 <template>
   <div class="staff-label">
-    常规员工内购商品
+    {{ $t('comps.staff-label.919533-0') }}
   </div>
 </template>
 

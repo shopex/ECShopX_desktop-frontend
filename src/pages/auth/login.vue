@@ -10,30 +10,30 @@
   </div> -->
   <div class="login-main">
     <div class="login-title ">
-      用户登录
+      {{ $t('auth.login.961430-0') }}
       </div>
     <div class="tabs">
       <div class="tab-item" :class="{ active: isAccountLogin }" :style="{
         borderBottomColor: isAccountLogin ? '#FF5D02' : ''
-      }" @click="handleToggleLogin('account')">账号登录</div>
+      }" @click="handleToggleLogin('account')">{{ $t('auth.login.961430-1') }}</div>
       <div class="tab-item" :class="{ active: isYzmLogin }" :style="{
         borderBottomColor: isYzmLogin ? '#FF5D02' : ''
-      }" @click="handleToggleLogin('yzm')">验证码登录</div>
+      }" @click="handleToggleLogin('yzm')">{{ $t('auth.login.961430-2') }}</div>
     </div>
-    <!-- 账号登录 -->
+    <!-- {{ $t('auth.login.961430-1') }} -->
     <SpForm
       class="login-con__form"
       ref="form-login"
       v-if="isAccountLogin"
       :model="accountLogin"
       :rules="accountRules"
-      style="{height: 372px;}"
+      style="height: 372px;"
       >
       <SpFormItem prop="account">
         <SpInput
           icon="new_iconfont icon-new-pc-zhanghu"
           v-model="accountLogin.account"
-          placeholder="手机号"
+          :placeholder="$t('auth.login.961430-3')"
           @keyup.enter.native="handleSubmit('form-login')"
         />
       </SpFormItem>
@@ -42,30 +42,30 @@
           v-model="accountLogin.password"
           icon="new_iconfont icon-new-pc-mima"
           type="password"
-          placeholder="登录密码"
+          :placeholder="$t('auth.login.961430-4')"
           @keyup.enter.native="handleSubmit('form-login')"
         />
       </SpFormItem>
       <SpFormItem class="btn-container">
         <div class="btn-container__login">
-          <SpButton long type="primary" @click="handleSubmit('form-login')">登录</SpButton>
+          <SpButton long type="primary" @click="handleSubmit('form-login')">{{ $t('auth.login.961430-5') }}</SpButton>
         </div>
       </SpFormItem>
     </SpForm>
-    <!-- 验证码登录 -->
+    <!-- {{ $t('auth.login.961430-2') }} -->
     <SpForm
       class="login-con__form"
       ref="mobile_login"
       v-if="isYzmLogin"
       :model="yzmLogin"
       :rules="yzmRules"
-      style="{height: 426px;}"
+      style="height: 426px;"
     >
       <SpFormItem prop="account">
         <SpInput
           icon="new_iconfont icon-new-pc-zhanghu"
           v-model="yzmLogin.account"
-          placeholder="手机号"
+          :placeholder="$t('auth.login.961430-3')"
           @keyup.enter.native="handleSubmit('mobile_login')"
         />
       </SpFormItem>
@@ -74,7 +74,7 @@
           icon="new_iconfont icon-new-pc-tuxingyanzhengma"
           class="yzm-text"
           v-model="yzmLogin.yzm"
-          placeholder="图形验证码" />
+          :placeholder="$t('auth.login.961430-6')" />
         <div class="yzm-img" @click="handleClickImgcode('login')">
           <img :src="imgInfo.imageData" alt />
         </div>
@@ -83,7 +83,7 @@
         <SpInput
           icon="new_iconfont icon-new-pc-yanzhengma"
           v-model="yzmLogin.vcode"
-          placeholder="验证码"
+          :placeholder="$t('auth.login.961430-7')"
           class="yzm-text"
           @keyup.enter.native="handleSubmit('mobile_login')"
         />
@@ -99,12 +99,12 @@
       </SpFormItem>
       <SpFormItem class="btn-container">
         <div class="btn-container__login">
-          <SpButton long type="primary" @click="handleSubmit('mobile_login')">登录</SpButton>
+          <SpButton long type="primary" @click="handleSubmit('mobile_login')">{{ $t('auth.login.961430-5') }}</SpButton>
         </div>
       </SpFormItem>
     </SpForm>
     <div class="form-link">
-      <NuxtLink class="link" to="/auth/forget-password">忘记密码</NuxtLink>
+      <NuxtLink class="link" to="/auth/forget-password">{{ $t('auth.login.961430-8') }}</NuxtLink>
       <!-- <NuxtLink class="register-link" to="/auth/reg?fromlogin=true">
         立即注册<i class="ec-icon ec-icon-right"></i>
       </NuxtLink> -->
@@ -132,7 +132,7 @@ import { validate } from '@/utils'
 export default {
   head() {
     return {
-      title: '登录/注册',
+      title: this.$t('auth.login.961430-9'),
     }
   },
   layout: 'auth_layout',
@@ -159,8 +159,8 @@ export default {
         password: ''
       },
       accountRules: {
-        account: [{ validate: 'required', message: '请输入手机号' }],
-        password: [{ validate: 'required', message: '密码不能为空' }]
+        account: [{ validate: 'required', message: this.$t('auth.login.961430-10') }],
+        password: [{ validate: 'required', message: this.$t('auth.login.961430-11') }]
       },
       yzmLogin: {
         account: '',
@@ -168,11 +168,11 @@ export default {
         vcode: ''
       },
       yzmRules: {
-        account: [{ validate: 'required', message: '请输入手机号' }],
-        vcode: [{ validate: 'required', message: '验证码不能为空' }]
+        account: [{ validate: 'required', message: this.$t('auth.login.961430-10') }],
+        vcode: [{ validate: 'required', message: this.$t('auth.login.961430-12') }]
       },
       imgInfo: {},
-      timerMsg: '发送验证码'
+      timerMsg: this.$t('auth.login.961430-13')
     }
   },
   created() {
@@ -225,11 +225,11 @@ export default {
       const { account, yzm } = this.yzmLogin
       const { imageToken } = this.imgInfo
       if (!validate.validatePhone(account)) {
-        this.$Message.error('请输入正确的手机号')
+        this.$Message.error(this.$t('auth.login.961430-14'))
         return false
       }
       if(!yzm) {
-        this.$Message.error('请输入图形验证码')
+        this.$Message.error(this.$t('auth.login.961430-15'))
         return false
       }
       try {
@@ -245,7 +245,7 @@ export default {
           this.$Message.error(message)
           return false
         }
-        this.$Message.success('发送成功')
+        this.$Message.success(this.$t('auth.login.961430-16'))
         cb()
       } catch (e) {
         this.yzmImg('login')
@@ -253,10 +253,10 @@ export default {
       }
     },
     handleUpdateTimer(e) {
-      this.timerMsg = `${e}秒后重发`
+      this.timerMsg = this.$t('auth.login.961430-17', [])
     },
     handleTimerStop() {
-      this.timerMsg = `重发验证码`
+      this.timerMsg = this.$t('auth.login.961430-18')
     },
     async login() {
       let params = {}
@@ -279,7 +279,7 @@ export default {
       if(token){
         S.setAuthToken(token)
         this.$cookies.set('ECSHOPX_TOKEN', token)
-        this.$Message.success("登录成功")
+        this.$Message.success(this.$t('auth.login.961430-19'))
         this.initStore()
         const { redirectUrl } = this.$route.query
         if (redirectUrl) {

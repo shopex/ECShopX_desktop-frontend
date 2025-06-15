@@ -211,24 +211,24 @@
     <div class="container">
       <div class="payment-info" v-if="!isView">
         <div class="success-info">
-          <div class="success-info-tl">订单提交成功，请您尽快付款！</div>
-          <div class="success-info-tl-text">请您在提交订单后尽快完成支付，否则订单将被取消。</div>
+          <div class="success-info-tl">{{ $t('cashier.index.984361-0') }}</div>
+          <div class="success-info-tl-text">{{ $t('cashier.index.984361-1') }}</div>
         </div>
       </div>
 
       <div class="payment-block" v-show="isPayment">
         <div class="b-item">
-          <div class="label">订单号：</div>
+          <div class="label">{{ $t('cashier.index.984361-2') }}</div>
           <div class="field">{{ tradeId }}</div>
         </div>
         <div class="b-item" v-if="!isView">
-          <div class="label" >应付金额：</div>
+          <div class="label" >{{ $t('cashier.index.984361-3') }}</div>
           <div class="field">
             <SpPrice :value="total_fee / 100" />
           </div>
         </div>
         <div class="b-item" v-if="!isView">
-          <div class="label">支付方式：</div>
+          <div class="label">{{ $t('cashier.index.984361-4') }}</div>
           <div class="field">
             <SpBtnPickerGroup v-model="paymentType">
               <SpBtnPicker
@@ -257,7 +257,7 @@
         </div>
         <div class="offline-pay" v-if="paymentType == 'offline_pay'">
           <div class="offline-pay-left">
-            <div class="offline-pay-left-title">1：请选择转入银行</div>
+            <div class="offline-pay-left-title">{{ $t('cashier.index.984361-5') }}</div>
             <SpBtnPickerGroup v-model="accountId" class="account-select">
               <SpBtnPicker
                 v-for="(item, index) in accountList"
@@ -269,34 +269,34 @@
               <div class="account-box">
                 <img class="account-box-left" :src="item.pic" alt="" width="100%" />
                 <div class="account-box-right">
-                  <div class="account-box-right-item">收款人户名:{{ item.bank_account_name }}</div>
-                  <div class="account-box-right-item">开户行:{{ item.bank_name }}</div>
-                  <div class="account-box-right-item">账户:{{ item.bank_account_no }}</div>
+                  <div class="account-box-right-item">{{ $t('cashier.index.984361-6') }}{{ item.bank_account_name }}</div>
+                  <div class="account-box-right-item">{{ $t('cashier.index.984361-7') }}{{ item.bank_name }}</div>
+                  <div class="account-box-right-item">{{ $t('cashier.index.984361-8') }}{{ item.bank_account_no }}</div>
                 </div>
               </div>
               </SpBtnPicker>
             </SpBtnPickerGroup>
           </div>
           <div class="offline-pay-right">
-            <div class="offline-pay-left-title">2：请填写汇款信息</div>
+            <div class="offline-pay-left-title">{{ $t('cashier.index.984361-9') }}</div>
             <SpForm ref="form" :model="transferInfo" :rules="transferInfoRules">
               <SpFormItem prop="pay_sn">
-                <span class="label-text">交易流水号：</span>
+                <span class="label-text">{{ $t('cashier.index.984361-10') }}</span>
                 <SpInput class="input-text" v-model="transferInfo.pay_sn" />
               </SpFormItem>
               <SpFormItem prop="total_fee">
-                <span class="label-text required">订单金额：</span>
+                <span class="label-text required">{{ $t('cashier.index.984361-11') }}</span>
                 <SpInput class="input-text" disabled :value="(transferInfo.total_fee/100).toFixed(2)" />
               </SpFormItem>
               <SpFormItem prop="transfer_remark">
-                <span class="label-text">转账备注：</span>
+                <span class="label-text">{{ $t('cashier.index.984361-12') }}</span>
                 <div class="el-textarea">
                   <textarea
                     class="el-textarea__content"
                     rows="3"
                     v-model="transferInfo.transfer_remark"
                     :maxlength="200"
-                    placeholder="请输入回复内容"
+                    :placeholder="$t('cashier.index.984361-13')"
                   ></textarea>
                   <span class="el-textarea__count"
                     >{{ transferInfo.transfer_remark.length }}/200</span
@@ -304,7 +304,7 @@
                 </div>
               </SpFormItem>
               <SpFormItem prop="postalCode">
-                <span class="label-text required">凭证图片：</span>
+                <span class="label-text required">{{ $t('cashier.index.984361-14') }}</span>
                 <div class="upload">
                     <input type="file" ref="input" class="input" @change="(e)=>changeUpload(e)"></input>
                         <div  v-for="(pic,idx) in transferInfo.voucher_pic" class="spimg-item" :key="idx" >
@@ -314,18 +314,18 @@
                     <div class="input-icon" v-if="!isView && this.transferInfo.voucher_pic.length < 6" @click="clickUpLoad()"><i class="ec-icon ec-icon-camera"></i></div>
                 </div>
                 <div v-if="!transferInfo.voucher_pic.length && rulesShow" class="form-item__error-message">
-                  请选择凭证图片
+                  {{ $t('cashier.index.984361-15') }}
                 </div>
-                <div class="upload-pic-tips">最多上传6张图片（支持png、jpg、gif、jpeg格式文件）</div>
+                <div class="upload-pic-tips">{{ $t('cashier.index.984361-16') }}</div>
               </SpFormItem>
 
             </SpForm>
 
             <div class="examine" v-if="examineInfo.check_status">
-              <div class="examine-title examine-item">审核信息</div>
-              <div class="examine-item">审核状态：{{ examineInfo.check_status == 2 ? '审核拒绝' : '审核通过' }}</div>
-              <div class="examine-item">审核备注：{{ examineInfo.remark }}</div>
-              <div class="examine-item">审核时间：{{ examineInfo.update_time }}</div>
+              <div class="examine-title examine-item">{{ $t('cashier.index.984361-17') }}</div>
+              <div class="examine-item">{{ $t('cashier.index.984361-18') }}{{ examineInfo.check_status == 2 ? $t('cashier.index.984361-19') : $t('cashier.index.984361-20') }}</div>
+              <div class="examine-item">{{ $t('cashier.index.984361-21') }}{{ examineInfo.remark }}</div>
+              <div class="examine-item">{{ $t('cashier.index.984361-22') }}{{ examineInfo.update_time }}</div>
             </div>
 
           </div>
@@ -338,7 +338,7 @@
           }"
           v-if="!isView"
         >
-         {{ paymentType == 'offline_pay' ? '提交凭证':'去支付' }}
+         {{ paymentType == 'offline_pay' ? $t('cashier.index.984361-23'):$t('cashier.index.984361-24') }}
         </div>
       </div>
 
@@ -360,7 +360,7 @@ export default {
   data() {
     var voucherPicValidate = (rule, value, callback) => {
       if (value.length == 0) {
-        callback('请选择凭证图片')
+        callback(this.$t('cashier.index.984361-15'))
       }
       callback()
     }
@@ -385,8 +385,8 @@ export default {
         voucher_pic:[]
       },
       transferInfoRules: {
-        voucher_pic: [{validate: voucherPicValidate, message: '请选择凭证图片'}],
-        total_fee: [{required: true, validate: 'required', message: '请输入订单金额' }],
+        voucher_pic: [{validate: voucherPicValidate, message: this.$t('cashier.index.984361-15')}],
+        total_fee: [{required: true, validate: 'required', message: this.$t('cashier.index.984361-25') }],
       },
       rulesShow:false,
       examineInfo:{},
@@ -555,11 +555,11 @@ export default {
       if(has_check == 'true'){
         //更新凭证
         await this.$api.cart.updateVoucher(params)
-        this.$Message.success('更新成功')
+        this.$Message.success(this.$t('cashier.index.984361-26'))
       }else{
         // 创建凭证
         await this.$api.cart.uploadVoucher(params)
-        this.$Message.success('上传成功')
+        this.$Message.success(this.$t('cashier.index.984361-27'))
       }
 
       const {
@@ -584,7 +584,7 @@ export default {
     changeUpload(e, index) {
       let files = e.target.files
       if (files.length + this.transferInfo.voucher_pic.length > 6) {
-        this.$Message.error('最多上传6张图片')
+        this.$Message.error(this.$t('cashier.index.984361-28'))
         return false
       }
       uploadImageFn(e.target.files).then((imgs) => {

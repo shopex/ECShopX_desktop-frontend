@@ -338,14 +338,14 @@
           <div class="member-content-right-body">
             <div class="member-content-right-hd clearfix">
               <span style="cursor: pointer" @click="clickToList"
-                ><i class="ec-icon ec-icon-back_android"></i>返回订单列表</span
+                ><i class="ec-icon ec-icon-back_android"></i>{{ $t('trade._id.035369-0') }}</span
               >
-              <span class="order-id">订单：{{ orderInfo.order_id }}</span>
+              <span class="order-id">{{ $t('trade._id.035369-1') }}{{ orderInfo.order_id }}</span>
               <!-- <span class="order-status">状态：{{orderStatusText[orderInfo.order_status_des]}}</span> -->
               <!-- <div class="order-btn">
 
-                <button class="btn btn-primary" @click="clickBtn('付款')" v-if="step == 1">现在付款</button>
-                <button class="btn" @click="clickBtn('取消订单')" v-if="step == 1 || step == 2">取消订单</button>
+                <button class="btn btn-primary" @click="clickBtn($t('trade._id.035369-4'))" v-if="step == 1">现在付款</button>
+                <button class="btn" @click="clickBtn($t('trade._id.035369-8'))" v-if="step == 1 || step == 2">{{ $t('trade._id.035369-8') }}</button>
 
             </div> -->
           </div>
@@ -354,29 +354,29 @@
             <!-- <SpSteps :steps="4" :step="step" :stepsText="stepsText" /> -->
             <div class="clearfix status-log">
               <div class="status-code">
-                订单号：{{ orderInfo.order_id }}
+                {{ $t('trade._id.035369-2') }}{{ orderInfo.order_id }}
                 <div class="status-text">
                   {{orderStatusTextFunc()}}
                 </div>
                 <!-- <span v-if="orderStatus=='PAYED'&&receiveData.ziti_status=='PENDING'">请尽快前往自提点自提</span> -->
                 <span v-if="!(orderStatus=='PAYED'&&receiveData.ziti_status=='PENDING') && orderInfo.order_status_des == 'NOTPAY'">
-                  <i class="ec-icon ec-icon-time"></i>剩余{{ cancelTime }}
+                  <i class="ec-icon ec-icon-time"></i>{{ $t('trade._id.035369-3') }}{{ cancelTime }}
                 </span>
                 <div class="btn-warp btn-warp2">
-                  <button class="btn func-btn" @click="clickBtn('付款')" v-if="step == 1 && orderInfo.pay_type != 'point' && orderInfo.offline_pay_check_status != '0'">付 款</button>
-                  <button class="btn func-btn" @click="clickBtn('付款')" v-if="step == 1 && orderInfo.pay_type != 'point' && orderStatus == 'NOTPAY' && orderInfo.offline_pay_check_status == 2"> 修改付款凭证</button>
-                  <button class="btn func-btn" v-if="step == 3" @click="clickBtn('确认收货')">确认收货</button>
+                  <button class="btn func-btn" @click="clickBtn($t('trade._id.035369-4'))" v-if="step == 1 && orderInfo.pay_type != 'point' && orderInfo.offline_pay_check_status != '0'">{{ $t('trade._id.035369-5') }}</button>
+                  <button class="btn func-btn" @click="clickBtn($t('trade._id.035369-4'))" v-if="step == 1 && orderInfo.pay_type != 'point' && orderStatus == 'NOTPAY' && orderInfo.offline_pay_check_status == 2"> {{ $t('trade._id.035369-6') }}</button>
+                  <button class="btn func-btn" v-if="step == 3" @click="clickBtn($t('trade._id.035369-7'))">{{ $t('trade._id.035369-7') }}</button>
                 </div>
-                <div class="btn-warp-bt" @click="clickBtn('取消订单')" v-if="(step == 1 || step == 2) && orderInfo.offline_pay_check_status != '0'">
-                  <i class="ec-icon ec-icon-roundclose"> 取消订单</i>
+                <div class="btn-warp-bt" @click="clickBtn($t('trade._id.035369-8'))" v-if="(step == 1 || step == 2) && orderInfo.offline_pay_check_status != '0'">
+                  <i class="ec-icon ec-icon-roundclose"> {{ $t('trade._id.035369-8') }}</i>
                 </div>
                 <!-- 判断是待提货及有无提货码状态下 -->
                 <div v-if="(orderStatus=='PAYED'&&receiveData.ziti_status=='PENDING') && (zitiInfo&&zitiInfo.pickup_code)">
-                  <h4 style="font-size:16px;font-weight: bold;">提货码：{{ zitiInfo.pickup_code }} </h4>
-                  <div style="color:rgb(153 153 153);font-size:12px;font-weight: 400;">提货时请出告知店员提货验证码</div>
+                  <h4 style="font-size:16px;font-weight: bold;">{{ $t('trade._id.035369-9') }}{{ zitiInfo.pickup_code }} </h4>
+                  <div style="color:rgb(153 153 153);font-size:12px;font-weight: 400;">{{ $t('trade._id.035369-10') }}</div>
                 </div>
                 <div v-else-if="(orderStatus=='PAYED'&&receiveData.ziti_status=='PENDING')">
-                  <h4 style="font-size:16px;font-weight: bold;">请凭小程序订单中的自提码到门店自提</h4>
+                  <h4 style="font-size:16px;font-weight: bold;">{{ $t('trade._id.035369-11') }}</h4>
                 </div>
               </div>
 
@@ -398,19 +398,19 @@
                 </ul>
               </div>
               <!-- 部分发货判断-----写class不生效，所以用style写样式 -->
-              <!-- <div v-else-if="orderStatusText[orderInfo.order_status_des]==='部分发货' || (orderStatusText[orderInfo.order_status_des]==='待收货'&&deliveryLists.length>1)"> 所有拆分发货的数据，改判断-->
+              <!-- <div :v-else-if="orderStatusText[orderInfo.order_status_des]==='$t('trade._id.035369-34')' || :(orderStatusText[orderInfo.order_status_des]==='$t('trade._id.035369-30')'&&deliveryLists.length>1)"> 所有拆分发货的数据，改判断-->
               <div v-else-if="deliveryLists.length>1">
                 <ul class="delivery">
-                  <div class="delivery-title">{{ deliveryGoodsNum.length }}个包裹已发货</div>
+                  <div class="delivery-title">{{ deliveryGoodsNum.length }}{{ $t('trade._id.035369-12') }}</div>
                   <template>
                     <li class="delivery-item" v-for="(item, index) in deliveryLists" :key="index">
                       <div class="delivery-info">
-                        <div>{{item.status_msg}}商品</div>
+                        <div>{{item.status_msg}}{{ $t('trade._id.035369-13') }}</div>
                         <div style="margin-left:50px" v-show="item.delivery_corp_name!='' || item.delivery_code!=''">
                           {{item.delivery_corp_name}}：{{item.delivery_code}}
                         </div>
                         <img class="delivery-img" :src="item2.pic" alt="" v-for="(item2, index2) in item.items" :key="index2">
-                        <div style="color:rgb(149 149 149);margin-top:8px">共{{item.items_num}}件商品</div>
+                        <div style="color:rgb(149 149 149);margin-top:8px">{{ $t('trade._id.035369-14') }}{{item.items_num}}{{ $t('trade._id.035369-15') }}</div>
                       </div>
                       </li>
                     </template>
@@ -445,7 +445,7 @@
               </div>
               <!-- 付款信息 -->
               <div style="width: 45%;" class="order_message" v-if="orderStatus && orderStatus !== 'CANCEL'">
-                <PayInfo :receiveData="receiveData" @viewCertificate="clickBtn('付款','isView')"></PayInfo>
+                <PayInfo :receiveData="receiveData" @viewCertificate="clickBtn($t('trade._id.035369-4'),'isView')"></PayInfo>
               </div>
               <!-- 发票信息 -->
               <div style="width: 100%;" class="order_message" v-if="(receiveData.invoice!=null &&receiveData.invoice.length!=0)">
@@ -453,7 +453,7 @@
               </div>
               <div style="width: 100%;" class="order_message remark_info" v-if="remark">
                 <p class="bd-border"></p>
-                <h4>备注</h4>
+                <h4>{{ $t('trade._id.035369-16') }}</h4>
                 <p>{{remark}}</p>
               </div>
 
@@ -467,21 +467,21 @@
     </div>
     <SpModal v-model="dailogCancel" :height="200" :width="450">
       <div class="dailog dailog-cancel">
-        <div class="dailog-hd">取消订单</div>
+        <div class="dailog-hd">{{ $t('trade._id.035369-8') }}</div>
         <div class="dailog-bd">
-          <span>订单号：{{ this.$route.params.id }}</span>
+          <span>{{ $t('trade._id.035369-2') }}{{ this.$route.params.id }}</span>
           <div style="padding: 20px 0 10px 0">
-            <!-- <span style="display:inline-block;width:100px;text-align:right">取消原因：</span>
-            <SpInput placeholder="必填：取消原因" v-model="cancelMean" class="dailog-bd-input" />-->
+            <!-- <span style="display:inline-block;width:100px;text-align:right">{{ $t('trade._id.035369-17') }}</span>
+            <SpInput :placeholder="$t('trade._id.035369-18')" v-model="cancelMean" class="dailog-bd-input" />-->
             <SpForm ref="form" :model="form" :rules="rules">
               <SpFormItem prop="cancelMean">
                 <span style="display: inline-block; width: 80px; text-align: right"
-                  >取消原因：</span
+                  >{{ $t('trade._id.035369-17') }}</span
                 >
                 <SpInput
                   class="dailog-bd-input"
                   v-model="form.cancelMean"
-                  placeholder="必填：取消原因"
+                  :placeholder="$t('trade._id.035369-18')"
                 />
               </SpFormItem>
             </SpForm>
@@ -489,14 +489,14 @@
         </div>
 
         <div class="dailog-ft">
-          <button class="btn btn-primary" @click="clickBtn('订单取消确认')">确认取消</button>
-          <button class="btn" @click="clickBtn('取消')">暂不取消</button>
+          <button class="btn btn-primary" @click="clickBtn($t('trade._id.035369-19'))">{{ $t('trade._id.035369-20') }}</button>
+          <button class="btn" @click="clickBtn($t('trade._id.035369-21'))">{{ $t('trade._id.035369-22') }}</button>
         </div>
       </div>
     </SpModal>
     <SpModal v-model="dialogLogistics" :height="500" :width="650">
       <div class="dailog dailog-cancel">
-        <div class="dailog-hd">查看物流</div>
+        <div class="dailog-hd">{{ $t('trade._id.035369-23') }}</div>
         <div class="timelineDetails" style="height:500px;padding-right:20px;overflow:auto;">
           <ul class>
             <template>
@@ -535,34 +535,34 @@ export default {
     return {
       step: 0,
       stepsText: [
-        '订单已生成,等待您付款',
-        '您已付款成功,等待商家发货',
-        '商家已经发货,等待您确认收货',
-        '订单完成'
+        this.$t('trade._id.035369-24'),
+        this.$t('trade._id.035369-25'),
+        this.$t('trade._id.035369-26'),
+        this.$t('trade._id.035369-27')
       ],
       orderInfo: {},
       receiveData: {}, //收货人信息
       orderGoodData: {}, //商品信息
       orderTotalData: {}, //总价信息
       orderStatusText: {
-        NOTPAY: '未付款',
-        PAYED: '待发货',
-        WAIT_BUYER_CONFIRM: '待收货',
-        FAIL: '已关闭',
-        CANCEL: '已取消',
-        PAYED_WAIT_PROCESS: '退款处理中',
-        PAYED_PARTAIL: '部分发货',
-        CLOSED: '已关闭',
-        DONE: '已完成',
-        PAYED_PENDING: '待自提',
-        // PENDING: '已完成',
+        NOTPAY: this.$t('trade._id.035369-28'),
+        PAYED: this.$t('trade._id.035369-29'),
+        WAIT_BUYER_CONFIRM: this.$t('trade._id.035369-30'),
+        FAIL: this.$t('trade._id.035369-31'),
+        CANCEL: this.$t('trade._id.035369-32'),
+        PAYED_WAIT_PROCESS: this.$t('trade._id.035369-33'),
+        PAYED_PARTAIL: this.$t('trade._id.035369-34'),
+        CLOSED: this.$t('trade._id.035369-31'),
+        DONE: this.$t('trade._id.035369-35'),
+        PAYED_PENDING: this.$t('trade._id.035369-36'),
+        // PENDING: this.$t('trade._id.035369-35'),
       }, //状态字典
       orderStatus: '',
       dailogCancel: false,
 
       form: { cancelMean: '' },
       rules: {
-        cancelMean: [{ validate: 'required', message: '取消原因必填' }]
+        cancelMean: [{ validate: 'required', message: this.$t('trade._id.035369-37') }]
       },
       activities: [
         {
@@ -611,7 +611,7 @@ export default {
       this.deliveryLists = list
       this.deliveryGoodsNum = []
       list.map(ele=>{
-        if(ele.status_msg=='已发货'){
+        if(ele.status_msg==this.$t('trade._id.035369-38')){
           this.deliveryGoodsNum.push(ele)
         }
       })
@@ -705,7 +705,7 @@ export default {
           this.step = 1
           activities = [
             {
-              AcceptStation: '待支付',
+              AcceptStation: this.$t('trade._id.035369-39'),
               AcceptTime: create_time
             }
           ]
@@ -714,11 +714,11 @@ export default {
           this.step = 2
           activities = [
             {
-              AcceptStation: '已付款',
+              AcceptStation: this.$t('trade._id.035369-40'),
               AcceptTime: payDate
             },
             {
-              AcceptStation: '待支付',
+              AcceptStation: this.$t('trade._id.035369-39'),
               AcceptTime: create_time
             }
           ]
@@ -750,11 +750,11 @@ export default {
           this.step = 5
           activities = [
             {
-              AcceptStation: '已付款',
+              AcceptStation: this.$t('trade._id.035369-40'),
               AcceptTime: payDate
             },
             {
-              AcceptStation: '待支付',
+              AcceptStation: this.$t('trade._id.035369-39'),
               AcceptTime: create_time
             }
           ]
@@ -768,15 +768,15 @@ export default {
         // 自提完成时间轴
         this.activities = [
           {
-            AcceptStation: '已完成',
+            AcceptStation: this.$t('trade._id.035369-35'),
             AcceptTime: end_date
           },
           {
-            AcceptStation: '已付款',
+            AcceptStation: this.$t('trade._id.035369-40'),
             AcceptTime: payDate
           },
           {
-            AcceptStation: '待支付',
+            AcceptStation: this.$t('trade._id.035369-39'),
             AcceptTime: create_time
           }
         ]
@@ -784,11 +784,11 @@ export default {
         deliveryInfo({delivery_id:delivery_id }).then((res) => {
           activities = [
             {
-              AcceptStation: '已付款',
+              AcceptStation: this.$t('trade._id.035369-40'),
               AcceptTime: payDate
             },
             {
-              AcceptStation: '待支付',
+              AcceptStation: this.$t('trade._id.035369-39'),
               AcceptTime: create_time
             }
           ]
@@ -806,30 +806,30 @@ export default {
     },
     clickBtn(type,isView) {
       switch (type) {
-        case '付款':
+        case this.$t('trade._id.035369-4'):
           let _url = `/cashier?order_id=${this.$route.params.id}&has_check=${this.orderInfo.offline_pay_check_status !== null}`;
           if(isView){
             _url += '&isView=true'
           }
           this.$router.push(_url)
           break
-        case '确认收货':
+        case this.$t('trade._id.035369-7'):
           confirmOrder({
             order_id: this.$route.params.id
           }).then((res) => {
-            this.$Message.success('收货成功')
+            this.$Message.success(this.$t('trade._id.035369-41'))
             // this.getTradeList()
             this.getOrderInfo()
           })
 
           break
-        case '取消订单':
+        case this.$t('trade._id.035369-8'):
           this.dailogCancel = true
           break
-        case '取消':
+        case this.$t('trade._id.035369-21'):
           this.dailogCancel = false
           break
-        case '订单取消确认':
+        case this.$t('trade._id.035369-19'):
           this.$refs['form'].validate((valid, errors) => {
             if (valid) {
               orderCancel({
@@ -845,9 +845,9 @@ export default {
     },
     orderStatusTextFunc(){
       if(this.orderStatus=='PAYED'&& this.receiveData.ziti_status=='PENDING'){
-        return '待自提'
+        return this.$t('trade._id.035369-36')
       }else if(this.orderInfo.offline_pay_check_status == 0){
-        return '待商家确认'
+        return this.$t('trade._id.035369-42')
       }else{
         return this.orderStatusText[this.orderInfo.order_status_des]
       }
@@ -873,16 +873,16 @@ export default {
       }
       let result = ''
       if (theTime > 0) {
-        result = '' + parseInt(theTime) + '秒'
+        result = '' + parseInt(theTime) + this.$t('trade._id.035369-43')
       }
       if (theTime1 > 0) {
-        result = '' + parseInt(theTime1) + '分' + result
+        result = '' + parseInt(theTime1) + this.$t('trade._id.035369-44') + result
       }
       if (theTime2 > 0) {
-        result = '' + parseInt(theTime2) + '小时' + result
+        result = '' + parseInt(theTime2) + this.$t('trade._id.035369-45') + result
       }
       if (theTime3 > 0) {
-        result = '' + parseInt(theTime3) + '天' + result
+        result = '' + parseInt(theTime3) + this.$t('trade._id.035369-46') + result
       }
       this.cancelTime = result
       this.auto_cancel_seconds--

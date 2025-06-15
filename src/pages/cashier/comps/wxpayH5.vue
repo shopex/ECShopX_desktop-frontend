@@ -14,9 +14,9 @@
 
 <template>
   <div class="cashier-wxpayh5">
-    <div class="cashier-wxpayh5__title">正在支付...</div>
+    <div class="cashier-wxpayh5__title">{{ $t('comps.wxpayH5.653734-0') }}</div>
     <div class="cashier-wxpayh5__warp">
-      <div>支付单号: {{ payment_id }}</div>
+      <div>{{ $t('comps.wxpayH5.653734-1') }} {{ payment_id }}</div>
     </div>
   </div>
 </template>

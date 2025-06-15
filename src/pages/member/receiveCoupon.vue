@@ -8,8 +8,8 @@
       </div>
       <div class="right">
         <div class="h-title">
-          <span class="back-btn" @click="goBack">&lt; 返回</span>
-          <span>领取优惠券</span>
+          <span class="back-btn" @click="goBack">{{ $t('member.receiveCoupon.522771-0') }}</span>
+          <span>{{ $t('member.receiveCoupon.522771-1') }}</span>
         </div>
         <div class="coupon-container-member coupon-list">
           <div class="coupon-list__warp" v-for="(item, index) in list" :key="index">
@@ -21,7 +21,7 @@
                 <div class="coupon-list__h">
                   <SpPrice class="price" :value="item.deduct_money"></SpPrice>
                   <span class="coupon-d">{{ item.coupon_name }}</span>
-                  <span class="coupon-e">店铺优惠券</span>
+                  <span class="coupon-e">{{ $t('member.receiveCoupon.522771-2') }}</span>
                 </div>
                 <div class="coupon-list__datetime">
                   {{ handleDatetime(item.cansend_start_time) }}-{{
@@ -34,14 +34,14 @@
                   type="warning"
                   @click="receiveCoupon(item.coupon_id, item.shop_id)"
                   v-if="item.user_get_times && item.all_use_times && item.get_time"
-                  >领取</SpButton
+                  >{{ $t('member.receiveCoupon.522771-3') }}</SpButton
                 >
-                <SpButton type="primary" disabled v-if="!item.user_get_times">已领取</SpButton>
+                <SpButton type="primary" disabled v-if="!item.user_get_times">{{ $t('member.receiveCoupon.522771-4') }}</SpButton>
                 <SpButton
                   type="primary"
                   disabled
                   v-if="item.user_get_times && (!item.all_use_times || !item.get_time)"
-                  >已领完</SpButton
+                  >{{ $t('member.receiveCoupon.522771-5') }}</SpButton
                 >
               </div>
             </div>
@@ -49,9 +49,9 @@
         </div>
         <SpTipMessage
           v-model="tip"
-          tipText="抱歉！暂无可领取优惠券"
-          tipLink="请继续购物。"
-          to="/items?tag=新品"
+          :tipText="$t('member.receiveCoupon.522771-6')"
+          :tipLink="$t('member.receiveCoupon.522771-7')"
+          :to="$t('member.receiveCoupon.522771-8')"
         ></SpTipMessage>
       </div>
     </div>
@@ -97,7 +97,7 @@ export default {
       }
       try {
         await this.$api.shop.receiveCoupon(params)
-        this.$Message.success(`领取优惠券成功`)
+        this.$Message.success(this.$t('member.receiveCoupon.522771-9'))
         this.getCouponList()
         this.loading = false
       } catch (error) {

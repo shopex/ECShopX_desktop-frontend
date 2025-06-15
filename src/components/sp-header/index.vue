@@ -13,35 +13,35 @@
       <div class="container clearfix">
         <div class="topbar-login fl">
           <div class="no-login active">
-            <NuxtLink to="/" class="index-link">首页</NuxtLink>
+            <NuxtLink to="/" class="index-link">{{ $t('sp-header.index.663900-0') }}</NuxtLink>
             <template v-if="!userInfo">
               <NuxtLink to="/auth/login" class="topbar-login__link " style="color:#FF5D02;"
-                >请登录</NuxtLink
+                >{{ $t('sp-header.index.663900-1') }}</NuxtLink
               >
               <NuxtLink to="/auth/reg" class="topbar-login__link topbar-register__link "
-                >注册</NuxtLink
+                >{{ $t('sp-header.index.663900-2') }}</NuxtLink
               >
               <!-- <img src="../../assets/imgs/top.png" /> -->
             </template>
             <template v-else>
-              <span class="sys-hello">你好</span>
+              <span class="sys-hello">{{ $t('sp-header.index.663900-3') }}</span>
               <span class="member-phone">{{ userInfo.memberInfo.mobile }}</span>
-              <span class="exit-btn" @click="handleLogout()">退出</span>
+              <span class="exit-btn" @click="handleLogout()">{{ $t('sp-header.index.663900-4') }}</span>
             </template>
           </div>
         </div>
         <div class="topbar-member fr">
-          <NuxtLink to="/cart" style="margin-right:0;">我的购物车</NuxtLink>
+          <NuxtLink to="/cart" style="margin-right:0;">{{ $t('sp-header.index.663900-5') }}</NuxtLink>
           <span>|</span>
-          <NuxtLink to="/member/trade" style="margin-right:0;">我的订单</NuxtLink>
+          <NuxtLink to="/member/trade" style="margin-right:0;">{{ $t('sp-header.index.663900-6') }}</NuxtLink>
           <span>|</span>
-          <NuxtLink to="/member/user-info" style="margin-right:0;" >会员中心</NuxtLink>
+          <NuxtLink to="/member/user-info" style="margin-right:0;" >{{ $t('sp-header.index.663900-7') }}</NuxtLink>
           <span>|</span>
-          <NuxtLink to="/shop">商家入驻</NuxtLink>
+          <NuxtLink to="/shop">{{ $t('sp-header.index.663900-8') }}</NuxtLink>
           <!-- 隐藏商家中心 -->
           <!-- <NuxtLink to="/member/user-info">商家中心</NuxtLink> -->
 
-          <!-- <NuxtLink to="/">首页</NuxtLink> -->
+          <!-- <NuxtLink to="/">{{ $t('sp-header.index.663900-0') }}</NuxtLink> -->
           <!-- <NuxtLink to="/pointitems">积分商城</NuxtLink> -->
         </div>
       </div>

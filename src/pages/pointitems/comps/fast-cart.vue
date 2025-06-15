@@ -1,24 +1,24 @@
 <template>
   <div class="fast-cart">
     <SpModal class="add-cart-modal" v-model="showModal" :width="400" @Cancel="handleClose">
-      <div class="header-title">积分兑换</div>
+      <div class="header-title">{{ $t('comps.fast-cart.153439-0') }}</div>
       <div class="modal-goods">
         <div class="modal-row">
-          <span class="modal-row__title">商品:</span>
+          <span class="modal-row__title">{{ $t('comps.fast-cart.153439-1') }}</span>
           <div class="modal-row__value">
             <span class="name">{{ info.item_name }}</span>
           </div>
         </div>
         <div class="modal-row">
-          <span class="modal-row__title">价格:</span>
+          <span class="modal-row__title">{{ $t('comps.fast-cart.153439-2') }}</span>
           <div class="modal-row__value">
             <SpPrice
-              :defaultValue="`${curSku.point}积分`"
+              :defaultValue="$t('comps.fast-cart.153439-3', [curSku.point])"
               unit=""
               symbol=""
               v-if="curSku"
             ></SpPrice>
-            <SpPrice :defaultValue="`${info.point}积分`" unit="" symbol="" v-else></SpPrice>
+            <SpPrice :defaultValue="$t('comps.fast-cart.153439-4', [info.point])" unit="" symbol="" v-else></SpPrice>
           </div>
         </div>
         <!-- 规格 -->
@@ -46,7 +46,7 @@
             </div>
         </div> -->
         <div class="modal-row">
-          <span class="modal-row__title">购买数量:</span>
+          <span class="modal-row__title">{{ $t('comps.fast-cart.153439-5') }}</span>
           <div class="modal-row__value">
             <SpNumInput
               class="t-num"
@@ -57,14 +57,14 @@
               @decrease="handleClickNumInput($event, info, 'decrease')"
               @change="handleQuantityChange($event, info, 'change')"
             ></SpNumInput>
-            <span v-if="curSku">库存：{{ curSku.store }}</span>
+            <span v-if="curSku">{{ $t('comps.fast-cart.153439-6') }}{{ curSku.store }}</span>
           </div>
           <div
             class="modal-btn"
             :class="{ 'disabled': info.item_spec_desc && !curSku }"
             @click="handleModalAddCart()"
           >
-            立即兑换
+            {{ $t('comps.fast-cart.153439-7') }}
           </div>
         </div>
       </div>

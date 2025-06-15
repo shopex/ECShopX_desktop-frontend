@@ -30,7 +30,7 @@
         v-model="province"
         :disabled="disabled"
         :data="provinceDs"
-        placeholder="请选择省"
+        :placeholder="$t('sp-address.index.346474-0')"
         @change="onChangeProvince"
       ></SpSelect>
     </div>
@@ -41,7 +41,7 @@
         :disabled="disabled"
         :data="cityDs"
         :value="1"
-        placeholder="请选择市"
+        :placeholder="$t('sp-address.index.346474-1')"
         @change="onChangeCity"
       ></SpSelect>
     </div>
@@ -51,7 +51,7 @@
         :disabled="disabled || county_disabled"
         :data="countyDs"
         :value="1"
-        placeholder="区"
+        :placeholder="$t('sp-address.index.346474-2')"
         @change="onChangeCounty"
       ></SpSelect>
     </div>

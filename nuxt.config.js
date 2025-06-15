@@ -1,8 +1,11 @@
+import i18n from './src/plugins/nuxti18n'
+
 const path = require('path')
 const merge = require('webpack-merge')
 const pkg = require('./package.json')
 const { extendRoutes } = require('./nuxt')
 const OssPlugin = require('./nuxt/ossplugin')
+
 // const Parser = require('process-argv-parser')
 // const parser = new Parser()
 const mode = process.env.BUILD_ENV
@@ -112,6 +115,8 @@ module.exports = {
    ** Nuxt.js modules
    */
   modules: [
+    
+    ['nuxt-i18n', i18n],
     '@nuxtjs/device',
     // ['~/modules/axios'],
     'cookie-universal-nuxt',
@@ -179,6 +184,7 @@ module.exports = {
 
   router: {
     base: '/',
+    middleware: 'i18n',
     extendRoutes
   },
 

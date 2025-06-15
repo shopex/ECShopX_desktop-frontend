@@ -100,9 +100,9 @@ $img-ratio:0.723;
   <div>
     <div class="order-item mb20">
       <div class="order-item__info">
-        <span>日期：{{handleDatetime(order.created_time)}}</span>
-        <span class="order-item__info-no">订单号：{{order.tid}}</span>
-        <span class="order-item__info-status"> <span class="countdown" v-if="order.status === 'WAIT_BUYER_PAY' && countdown">支付倒计时{{countdown}}</span> {{order.status_desc}}</span>
+        <span>{{ $t('comps.order-item.406280-0') }}{{handleDatetime(order.created_time)}}</span>
+        <span class="order-item__info-no">{{ $t('comps.order-item.406280-1') }}{{order.tid}}</span>
+        <span class="order-item__info-status"> <span class="countdown" v-if="order.status === 'WAIT_BUYER_PAY' && countdown">{{ $t('comps.order-item.406280-2') }}{{countdown}}</span> {{order.status_desc}}</span>
       </div>
       <ul>
         <li class="mb20" v-for="(item,index) in goodList" :key="index">
@@ -119,20 +119,20 @@ $img-ratio:0.723;
         </li>
       </ul>
       <div class="order-item-total">
-        <span class="order-item-total-text">共{{order.totalItem}}件商品 合计：</span>
+        <span class="order-item-total-text">{{ $t('comps.order-item.406280-3') }}{{order.totalItem}}{{ $t('comps.order-item.406280-4') }}</span>
         <SpPrice class="order-item-total-price-num" :value="order.payment"></SpPrice>
       </div>
       <div class="order-item-button-wraper">
         <slot name="btns">
-          <SpButton @click="handleJumpDetail" class="button-dark ml20">查看订单</SpButton>
-          <SpButton @click="goPay()" v-if="btns && btns.btn_pay"          class="button-dark ml20" type="primary">付款</SpButton>
-          <SpButton @click="cancelTrade()" v-if="btns && btns.btn_cancel" class="button-dark ml20" type="primary">取消订单</SpButton>
-          <SpButton @click="applyRefund" v-if="btns && btns.btn_refund" class="button-dark ml20" type="primary">申请退款</SpButton>
-          <SpButton @click="confirmTrade()" v-if="btns && btns.btn_confirm" class="button-dark ml20" type="primary">确认收货</SpButton>
+          <SpButton @click="handleJumpDetail" class="button-dark ml20">{{ $t('comps.order-item.406280-5') }}</SpButton>
+          <SpButton @click="goPay()" v-if="btns && btns.btn_pay"          class="button-dark ml20" type="primary">{{ $t('comps.order-item.406280-6') }}</SpButton>
+          <SpButton @click="cancelTrade()" v-if="btns && btns.btn_cancel" class="button-dark ml20" type="primary">{{ $t('comps.order-item.406280-7') }}</SpButton>
+          <SpButton @click="applyRefund" v-if="btns && btns.btn_refund" class="button-dark ml20" type="primary">{{ $t('comps.order-item.406280-8') }}</SpButton>
+          <SpButton @click="confirmTrade()" v-if="btns && btns.btn_confirm" class="button-dark ml20" type="primary">{{ $t('comps.order-item.406280-9') }}</SpButton>
           <!-- <SpButton @click="deleteTrade()" v-if="btns && btns.btn_delete" class="button-dark ml20" type="primary">删除订单</SpButton> -->
-          <SpButton @click="returnExchangeTrade('refund_goods')" v-if="btns && btns.btn_refundgoods" class="button-dark ml20"  type="primary">申请售后</SpButton>
+          <SpButton @click="returnExchangeTrade('refund_goods')" v-if="btns && btns.btn_refundgoods" class="button-dark ml20"  type="primary">{{ $t('comps.order-item.406280-10') }}</SpButton>
           <!-- <SpButton @click="returnExchangeTrade('only_refund')" v-if="btns && btns.btn_onlyrefund" class="button-dark ml20" type="primary">取消未发货商品</SpButton> -->
-          <SpButton @click="linkRefund" v-if="btns && btns.btn_aftersales" class="button-dark ml20" type="primary">退单详情</SpButton>
+          <SpButton @click="linkRefund" v-if="btns && btns.btn_aftersales" class="button-dark ml20" type="primary">{{ $t('comps.order-item.406280-11') }}</SpButton>
         </slot>
       </div>
     </div>
@@ -175,7 +175,7 @@ export default {
               callback()
             } else {
               // eslint-disable-next-line standard/no-callback-literal
-              callback('请选择物流商')
+              callback(this.$t('comps.order-item.406280-12'))
             }
           },
           trigger: 'blur'
@@ -187,7 +187,7 @@ export default {
               callback()
             } else {
               // eslint-disable-next-line standard/no-callback-literal
-              callback('请输入物流单号')
+              callback(this.$t('comps.order-item.406280-13'))
             }
           },
           trigger: 'blur'
@@ -221,7 +221,7 @@ export default {
           if (lastTime > 0) {
             int_minute = Math.floor(lastTime / 60)
             lastTime -= int_minute * 60
-            this.countdown = int_minute + '分' + lastTime + '秒'
+            this.countdown = int_minute + this.$t('comps.order-item.406280-14') + lastTime + this.$t('comps.order-item.406280-15')
           } else {
             this.countdown = null
           }
@@ -274,7 +274,7 @@ export default {
 
     async handleClickCheckout (params) {
       if (!params.pay_app_id) {
-        this.$Message.error('请选择支付方式')
+        this.$Message.error(this.$t('comps.order-item.406280-16'))
         return
       }
 
@@ -304,12 +304,12 @@ export default {
     cancelTrade () {
       const { tid } = this.order
       this.$Modal.confirm({
-        title: '提示',
+        title: this.$t('comps.order-item.406280-17'),
         content: '<p>请确认是否取消订单?</p>',
         onOk: async () => {
           await this.$api.trade.tradeCancelBuyer({
             tid,
-            cancel_reason: '取消订单'
+            cancel_reason: this.$t('comps.order-item.406280-7')
           })
           this.handlePerformAct('refresh')
         },
@@ -320,12 +320,12 @@ export default {
     applyRefund () {
       const { tid } = this.order
       this.$Modal.confirm({
-        title: '提示',
+        title: this.$t('comps.order-item.406280-17'),
         content: '<p>请确认是否退款?</p>',
         onOk: async () => {
           await this.$api.trade.tradeCancelBuyer({
             tid,
-            cancel_reason: '取消订单'
+            cancel_reason: this.$t('comps.order-item.406280-7')
           })
           this.handlePerformAct('refresh')
         },
@@ -336,7 +336,7 @@ export default {
     deleteTrade () {
       const { tid } = this.order
       this.$Modal.confirm({
-        title: '提示',
+        title: this.$t('comps.order-item.406280-17'),
         content: '<p>确认是否删除?</p>',
         onOk: async () => {
           await this.$api.trade.remove(tid)
@@ -349,7 +349,7 @@ export default {
     confirmTrade () {
       const { tid } = this.order
       this.$Modal.confirm({
-        title: '提示',
+        title: this.$t('comps.order-item.406280-17'),
         content: '<p>请确认是否收货?</p>',
         onOk: async () => {
           await this.$api.trade.tradeConfirmReceipt({
@@ -412,7 +412,7 @@ export default {
         logi_name
       }
       await this.$api.aftersales.logistics(params)
-      this.$Message.success('填写物流信息成功')
+      this.$Message.success(this.$t('comps.order-item.406280-22'))
       this.tradeList()
     }
 

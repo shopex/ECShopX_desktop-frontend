@@ -4,13 +4,13 @@
       <div class="cart-point__l1">
         <label>
           <SpRadio type="checkbox" :value="isChecked" @change="this.handleToggleCheck" />
-          <span class="cart-point__l1-text">积分抵扣</span>
-          <span>当前账户积分:</span>
+          <span class="cart-point__l1-text">{{ $t('comps.point.775552-0') }}</span>
+          <span>{{ $t('comps.point.775552-1') }}</span>
           <span class="cart-point__total">{{ total }}</span>
         </label>
       </div>
       <div class="cart-point__l2" v-show="isChecked">
-        <span>输入抵扣积分</span>
+        <span>{{ $t('comps.point.775552-2') }}</span>
         <SpNumInput
           v-model="localVal"
           :min="10000"
@@ -19,10 +19,10 @@
           @change="handleInputChange"
           disabled-input
         />
-        <SpButton @click="handleConfirm">使用</SpButton>
+        <SpButton @click="handleConfirm">{{ $t('comps.point.775552-3') }}</SpButton>
       </div>
     </template>
-    <div class="cart-point__l1" v-else>您的积分余额不足</div>
+    <div class="cart-point__l1" v-else>{{ $t('comps.point.775552-4') }}</div>
   </div>
 </template>
 

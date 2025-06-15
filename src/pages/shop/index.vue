@@ -23,7 +23,7 @@
           <SpInput
             icon="new_iconfont icon-new-pc-zhanghu"
             v-model="yzmLogin.mobile"
-            placeholder="手机号"
+            :placeholder="$t('shop.index.963066-0')"
           />
           <!-- @keyup.enter.native="handleSubmit('mobile_login')" -->
         </SpFormItem>
@@ -32,7 +32,7 @@
             icon="new_iconfont icon-new-pc-tuxingyanzhengma"
             class="yzm-text"
             v-model="yzmLogin.yzm"
-            placeholder="图形验证码"
+            :placeholder="$t('shop.index.963066-1')"
           />
           <div class="yzm-img" @click="handleClickImgcode('merchant_login')">
             <img :src="imgInfo.imageData" alt />
@@ -42,7 +42,7 @@
           <SpInput
             icon="new_iconfont icon-new-pc-yanzhengma"
             v-model="yzmLogin.vcode"
-            placeholder="验证码"
+            :placeholder="$t('shop.index.963066-2')"
             class="yzm-text"
             @keyup.enter.native="handleSubmit('merchant_login')"
           />
@@ -58,20 +58,20 @@
         </SpFormItem>
         <SpFormItem class="btn-container">
           <div class="btn-container__login">
-            <SpButton long type="primary" @click="handleSubmit('mobile_login')">登录</SpButton>
+            <SpButton long type="primary" @click="handleSubmit('mobile_login')">{{ $t('shop.index.963066-3') }}</SpButton>
           </div>
         </SpFormItem>
         <div class="form-link">
           <SpRadio type="checkbox" size="small" v-model="checkLabel"></SpRadio>
           <p>
-            阅读并同意
-            <span class="link" @click="protocolHandle">入驻协议</span>
+            {{ $t('shop.index.963066-4') }}
+            <span class="link" @click="protocolHandle">{{ $t('shop.index.963066-5') }}</span>
           </p>
         </div>
       </SpForm>
     </div>
     <SpModal v-model="visiableProtocolDialog" :width="600">
-      <div slot="title" class="protocol-title">入驻协议</div>
+      <div slot="title" class="protocol-title">{{ $t('shop.index.963066-5') }}</div>
       <div class="protocol-info">
         <p class="dialog-info" v-html="baseContent"></p>
       </div>
@@ -92,7 +92,7 @@ import { getBasesetting } from '@/api/store'
 export default {
   head() {
     return {
-      title: '登录/注册'
+      title: this.$t('shop.index.963066-6')
     }
   },
   components: {},
@@ -124,11 +124,11 @@ export default {
         vcode: ''
       },
       yzmRules: {
-        mobile: [{ validate: 'required', message: '请输入手机号' }],
-        vcode: [{ validate: 'required', message: '验证码不能为空' }]
+        mobile: [{ validate: 'required', message: this.$t('shop.index.963066-7') }],
+        vcode: [{ validate: 'required', message: this.$t('shop.index.963066-8') }]
       },
       imgInfo: {},
-      timerMsg: '发送验证码'
+      timerMsg: this.$t('shop.index.963066-9')
     }
   },
   created() {
@@ -184,11 +184,11 @@ export default {
       const { imageToken } = this.imgInfo
       console.log(imageToken)
       if (!validate.validatePhone(mobile)) {
-        this.$Message.error('请输入正确的手机号')
+        this.$Message.error(this.$t('shop.index.963066-10'))
         return false
       }
       if (!yzm) {
-        this.$Message.error('请输入图形验证码')
+        this.$Message.error(this.$t('shop.index.963066-11'))
         return false
       }
       try {
@@ -204,7 +204,7 @@ export default {
           this.$Message.error(message)
           return false
         }
-        this.$Message.success('发送成功')
+        this.$Message.success(this.$t('shop.index.963066-12'))
         cb()
       } catch (e) {
         this.yzmImg('merchant_login')
@@ -212,16 +212,16 @@ export default {
       }
     },
     handleUpdateTimer(e) {
-      this.timerMsg = `${e}秒后重发`
+      this.timerMsg = this.$t('shop.index.963066-13', [])
     },
     handleTimerStop() {
-      this.timerMsg = `重发验证码`
+      this.timerMsg = this.$t('shop.index.963066-14')
     },
     async login() {
       let params = {}
       const { mobile, vcode } = this.yzmLogin
       if (!this.checkLabel) {
-        this.$Message.error('请查看并勾选入驻协议')
+        this.$Message.error(this.$t('shop.index.963066-15'))
         return
       }
       params = {
@@ -234,7 +234,7 @@ export default {
         S.setAuthToken(token)
         this.$cookies.set('ECSHOPX_STORE_TOKEN', token)
 
-        this.$Message.success('登录成功')
+        this.$Message.success(this.$t('shop.index.963066-16'))
         // this.initStore()
         const { redirectUrl } = this.$route.query
         if (redirectUrl) {

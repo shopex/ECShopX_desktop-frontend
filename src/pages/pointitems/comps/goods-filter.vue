@@ -191,7 +191,7 @@ $border-color: #dcdcdc;
 <template>
   <div class="filter-container-pointitem" v-show="isHaveFilter">
     <!-- <div class="brand-wrap clearfix">
-      <div class="brand-title">品牌:</div>
+      <div class="brand-title">{{ $t('comps.goods-filter.039030-0') }}:</div>
       <div class="brand-list">
         <a class="brand-list__link" :class="{'active': isActive(item)}" v-for="(item, index) in data" :key="index">
           <span class="name" @click="handleClick(item.attribute_id)">{{item.attribute_name}}</span>
@@ -201,7 +201,7 @@ $border-color: #dcdcdc;
     </div> -->
     <div class="filter-content">
       <div class="filter-item" v-show="isHaveBrand">
-        <div class="filter-item_title">品牌</div>
+        <div class="filter-item_title">{{ $t('comps.goods-filter.039030-0') }}</div>
         <div class="filter-item_content">
           <div class="scroll-brand">
             <BrandBlock
@@ -236,7 +236,7 @@ $border-color: #dcdcdc;
           isNotHavePoint: isNotHavePoint
         }"
       >
-        <div class="filter-item_title">分类</div>
+        <div class="filter-item_title">{{ $t('comps.goods-filter.039030-1') }}</div>
         <div class="filter-item_content">
           <div class="scroll-brand-category">
             <div
@@ -255,7 +255,7 @@ $border-color: #dcdcdc;
         </div>
       </div>
       <div class="filter-item" v-show="isHavePoint">
-        <div class="filter-item_title">积分区间</div>
+        <div class="filter-item_title">{{ $t('comps.goods-filter.039030-2') }}</div>
         <div class="filter-item_content" style="justify-content: space-between">
           <ScoreBlock
             :data="scoreInterval"

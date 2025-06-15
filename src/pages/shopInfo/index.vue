@@ -10,16 +10,16 @@
         </div>
         <div class="top-info">
           <div style="display: flex; align-items: center;">
-            <div class="shop-name">店铺：{{ storeInfo.store_name || '' }}</div>
+            <div class="shop-name">{{ $t('shopInfo.index.513870-0') }}{{ storeInfo.store_name || '' }}</div>
             <div @click="collectionClick">
               <i class="ec-icon ec-icon-favor_light left-icon"  v-if="iconShow"></i>
               <i class="ec-icon ec-icon-favorfill color-icom"  v-else></i>
               <span class="words-color"> {{followStore}}</span>
             </div>
           </div>
-          <div class="words-color">店铺地址：{{ storeInfo.store_address || '' }}</div>
+          <div class="words-color">{{ $t('shopInfo.index.513870-1') }}{{ storeInfo.store_address || '' }}</div>
           <div class="words-color" style="margin-top: 8px;">
-            店铺介绍：{{ storeInfo.introduce || '' }}
+            {{ $t('shopInfo.index.513870-2') }}{{ storeInfo.introduce || '' }}
           </div>
         </div>
       </div>
@@ -96,7 +96,7 @@
                   {{ item.item_name || '' }}
                 </div>
               </div>
-              <div class="imgs-btn" @click="addClick(item)">加入购物车</div>
+              <div class="imgs-btn" @click="addClick(item)">{{ $t('shopInfo.index.513870-4') }}</div>
             </div>
           </div>
           <div class="pagination-wrap">
@@ -109,7 +109,7 @@
           </div>
         </div>
         <div class="cotent-right" v-else>
-          <div class="content-nothing">暂无数据</div>
+          <div class="content-nothing">{{ $t('shopInfo.index.513870-5') }}</div>
         </div>
       </div>
     </div>
@@ -117,7 +117,7 @@
     <div class="popup" v-if="popupShow">
       <div class="popup-item">
         <div class="item-top">
-          <div class="item-top-content">请选择规格</div>
+          <div class="item-top-content">{{ $t('shopInfo.index.513870-6') }}</div>
           <div @click="closeClick">
             <i class="ec-icon ec-icon-close"></i>
           </div>
@@ -139,7 +139,7 @@
             </div>
           </div>
           <div class="item-center-number">
-            <div class="number-title">商品数量</div>
+            <div class="number-title">{{ $t('shopInfo.index.513870-7') }}</div>
             <div class="number-lable">
               <div>
                 <input type="number"  min=0 v-model="carNumber"/>
@@ -156,7 +156,7 @@
           </div>
         </div>
         <div class="item-bottom">
-          <button class="car-btn" @click="addCat">加入购物车</button>
+          <button class="car-btn" @click="addCat">{{ $t('shopInfo.index.513870-4') }}</button>
         </div>
       </div>
     </div>
@@ -224,11 +224,11 @@ export default {
   data() {
     return {
       sorts: [
-        { label: '综合', value: 'all' },
-        { label: '销量', value: '1' },
-        { label: '上新', value: '4' },
-        { label: '价格降序', value: '2' },
-        { label: '价格升序', value: '3' }
+        { label: this.$t('shopInfo.index.513870-8'), value: 'all' },
+        { label: this.$t('shopInfo.index.513870-9'), value: '1' },
+        { label: this.$t('shopInfo.index.513870-10'), value: '4' },
+        { label: this.$t('shopInfo.index.513870-11'), value: '2' },
+        { label: this.$t('shopInfo.index.513870-12'), value: '3' }
       ],
       sort: 'all',
       total: 0,
@@ -243,7 +243,7 @@ export default {
       addCarInfo:null,
       carNumber:0,
       iconShow: true,
-      followStore:'关注店铺',
+      followStore:this.$t('shopInfo.index.513870-13'),
       keywords:'',
       goodsSort: '',
       main_category: 0
@@ -288,17 +288,17 @@ export default {
     async collectionClick(){
       if( this.iconShow){
         this.iconShow = false
-        this.followStore = '取消店铺'
+        this.followStore = this.$t('shopInfo.index.513870-14')
         const data = await this.$api.member.addCollectionStore(this.storeInfo.distributor_id)
         if(data){
-          this.$Message.success('收藏成功')
+          this.$Message.success(this.$t('shopInfo.index.513870-15'))
         }
       }else{
         this.iconShow = true
-        this.followStore = '收藏店铺'
+        this.followStore = this.$t('shopInfo.index.513870-16')
         const data = await this.$api.member.removeCollectionStore(this.storeInfo.distributor_id)
         if(data){
-          this.$Message.success('取消收藏')
+          this.$Message.success(this.$t('shopInfo.index.513870-17'))
         }
       }
       
@@ -428,7 +428,7 @@ export default {
             distributor_id: this.addCarInfo.distributor_id
           }
          } else {
-          this.$Message.error('请输入商品数量')
+          this.$Message.error(this.$t('shopInfo.index.513870-18'))
             return
 
         }
@@ -449,7 +449,7 @@ export default {
         })
         
         if(this.itemInfo.length > arr.length){
-          this.$Message.error('请选择规格值')
+          this.$Message.error(this.$t('shopInfo.index.513870-19'))
           return
         }
         
@@ -471,7 +471,7 @@ export default {
             distributor_id: this.addCarInfo.distributor_id
           }
          }else{
-            this.$Message.error('请输入商品数量')
+            this.$Message.error(this.$t('shopInfo.index.513870-18'))
             return
          }
       }

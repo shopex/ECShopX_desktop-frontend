@@ -1,8 +1,8 @@
 <template>
   <div class="address__item" >
-    <p class="address__item-title" v-if="info.def_addr === 1">默认地址</p>
+    <p class="address__item-title" v-if="info.def_addr === 1">{{ $t('comps.address-item.757087-0') }}</p>
     <SpRadio v-else type="checkbox" size="small" :value="def_addr" @change="handleEmitAction('setDef')">
-      <span class="set-default-addr">设置为默认收货地址</span>
+      <span class="set-default-addr">{{ $t('comps.address-item.757087-1') }}</span>
     </SpRadio>
     <div class="address__item-content">
       <p>{{info.name}}</p>
@@ -11,9 +11,9 @@
       <p>{{info.zip}}</p>
     </div>
     <div class="address__item-set">
-      <span @click="handleEmitAction('edit')">编辑</span>
+      <span @click="handleEmitAction('edit')">{{ $t('comps.address-item.757087-2') }}</span>
       <span>/</span>
-      <span @click="handleEmitAction('delete')">删除</span>
+      <span @click="handleEmitAction('delete')">{{ $t('comps.address-item.757087-3') }}</span>
     </div>
   </div>
 </template>

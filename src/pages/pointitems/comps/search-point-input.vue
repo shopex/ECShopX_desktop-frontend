@@ -3,7 +3,7 @@
     <SpInput class="price-input front" v-model="start_point" placeholder=""></SpInput>
     <span class="symbol">-</span>
     <SpInput class="price-input behind" v-model="end_point" placeholder=""></SpInput>
-    <span class="price-btn" @click="submitPrice()">确定</span>
+    <span class="price-btn" @click="submitPrice()">{{ $t('comps.search-point-input.683294-0') }}</span>
   </div>
 </template>
 

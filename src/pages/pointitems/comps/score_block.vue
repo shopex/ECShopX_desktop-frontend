@@ -18,7 +18,7 @@
       <div class="name">{{ item[0] }}</div>
       <div class="name">~</div>
       <div class="name">{{ item[1] }}</div>
-      <div class="name">积分</div>
+      <div class="name">{{ $t('comps.score_block.523891-0') }}</div>
       <!-- <i class="ec-icon ec-icon-close" @click="handleDelete($event)" /> -->
     </div>
   </div>

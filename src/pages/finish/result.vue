@@ -121,7 +121,7 @@ $finish-fail-color: #e23038;
 <template>
   <div class="page-trade-status page-body">
     <div class="container container-finish-success" v-if="!tradeInfo">
-      <SpLoading class="modal-loading__t">加载中...</SpLoading>
+      <SpLoading class="modal-loading__t">{{ $t('finish.result.595530-0') }}</SpLoading>
     </div>
     <div class="container container-finish-success" v-else>
       <div
@@ -135,28 +135,28 @@ $finish-fail-color: #e23038;
       <div class="content-right-wrapper">
         <div class="trade-status__title">
           <template v-if="!isOfflinePay">
-            订单支付{{ tradeState === 1 ? '成功' : '失败' }}！我们将尽快为您处理
+            {{ $t('finish.result.595530-1') }}{{ tradeState === 1 ? $t('finish.result.595530-2') : $t('finish.result.595530-3') }}{{ $t('finish.result.595530-4') }}
           </template>
           <template v-if="isOfflinePay">
             {{
               offlinePayCheckStatus == 0 ?
-              '待商家确认' :
-              `订单支付${ tradeState === 1 ? '成功' : '失败' }！我们将尽快为您处理`
+              $t('finish.result.595530-5') :
+              `${ $t('finish.result.595530-1')}${ tradeState === 1 ? $t('finish.result.595530-2') : $t('finish.result.595530-3') } ${ $t('finish.result.595530-4') }`
             }}
           </template>
         </div>
         <div class="trade-status__content">
           <div class="trade-status__orderinfo">
-            <div class="no">订单号：{{ orderId }}</div>
-            <div class="money">订单金额：¥ {{ totalFee | formatPriceToHundred }}</div>
+            <div class="no">{{ $t('finish.result.595530-7') }}{{ orderId }}</div>
+            <div class="money">{{ $t('finish.result.595530-8') }} {{ totalFee | formatPriceToHundred }}</div>
           </div>
         </div>
         <div class="trade-status__actions">
           <div class="view" @click="handleNavigate(`/member/trade/`, 'view')">
-            查看订单详情
+            {{ $t('finish.result.595530-9') }}
           </div>
           <div class="continue" @click="handleNavigate('/', 'continue')">
-            继续购物
+            {{ $t('finish.result.595530-10') }}
           </div>
         </div>
       </div>
@@ -222,7 +222,7 @@ export default {
     handleNavigate(to, type) {
       let path
       if (!this.orderId) {
-        this.$Message.error('无订单号请刷新后重试')
+        this.$Message.error(this.$t('finish.result.595530-11'))
       }
       if (type === 'view') {
         path = to + this.orderId

@@ -3,13 +3,13 @@
     <img class="bg-img1" src="@/assets/imgs/coupons/bg1.png" alt="" />
     <img class="bg-img2" src="@/assets/imgs/coupons/bg2.png" alt="" />
     <div class="header">
-      <h2 class="coupons-title">领券中心</h2>
+      <h2 class="coupons-title">{{ $t('receive.coupons.213323-0') }}</h2>
       <div class="coupons-subtitle">
         <img class="coupons-title-img" src="@/assets/imgs/coupons/subtitle.png" alt="" />
-        <span>为你推荐好券</span>
+        <span>{{ $t('receive.coupons.213323-1') }}</span>
       </div>
       <NuxtLink to="/member/coupon" class="coupons-link">
-        <span>我的优惠券</span>
+        <span>{{ $t('receive.coupons.213323-2') }}</span>
       </NuxtLink>
     </div>
     <div class="lists">
@@ -20,18 +20,18 @@
         <div class="list-item">
           <div class="list-money">
             $100
-            <img src="@/assets/imgs/coupons/小矩形.png" alt="" />
-            <span class="list-money-text">满300可用</span>
+            <img :src="$t('receive.coupons.213323-3')" alt="" />
+            <span class="list-money-text">{{ $t('receive.coupons.213323-4') }}</span>
           </div>
-          <div class="list-text">4月钜惠</div>
+          <div class="list-text">{{ $t('receive.coupons.213323-5') }}</div>
           <div class="list-time">
             2022.06.17-2022.08.30
-            <span class="list-time-text">使用规则</span>
+            <span class="list-time-text">{{ $t('receive.coupons.213323-6') }}</span>
           </div>
         </div>
-        <div v-show="item==0" class="list-right">立即领取</div>
-        <div v-show="item==1" class="list-right1">已领取</div>
-        <div v-show="item==2" class="list-right1 right2">已结束</div>
+        <div v-show="item==0" class="list-right">{{ $t('receive.coupons.213323-7') }}</div>
+        <div v-show="item==1" class="list-right1">{{ $t('receive.coupons.213323-8') }}</div>
+        <div v-show="item==2" class="list-right1 right2">{{ $t('receive.coupons.213323-9') }}</div>
       </div>
     </div>
   </div>
@@ -41,7 +41,7 @@
 export default {
   head() {
     return {
-      title: '领券中心'
+      title: this.$t('receive.coupons.213323-0')
     }
   },
   data() {

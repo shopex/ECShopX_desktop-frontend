@@ -1,7 +1,7 @@
 <template>
   <div class="cart-item" :class="{ 'has-selection': hasSelection, 'novalid': !valid }">
     <div class="cart-item-selection" v-if="hasSelection">
-      <div class="lose-eff" v-if="!valid">失效</div>
+      <div class="lose-eff" v-if="!valid">{{ $t('comps.cart-item.988097-0') }}</div>
       <SpRadio
         v-else
         type="checkbox"
@@ -17,8 +17,8 @@
     </div>
     <div class="cart-item-actions" v-if="!noActions">
       <slot name="actions">
-        <span href="javascript:;" @click="handlePerformAct('edit')">编辑</span><span>/</span
-        ><span href="javascript:;" @click="handlePerformAct('remove')">删除</span>
+        <span href="javascript:;" @click="handlePerformAct('edit')">{{ $t('comps.cart-item.988097-1') }}</span><span>/</span
+        ><span href="javascript:;" @click="handlePerformAct('remove')">{{ $t('comps.cart-item.988097-2') }}</span>
       </slot>
     </div>
     <div class="cart-item-promos">

@@ -3,7 +3,7 @@
 <template>
   <div class="page-article page-body container clearfix">
     <div class="article-content">
-      <div class="article-title">常见问题</div>
+      <div class="article-title">{{ $t('faqs._id.303628-0') }}</div>
       <div class="article-wrap clearfix">
         <div class="article-common clearfix" v-for="(art, artkey) in articleList" :key="artkey">
           <div class="item" v-for="item in art" :key="item.node_id">
@@ -19,7 +19,7 @@
                 }}</span>
                 <div class="txt">
                   <p v-html="sitem.info"></p>
-                  <div @click.stop="sitem.isOpened = false">收回</div>
+                  <div @click.stop="sitem.isOpened = false">{{ $t('faqs._id.303628-1') }}</div>
                 </div>
               </li>
             </ul>
@@ -49,9 +49,9 @@ export default {
   mounted() {
     analytics.pageReady({
       page: {
-        pageName: '常见问题',
+        pageName: this.$t('faqs._id.303628-0'),
         pageType: 'content',
-        breadcrumb: '常见问题'
+        breadcrumb: this.$t('faqs._id.303628-0')
       }
     })
   },

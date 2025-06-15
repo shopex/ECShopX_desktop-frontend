@@ -149,8 +149,8 @@
 <template>
   <div class="rate-page container-member">
     <div class="head">
-      <h4>评价订单</h4>
-      <span>订单号：{{ info.id }}</span>
+      <h4>{{ $t('trade.rate.336928-0') }}</h4>
+      <span>{{ $t('trade.rate.336928-1') }}{{ info.id }}</span>
       <span>{{ info.date }}</span>
     </div>
     <div class="bd">
@@ -163,9 +163,9 @@
             <div class="price">￥{{ item.price }}</div>
           </div>
           <div class="right">
-            <div class="rate"><span class="text">商品评分：</span> <SpRate :max='5' v-model="item.star" class="rate-rate"></SpRate> <span class="text " :class="item.star==0?'':'red'">{{item.star}}分</span></div>
-            <div class="evaluate"><span class="text">评价晒单：</span> <textarea  class="textarea"  v-model="item.content" placeholder="写点评价吧，你的评价对其他买家很有帮助哦~"  /></div>
-            <div class="tips">还可以输入{{item.content&&(300-item.content.length)||300}}字</div>
+            <div class="rate"><span class="text">{{ $t('trade.rate.336928-2') }}</span> <SpRate :max='5' v-model="item.star" class="rate-rate"></SpRate> <span class="text " :class="item.star==0?'':'red'">{{item.star}}{{ $t('trade.rate.336928-3') }}</span></div>
+            <div class="evaluate"><span class="text">{{ $t('trade.rate.336928-4') }}</span> <textarea  class="textarea"  v-model="item.content" :placeholder="$t('trade.rate.336928-5')"  /></div>
+            <div class="tips">{{ $t('trade.rate.336928-6') }}{{item.content&&(300-item.content.length)||300}}{{ $t('trade.rate.336928-7') }}</div>
             <div class="upload">
                 <input type="file" ref="input" class="input" @change="(e)=>changeUpload(e,index)"></input>
                 <template v-for="pic in item.pics">
@@ -181,11 +181,11 @@
     </div>
     <div class="ft"> 
         <div class="btn" @click="clickSumbit"> 
-           提交评价
+           {{ $t('trade.rate.336928-8') }}
         </div>
         <span class="btn-tips">
             
-            <SpRadio type="checkbox" size="small" v-model="anonymousStatus" >匿名提交</SpRadio>
+            <SpRadio type="checkbox" size="small" v-model="anonymousStatus" >{{ $t('trade.rate.336928-9') }}</SpRadio>
              </span>
     </div>
   </div>
@@ -248,7 +248,7 @@ export default {
     changeUpload(e, index) {
       let files = e.target.files
       if (files.length + this.list[index].pics.length > 5) {
-        this.$Message.error('最多上传5张图片')
+        this.$Message.error(this.$t('trade.rate.336928-10'))
         return false
       }
       uploadImageFn(e.target.files).then((imgs) => {
@@ -265,11 +265,11 @@ export default {
       for (let item of list) {
         if (!errText) {
           if (!item.star) {
-            errText = '请打分'
+            errText = this.$t('trade.rate.336928-11')
             break
           }
           if (!item.content) {
-            errText = '评价内容不能为空'
+            errText = this.$t('trade.rate.336928-12')
             break
           }
         }
@@ -298,7 +298,7 @@ export default {
       }
 
       createOrderRate(params).then((res) => {
-           this.$Message.success('提交成功')
+           this.$Message.success(this.$t('trade.rate.336928-13'))
            if(this.$route.query.order_class&&this.$route.query.order_class=='pointsmall'){
              this.$router.push('/member/trade/point')
            }else{

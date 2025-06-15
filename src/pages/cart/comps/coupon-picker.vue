@@ -123,7 +123,7 @@
         color: theme
       }"
     >
-      优惠券
+      {{ $t('comps.coupon-picker.184020-0') }}
       <i
         class="ec-icon ec-icon-unfold"
         :style="{
@@ -164,7 +164,7 @@
                 }"
                 @click="handleClickGetCoupon(coupon)"
               >
-                领取
+                {{ $t('comps.coupon-picker.184020-1') }}
               </div>
             </div>
           </div>
@@ -207,9 +207,9 @@ export default {
       if (item.card_type == 'cash') {
         title = `￥${item.reduce_cost / 100}`
       } else if (item.card_type == 'gift') {
-        title = '兑换券'
+        title = this.$t('comps.coupon-picker.184020-2')
       } else if (item.card_type == 'discount') {
-        title = `${(100 - item.discount) / 10}折`
+        title = this.$t('comps.coupon-picker.184020-3', [(100 - item.discount) / 10])
       }
       return title
     },
@@ -217,13 +217,13 @@ export default {
       let couponType = '',
         couponDesc = ''
       if (item.card_type == 'cash') {
-        couponType = '代金券'
-        couponDesc = `满${item.least_cost > 0 ? item.least_cost / 100 : 0.01}可用`
+        couponType = this.$t('comps.coupon-picker.184020-4')
+        couponDesc = this.$t('comps.coupon-picker.184020-5', [item.least_cost > 0 ? item.least_cost / 100 : 0.01])
       } else if (item.card_type == 'gift') {
-        couponType = '兑换券'
+        couponType = this.$t('comps.coupon-picker.184020-2')
       } else if (item.card_type == 'discount') {
-        couponType = '折扣券'
-        couponDesc = `满${item.least_cost > 0 ? item.least_cost / 100 : 0.01}可用`
+        couponType = this.$t('comps.coupon-picker.184020-6')
+        couponDesc = this.$t('comps.coupon-picker.184020-5', [item.least_cost > 0 ? item.least_cost / 100 : 0.01])
       }
       return `【${couponType}】${item.title} ${couponDesc}`
     },
@@ -237,7 +237,7 @@ export default {
       await this.$api.cart.receiveCard({
         card_id: coupon.card_id
       })
-      this.$Message.success('领取成功')
+      this.$Message.success(this.$t('comps.coupon-picker.184020-7'))
     }
   }
 }

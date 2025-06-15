@@ -9,24 +9,24 @@
         </div>
         <div class="top-info">
           <div style="display: flex; align-items: center;">
-            <div class="shop-name">店铺：{{ storeInfo.store_name || '' }}</div>
+            <div class="shop-name">{{ $t('shops.info.952905-0') }}{{ storeInfo.store_name || '' }}</div>
             <div class="collection-shop" @click="collectionClick">
               <i class="ec-icon ec-icon-favor_light left-icon" v-if="iconShow"></i>
               <i class="ec-icon ec-icon-favorfill color-icom" v-else></i>
-              <span v-if="iconShow" class="words-color"> 关注店铺</span>
-              <span v-else class="words-color" >取消关注 </span>
+              <span v-if="iconShow" class="words-color"> {{ $t('shops.info.952905-1') }}</span>
+              <span v-else class="words-color" >{{ $t('shops.info.952905-2') }} </span>
             </div>
           </div>
-          <div class="words-color">店铺地址：{{ storeInfo.store_address || '' }}</div>
+          <div class="words-color">{{ $t('shops.info.952905-3') }}{{ storeInfo.store_address || '' }}</div>
           <div class="words-color" style="margin-top: 8px;">
-            店铺介绍：{{ storeInfo.introduce || '' }}
+            {{ $t('shops.info.952905-4') }}{{ storeInfo.introduce || '' }}
           </div>
         </div>
       </div>
       <hr />
-      <!-- 商品分类 -->
+      <!-- {{ $t('shops.info.952905-5') }} -->
       <div class="content-middle">
-        <div class="sort-title" @click="allCategories">商品分类</div>
+        <div class="sort-title" @click="allCategories">{{ $t('shops.info.952905-5') }}</div>
         <div>
           <GoodSort :data="sorts" :value="sort" :total="total" @change="changeSort" @change-price="changeSortPrice"
             @search-keyword="search">
@@ -95,7 +95,7 @@
                   {{ item.item_name || '' }}
                 </div>
               </div>
-              <div class="imgs-btn" @click="addClick(item)">加入购物车</div>
+              <div class="imgs-btn" @click="addClick(item)">{{ $t('shops.info.952905-6') }}</div>
             </div>
           </div>
           <div class="pagination-wrap">
@@ -103,7 +103,7 @@
           </div>
         </div>
         <div class="cotent-right" v-else>
-          <div class="content-nothing">暂无数据</div>
+          <div class="content-nothing">{{ $t('shops.info.952905-7') }}</div>
         </div>
       </div>
     </div>
@@ -111,7 +111,7 @@
     <div class="popup" v-if="popupShow">
       <div class="popup-item">
         <div class="item-top">
-          <div class="item-top-content">请选择规格</div>
+          <div class="item-top-content">{{ $t('shops.info.952905-8') }}</div>
           <div @click="closeClick">
             <i class="ec-icon ec-icon-close"></i>
           </div>
@@ -129,7 +129,7 @@
             </div>
           </div>
           <div class="item-center-number">
-            <div class="number-title">商品数量</div>
+            <div class="number-title">{{ $t('shops.info.952905-9') }}</div>
             <div class="number-lable">
               <div>
                 <input type="number" min="0" v-model="carNumber" />
@@ -146,7 +146,7 @@
           </div>
         </div>
         <div class="item-bottom">
-          <button class="car-btn" @click="addCat">加入购物车</button>
+          <button class="car-btn" @click="addCat">{{ $t('shops.info.952905-6') }}</button>
         </div>
       </div>
     </div>
@@ -226,23 +226,23 @@
     data() {
       return {
         sorts: [{
-            label: '综合',
+            label: this.$t('shops.info.952905-10'),
             value: 'all'
           },
           {
-            label: '销量',
+            label: this.$t('shops.info.952905-11'),
             value: '1'
           },
           {
-            label: '上新',
+            label: this.$t('shops.info.952905-12'),
             value: '4'
           },
           {
-            label: '价格降序',
+            label: this.$t('shops.info.952905-13'),
             value: '2'
           },
           {
-            label: '价格升序',
+            label: this.$t('shops.info.952905-14'),
             value: '3'
           }
         ],
@@ -320,13 +320,13 @@
           this.iconShow = false
           const data = await this.$api.member.addCollectionStore(this.storeInfo.distributor_id)
           if (data) {
-            this.$Message.success('收藏成功')
+            this.$Message.success(this.$t('shops.info.952905-15'))
           }
         } else {
           this.iconShow = true
           const data = await this.$api.member.removeCollectionStore(this.storeInfo.distributor_id)
           if (data) {
-            this.$Message.success('取消收藏')
+            this.$Message.success(this.$t('shops.info.952905-16'))
           }
         }
       },
@@ -454,7 +454,7 @@
               distributor_id: this.addCarInfo.distributor_id
             }
           } else {
-            this.$Message.error('请输入商品数量')
+            this.$Message.error(this.$t('shops.info.952905-17'))
             return
           }
         }
@@ -473,7 +473,7 @@
           })
 
           if (this.itemInfo.length > arr.length) {
-            this.$Message.error('请选择规格值')
+            this.$Message.error(this.$t('shops.info.952905-18'))
             return
           }
 
@@ -495,7 +495,7 @@
               distributor_id: this.addCarInfo.distributor_id
             }
           } else {
-            this.$Message.error('请输入商品数量')
+            this.$Message.error(this.$t('shops.info.952905-17'))
             return
           }
         }
@@ -503,7 +503,7 @@
         if (res.message) {
           this.$Message.error(res.message)
         } else {
-          this.$Message.success('成功加入购物车')
+          this.$Message.success(this.$t('shops.info.952905-19'))
         }
         if (res.is_check_store) {
           this.popupShow = false

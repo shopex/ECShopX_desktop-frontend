@@ -15,7 +15,7 @@
       <van-picker :columns="columns" @change="onChange" />
     </div>
     <div class="btn-container">
-      <SpButton type="primary" long size="large">保存</SpButton>
+      <SpButton type="primary" long size="large">{{ $t('cart.addAddress.163303-0') }}</SpButton>
     </div>
   </div>
 </template>
@@ -26,7 +26,7 @@ export default {
   data() {
     return {
       list: [],
-      columns: ['杭州', '宁波', '温州', '嘉兴', '湖州']
+      columns: [this.$t('cart.addAddress.163303-1'), this.$t('cart.addAddress.163303-2'), this.$t('cart.addAddress.163303-3'), this.$t('cart.addAddress.163303-4'), this.$t('cart.addAddress.163303-5')]
     }
   },
   created() {
@@ -38,7 +38,7 @@ export default {
       this.list = list
     },
     onChange(picker, value, index) {
-      console.log(`当前值：${value}, 当前索引：${index}`)
+      console.log(this.$t('cart.addAddress.163303-6', [value,index]))
     }
   }
 }

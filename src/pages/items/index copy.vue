@@ -5,7 +5,7 @@
     <div class="page-item__breadcrumb-wraper">
       <SpBreadCrumb :value="breadcrumb" />
       <div class="items-searchbar" v-if="keyword">
-        <h3 class="items-searchbar-h">搜索</h3>
+        <h3 class="items-searchbar-h">{{ $t('items.index copy.995821-0') }}</h3>
         <div class="items-searchbar-hd">
           <SpInput
             class="items-searchbar-input"
@@ -13,7 +13,7 @@
             @input="handleInputKeyword"
           ></SpInput>
           <SpButton class="items-searchbar-btn" type="primary" @click="handleClickSearch"
-            >确定</SpButton
+            >{{ $t('items.index copy.995821-1') }}</SpButton
           >
         </div>
       </div>
@@ -29,7 +29,7 @@
     <div class="page-item__list">
       <div class="items-toolbar">
         <div class="items-toolbar-tabs">
-          <p class="">共{{ count }}件商品</p>
+          <p class="">{{ $t('items.index copy.995821-2') }}{{ count }}{{ $t('items.index copy.995821-3') }}</p>
         </div>
 
         <div class="items-toolbar-right">
@@ -62,7 +62,7 @@
             :paddingSpace="40"
           />
         </div>
-        <div class="no-data" v-if="!list">商品列表无数据</div>
+        <div class="no-data" v-if="!list">{{ $t('items.index copy.995821-4') }}</div>
       </div>
       <div class="items-list__f">
         <SpPagination
@@ -76,7 +76,7 @@
       <no-ssr>
         <SpModal v-model="modalShow" :width="1000" :height="600">
           <div class="modal-loading" v-if="!info">
-            <SpLoading class="modal-loading__t">加载中...</SpLoading>
+            <SpLoading class="modal-loading__t">{{ $t('items.index copy.995821-5') }}</SpLoading>
           </div>
           <GoodsInfo
             isModal
@@ -221,7 +221,7 @@ export default {
     let catId = tag ? '' : cat_id
     const { categorys, spec_props: specProps } = await app.$api.item.category()
     const spec_props = resolveSpecProps(specProps)
-    const breadcrumb = resolveBreadCrumb(['首页'], {
+    const breadcrumb = resolveBreadCrumb([this.$t('items.index copy.995821-6')], {
       categorys,
       tag,
       keyword,
@@ -278,11 +278,11 @@ export default {
       goods_width: 310,
       sort: 'list_time desc',
       sorts: [
-        { label: '按新品排序', value: 'list_time desc' },
-        { label: '价格降序', value: 'price desc' },
-        { label: '价格升序', value: 'price asc' },
-        { label: '销量', value: 'sold_quantity desc' },
-        { label: '浏览量', value: 'view_count' }
+        { label: this.$t('items.index copy.995821-7'), value: 'list_time desc' },
+        { label: this.$t('items.index copy.995821-8'), value: 'price desc' },
+        { label: this.$t('items.index copy.995821-9'), value: 'price asc' },
+        { label: this.$t('items.index copy.995821-10'), value: 'sold_quantity desc' },
+        { label: this.$t('items.index copy.995821-11'), value: 'view_count' }
       ],
       // priceList: [
       //   { label: '0-199', value: '0-199' },
@@ -332,7 +332,7 @@ export default {
       const { categorys, spec_props } = await this.$api.item.category()
       this.categorys = categorys
       this.spec_props = resolveSpecProps(spec_props)
-      this.breadcrumb = resolveBreadCrumb(['首页'], {
+      this.breadcrumb = resolveBreadCrumb([this.$t('items.index copy.995821-6')], {
         categorys,
         tag,
         keyword,

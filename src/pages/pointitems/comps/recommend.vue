@@ -54,7 +54,7 @@
   <div class="sp-recommend">
     <div v-if="recommendList.length > 0">
       <div class="recommend-header clearfix">
-        <span class="recommend-header__title">推荐商品</span>
+        <span class="recommend-header__title">{{ $t('comps.recommend.360779-0') }}</span>
         <!-- <span class="recommend-header__more">查看全部</span> -->
       </div>
       <div class="recommend-list">
@@ -67,7 +67,7 @@
         </div>
       </div>
     </div>
-    <div class="no-store" v-else>暂无相关信息</div>
+    <div class="no-store" v-else>{{ $t('comps.recommend.360779-1') }}</div>
   </div>
 </template>
 

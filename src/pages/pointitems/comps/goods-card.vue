@@ -249,13 +249,13 @@ $good_color: #f0f0f0;
     <div class="goods-card__price">
       <!-- <SpPrice :defaultValue="`${info.point}积分`" unit="" symbol=""></SpPrice> -->
       <SpPointPrice :point="info.point" />
-      <!-- <div class="add-cart" @click.stop="handleAddCart(info)"><i class="ec-icon ec-icon-cart"></i>立即兑换</div> -->
+      <!-- <div class="add-cart" @click.stop="handleAddCart(info)"><i class="ec-icon ec-icon-cart"></i>{{ $t('comps.goods-card.680253-1') }}</div> -->
     </div>
     <div class="goods_display">
       <span class="ec-icon2 ec-icon2-jifen-01"></span>
-      <span>可兑换总量：{{ info.store }}</span>
+      <span>{{ $t('comps.goods-card.680253-0') }}{{ info.store }}</span>
       <div class="exchange-btn" @click.stop="handleAddCart(info)">
-        立即兑换<span class="ec-icon2 ec-icon2-anniu-01"></span>
+        {{ $t('comps.goods-card.680253-1') }}<span class="ec-icon2 ec-icon2-anniu-01"></span>
       </div>
     </div>
   </div>

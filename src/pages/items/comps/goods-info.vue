@@ -28,11 +28,11 @@
         <div class="collect-wrap">
           <div class="collect-btn" v-if="!collected" @click="handleClickCollect('collect')">
             <i class="ec-icon ec-icon-favor"></i>
-            <span>收藏</span>
+            <span>{{ $t('comps.goods-info.991145-0') }}</span>
           </div>
           <div class="collect-btn cancel" v-else @click="handleClickCollect('cancel')">
             <i class="ec-icon ec-icon-favorfill"></i>
-            <span>取消收藏</span>
+            <span>{{ $t('comps.goods-info.991145-1') }}</span>
           </div>
         </div>
       </div>
@@ -40,13 +40,13 @@
 
       <div class="tag-wrap" v-if="activityText">
         <span class="goods-tag">{{ activityText }}</span>
-        <span class="goods-tag" v-if="info.activity_type == 'group'">{{ info.activity_info.person_num }}人团</span>
+        <span class="goods-tag" v-if="info.activity_type == 'group'">{{ info.activity_info.person_num }}{{ $t('comps.goods-info.991145-2') }}</span>
       </div>
 
       <div class="goods-prices__wrap">
         <div class="goods-prices" v-show="showprice">
           <template v-if="curSkuInfo">
-            <span class="price-text">价格</span>
+            <span class="price-text">{{ $t('comps.goods-info.991145-3') }}</span>
             <span class="sale-price">{{ curSkuInfo | priceFilter }}</span>
             <!-- <SpPrice class="price-primary" :value="curSkuInfo.price" /> -->
             <span class="price-mkt-box" v-if="curSkuInfo.price != curSkuInfo.market_price">
@@ -57,7 +57,7 @@
             </span>
           </template>
           <template v-else>
-            <span class="price-text">价格:</span>
+            <span class="price-text">{{ $t('comps.goods-info.991145-3') }}:</span>
             <span class="sale-price">{{ info | priceFilter }}</span>
             <!-- <SpPrice class="price-primary" :value="info.price" /> -->
             <span class="price-mkt-box" v-if="info.price != info.market_price">
@@ -70,21 +70,21 @@
         </div>
 
         <div class="goods-coupon clearfix">
-          <span class="goods-coupon__title">优惠券</span>
+          <span class="goods-coupon__title">{{ $t('comps.goods-info.991145-5') }}</span>
           <div class="goods-coupon__list" :class="{ 'has-more': couponList.length > 3 }">
             <SpLabel v-for="(coupon, index) in couponList" :key="coupon.card_id" v-if="index < 3">{{ coupon.title }}</SpLabel>
-            <span class="more" @click="handleOpenDrawer">更多>></span>
+            <span class="more" @click="handleOpenDrawer">{{ $t('comps.goods-info.991145-6') }}>></span>
           </div>
         </div>
 
         <no-ssr>
           <!-- 促销信息 -->
           <div class="goods-promotion__wrap clearfix" v-if="info.promotion_activity || info.vipgrade_guide_title">
-            <span class="goods-promotion__title">促销</span>
+            <span class="goods-promotion__title">{{ $t('comps.goods-info.991145-7') }}</span>
             <div class="goods-promotion__info">
               <div class="vip-guide" v-if="info.vipgrade_guide_title">
                 <SpPrice class="vip-guide__price" :value="info.vipgrade_guide_title.memberPrice" v-if="info.vipgrade_guide_title.memberPrice"></SpPrice>
-                <span class="vip-guide__discount" v-if="info.vipgrade_guide_title.gradeDiscount">{{ info.vipgrade_guide_title.gradeDiscount }}折</span>
+                <span class="vip-guide__discount" v-if="info.vipgrade_guide_title.gradeDiscount">{{ info.vipgrade_guide_title.gradeDiscount }}{{ $t('comps.goods-info.991145-8') }}</span>
                 <span class="vip-guide__tag" v-if="info.vipgrade_guide_title.gradeDiscount">{{ info.vipgrade_guide_title.vipgrade_desc }}</span>
                 <span class="vip-guide__desc">{{ info.vipgrade_guide_title.guide_title_desc }}</span>
                 <span class="icon-wrap"><i class="ec-icon ec-icon-playfill"></i></span>
@@ -134,13 +134,13 @@
           <SpNumInput :max="curSkuInfo ? curSkuInfo.store : info.store" v-model="quantity" @increase="handleClickNumInput($event, 'increase')" @decrease="handleClickNumInput($event, 'decrease')" @change="handleClickNumInput($event, 'change')" />
           <div class="goods-stock" >
             <template v-if="curSkuInfo">
-                <span v-if="curSkuInfo.store > 0">库存：{{ curSkuInfo.store }}</span>
-              <span v-else>暂无库存</span>
+                <span v-if="curSkuInfo.store > 0">{{ $t('comps.goods-info.991145-9') }}{{ curSkuInfo.store }}</span>
+              <span v-else>{{ $t('comps.goods-info.991145-10') }}</span>
             </template>
               
             </te>
           </div>
-          <span v-if="purchaseLimitCheck" class="limit-buy">限购：{{ info.activity_info.describe }}</span>
+          <span v-if="purchaseLimitCheck" class="limit-buy">{{ $t('comps.goods-info.991145-11') }}{{ info.activity_info.describe }}</span>
           <BuyToolbar :info="info" :activity-text="activityText" :buyLoading="buyLoading" :collected="collected" @btn-click="(type) => handleClickBuyBtn(type)"  class="goods-buybar"/>
         </div>
       </div>
@@ -158,7 +158,7 @@
 
     <transition name="fade">
       <div class="size-guide" v-if="showSizeChart">
-        <span class="btn-close" @click="showSizeChart = false">关闭</span>
+        <span class="btn-close" @click="showSizeChart = false">{{ $t('comps.goods-info.991145-12') }}</span>
         <div class="size-guide__inner">
           <img :src="info.size_guide" />
         </div>
@@ -169,23 +169,23 @@
       <div class="sp-drawer__cover"></div>
       <div class="sp-drawer__content">
         <div class="sp-drawer__header">
-          <span>优惠券</span>
+          <span>{{ $t('comps.goods-info.991145-5') }}</span>
           <i class="ec-icon ec-icon-close" @click="handleClose"></i>
         </div>
         <div class="coupon-list">
           <div class="coupon-item" v-for="item in couponList" :key="item.card_id">
-            <div class="coupon-price" v-if="item.card_type == 'discount'">{{ (100 - item.discount) / 10 }}<span class="text">折</span></div>
+            <div class="coupon-price" v-if="item.card_type == 'discount'">{{ (100 - item.discount) / 10 }}<span class="text">{{ $t('comps.goods-info.991145-8') }}</span></div>
             <div class="coupon-price" v-if="item.card_type == 'cash'">
               <SpPrice class="coupon-price__num" unit="cent" :value="item.reduce_cost"></SpPrice>
-              <span class="text">优惠券</span>
+              <span class="text">{{ $t('comps.goods-info.991145-5') }}</span>
             </div>
-            <div class="coupon-price" v-if="item.card_type == 'gift'">兑换券</div>
+            <div class="coupon-price" v-if="item.card_type == 'gift'">{{ $t('comps.goods-info.991145-13') }}</div>
             <div class="coupon-title">{{ item.title }}</div>
-            <div class="coupon-time">有效期{{ handleDatetime(item.begin_date) }}至{{ handleDatetime(item.end_date) }}</div>
+            <div class="coupon-time">{{ $t('comps.goods-info.991145-14') }}{{ handleDatetime(item.begin_date) }}{{ $t('comps.goods-info.991145-15') }}{{ handleDatetime(item.end_date) }}</div>
             <div class="option-btn" :class="{ invalid: item.getted > 0 }" @click="handleClickCoupon(item)">
-              <span v-if="item.getted == 0">立即领取</span>
-              <span v-if="item.getted == 1">已领取</span>
-              <span v-if="item.getted == 2">已领完</span>
+              <span v-if="item.getted == 0">{{ $t('comps.goods-info.991145-16') }}</span>
+              <span v-if="item.getted == 1">{{ $t('comps.goods-info.991145-17') }}</span>
+              <span v-if="item.getted == 2">{{ $t('comps.goods-info.991145-18') }}</span>
             </div>
           </div>
         </div>
@@ -352,13 +352,13 @@ export default {
     }
     this.timer = timer
     if (activity_type === 'group') {
-      this.activityText = '团购'
+      this.activityText = this.$t('comps.goods-info.991145-19')
       this.info.startActivity = activity_info.show_status === 'noend'
     } else if (activity_type === 'seckill') {
-      this.activityText = '秒杀'
+      this.activityText = this.$t('comps.goods-info.991145-20')
       this.info.startActivity = activity_info.status === 'in_sale'
     } else if (activity_type === 'limited_time_sale') {
-      this.activityText = '限时特惠'
+      this.activityText = this.$t('comps.goods-info.991145-21')
       this.info.startActivity = activity_info.status === 'in_sale'
     }
     // 图片规格
@@ -421,7 +421,7 @@ export default {
         card_id: item.card_id,
       }
       const data = await this.$api.cart.receiveCard(params)
-      this.$Message.success('优惠券领取成功')
+      this.$Message.success(this.$t('comps.goods-info.991145-22'))
       this.getCardList()
     },
     handleDatetime(timestamp) {
@@ -488,7 +488,7 @@ export default {
         // const itemCollect = 1 - status
         if (status) {
           await this.$api.member.favoriteItemRemove({ item_id: item_id })
-          this.$Message.success('商品移除收藏成功')
+          this.$Message.success(this.$t('comps.goods-info.991145-23'))
         } else {
           Analytics.event(
             {
@@ -506,7 +506,7 @@ export default {
             'addToWishlist'
           )
           await this.$api.member.favoriteItemAdd({ item_id: item_id })
-          this.$Message.success('商品收藏成功')
+          this.$Message.success(this.$t('comps.goods-info.991145-24'))
         }
 
         this.localCollect = !status
@@ -534,12 +534,12 @@ export default {
     handleClickNumInput(val, type) {
       if (val === 1) {
         if (this.curSkuInfo && this.curSkuInfo.store == 1 && type == 'increase') {
-          this.tipMsg = '库存不足，最大库存为1件'
+          this.tipMsg = this.$t('comps.goods-info.991145-25')
         } else if (type == 'decrease') {
-          this.tipMsg = '此商品的最小购买数量为1件'
+          this.tipMsg = this.$t('comps.goods-info.991145-26')
         }
       } else if (this.curSkuInfo && val === this.curSkuInfo.store && type == 'increase') {
-        this.tipMsg = `库存不足，最大库存为${this.curSkuInfo.store}件`
+        this.tipMsg = this.$t('comps.goods-info.991145-27', [this.curSkuInfo.store])
       } else {
         this.tipMsg = ''
       }
@@ -571,18 +571,18 @@ export default {
       }
       const { curSku, selection } = this
       if (!curSku) {
-        return this.$Message.error('请选择规格')
+        return this.$Message.error(this.$t('comps.goods-info.991145-28'))
       }
       if (!curSku.nospec) {
         if (!selection || (!selection[0] && !selection[1])) {
-          return this.$Message.error('请选择和尺码')
+          return this.$Message.error(this.$t('comps.goods-info.991145-29'))
         }
         if (selection.length) {
           if (!selection[0]) {
-            return this.$Message.error('请选择颜色')
+            return this.$Message.error(this.$t('comps.goods-info.991145-30'))
           }
           if (selection.length == 2 && !selection[1]) {
-            return this.$Message.error('请选择尺码')
+            return this.$Message.error(this.$t('comps.goods-info.991145-31'))
           }
         }
       }
@@ -617,7 +617,7 @@ export default {
 
         if (mode !== 'fastbuy') {
           this.$EventBus.$emit('show-minicart')
-          this.$Message.success('成功加入购物车')
+          this.$Message.success(this.$t('comps.goods-info.991145-32'))
           // this.handleAnalytics('addToCart', info)
           this.$store.dispatch('cart/CART_GETINFO')
           this.buyLoading = false
@@ -657,13 +657,13 @@ export default {
         }
         if (type == 'collect') {
           await this.$api.member.addCollection(params, this.info.item_id)
-          this.$Message.success('商品收藏成功')
+          this.$Message.success(this.$t('comps.goods-info.991145-24'))
           this.collected = true
         } else {
           params['item_ids'] = [this.info.item_id]
           params['is_empty'] = false
           await this.$api.member.removeCollection(params)
-          this.$Message.success('商品移除收藏成功')
+          this.$Message.success(this.$t('comps.goods-info.991145-23'))
           this.collected = false
         }
       } catch (error) {

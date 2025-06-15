@@ -6,13 +6,13 @@
           <smenu activeTitle="point" active="point"></smenu>
         </div>
         <div class="member-content-right">
-          <div class="member-content-right-header">我的积分</div>
+          <div class="member-content-right-header">{{ $t('member.point.216312-0') }}</div>
 
           <div class="hd">
             <div class="hd-kyong">
               <img src="~/assets/imgs/score.png" />
               <div class="wrapper">
-                <h4>可用积分</h4>
+                <h4>{{ $t('member.point.216312-1') }}</h4>
                 <div class="kyong-num">{{ mypoint }}</div>
               </div>
             </div>
@@ -25,7 +25,7 @@
                     <h4>近三个月内积分统计数据</h4>
                     <p>1.下单获取积分</p>
                     <p>2.评价获取积分（无该功能，暂时不做）</p>
-                    <p>3.其他积分（新用户注册，售后返，管理端手动调整）</p>
+                    <p>3.{{ $t('member.point.216312-11') }}（新用户注册，售后返，管理端手动调整）</p>
                     <p>积分抵扣节省：积分抵扣部分金额（现金积分抵扣部分，不包含积分商城）</p>
                   </div>
                 </div>
@@ -47,8 +47,8 @@
 
             </div> -->
             <div class="bd-hd">
-              <h4>积分明细(近一年内)</h4>
-              <div>共{{ total }}条记录</div>
+              <h4>{{ $t('member.point.216312-2') }}({{ $t('member.point.216312-3') }})</h4>
+              <div>{{ $t('member.point.216312-4') }}{{ total }}{{ $t('member.point.216312-5') }}</div>
             </div>
             <table class="table-body">
               <colgroup>
@@ -58,9 +58,9 @@
               </colgroup>
               <thead>
                 <tr>
-                  <th>时间</th>
-                  <th>收入/支出</th>
-                  <th>详细说明</th>
+                  <th>{{ $t('member.point.216312-6') }}</th>
+                  <th>{{ $t('member.point.216312-7') }}</th>
+                  <th>{{ $t('member.point.216312-8') }}</th>
                 </tr>
               </thead>
               <tbody>
@@ -77,7 +77,7 @@
               </tbody>
             </table>
             <div class="collector__blank" v-if="list == ''">
-              <Tips tips="尚无记录" />
+              <Tips :tips="$t('member.point.216312-9')" />
             </div>
             <div class="pagination-wrap">
               <SpPagination
@@ -110,15 +110,15 @@ export default {
     return {
       itemNum: {
         gouwujifen: {
-          name: '购物积分',
+          name: this.$t('member.point.216312-10'),
           num: 0
         },
         pingjiajifen: {
-          name: '购物积分',
+          name: this.$t('member.point.216312-10'),
           num: 0
         },
         qitajifen: {
-          name: '其他积分',
+          name: this.$t('member.point.216312-11'),
           num: 0
         }
       },

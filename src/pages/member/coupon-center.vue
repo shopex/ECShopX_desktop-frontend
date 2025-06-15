@@ -13,17 +13,17 @@
           <div class="title-group">
             <div></div>
             <div class="coupon-center">
-              <div class="coupon-center-title">领券中心</div>
+              <div class="coupon-center-title">{{ $t('member.coupon-center.473557-0') }}</div>
               <div class="coupon-center-title-recommend">       
                 <div class="triangle-left"></div>
                 <div class="triangle-right"></div>
-                为你推荐好券
+                {{ $t('member.coupon-center.473557-1') }}
               </div>
             </div>
             <nuxt-link class="coupon-my" to="/member/coupon">
               <img src="@/assets/imgs/coupons/quan (5).png" alt="">
               <span class="vip-desc"
-                >我的优惠券
+                >{{ $t('member.coupon-center.473557-2') }}
               </span>
             </nuxt-link>
           </div>
@@ -62,7 +62,7 @@
                 <SpLoading class="modal-loading__t" color="#c3c3c3" v-if="!list"></SpLoading>
               </div>
               <div class='no-coupon' v-if="list && list.length == 0">
-                您暂时没有任何优惠劵
+                {{ $t('member.coupon-center.473557-3') }}
               </div>
             </div>
             
@@ -103,11 +103,11 @@ export default {
       couponType: [
         {
           id: 1,
-          name: '可用优惠券'
+          name: this.$t('member.coupon-center.473557-4')
         },
         {
           id: 2,
-          name: '不可用优惠券'
+          name: this.$t('member.coupon-center.473557-5')
         }
       ]
     }
@@ -171,7 +171,7 @@ export default {
       await this.$api.cart.receiveCard({
         card_id: info.card_id
       })
-      this.$Message.success('领取成功')
+      this.$Message.success(this.$t('member.coupon-center.473557-6'))
       this.getCouponList();
     }
   }

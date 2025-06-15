@@ -116,10 +116,10 @@
 <template>
   <div class="page-news page-body container">
     <div class="page-news__nav">
-      <div class="nav_title">品牌资讯</div>
+      <div class="nav_title">{{ $t('news.index.335531-0') }}</div>
     </div>
     <div class="page-news__subnav">
-      <div class="subnav_title">官方所有的最新消息，在这里都可以得知，以保证不会让您错过它们。</div>
+      <div class="subnav_title">{{ $t('news.index.335531-1') }}</div>
     </div>
     <div class="news-list clearfix">
       <div class="news-list__item" v-for="(item, index) in list" :key="index">
@@ -142,7 +142,7 @@
               </span>
             </div> -->
             <div class="into fr">
-              查看
+              {{ $t('news.index.335531-2') }}
             </div>
           </div>
 
@@ -181,9 +181,9 @@ export default {
   mounted () {
     analytics.pageReady({
       page: {
-        pageName: '品牌动态',
+        pageName: this.$t('news.index.335531-3'),
         pageType: 'content',
-        breadcrumb: '品牌动态'
+        breadcrumb: this.$t('news.index.335531-3')
       }
     })
   },
@@ -204,12 +204,12 @@ export default {
       })
       let nodeid
       list.forEach(item => {
-        if (item.node_name === '品牌资讯') {
+        if (item.node_name === this.$t('news.index.335531-0')) {
           nodeid = item.node_id
         }
         if (item.children) {
           item.children.forEach(sitem => {
-            if (sitem.node_name === '品牌资讯') {
+            if (sitem.node_name === this.$t('news.index.335531-0')) {
               nodeid = sitem.node_id
             }
           })
@@ -227,7 +227,7 @@ export default {
           this.total = pagers.total
         }
       } else {
-        this.$Message.error('无效的文章ID')
+        this.$Message.error(this.$t('news.index.335531-4'))
       }
     }
   }

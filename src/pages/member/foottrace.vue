@@ -8,14 +8,14 @@
           <smenu activeTitle="foottrace" active="foottrace"></smenu>
         </div>
         <div class="member-content-right">
-          <div class="member-content-right-header">我的足迹</div>
+          <div class="member-content-right-header">{{ $t('member.foottrace.905456-0') }}</div>
           <div class="member-content-right-body">
             <div v-if="!loading" class="collect-list clearfix">
               <template v-if="list && list.length > 0">
                 <FoottraceItem :info="item" v-for="item in list" :key="item.item_id"> </FoottraceItem>
               </template>
               <div class="collector__blank" v-else>
-                <Tips :userInfo="userInfo" tips="您的足迹是空白的。" />
+                <Tips :userInfo="userInfo" :tips="$t('member.foottrace.905456-1')" />
               </div>
             </div>
             <div class="pagination-wrap">
@@ -45,17 +45,17 @@ import { getHistoryList } from '@/api/member'
 export default {
   head() {
     return {
-      title: '我的足迹',
+      title: this.$t('member.foottrace.905456-0'),
       meta: [
         {
           hid: 'keywords',
           name: 'keywords',
-          content: '我的账户_标品官方网站'
+          content: this.$t('member.foottrace.905456-2')
         },
         {
           hid: 'description',
           name: 'description',
-          content: '我的账户_标品官方网站'
+          content: this.$t('member.foottrace.905456-2')
         }
       ]
     }

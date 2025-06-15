@@ -44,28 +44,28 @@
       <div class="tag-wrap" v-if="activityText">
         <span class="goods-tag">{{ activityText }}</span>
         <span class="goods-tag" v-if="info.activity_type == 'group'"
-          >{{ info.activity_info.person_num }}人团</span
+          >{{ info.activity_info.person_num }}{{ $t('comps.goods-info.282870-0') }}</span
         >
       </div>
 
       <div class="goods-prices__wrap">
         <div class="goods-prices__wrap_title">
-          积分商城
+          {{ $t('comps.goods-info.282870-1') }}
         </div>
         <div class="goods-prices" v-show="showprice">
           <template v-if="curSkuInfo">
             <div>
-              <span class="price-text">价格</span>
+              <span class="price-text">{{ $t('comps.goods-info.282870-2') }}</span>
               <span class="sale-price">{{ curSkuInfo | priceFilter }}</span>
             </div>
             <div style="margin-top:20px">
-              <span class="price-text">库存</span>
-              <span>{{ curSkuInfo.store }}件</span>
+              <span class="price-text">{{ $t('comps.goods-info.282870-3') }}</span>
+              <span>{{ curSkuInfo.store }}{{ $t('comps.goods-info.282870-4') }}</span>
             </div>
           </template>
           <template v-else>
             <div>
-              <span class="price-text">价格:</span>
+              <span class="price-text">{{ $t('comps.goods-info.282870-2') }}:</span>
               <span class="sale-price">{{ info | priceFilter }}</span>
             </div>
             <!-- <SpPrice class="price-primary" :value="info.price" /> -->
@@ -84,7 +84,7 @@
             class="goods-promotion__wrap clearfix"
             v-if="info.promotion_activity || info.vipgrade_guide_title"
           >
-            <span class="goods-promotion__title">促销</span>
+            <span class="goods-promotion__title">{{ $t('comps.goods-info.282870-6') }}</span>
             <div class="goods-promotion__info">
               <div class="vip-guide" v-if="info.vipgrade_guide_title">
                 <SpPrice
@@ -93,7 +93,7 @@
                   v-if="info.vipgrade_guide_title.memberPrice"
                 ></SpPrice>
                 <span class="vip-guide__discount" v-if="info.vipgrade_guide_title.gradeDiscount"
-                  >{{ info.vipgrade_guide_title.gradeDiscount }}折</span
+                  >{{ info.vipgrade_guide_title.gradeDiscount }}{{ $t('comps.goods-info.282870-7') }}</span
                 >
                 <span class="vip-guide__tag" v-if="info.vipgrade_guide_title.gradeDiscount">{{
                   info.vipgrade_guide_title.vipgrade_desc
@@ -148,7 +148,7 @@
           />
 
           <span v-if="purchaseLimitCheck" class="limit-buy"
-            >限购：{{ info.activity_info.describe }}</span
+            >{{ $t('comps.goods-info.282870-8') }}{{ info.activity_info.describe }}</span
           >
           <BuyToolbar
             :info="info"
@@ -174,7 +174,7 @@
 
     <transition name="fade">
       <div class="size-guide" v-if="showSizeChart">
-        <span class="btn-close" @click="showSizeChart = false">关闭</span>
+        <span class="btn-close" @click="showSizeChart = false">{{ $t('comps.goods-info.282870-9') }}</span>
         <div class="size-guide__inner">
           <img :src="info.size_guide" />
         </div>
@@ -295,7 +295,7 @@ export default {
         if (price == 0) price = info.point
       }
 
-      return `${price}积分`
+      return this.$t('comps.goods-info.282870-10', [price])
     },
     marketPriceFilter(info) {
       let timer = null,
@@ -312,7 +312,7 @@ export default {
       } else {
         price = info.market_price
       }
-      return `${price} 积分`
+      return this.$t('comps.goods-info.282870-11', [price])
     }
   },
   created() {
@@ -344,11 +344,11 @@ export default {
     } = this.info
 
     if (activity_type === 'group') {
-      this.activityText = '团购'
+      this.activityText = this.$t('comps.goods-info.282870-12')
     } else if (activity_type === 'seckill') {
-      this.activityText = '秒杀'
+      this.activityText = this.$t('comps.goods-info.282870-13')
     } else if (activity_type === 'limited_time_sale') {
-      this.activityText = '限时特惠'
+      this.activityText = this.$t('comps.goods-info.282870-14')
     }
 
     // 图片规格
@@ -447,7 +447,7 @@ export default {
         // const itemCollect = 1 - status
         if (status) {
           await this.$api.member.favoriteItemRemove({ item_id: item_id })
-          this.$Message.success('商品移除收藏成功')
+          this.$Message.success(this.$t('comps.goods-info.282870-15'))
         } else {
           Analytics.event(
             {
@@ -465,7 +465,7 @@ export default {
             'addToWishlist'
           )
           await this.$api.member.favoriteItemAdd({ item_id: item_id })
-          this.$Message.success('商品收藏成功')
+          this.$Message.success(this.$t('comps.goods-info.282870-16'))
         }
 
         this.localCollect = !status
@@ -493,12 +493,12 @@ export default {
     handleClickNumInput(val, type) {
       if (val === 1) {
         if (this.curSkuInfo && this.curSkuInfo.store == 1 && type == 'increase') {
-          this.tipMsg = '库存不足，最大库存为1件'
+          this.tipMsg = this.$t('comps.goods-info.282870-17')
         } else if (type == 'decrease') {
-          this.tipMsg = '此商品的最小购买数量为1件'
+          this.tipMsg = this.$t('comps.goods-info.282870-18')
         }
       } else if (this.curSkuInfo && val === this.curSkuInfo.store && type == 'increase') {
-        this.tipMsg = `库存不足，最大库存为${this.curSkuInfo.store}件`
+        this.tipMsg = this.$t('comps.goods-info.282870-19', [this.curSkuInfo.store])
       } else {
         this.tipMsg = ''
       }
@@ -530,18 +530,18 @@ export default {
       }
       const { curSku, selection } = this
       if (!curSku) {
-        return this.$Message.error('请选择规格')
+        return this.$Message.error(this.$t('comps.goods-info.282870-20'))
       }
       if (!curSku.nospec) {
         if (!selection || (!selection[0] && !selection[1])) {
-          return this.$Message.error('请选择和尺码')
+          return this.$Message.error(this.$t('comps.goods-info.282870-21'))
         }
         if (selection.length) {
           if (!selection[0]) {
-            return this.$Message.error('请选择颜色')
+            return this.$Message.error(this.$t('comps.goods-info.282870-22'))
           }
           if (selection.length == 2 && !selection[1]) {
-            return this.$Message.error('请选择尺码')
+            return this.$Message.error(this.$t('comps.goods-info.282870-23'))
           }
         }
       }
@@ -571,7 +571,7 @@ export default {
 
         if (mode !== 'fastbuy') {
           this.$EventBus.$emit('show-minicart')
-          this.$Message.success('成功加入购物车')
+          this.$Message.success(this.$t('comps.goods-info.282870-24'))
           this.handleAnalytics('addToCart', info)
           // this.$store.dispatch('cart/getCartCount')
           this.buyLoading = false
@@ -596,13 +596,13 @@ export default {
         }
         if (type == 'collect') {
           await this.$api.member.addCollection(params, this.info.item_id)
-          this.$Message.success('商品收藏成功')
+          this.$Message.success(this.$t('comps.goods-info.282870-16'))
           this.collected = true
         } else {
           params['item_ids'] = [this.info.item_id]
           params['is_empty'] = false
           await this.$api.member.removeCollection(params)
-          this.$Message.success('商品移除收藏成功')
+          this.$Message.success(this.$t('comps.goods-info.282870-15'))
           this.collected = false
         }
       } catch (error) {

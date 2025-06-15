@@ -36,7 +36,7 @@
 <template>
   <div class="page-story page-body">
     <div class="page-story__nav article-title">
-      <div class="title">法式风格</div>
+      <div class="title">{{ $t('pages.frenchstyle.559828-0') }}</div>
     </div>
     <div class="story-wall pc">
       <div class="swiper swiperBox" v-swiper:recSwiper="swiperOptions">
@@ -142,9 +142,9 @@ export default {
   mounted() {
     // analytics.pageReady({
     //   page: {
-    //     pageName: '法式风格',
+    //     pageName: this.$t('pages.frenchstyle.559828-0'),
     //     pageType: 'content',
-    //     breadcrumb: '法式风格'
+    //     breadcrumb: this.$t('pages.frenchstyle.559828-0')
     //   }
     // })
   },

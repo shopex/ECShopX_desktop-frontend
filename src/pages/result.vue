@@ -31,20 +31,20 @@
   <div class="page-item page-result page-body container">
     <div class="page-item__breadcrumb-wraper">
       <div class="items-searchbar">
-        <h3 class="items-searchbar-h">搜索</h3>
+        <h3 class="items-searchbar-h">{{ $t('pages.result.828730-0') }}</h3>
         <div class="items-searchbar-hd">
           <SpInput
             class="items-searchbar-input"
             v-model="message"
-            placeholder="搜索......"
+            :placeholder="`${$t('pages.result.828730-0')}......`"
           ></SpInput>
           <SpButton class="items-searchbar-btn" type="primary" @click="handleSearch(message)"
-            >确定</SpButton
+            >{{ $t('pages.result.828730-2') }}</SpButton
           >
         </div>
 
         <div class="recommend">
-          <p class="recommend__td">汲取灵感</p>
+          <p class="recommend__td">{{ $t('pages.result.828730-3') }}</p>
           <ul class="recommend__bd">
             <li v-for="(item, index) in list" :key="index" @click="handleClickItem(item)">
               {{ item }}
@@ -61,7 +61,7 @@ export default {
   data() {
     return {
       message: '',
-      list: ['19秋冬新品', '科技产品', '明星同款', '精选推荐']
+      list: [this.$t('pages.result.828730-4'), this.$t('pages.result.828730-5'), this.$t('pages.result.828730-6'), this.$t('pages.result.828730-7')]
     }
   },
   mounted() {
@@ -78,7 +78,7 @@ export default {
         search_keywords: val
       })
       if (category.length === 0 && itemSearchCount === 0) {
-        this.$Message.error('没有搜索到相应商品')
+        this.$Message.error(this.$t('pages.result.828730-8'))
         this.message = val
       } else {
         this.$router.push({ path: '/items', query: { keyword: val } })

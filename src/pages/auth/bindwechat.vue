@@ -7,12 +7,12 @@
         <SpForm ref="form-reg" :model="info" :rules="rules">
           <template v-if="step == '1'">
             <SpFormItem prop="mobile">
-              <span class="label-text">手机号</span>
+              <span class="label-text">{{ $t('auth.bindwechat.454774-0') }}</span>
               <SpInput v-model="info.mobile" />
             </SpFormItem>
 
             <SpFormItem prop="password">
-              <span class="label-text">密码</span>
+              <span class="label-text">{{ $t('auth.bindwechat.454774-1') }}</span>
               <SpInput
                 v-model="info.password"
                 type="password"
@@ -21,7 +21,7 @@
             </SpFormItem>
 
             <SpFormItem prop="yzm" class="yzm-feild graphics-code">
-              <span class="label-text">图形验证码</span>
+              <span class="label-text">{{ $t('auth.bindwechat.454774-2') }}</span>
               <SpInput v-model="info.yzm" />
               <div class="yzm-img vcode-btn" @click="handleClickImgcode('mobile_login')">
                 <img :src="imgInfo.imageData" alt />
@@ -29,7 +29,7 @@
             </SpFormItem>
 
             <SpFormItem prop="vcode" class="yzm-feild">
-              <span class="label-text">动态验证码</span>
+              <span class="label-text">{{ $t('auth.bindwechat.454774-3') }}</span>
               <SpInput v-model="info.vcode" />
               <div class="vcode-btn">
                 <SpTimer
@@ -45,16 +45,16 @@
 
           <template v-if="step == '2'">
             <SpFormItem prop="password">
-              <span class="label-text">设置密码</span>
+              <span class="label-text">{{ $t('auth.bindwechat.454774-4') }}</span>
               <SpInput
                 v-model="info.password"
                 type="password"
-                placeholder="建议使用两种或两种以上的字符组合"
+                :placeholder="$t('auth.bindwechat.454774-5')"
               />
             </SpFormItem>
             <SpFormItem prop="password2">
-              <span class="label-text">确定密码</span>
-              <SpInput v-model="info.password2" type="password" placeholder="请再次输入密码" />
+              <span class="label-text">{{ $t('auth.bindwechat.454774-6') }}</span>
+              <SpInput v-model="info.password2" type="password" :placeholder="$t('auth.bindwechat.454774-7')" />
             </SpFormItem>
 
             <div class="dash-line"></div>
@@ -65,7 +65,7 @@
                 <SpInput
                   v-model="info[name]"
                   :placeholder="
-                    item.name == 'username' ? '建议输入真实姓名以便发送奖品信息核对' : ''
+                    item.name == 'username' ? $t('auth.bindwechat.454774-8') : ''
                   "
                 />
               </SpFormItem>
@@ -75,8 +75,8 @@
                 :key="name"
                 class="form-select select"
               >
-                <span class="label-text">性别</span>
-                <SpSelect v-model="info.sex" :data="sexOpt" placeholder="请选择性别"></SpSelect>
+                <span class="label-text">{{ $t('auth.bindwechat.454774-9') }}</span>
+                <SpSelect v-model="info.sex" :data="sexOpt" :placeholder="$t('auth.bindwechat.454774-10')"></SpSelect>
               </SpFormItem>
               <SpFormItem
                 :prop="name"
@@ -84,7 +84,7 @@
                 :key="name"
                 class="form-select"
               >
-                <span class="label-text">生日</span>
+                <span class="label-text">{{ $t('auth.bindwechat.454774-11') }}</span>
                 <datepicker v-model="info.birthday"></datepicker>
               </SpFormItem>
             </template>
@@ -104,18 +104,18 @@
             </SpFormItem> -->
           </template>
           <SpFormItem class="btn-container">
-            <SpButton long type="primary" @click="regBtn('form-reg')">绑定</SpButton>
+            <SpButton long type="primary" @click="regBtn('form-reg')">{{ $t('auth.bindwechat.454774-12') }}</SpButton>
           </SpFormItem>
           <SpFormItem class="btn-container-reg">
-            <SpButton long type="primary" @click="handleReg">注册</SpButton>
+            <SpButton long type="primary" @click="handleReg">{{ $t('auth.bindwechat.454774-13') }}</SpButton>
           </SpFormItem>
         </SpForm>
       </div>
 
       <div class="reg-complete" v-if="step == '3'">
         <img class="reg-img" src="~/assets/imgs/reg-img.svg" />
-        <div class="name">恭喜您 {{ this.info.username }}</div>
-        <div class="vip">您已成功申请为{{ website_name }}的会员</div>
+        <div class="name">{{ $t('auth.bindwechat.454774-14') }} {{ this.info.username }}</div>
+        <div class="vip">{{ $t('auth.bindwechat.454774-15') }}{{ website_name }}{{ $t('auth.bindwechat.454774-16') }}</div>
       </div>
     </div>
   </div>
@@ -134,22 +134,22 @@ import datepicker from './comps/datepicker'
 
 const sexOpt = [
   {
-    label: '男',
-    value: '男'
+    label: this.$t('auth.bindwechat.454774-17'),
+    value: this.$t('auth.bindwechat.454774-17')
   },
   {
-    label: '女',
-    value: '女'
+    label: this.$t('auth.bindwechat.454774-18'),
+    value: this.$t('auth.bindwechat.454774-18')
   }
 ]
 const familyOpt = [
   {
     label: '1',
-    value: '小两口'
+    value: this.$t('auth.bindwechat.454774-19')
   },
   {
     label: '2',
-    value: '三口之家'
+    value: this.$t('auth.bindwechat.454774-20')
   }
 ]
 export default {
@@ -218,7 +218,7 @@ export default {
         //     trigger: 'blur'
         //   }
         // ],
-        mobile: [{ validate: 'required', message: '请输入手机号', trigger: 'blur' }],
+        mobile: [{ validate: 'required', message: this.$t('auth.bindwechat.454774-21'), trigger: 'blur' }],
         // username: [
         //   { validate: 'required', message: '请输入姓名', trigger: 'blur' }
         // ],
@@ -267,16 +267,16 @@ export default {
                 callback()
               } else {
                 // eslint-disable-next-line standard/no-callback-literal
-                callback('请输入图形验证码')
+                callback(this.$t('auth.bindwechat.454774-22'))
               }
             },
             trigger: 'blur'
           }
         ],
-        vcode: [{ validate: 'required', message: '请输入验证码', trigger: 'blur' }]
+        vcode: [{ validate: 'required', message: this.$t('auth.bindwechat.454774-23'), trigger: 'blur' }]
       },
       imgInfo: {},
-      timerMsg: '获取验证码',
+      timerMsg: this.$t('auth.bindwechat.454774-24'),
       license: false,
       showModal: false,
       step: '1',
@@ -292,8 +292,8 @@ export default {
 
     analytics.pageReady({
       page: {
-        pageName: '注册',
-        pageType: '注册',
+        pageName: this.$t('auth.bindwechat.454774-13'),
+        pageType: this.$t('auth.bindwechat.454774-13'),
         breadcrumb: ''
       }
     })
@@ -312,7 +312,7 @@ export default {
           this.rules[key] = [
             {
               validate: 'required',
-              message: `${item.element_type == 'input' ? '请输入' : '请选择'}${item.name}`,
+              message: `${item.element_type == 'input' ? this.$t('auth.bindwechat.454774-25') : this.$t('auth.bindwechat.454774-26')}${item.name}`,
               trigger: 'blur'
             }
           ]
@@ -353,7 +353,7 @@ export default {
     },
     handleLoginSuccess(token) {
       S.setAuthToken(token)
-      this.$Message.success('绑定成功')
+      this.$Message.success(this.$t('auth.bindwechat.454774-27'))
       this.$store.dispatch('user/getUserInfo')
       // this.$store.dispatch('cart/getCartCount')
       const { redirectUrl } = this.$route.query
@@ -394,14 +394,14 @@ export default {
       //   send_sms_token: res_verify.verifyAccount_token
       // }
       await this.$api.auth.regSmsCode(query)
-      this.$Message.success('发送成功')
+      this.$Message.success(this.$t('auth.bindwechat.454774-28'))
       cb()
     },
     handleUpdateTimer(e) {
-      this.timerMsg = `${e}秒后重发`
+      this.timerMsg = this.$t('auth.bindwechat.454774-29', [])
     },
     handleTimerStop() {
-      this.timerMsg = `重发验证码`
+      this.timerMsg = this.$t('auth.bindwechat.454774-30')
     }
   }
 }

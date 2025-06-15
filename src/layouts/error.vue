@@ -26,16 +26,16 @@
       </div>
       <SpTipMessage
         :value="true"
-        tipText="抱歉！您所访问的页面不存在！"
-        tipLink="点击返回首页。"
+        :tipText="$t('layouts.error.251551-0')"
+        :tipLink="$t('layouts.error.251551-1')"
         to="/"
       ></SpTipMessage>
     </div>
     <div v-else class="page-error__container">
       <SpTipMessage
         :value="true"
-        tipText="抱歉！应用程序错误异常！"
-        tipLink="点击返回首页。"
+        :tipText="$t('layouts.error.251551-2')"
+        :tipLink="$t('layouts.error.251551-1')"
         to="/"
       ></SpTipMessage>
     </div>

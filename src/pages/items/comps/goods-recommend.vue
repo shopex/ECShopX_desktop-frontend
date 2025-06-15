@@ -118,7 +118,7 @@
           <GoodsCard :value="item" :isSwiper="false" :spacewidth="0" @on-select="handleSelect">
             <div class="sp-goods-recommend__btn">
               <nuxt-link :to=resolveLink(item)>
-                <SpButton>添加</SpButton>
+                <SpButton>{{ $t('comps.goods-recommend.129852-0') }}</SpButton>
               </nuxt-link>
             </div>
           </GoodsCard>

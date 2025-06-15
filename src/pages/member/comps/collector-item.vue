@@ -53,7 +53,7 @@ $img-ratio:0.723;
     <div class="name" @click="$router.push({path:`/items/${info.item_id}`})">{{info.item_name}}</div>
     <SpPrice unit="cent" :value="info.item_price"></SpPrice>
     <div class="ctrl" @click="remove(info.item_id)">
-      移出收藏
+      {{ $t('comps.collector-item.851336-0') }}
     </div>
   </div>
 </template>

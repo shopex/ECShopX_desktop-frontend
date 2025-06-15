@@ -172,7 +172,7 @@
     <div class="goods-card__price">
       <SpPrice :value="info.price" unit="cent"></SpPrice>
       <div class="add-cart" @click.stop="handleAddCart(info)">
-        <i class="ec-icon ec-icon-cart"></i>加入购物车
+        <i class="ec-icon ec-icon-cart"></i>{{ $t('comps.goods-card.573640-0') }}
       </div>
     </div>
   </div>

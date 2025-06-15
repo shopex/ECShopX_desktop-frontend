@@ -76,7 +76,7 @@ import linkPage from '../../common/linkpage'
 import ImgWrap from '../../common/img-wrap'
 import { goodsPrice } from '../../common/comps'
 
-import 'swiper/dist/css/swiper.css'
+import 'swiper/css/swiper.css'
 
 const WIDGET_NAME = 'W0018'
 

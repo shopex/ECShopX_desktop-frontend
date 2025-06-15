@@ -1,16 +1,16 @@
 <template>
   <div class="fast-cart">
     <SpModal class="add-cart-modal" v-model="showModal" :width="400" @Cancel="handleClose">
-      <div class="header-title">加入购物车</div>
+      <div class="header-title">{{ $t('comps.fast-cart.338393-0') }}</div>
       <div class="modal-goods">
         <div class="modal-row">
-          <span class="modal-row__title">商品</span>
+          <span class="modal-row__title">{{ $t('comps.fast-cart.338393-1') }}</span>
           <div class="modal-row__value">
             <span class="name">{{ info.item_name }}</span>
           </div>
         </div>
         <div class="modal-row">
-          <span class="modal-row__title">价格</span>
+          <span class="modal-row__title">{{ $t('comps.fast-cart.338393-2') }}</span>
           <div class="modal-row__value">
             <SpPrice :value="info.price" unit="cent"></SpPrice>
           </div>
@@ -39,7 +39,7 @@
             </div>
         </div> -->
         <div class="modal-row">
-          <span class="modal-row__title">购买数量</span>
+          <span class="modal-row__title">{{ $t('comps.fast-cart.338393-3') }}</span>
           <div class="modal-row__value">
             <SpNumInput
               class="t-num"
@@ -50,14 +50,14 @@
               @decrease="handleClickNumInput($event, info, 'decrease')"
               @change="handleQuantityChange($event, info, 'change')"
             ></SpNumInput>
-            <span>库存{{ info.store }}</span>
+            <span>{{ $t('comps.fast-cart.338393-4') }}{{ info.store }}</span>
           </div>
           <div
             class="modal-btn"
             :class="{ 'disabled': info.item_spec_desc && !curSku }"
             @click="handleModalAddCart()"
           >
-            加入购物车
+            {{ $t('comps.fast-cart.338393-0') }}
           </div>
         </div>
       </div>

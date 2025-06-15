@@ -8,33 +8,33 @@
       style="{height: 372px;}"
     >
       <SpFormItem prop="shopType" class="form-select">
-        <span class="label-text"><span class="must-icon">*</span>商户类型</span>
+        <span class="label-text"><span class="must-icon">*</span>{{ $t('comp.settleformOne.524219-0') }}</span>
         <SpInputSelect
           v-model="info.merchant_type_parent_id"
           @change="chooseShopType"
           :data="shopTypeList"
           @inputChange="changeInput"
-          placeholder="请选择"
+          :placeholder="$t('comp.settleformOne.524219-1')"
         ></SpInputSelect>
       </SpFormItem>
       <SpFormItem prop="bussinessScope" class="form-select">
-        <span class="label-text"><span class="must-icon">*</span>经营范围</span>
+        <span class="label-text"><span class="must-icon">*</span>{{ $t('comp.settleformOne.524219-2') }}</span>
         <SpInputSelect
           v-model="info.merchant_type_id"
           :data="bussinessScopeList"
           @change="chooseShopList"
           @inputChange="changeInputBussiness"
-          placeholder="请选择"
+          :placeholder="$t('comp.settleformOne.524219-1')"
         ></SpInputSelect>
       </SpFormItem>
       <SpFormItem prop="settled_type" class="form-select ">
-        <span class="label-text"><span class="must-icon">*</span>入驻类型</span>
+        <span class="label-text"><span class="must-icon">*</span>{{ $t('comp.settleformOne.524219-3') }}</span>
         <SpRadioGroup v-model="info.settled_type">
-          <SpRadio label="enterprise" :theme="themeColor">企业</SpRadio>
-          <SpRadio label="soletrader" :theme="themeColor">个体户</SpRadio>
+          <SpRadio label="enterprise" :theme="themeColor">{{ $t('comp.settleformOne.524219-4') }}</SpRadio>
+          <SpRadio label="soletrader" :theme="themeColor">{{ $t('comp.settleformOne.524219-5') }}</SpRadio>
         </SpRadioGroup>
         <div v-if="!info.settled_type && rulesShow" class="form-item__error-message">
-          请上传银行卡正面照片
+          {{ $t('comp.settleformOne.524219-6') }}
         </div>
       </SpFormItem>
     </SpForm>
@@ -66,7 +66,7 @@ export default {
         name: ''
       },
       accountRules: {
-        settled_type: [{ required: true, validate: 'required', message: '请选择入驻类型' }]
+        settled_type: [{ required: true, validate: 'required', message: this.$t('comp.settleformOne.524219-7') }]
       }
     }
   },

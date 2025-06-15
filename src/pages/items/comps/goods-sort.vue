@@ -94,7 +94,7 @@
 <template>
   <div class="sortbar clearfix">
     <div class="sort-list">
-      <div class="label">排序：</div>
+      <div class="label">{{ $t('comps.goods-sort.235075-0') }}</div>
       <div class="sort-items">
         <div
           class="sort-item"
@@ -121,13 +121,13 @@
           <SpInput class="price-input" v-model="start_price" placeholder="￥"></SpInput>
           <div class="line">-</div>
           <SpInput class="price-input" v-model="end_price" placeholder="￥"></SpInput>
-          <div class="price-btn" @click="submitPrice()">确定</div>
+          <div class="price-btn" @click="submitPrice()">{{ $t('comps.goods-sort.235075-1') }}</div>
         </div>
       </div>
     </div>
     <div class="search-total">
-      共<span class="highlight">{{ total }}</span
-      >件商品
+      {{ $t('comps.goods-sort.235075-2') }}<span class="highlight">{{ total }}</span
+      >{{ $t('comps.goods-sort.235075-3') }}
     </div>
   </div>
 </template>

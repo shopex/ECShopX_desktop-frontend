@@ -3,7 +3,7 @@
 <template>
   <div class="sp-point-price">
     <div class="point">{{ point }}</div>
-    <div class="symbol">积分</div>
+    <div class="symbol">{{ $t('sp-point-price.index.889802-0') }}</div>
   </div>
 </template>
 

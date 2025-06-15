@@ -49,7 +49,7 @@ export default {
       if (text) {
         arr = text.split(',')
       } else {
-        arr = [`第${num}步`]
+        arr = [this.$t('steps.index.996759-0', [num])]
       }
       return arr
     },

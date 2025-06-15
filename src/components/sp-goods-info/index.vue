@@ -266,7 +266,7 @@
               color: theme
             }"
           ></i>
-          <span>{{ collected ? '取消收藏' : '收藏' }}</span>
+          <span>{{ collected ? $t('sp-goods-info.index.091195-1') : $t('sp-goods-info.index.091195-2') }}</span>
         </div>
       </div>
       <div class="goodsinfo-f">
@@ -276,14 +276,14 @@
           <SpPrice class="market-price" :value="(curSku ? curSku.market_price : info.market_price) / 100" />
         </div>
         <div class="r-w open-vip" v-if="info.vipgrade_guide_title">
-          开通
+          {{ $t('sp-goods-info.index.091195-3') }}
           <span class="vip-name">{{ info.vipgrade_guide_title.vipgrade_name }}</span>
           <span
             class="vip-discount"
             :style="{
               backgroundColor: theme
             }"
-            >享{{ info.vipgrade_guide_title.gradeDiscount }}折</span
+            >{{ $t('sp-goods-info.index.091195-4') }}{{ info.vipgrade_guide_title.gradeDiscount }}{{ $t('sp-goods-info.index.091195-5') }}</span
           >
           <nuxt-link to="/member/vip">
             <span class="vip-desc"
@@ -294,7 +294,7 @@
         </div>
       </div>
       <div class="goodsinfo-coupons" v-if="showCouponsList.length > 0">
-        <div class="coupons-item_hd">优惠券：</div>
+        <div class="coupons-item_hd">{{ $t('sp-goods-info.index.091195-6') }}</div>
         <div class="coupons-item_bd">
           <div v-for="(item, index) in showCouponsList" :key="index" class="coupons-item_bd-info">
             <img
@@ -311,7 +311,7 @@
             />
             <div class="coupons-item_bd-content">
               <p v-if="item.card_type == 'discount'" class="discount_title_price">
-                {{ 10 - item.discount / 10 }}折满折优惠券
+                {{ 10 - item.discount / 10 }}{{ $t('sp-goods-info.index.091195-7') }}
               </p>
               <p v-if="item.card_type == 'cash'" class="discount_title_price">
                 <SpPrice
@@ -320,31 +320,31 @@
                   :symbol="''"
                   :value="item.reduce_cost"
                 ></SpPrice
-                >元满减优惠券
+                >{{ $t('sp-goods-info.index.091195-8') }}
               </p>
               <p v-if="item.least_cost > 0">
-                ，满<SpPrice
+                {{ $t('sp-goods-info.index.091195-9') }}<SpPrice
                   class="center-coupon-item__price-num"
                   unit="cent"
                   :symbol="''"
                   :value="item.least_cost"
                 ></SpPrice
-                >元可用
+                >{{ $t('sp-goods-info.index.091195-10') }}
               </p>
-              <p v-if="item.least_cost < 0 || item.least_cost == 0">，无门槛使用</p>
+              <p v-if="item.least_cost < 0 || item.least_cost == 0">{{ $t('sp-goods-info.index.091195-11') }}</p>
             </div>
             <p
               class="coupons-item_bd-footer "
               v-if="info.getted != 1 && info.getted != 2"
               @click="handleReceive(item)"
             >
-              领取
+              {{ $t('sp-goods-info.index.091195-12') }}
             </p>
-            <p class="coupons-item_bd-footer receive" v-else-if="info.getted == 1">已领取</p>
+            <p class="coupons-item_bd-footer receive" v-else-if="info.getted == 1">{{ $t('sp-goods-info.index.091195-13') }}</p>
           </div>
           <div v-if="couponsList.length > 4">
             <p @click="handleOpenCoupon" class="coupongBtn">
-              {{ couponsBtn ? '展开' : '收起' }}
+              {{ couponsBtn ? $t('sp-goods-info.index.091195-14') : $t('sp-goods-info.index.091195-15') }}
               <i v-if="couponsBtn" class="espier-icon espier-icon-xiangxia-01"></i>
               <i v-else class="espier-icon espier-icon-xiangshang-01"></i>
             </p>
@@ -352,7 +352,7 @@
         </div>
       </div>
       <div class="promation" v-if="info.promotion_activity">
-        <div class="promation-label">促销</div>
+        <div class="promation-label">{{ $t('sp-goods-info.index.091195-16') }}</div>
         <div class="promation-values">
           <div
             class="promat-item"
@@ -433,11 +433,11 @@ export default {
       const { act_price, member_price } = info
 
       if (act_price) {
-        return '活动价'
+        return this.$t('sp-goods-info.index.091195-17')
       } else if (member_price) {
-        return '会员价'
+        return this.$t('sp-goods-info.index.091195-18')
       } else {
-        return '价格'
+        return this.$t('sp-goods-info.index.091195-19')
       }
     },
     FilterPrice(info) {
@@ -492,7 +492,7 @@ export default {
           item_ids: [item_id],
           is_empty: false
         })
-        this.$Message.success('商品移除收藏成功')
+        this.$Message.success(this.$t('sp-goods-info.index.091195-20'))
         this.collected = false
       } else {
         await this.$api.member.addCollection(
@@ -501,7 +501,7 @@ export default {
           },
           item_id
         )
-        this.$Message.success('商品收藏成功')
+        this.$Message.success(this.$t('sp-goods-info.index.091195-21'))
         this.collected = true
       }
     },
@@ -536,7 +536,7 @@ export default {
     },
     async handleClickAddCart(mode) {
       if (!this.curSku) {
-        this.$Message.error('请选择规格')
+        this.$Message.error(this.$t('sp-goods-info.index.091195-22'))
         return
       }
       const { distributor_id } = this.info
@@ -549,7 +549,7 @@ export default {
         quantity: this.quantity
       })
       if (mode == 'cart') {
-        this.$Message.success('成功加入购物车')
+        this.$Message.success(this.$t('sp-goods-info.index.091195-23'))
       } else {
         // this.$router.push('/cart/checkout?mode=fastbuy')
         let url = `/cart/checkout?mode=fastbuy&id=${distributor_id}`
@@ -594,7 +594,7 @@ export default {
       await this.$api.cart.receiveCard({
         card_id: item.card_id
       })
-      this.$Message.success('领取成功')
+      this.$Message.success(this.$t('sp-goods-info.index.091195-24'))
       this.getConponList()
     },
     // 展开优惠券

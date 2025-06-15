@@ -320,7 +320,7 @@ $color-coupon-text: #1f201f;
     <div class="center-coupon-item__up">
       <div class="center-coupon-item__price-wrap">
         <div class="center-coupon-item__price" v-if="info.card_type == 'discount'">
-          {{ (100 - info.discount) / 10 }}折
+          {{ (100 - info.discount) / 10 }}{{ $t('comps.coupon-center-item.982976-1') }}
         </div>
         <div class="center-coupon-item__price" v-if="info.card_type == 'cash'">
           <SpPrice
@@ -330,18 +330,18 @@ $color-coupon-text: #1f201f;
           ></SpPrice>
         </div>
         <p class="center-coupon-item__price-num-reduce">
-          满{{ info.least_cost > 0 ? info.least_cost / 100 : 0.01 }}可用
+          {{ $t('comps.coupon-center-item.982976-2') }}{{ info.least_cost > 0 ? info.least_cost / 100 : 0.01 }}{{ $t('comps.coupon-center-item.982976-3') }}
         </p>
-        <div class="center-coupon-item__price" v-if="info.card_type == 'gift'">兑换券</div>
+        <div class="center-coupon-item__price" v-if="info.card_type == 'gift'">{{ $t('comps.coupon-center-item.982976-4') }}</div>
       </div>
       <div class="center-coupon-item__desc">
         <div class="title" v-if="info.card_type != 'gift'">
           {{ info.title }}
-          <!-- <span>满{{info.least_cost > 0 ? info.least_cost/100 : 0.01}}可用</span> -->
+          <!-- <span>{{ $t('comps.coupon-center-item.982976-2') }}{{info.least_cost > 0 ? info.least_cost/100 : 0.01}}{{ $t('comps.coupon-center-item.982976-3') }}</span> -->
         </div>
         <div class="time">
           {{ handleDatetime(info.begin_date) }} - {{ handleDatetime(info.end_date) }}
-          <p class="use_rules" @click="showUseRuler(info.description)">使用规则</p>
+          <p class="use_rules" @click="showUseRuler(info.description)">{{ $t('comps.coupon-center-item.982976-5') }}</p>
         </div>
       </div>
     </div>
@@ -350,10 +350,10 @@ $color-coupon-text: #1f201f;
       v-if="info.getted != 1 && info.getted != 2"
       @click="handleReceive(info)"
     >
-      <p class="no-receive">立即领取</p>
+      <p class="no-receive">{{ $t('comps.coupon-center-item.982976-6') }}</p>
     </div>
     <div class="center-coupon-item__down have-receive-btn" v-else-if="info.getted == 1">
-      <p class="have-receive">已领取</p>
+      <p class="have-receive">{{ $t('comps.coupon-center-item.982976-7') }}</p>
       <!-- <div class="code">{{info.code}}</div>
     <div class="use-goods">{{waresGoods(info)}}</div> -->
     </div>
@@ -361,12 +361,12 @@ $color-coupon-text: #1f201f;
       class="center-coupon-item__down is-end-btn"
       v-else-if="info.getted == 2 || info.end_date < nowDate"
     >
-      <p class="is-end">已结束</p>
+      <p class="is-end">{{ $t('comps.coupon-center-item.982976-8') }}</p>
     </div>
 
     <SpModal v-model="dialogLog" :height="320" :width="520">
       <div class="center-coupon-item__rule">
-        <div class="center-coupon-item__rule-hd">使用规则</div>
+        <div class="center-coupon-item__rule-hd">{{ $t('comps.coupon-center-item.982976-5') }}</div>
         <div class="center-coupon-item__rule-text">{{ rules }}</div>
       </div>
     </SpModal>
@@ -396,7 +396,7 @@ export default {
   },
   methods: {
     showUseRuler(item) {
-      ;(this.dialogLog = true), (this.rules = item ? item : '暂无使用规则')
+      ;(this.dialogLog = true), (this.rules = item ? item : this.$t('comps.coupon-center-item.982976-9'))
     },
     handleDatetime(timestamp) {
       return formatDataTime(timestamp * 1000, 'YYYY.M.D')

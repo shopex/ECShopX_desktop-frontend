@@ -43,7 +43,7 @@
 <template>
   <div class="page-apply-refund page-aftersales-detail member page-body container-member">
     <div class="member-top">
-      <p class="member-top-title">会员中心</p>
+      <p class="member-top-title">{{ $t('aftersales._id.399829-0') }}</p>
     </div>
     <div class="member-content">
       <div class="member-content-left">
@@ -52,9 +52,9 @@
       <div class="member-content-right" v-if="info">
         <div class="pb100">
           <div class="page-apply-refund__status border-top">
-            <p class="page-apply-refund__status-text">申请退货</p>
-            <p class="page-apply-refund__status-order">订单号：{{info.tid}}</p>
-            <p class="page-apply-refund__status-order">退货单号：{{info.aftersales_bn}}</p>
+            <p class="page-apply-refund__status-text">{{ $t('aftersales._id.399829-1') }}</p>
+            <p class="page-apply-refund__status-order">{{ $t('aftersales._id.399829-2') }}{{info.tid}}</p>
+            <p class="page-apply-refund__status-order">{{ $t('aftersales._id.399829-3') }}{{info.aftersales_bn}}</p>
           </div>
           <SpGoodsItem
             v-if="info.sku"
@@ -63,14 +63,14 @@
           />
           <SpForm>
             <SpFormItem prop="account">
-              <span class="label-text">退款/退货说明</span>
+              <span class="label-text">{{ $t('aftersales._id.399829-4') }}</span>
               <div class="page-apply-refund__explain">
                 <textarea class="textarea" v-model="info.reason" cols="30" rows="10"></textarea>
               </div>
             </SpFormItem>
             <SpFormItem prop="account" class="mb20">
               <div class="label-text">
-                <p>凭证</p>
+                <p>{{ $t('aftersales._id.399829-5') }}</p>
               </div>
               <div class="img-list" v-if="info.evidence_pic">
                 <li v-for="(url, index) in info.evidence_pic" :key="index">
@@ -81,7 +81,7 @@
           </SpForm>
 
           <div class="refund-reason" v-if="info.status == '3' && info.shop_explanation">
-            <span class="label-text">拒绝原因</span><span>{{info.shop_explanation}}</span>
+            <span class="label-text">{{ $t('aftersales._id.399829-6') }}</span><span>{{info.shop_explanation}}</span>
           </div>
 
           <!--'0' => '等待商家处理', '3' => '商家已驳回',"aftersales_type": "ONLY_REFUND" -->
@@ -89,25 +89,25 @@
             <div class="refund-info">
               <div v-if="info.returnGoodsLogistics">
                 <div class="refund-info__label">
-                  <span class="label-text">物流公司</span><span>{{info.returnGoodsLogistics.logi_name}}</span>
+                  <span class="label-text">{{ $t('aftersales._id.399829-7') }}</span><span>{{info.returnGoodsLogistics.logi_name}}</span>
                 </div>
                 <div class="refund-info__label">
-                  <span class="label-text">物流单号</span><span>{{info.returnGoodsLogistics.logi_no}}</span>
+                  <span class="label-text">{{ $t('aftersales._id.399829-8') }}</span><span>{{info.returnGoodsLogistics.logi_no}}</span>
                 </div>
               </div>
               <div class="logistics-form" v-if="info.progress == '1'">
                 <SpForm ref="form-logistics" :model="logisticsInfo" :rules="rules">
                   <div class="form-limit">
                     <SpFormItem prop="corp_code">
-                      <span class="logistics-label">物流公司</span>
+                      <span class="logistics-label">{{ $t('aftersales._id.399829-7') }}</span>
                       <div class="logistics-value">
-                        <SpSelect v-model="logisticsInfo.corp_code" :data="logisticsList" placeholder="物流公司" />
+                        <SpSelect v-model="logisticsInfo.corp_code" :data="logisticsList" :placeholder="$t('aftersales._id.399829-7')" />
                       </div>
                     </SpFormItem>
                     <SpFormItem prop="logi_no">
-                      <span class="logistics-label">物流单号</span>
+                      <span class="logistics-label">{{ $t('aftersales._id.399829-8') }}</span>
                       <div class="logistics-value">
-                        <SpInput v-model="logisticsInfo.logi_no" placeholder="物流单号" />
+                        <SpInput v-model="logisticsInfo.logi_no" :placeholder="$t('aftersales._id.399829-8')" />
                       </div>
                     </SpFormItem>
                   </div>
@@ -117,12 +117,12 @@
                         class="button-dark"
                         type="primary"
                         @click="submitLogistics('form-logistics')"
-                      >提交</SpButton>
+                      >{{ $t('aftersales._id.399829-9') }}</SpButton>
                     </div>
                   </SpFormItem>
                 </SpForm>
               </div>
-              <div v-if="info.progress != '1' && !info.returnGoodsLogistics">暂无物流信息，请稍后查看</div>
+              <div v-if="info.progress != '1' && !info.returnGoodsLogistics">{{ $t('aftersales._id.399829-10') }}</div>
             </div>
           </template>
 
@@ -144,9 +144,9 @@ export default {
     return {
       info: null,
       ORDER_STATUS: {
-        'online': '在线支付',
-        'offline': '货到付款',
-        'rechange': '预存款充值'
+        'online': this.$t('aftersales._id.399829-11'),
+        'offline': this.$t('aftersales._id.399829-12'),
+        'rechange': this.$t('aftersales._id.399829-13')
       },
       logisticsList: [],
       logisticsInfo: {
@@ -160,7 +160,7 @@ export default {
               // eslint-disable-next-line standard/no-callback-literal
               callback()
             } else {
-              callback('请选择物流商')
+              callback(this.$t('aftersales._id.399829-14'))
             }
           },
           trigger: 'blur'
@@ -171,7 +171,7 @@ export default {
               // eslint-disable-next-line standard/no-callback-literal
               callback()
             } else {
-              callback('请输入物流单号')
+              callback(this.$t('aftersales._id.399829-15'))
             }
           },
           trigger: 'blur'
@@ -249,7 +249,7 @@ export default {
         aftersales_bn: this.aftersales_bn
       }
       await this.$api.aftersales.logistics(params)
-      this.$Message.success('填写物流信息成功')
+      this.$Message.success(this.$t('aftersales._id.399829-16'))
       this.getAftersalesDetail()
     }
   }

@@ -184,7 +184,7 @@ export default {
           this.mask ? (
             <div
               class='sp-loading__mask'
-              style={{ background: this.background, text: '正在加载...' }}
+              style={{ background: this.background, text: this.$t('src.index.305922-0') }}
             >
               {spinner}
             </div>

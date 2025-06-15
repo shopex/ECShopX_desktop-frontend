@@ -41,14 +41,14 @@ export default {
     renderGiftBtn() {
       return (
         <div class='buy-toolbar'>
-          <div class='btn disabled'>赠品不可购买</div>
+          <div class='btn disabled'>{ this.$t('sp-goods-info.buy-toolbar.855108-0') }</div>
         </div>
       )
     },
     renderInstockBtn() {
       return (
         <div class='buy-toolbar'>
-          <div class='btn disabled'>商品已下架</div>
+          <div class='btn disabled'>{ this.$t('sp-goods-info.buy-toolbar.855108-1') }</div>
         </div>
       )
     },
@@ -65,7 +65,7 @@ export default {
             }}
             onClick={this.handleAddToCart}
           >
-            加入购物车
+            { this.$t('sp-goods-info.buy-toolbar.855108-2') }
           </div>
           <div
             class='btn btn-fastbuy'
@@ -75,7 +75,7 @@ export default {
             }}
             onClick={this.handleFastBuy}
           >
-            立即购买
+            { this.$t('sp-goods-info.buy-toolbar.855108-3') }
           </div>
         </div>
       )

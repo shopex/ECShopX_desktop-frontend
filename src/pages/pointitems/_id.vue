@@ -32,7 +32,7 @@
 
           <div class="goods-parameter" v-if="curTabIdx == 0 && info && info.item_params.length > 0">
             <ul class="goods-parameter__list clearfix">
-              <li class="goods-parameter__item">品牌：{{ info.goods_brand }}</li>
+              <li class="goods-parameter__item">{{ $t('pointitems._id.032647-0') }}{{ info.goods_brand }}</li>
               <li
                 class="goods-parameter__item"
                 v-for="(item, index) in info.item_params"
@@ -43,7 +43,7 @@
               </li>
             </ul>
             <div class="more-wrap">
-              <span class="more-text" @click="changeTab(1)">更多参数 》</span>
+              <span class="more-text" @click="changeTab(1)">{{ $t('pointitems._id.032647-1') }}</span>
             </div>
           </div>
 
@@ -81,10 +81,10 @@
                 v-html="desc"
                 v-lazy-container="{ selector: 'img' }"
               >
-                正在加载详情...
+                {{ $t('pointitems._id.032647-2') }}
               </div>
             </div>
-            <div class="no-info" v-else>该商品暂无内容数据</div>
+            <div class="no-info" v-else>{{ $t('pointitems._id.032647-3') }}</div>
           </div>
 
           <div
@@ -105,10 +105,10 @@
               >
               </GoodsEvaluation>
             </div>
-            <div class="loading-data" v-if="loading">正在加载</div>
+            <div class="loading-data" v-if="loading">{{ $t('pointitems._id.032647-4') }}</div>
             <div class="loading-data" v-if="!loading && noMore">
-              <span v-if="evaluationList.length == 0">暂无评价</span>
-              <span v-if="evaluationList.length > pageSize">没有更多了</span>
+              <span v-if="evaluationList.length == 0">{{ $t('pointitems._id.032647-5') }}</span>
+              <span v-if="evaluationList.length > pageSize">{{ $t('pointitems._id.032647-6') }}</span>
             </div>
           </div>
         </div>
@@ -176,7 +176,7 @@ export default {
       keyword: '',
       showprice: true,
       info: null,
-      tabList: ['商品介绍', '商品评价'],
+      tabList: [this.$t('pointitems._id.032647-7'), this.$t('pointitems._id.032647-8')],
       curTabIdx: 0,
       evaluationList: [],
       evaluationTotal: 0,
@@ -201,7 +201,7 @@ export default {
       const { item_category_main } = this.info
       let ret = [
         {
-          name: '首页',
+          name: this.$t('pointitems._id.032647-9'),
           url: `/`
         }
       ]
@@ -399,7 +399,7 @@ export default {
       }
       let page_params = {
         page: {
-          pageName: '商品详情',
+          pageName: this.$t('pointitems._id.032647-10'),
           pageType: 'pdp',
           breadcrumb: ''
         },

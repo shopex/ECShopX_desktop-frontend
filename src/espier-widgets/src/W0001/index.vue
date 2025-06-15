@@ -49,7 +49,7 @@ import braidStyle from './props'
 import mixins from '../../mixins'
 import { attrs } from '../../mixins/common-props'
 import linkPage from '../../common/linkpage'
-import 'swiper/dist/css/swiper.css'
+import 'swiper/css/swiper.css'
 
 const WIDGET_NAME = 'W0001'
 

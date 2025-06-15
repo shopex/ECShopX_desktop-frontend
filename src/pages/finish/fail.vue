@@ -45,8 +45,8 @@
     <div class="page-fail__container clearfix">
       <img class="page-fail__img" src="~/assets/imgs/fail.png" alt />
       <div class="page-fail__content">
-        <span>付款失败，</span>
-        <a class="text-underline" @click="goPay">点击重新付款。</a>
+        <span>{{ $t('finish.fail.429253-0') }}</span>
+        <a class="text-underline" @click="goPay">{{ $t('finish.fail.429253-1') }}</a>
       </div>
     </div>
   </div>

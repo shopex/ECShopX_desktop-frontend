@@ -49,7 +49,7 @@ import * as Filters from '@/filters'
 import { TrackerPlugin } from '@/service'
 import store from 'store'
 
-import 'swiper/dist/css/swiper.css'
+// import 'swiper/css/swiper.css'
 import plugin from './components/sp-modal/src/plugin'
 
 // const Comps = {

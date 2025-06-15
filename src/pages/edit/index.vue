@@ -2,15 +2,15 @@
   <div class="page-index page-body">
     <SpWidgetPanel base-slot="2" base-id="main_focus" :info="wgts"> </SpWidgetPanel>
     <div>
-      <div class="wdget-title" style="margin-bottom: 20px;">新品推荐</div>
+      <div class="wdget-title" style="margin-bottom: 20px;">{{ $t('edit.index.316431-0') }}</div>
       <div class="wdget-recommend__nav">
         <ul class="clearfix">
           <li :class="{ 'active': recommend == 'men' }" @click="handleRecommendClick('men')">
-            男装
+            {{ $t('edit.index.316431-1') }}
           </li>
           <li>/</li>
           <li :class="{ 'active': recommend == 'women' }" @click="handleRecommendClick('women')">
-            女装
+            {{ $t('edit.index.316431-2') }}
           </li>
         </ul>
       </div>

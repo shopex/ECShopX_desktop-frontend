@@ -111,9 +111,9 @@ export default {
     FilterPriceLabel(info) {
       const { activity_price, member_price } = info
       if(activity_price) {
-        return '活动价'
+        return this.$t('sp-goods-card.index.699394-0')
       } else if(member_price) {
-        return '会员价'
+        return this.$t('sp-goods-card.index.699394-1')
       }
     },
     FilterPrice(info) {

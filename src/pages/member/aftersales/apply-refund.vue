@@ -3,7 +3,7 @@
 <template>
   <div class="page-apply-refund member page-body container-member">
     <div class="member-top">
-      <p class="member-top-title">会员中心</p>
+      <p class="member-top-title">{{ $t('aftersales.apply-refund.521937-0') }}</p>
     </div>
     <div class="member-content">
       <div class="member-content-left">
@@ -12,8 +12,8 @@
       <div class="member-content-right">
         <div>
           <div class="page-apply-refund__status border-top">
-            <p class="page-apply-refund__status-text">申请退款/退货</p>
-            <p class="page-apply-refund__status-order">订单号：{{tid}}</p>
+            <p class="page-apply-refund__status-text">{{ $t('aftersales.apply-refund.521937-1') }}</p>
+            <p class="page-apply-refund__status-order">{{ $t('aftersales.apply-refund.521937-2') }}{{tid}}</p>
           </div>
           <ul class="page-apply-refund__refund-item-list">
             <li class="refund-item"
@@ -53,15 +53,15 @@
               ></SpSelect>
             </SpFormItem> -->
             <SpFormItem>
-              <span class="label-text">退款/退货说明</span>
+              <span class="label-text">{{ $t('aftersales.apply-refund.521937-3') }}</span>
               <div class="page-apply-refund__explain">
                 <textarea class="textarea" v-model="reason" cols="30" rows="10"></textarea>
               </div>
             </SpFormItem>
             <SpFormItem class="mb20">
               <div class="label-text">
-                <p>上传凭证</p>
-                <p class="label-tips">（最多上传6张）</p>
+                <p>{{ $t('aftersales.apply-refund.521937-4') }}</p>
+                <p class="label-tips">{{ $t('aftersales.apply-refund.521937-5') }}</p>
               </div>
               <div>
                 <ul class="img-list" v-if="imageList.length">
@@ -80,7 +80,7 @@
               :loading="loading"
               class="button-dark"
               @click="handleSubmit"
-            >提交</SpButton>
+            >{{ $t('aftersales.apply-refund.521937-6') }}</SpButton>
           </div>
         </div>
       </div>
@@ -138,14 +138,14 @@ export default {
       maxSize: 1024000, // 图片限制为1M内
       aftersales_type: '',
       reasonList: [
-        { label: '多买/错买', value: '多买/错买' },
-        { label: '不想要了', value: '不想要了' },
-        { label: '买多了', value: '买多了' },
-        { label: '质量问题', value: '质量问题' },
-        { label: '卖家发错货', value: '卖家发错货' },
-        { label: '商品破损', value: '商品破损' },
-        { label: '描述不符', value: '描述不符' },
-        { label: '其他', value: '其他' }
+        { label: this.$t('aftersales.apply-refund.521937-7'), value: this.$t('aftersales.apply-refund.521937-7') },
+        { label: this.$t('aftersales.apply-refund.521937-8'), value: this.$t('aftersales.apply-refund.521937-8') },
+        { label: this.$t('aftersales.apply-refund.521937-9'), value: this.$t('aftersales.apply-refund.521937-9') },
+        { label: this.$t('aftersales.apply-refund.521937-10'), value: this.$t('aftersales.apply-refund.521937-10') },
+        { label: this.$t('aftersales.apply-refund.521937-11'), value: this.$t('aftersales.apply-refund.521937-11') },
+        { label: this.$t('aftersales.apply-refund.521937-12'), value: this.$t('aftersales.apply-refund.521937-12') },
+        { label: this.$t('aftersales.apply-refund.521937-13'), value: this.$t('aftersales.apply-refund.521937-13') },
+        { label: this.$t('aftersales.apply-refund.521937-14'), value: this.$t('aftersales.apply-refund.521937-14') }
       ]
     }
   },
@@ -176,12 +176,12 @@ export default {
 
     changeImage (e) {
       if (this.imageList.length > 5) {
-        this.$Message.error('图片不能超过6张')
+        this.$Message.error(this.$t('aftersales.apply-refund.521937-15'))
         return
       }
       let file = e.target.files[0]
       if (file.size > this.maxSize) {
-        this.$Message.error('图片大小不能超过2M')
+        this.$Message.error(this.$t('aftersales.apply-refund.521937-16'))
         return
       }
       if (file) {
@@ -212,12 +212,12 @@ export default {
 
       const hasSelect = goodsList.some(item => item.isChecked == true)
       if (!hasSelect) {
-        this.$Message.error('退款/退货商品不能为空')
+        this.$Message.error(this.$t('aftersales.apply-refund.521937-17'))
         return
       }
 
       if (!this.reason) {
-        this.$Message.error('退货原因不能为空')
+        this.$Message.error(this.$t('aftersales.apply-refund.521937-18'))
         return
       } else {
         params.reason = this.reason

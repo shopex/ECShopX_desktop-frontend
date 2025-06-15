@@ -1,11 +1,11 @@
 <template>
   <div class="receive-wrap">
-    <h4>付款信息</h4>
+    <h4>{{ $t('comps.payInfo.590028-0') }}</h4>
     <div>
-      付款方式：{{ name }}
-      <span class="view-certificate" v-if="receiveData.offline_pay_check_status == 1" @click="handleViewCertificate">查看付款凭证</span>
+      {{ $t('comps.payInfo.590028-1') }}{{ name }}
+      <span class="view-certificate" v-if="receiveData.offline_pay_check_status == 1" @click="handleViewCertificate">{{ $t('comps.payInfo.590028-2') }}</span>
     </div>
-    <div>付款时间：{{ receiveData.payDate }}</div>
+    <div>{{ $t('comps.payInfo.590028-3') }}{{ receiveData.payDate }}</div>
     <!-- <div>收货地址:{{receiveData.receiver_state}} {{receiveData.receiver_city}} {{receiveData.receiver_district}} {{receiveData.receiver_address}}</div> -->
     <!-- <p class="bd-border"></p>
     <h4>物流信息</h4>
@@ -30,12 +30,12 @@ export default {
   computed: {
     name() {
       let typeText = {
-        point: '积分支付',
-        wxpaypc: '微信支付',
-        alipay: '支付宝支付',
+        point: this.$t('comps.payInfo.590028-4'),
+        wxpaypc: this.$t('comps.payInfo.590028-5'),
+        alipay: this.$t('comps.payInfo.590028-6'),
         offline_pay: this.receiveData.offline_pay_name
       }
-      return (this.receiveData.pay_type && typeText[this.receiveData.pay_type]) || '微信支付'
+      return (this.receiveData.pay_type && typeText[this.receiveData.pay_type]) || this.$t('comps.payInfo.590028-5')
     }
   },
   methods:{

@@ -160,7 +160,7 @@
       </div>
       <div class="comment">
         <div class="comment-text">{{ info.content }}</div>
-        <div class="btn-comment" @click="handleClickShowComment">回复</div>
+        <div class="btn-comment" @click="handleClickShowComment">{{ $t('comps.goods-evaluation.645004-0') }}</div>
         <div class="comment-num">
           <i class="ec-icon ec-icon-comment_light" @click="handleClickShowReply"></i>
           <span class="num">{{ info.reply.total_count }}</span>
@@ -170,7 +170,7 @@
 
       <div class="reply-list" v-if="replyList.length > 0 && showReply">
         <div class="reply-item" v-for="(reply, i) in replyList" :key="`reply-item__${i}`">
-          <span class="reply-name">{{ reply.username || '匿名' }}：</span>
+          <span class="reply-name">{{ reply.username || $t('comps.goods-evaluation.645004-1') }}：</span>
           <span class="reply-comment">{{ reply.content }}</span>
           <div class="reply-date">{{ reply.created | DateTimeFilter }}</div>
         </div>
@@ -183,7 +183,7 @@
             rows="5"
             v-model="replyComment"
             :maxlength="500"
-            placeholder="请输入回复内容"
+            :placeholder="$t('comps.goods-evaluation.645004-2')"
           ></textarea>
           <span class="el-textarea__count">{{ replyComment.length }}/500</span>
         </div>
@@ -195,7 +195,7 @@
           }"
           @click.stop="handleReply()"
         >
-          回复
+          {{ $t('comps.goods-evaluation.645004-0') }}
         </div>
       </div>
     </div>

@@ -149,7 +149,7 @@
         v-if="!info.showComment"
         @click.stop="openComment()"
       >
-        回复
+        {{ $t('comps.goods-evaluation.885774-0') }}
       </div>
       <div class="reply-list" v-if="info.reply_list.length > 0">
         <div class="reply-item" v-for="(reply, i) in info.reply_list" :key="i">
@@ -171,7 +171,7 @@
             rows="3"
             v-model="info.reply_comment"
             :maxlength="500"
-            placeholder="请输入回复内容"
+            :placeholder="$t('comps.goods-evaluation.885774-1')"
           ></textarea>
           <span class="el-textarea__count"
             >{{ info.reply_comment.length }}/500</span
@@ -182,7 +182,7 @@
           :class="{ disabled: !info.reply_comment }"
           @click.stop="handleReply()"
         >
-          回复
+          {{ $t('comps.goods-evaluation.885774-0') }}
         </div>
       </div>
     </div>

@@ -4,36 +4,36 @@
 <template>
   <div class="page-reg page-body">
     <div class="auth reg">
-      <p class="auth-title">创建账户</p>
+      <p class="auth-title">{{ $t('auth.reg copy.315610-0') }}</p>
       <div class="clearfix">
         <div class="auth-form reg-form">
           <!-- <p class="reg-form_prompt">创建账户可获得500积分和100元现金券，完善资料更可再获得500积分!</p> -->
           <SpForm ref="form-reg" :model="info" :rules="rules">
             <SpFormItem prop="account">
-              <span class="label-text">手机号</span>
+              <span class="label-text">{{ $t('auth.reg copy.315610-1') }}</span>
               <SpInput v-model="info.account" />
             </SpFormItem>
             <SpFormItem prop="username">
-              <span class="label-text">姓名</span>
+              <span class="label-text">{{ $t('auth.reg copy.315610-2') }}</span>
               <SpInput v-model="info.username" />
             </SpFormItem>
             <SpFormItem prop="sex">
-              <span class="label-text">性别</span>
+              <span class="label-text">{{ $t('auth.reg copy.315610-3') }}</span>
               <SpSelect v-model="info.sex" :data="sexOpt"></SpSelect>
             </SpFormItem>
             <SpFormItem prop="birthday">
-              <span class="label-text">生日</span>
+              <span class="label-text">{{ $t('auth.reg copy.315610-4') }}</span>
               <datepicker v-model="info.birthday"></datepicker>
             </SpFormItem>
             <SpFormItem prop="yzm">
-              <span class="label-text">图片验证码</span>
+              <span class="label-text">{{ $t('auth.reg copy.315610-5') }}</span>
               <div class="yzm-img" @click="handleClickImgcode">
                 <img :src="imgInfo.base64Image" alt />
               </div>
               <SpInput v-model="info.yzm" />
             </SpFormItem>
             <SpFormItem prop="vcode">
-              <span class="label-text">动态验证码</span>
+              <span class="label-text">{{ $t('auth.reg copy.315610-6') }}</span>
               <div class="vcode-btn">
                 <SpTimer
                   :onStart="handleTimerStart"
@@ -46,29 +46,29 @@
               <SpInput v-model="info.vcode" />
             </SpFormItem>
             <SpFormItem prop="password">
-              <span class="label-text">密码</span>
+              <span class="label-text">{{ $t('auth.reg copy.315610-7') }}</span>
               <SpInput v-model="info.password" type="password" />
             </SpFormItem>
             <SpFormItem prop="password2">
-              <span class="label-text">确定密码</span>
+              <span class="label-text">{{ $t('auth.reg copy.315610-8') }}</span>
               <SpInput v-model="info.password2" type="password" />
             </SpFormItem>
             <SpFormItem class="clearfix mb22">
               <div>
                 <SpRadio type="checkbox" size="small" v-model="license"></SpRadio>
                 <span class="license-info"
-                  >您接受并同意遵守AIGLE的
-                  <nuxt-link to="/article/detail/19">条款与细则</nuxt-link> 、<nuxt-link
+                  >{{ $t('auth.reg copy.315610-9') }}
+                  <nuxt-link to="/article/detail/19">{{ $t('auth.reg copy.315610-10') }}</nuxt-link> 、<nuxt-link
                     to="/article/detail/17"
-                    >隐私政策</nuxt-link
-                  >、以及<nuxt-link to="/article/detail/20">个人敏感信息政策</nuxt-link>。</span
+                    >{{ $t('auth.reg copy.315610-11') }}</nuxt-link
+                  >{{ $t('auth.reg copy.315610-12') }}<nuxt-link to="/article/detail/20">{{ $t('auth.reg copy.315610-13') }}</nuxt-link>。</span
                 >
               </div>
             </SpFormItem>
             <SpFormItem class="btn-container">
               <div class="btn-container__login">
                 <SpButton class="button-dark" :disabled="!license" @click="regBtn('form-reg')"
-                  >注册并登录</SpButton
+                  >{{ $t('auth.reg copy.315610-14') }}</SpButton
                 >
               </div>
             </SpFormItem>
@@ -79,8 +79,8 @@
         </div>
       </div>
       <ModalTips v-if="showModal" @close="handleModalClose">
-        <SpButton class="button-dark" @click="handleJumpProfile">前往完善个人信息</SpButton>
-        <SpButton class="button-dark ml20" @click="handleJumpIndex">跳过</SpButton>
+        <SpButton class="button-dark" @click="handleJumpProfile">{{ $t('auth.reg copy.315610-15') }}</SpButton>
+        <SpButton class="button-dark ml20" @click="handleJumpIndex">{{ $t('auth.reg copy.315610-16') }}</SpButton>
       </ModalTips>
     </div>
   </div>
@@ -98,12 +98,12 @@ import datepicker from './comps/datepicker'
 
 const sexOpt = [
   {
-    label: '男',
-    value: '男'
+    label: this.$t('auth.reg copy.315610-17'),
+    value: this.$t('auth.reg copy.315610-17')
   },
   {
-    label: '女',
-    value: '女'
+    label: this.$t('auth.reg copy.315610-18'),
+    value: this.$t('auth.reg copy.315610-18')
   }
 ]
 export default {
@@ -159,9 +159,9 @@ export default {
             trigger: 'blur'
           }
         ],
-        username: [{ validate: 'required', message: '请输入姓名', trigger: 'blur' }],
-        sex: [{ validate: 'required', message: '请输入选择性别', trigger: 'blur' }],
-        birthday: [{ validate: 'required', message: '请选择生日', trigger: 'blur' }],
+        username: [{ validate: 'required', message: this.$t('auth.reg copy.315610-19'), trigger: 'blur' }],
+        sex: [{ validate: 'required', message: this.$t('auth.reg copy.315610-20'), trigger: 'blur' }],
+        birthday: [{ validate: 'required', message: this.$t('auth.reg copy.315610-21'), trigger: 'blur' }],
         password: [
           {
             validate: (rule, value, callback) => {
@@ -201,7 +201,7 @@ export default {
                 callback()
               } else {
                 // eslint-disable-next-line standard/no-callback-literal
-                callback('请输入验证码')
+                callback(this.$t('auth.reg copy.315610-22'))
               }
             },
             trigger: 'blur'
@@ -219,10 +219,10 @@ export default {
         //   },
         //   trigger: 'blur'
         // }]
-        vcode: [{ validate: 'required', message: '请输入验证码', trigger: 'blur' }]
+        vcode: [{ validate: 'required', message: this.$t('auth.reg copy.315610-22'), trigger: 'blur' }]
       },
       imgInfo: {},
-      timerMsg: '获取验证码',
+      timerMsg: this.$t('auth.reg copy.315610-23'),
       license: false,
       showModal: false
     }
@@ -231,8 +231,8 @@ export default {
     this.yzmImg()
     analytics.pageReady({
       page: {
-        pageName: '注册',
-        pageType: '注册',
+        pageName: this.$t('auth.reg copy.315610-24'),
+        pageType: this.$t('auth.reg copy.315610-24'),
         breadcrumb: ''
       }
     })
@@ -278,7 +278,7 @@ export default {
       // 发送短信
       try {
         await this.$api.auth.regSmsCode(query_sms)
-        this.$Message.success('发送成功')
+        this.$Message.success(this.$t('auth.reg copy.315610-25'))
       } catch (error) {
         return false
       }
@@ -350,14 +350,14 @@ export default {
         send_sms_token: res_verify.verifyAccount_token
       }
       await this.$api.auth.regSmsCode(query_sms)
-      this.$Message.success('发送成功')
+      this.$Message.success(this.$t('auth.reg copy.315610-25'))
       cb()
     },
     handleUpdateTimer(e) {
-      this.timerMsg = `${e}秒后重发`
+      this.timerMsg = this.$t('auth.reg copy.315610-26', [])
     },
     handleTimerStop() {
-      this.timerMsg = `重发验证码`
+      this.timerMsg = this.$t('auth.reg copy.315610-27')
     },
     handleClickBindAccount() {
       this.$router.push('/auth/bind')

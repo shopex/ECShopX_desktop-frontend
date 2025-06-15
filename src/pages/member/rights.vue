@@ -1,7 +1,7 @@
 <template>
   <div class="page-member-rights member page-body container-member">
     <div class="member-top">
-      <p class="member-top-title">会员中心</p>
+      <p class="member-top-title">{{ $t('member.rights.692011-0') }}</p>
     </div>
     <div class="member-content">
       <div class="member-content-left">

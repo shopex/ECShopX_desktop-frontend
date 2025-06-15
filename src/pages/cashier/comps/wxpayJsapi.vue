@@ -14,9 +14,9 @@
 
 <template>
   <div class="cashier-wxpayjsapi">
-    <div class="cashier-wxpayjsapi__title">正在支付...</div>
+    <div class="cashier-wxpayjsapi__title">{{ $t('comps.wxpayJsapi.751517-0') }}</div>
     <div class="cashier-wxpayjsapi__warp">
-      <div>支付单号: {{ payment_id }}</div>
+      <div>{{ $t('comps.wxpayJsapi.751517-1') }} {{ payment_id }}</div>
     </div>
   </div>
 </template>

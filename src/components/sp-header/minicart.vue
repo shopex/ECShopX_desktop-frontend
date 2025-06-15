@@ -324,20 +324,20 @@
           <!-- </template> -->
         </div>
         <div class="cart-null" v-if="cartInfo.list.length == 0">
-          <div class="text">购物袋中还没有商品，赶紧选购吧！</div>
-          <SpButton @click="viewBuy">立即选购</SpButton>
+          <div class="text">{{ $t('sp-header.minicart.461304-0') }}</div>
+          <SpButton @click="viewBuy">{{ $t('sp-header.minicart.461304-1') }}</SpButton>
         </div>
         <div class="sp-cart__list-footer" v-if="cartInfo.list.length > 0">
           <div class="total">
-            <span class="total-text">共{{ cartInfo.count }}件商品</span>
+            <span class="total-text">{{ $t('sp-header.minicart.461304-2') }}{{ cartInfo.count }}{{ $t('sp-header.minicart.461304-3') }}</span>
             <span class="total-text">
-              合计
+              {{ $t('sp-header.minicart.461304-4') }}
               <SpPrice class="t-price" unit="cent" :value="cartInfo.total_price" />
             </span>
           </div>
           <div class="view-btn">
-            <SpButton @click="viewCart" size="small">进入购物车</SpButton>
-            <SpButton class="btn-checkout" @click="checkout" size="small">去结算</SpButton>
+            <SpButton @click="viewCart" size="small">{{ $t('sp-header.minicart.461304-5') }}</SpButton>
+            <SpButton class="btn-checkout" @click="checkout" size="small">{{ $t('sp-header.minicart.461304-6') }}</SpButton>
           </div>
         </div>
       </div>
@@ -509,7 +509,7 @@ export default {
     },
     viewBuy() {
       this.closeMiniCart()
-      this.$router.push('/items?tag=新品')
+      this.$router.push(this.$t('sp-header.minicart.461304-7'))
       let body = document.getElementsByTagName('body')
       body[0].style.overflow = ''
     },

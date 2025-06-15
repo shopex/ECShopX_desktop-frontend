@@ -1,8 +1,8 @@
 <template>
   <SpModal v-model="visiableProtocol" :width="600" @Cancel="handleClose">
-    <div slot="title" class="protocol-title">提示</div>
+    <div slot="title" class="protocol-title">{{ $t('comp.protocolDialog.382474-0') }}</div>
     <div class="protocol-info">
-      <p class="dialog-info">请确认是否提交审核</p>
+      <p class="dialog-info">{{ $t('comp.protocolDialog.382474-1') }}</p>
     </div>
   </SpModal>
 </template>

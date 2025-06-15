@@ -3,16 +3,16 @@
 <template>
   <div class="page-cart container">
     <div class="cart-hd">
-      <div class="hd-item name">商品信息</div>
-      <div class="hd-item price">单价</div>
-      <div class="hd-item num">数量</div>
-      <div class="hd-item amount">金额</div>
-      <div class="hd-item action">操作</div>
+      <div class="hd-item name">{{ $t('cart.index.281938-0') }}</div>
+      <div class="hd-item price">{{ $t('cart.index.281938-1') }}</div>
+      <div class="hd-item num">{{ $t('cart.index.281938-2') }}</div>
+      <div class="hd-item amount">{{ $t('cart.index.281938-3') }}</div>
+      <div class="hd-item action">{{ $t('cart.index.281938-4') }}</div>
     </div>
     <div class="cart-bd">
       <div class="cart-shop" v-for="(shop, index) in list" :key="`cart-shop__${index}`">
         <div class="cart-shop-hd" :style="{ borderBottomColor: themeColor }">
-          <div class="shop-name" v-if="shop.shop_name">店铺名称：{{ shop.shop_name || '' }}</div>
+          <div class="shop-name" v-if="shop.shop_name">{{ $t('cart.index.281938-5') }}{{ shop.shop_name || '' }}</div>
           <div class="shop-coupon">
             <CouponPicker :info="shop" :theme="themeColor" />
           </div>
@@ -38,7 +38,7 @@
             <SpPrice :value="item.total_fee / 100"></SpPrice>
           </div>
           <div class="goods-action">
-            <span class="delete-text" @click="handleRemove(item.cart_id)">删除</span>
+            <span class="delete-text" @click="handleRemove(item.cart_id)">{{ $t('cart.index.281938-6') }}</span>
           </div>
         </div>
 
@@ -46,27 +46,27 @@
           <div class="cart-ft-hd">
             <div class="left-con">
               <SpRadio type="checkbox" :theme="themeColor" :value="shop.is_checked"
-                @change="(val) => handleOnChangeAllCheck(val, index)">全选</SpRadio>
-              <div class="text-grel-all" @click="handleRemoveAll">删除选中商品</div>
+                @change="(val) => handleOnChangeAllCheck(val, index)">{{ $t('cart.index.281938-7') }}</SpRadio>
+              <div class="text-grel-all" @click="handleRemoveAll">{{ $t('cart.index.281938-8') }}</div>
             </div>
             <div class="right-con">
               <div class="cart-col-sl">
-                已选<span class="checknum" :style="{ color: themeColor }">{{ shop.goodsCheckNum }}</span>件商品
+                {{ $t('cart.index.281938-9') }}<span class="checknum" :style="{ color: themeColor }">{{ shop.goodsCheckNum }}</span>{{ $t('cart.index.281938-10') }}
               </div>
               <div class="diss-count">
-                已优惠：
+                {{ $t('cart.index.281938-11') }}
                 <SpPrice :value="shop.discountFee / 100" />
-                <span class="text-grel">（不含运费）</span>
+                <span class="text-grel">{{ $t('cart.index.281938-12') }}</span>
               </div>
               <div class="total-price">
-                总计：
+                {{ $t('cart.index.281938-13') }}
                 <SpPrice size="large" :value="shop.totalFee / 100" />
               </div>
             </div>
           </div>
           <div class="calc-btn" :class="{ disabled: shop.goodsCheckNum == 0 }" :style="{ backgroundColor: themeColor }"
             @click="handleClickSubmit(shop)">
-            去结算
+            {{ $t('cart.index.281938-14') }}
           </div>
         </div>
       </div>
@@ -79,11 +79,11 @@
         <div class="cart-empty-con">
           <img class="cart-empty-img" src="@/assets/imgs/cart-empty.png" alt="" />
           <div class="cart-empty-info">
-            <div class="txt">购物车内暂时没有商品</div>
+            <div class="txt">{{ $t('cart.index.281938-15') }}</div>
             <nuxt-link to="/items">
               <span :style="{
                   color: themeColor
-                }">去购物<i class="ec-icon ec-icon-right"></i></span>
+                }">{{ $t('cart.index.281938-16') }}<i class="ec-icon ec-icon-right"></i></span>
             </nuxt-link>
           </div>
         </div>
@@ -93,7 +93,7 @@
     <!-- 无效商品 -->
     <div class="cart-bd invalid-cart">
       <div class="shop-goods-item" v-for="(item, index) in invalid_list" :key="`shop-item__${index}`">
-        <div class="invalid-text">已失效</div>
+        <div class="invalid-text">{{ $t('cart.index.281938-17') }}</div>
         <div class="g-wrap">
           <SpImg class="spimg" noSize :src="item.pics" />
           <div class="goods-name">{{ item.item_name }}</div>
@@ -103,7 +103,7 @@
           <SpPrice :value="item.price / 100"></SpPrice>
         </div>
         <div class="goods-action">
-          <span class="delete-text" @click="handleRemove(item.cart_id)">删除</span>
+          <span class="delete-text" @click="handleRemove(item.cart_id)">{{ $t('cart.index.281938-6') }}</span>
         </div>
       </div>
     </div>
@@ -133,7 +133,7 @@
     },
     head() {
       return {
-        title: '购物车',
+        title: this.$t('cart.index.281938-18'),
       }
     },
     data() {

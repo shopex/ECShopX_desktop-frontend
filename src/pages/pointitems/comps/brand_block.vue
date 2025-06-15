@@ -9,11 +9,11 @@
 <template>
   <div class="block" @click="handleClick(item.attribute_id)" :class="{ 'active': isActive(item) }">
     <div class="item item1">
-      <div class="column1">品牌</div>
+      <div class="column1">{{ $t('comps.brand_block.500640-0') }}</div>
       <div class="column2">{{ name }}</div>
     </div>
     <div class="item item2">
-      <div class="column1">图片</div>
+      <div class="column1">{{ $t('comps.brand_block.500640-1') }}</div>
       <div class="column2"><img :src="imgurl || ''" /></div>
     </div>
     <div class="close">

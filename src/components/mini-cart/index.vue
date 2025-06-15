@@ -173,9 +173,9 @@
               >
                 <div slot="specs" class="goods-item__specs">
                   <SpPrice class="goods-item__specs-price" :value="item.price * item.quantity" />
-                  <div class="goods-item__specs-item">颜色：{{ item.color }}</div>
-                  <div class="goods-item__specs-item">尺码：{{ item.size }}</div>
-                  <div class="goods-item__specs-item">数量：{{ item.quantity }}</div>
+                  <div class="goods-item__specs-item">{{ $t('mini-cart.index.927209-0') }}{{ item.color }}</div>
+                  <div class="goods-item__specs-item">{{ $t('mini-cart.index.927209-1') }}{{ item.size }}</div>
+                  <div class="goods-item__specs-item">{{ $t('mini-cart.index.927209-2') }}{{ item.quantity }}</div>
                 </div>
                 <div slot="price"></div>
                 <i
@@ -196,8 +196,8 @@
           </template>
         </div>
         <div class="cart-null" v-if="cartInfo.list.length == 0">
-          <div class="text">购物袋中还没有商品，赶紧选购吧！</div>
-          <SpButton type="primary" @click="viewBuy">立即选购</SpButton>
+          <div class="text">{{ $t('mini-cart.index.927209-3') }}</div>
+          <SpButton type="primary" @click="viewBuy">{{ $t('mini-cart.index.927209-4') }}</SpButton>
         </div>
         <div class="sp-mini-cart__list-body mb">
           <div v-for="(mitem, mindex) in mbCartInfo.list" :key="mindex">
@@ -222,7 +222,7 @@
         </div>
         <div class="sp-mini-cart__list-footer" v-if="cartInfo.list.length > 0">
           <div class="total clearfix">
-            <span class="fl">订单小计</span>
+            <span class="fl">{{ $t('mini-cart.index.927209-5') }}</span>
             <span class="fr">
               <!-- <SpPrice
                 class="t-price"
@@ -238,7 +238,7 @@
             <SpButton type="warning" @click="viewCart">查看购物袋</SpButton>
           </div> -->
           <div class="cart-checkout">
-            <SpButton type="primary" @click="viewCart">结算</SpButton>
+            <SpButton type="primary" @click="viewCart">{{ $t('mini-cart.index.927209-6') }}</SpButton>
           </div>
         </div>
       </div>
@@ -400,7 +400,7 @@ export default {
     },
     goCart () {
       // this.$router.push('/cart')
-      this.$track('header', '购物袋')
+      this.$track('header', this.$t('mini-cart.index.927209-7'))
     },
     handleClickNav () {
       this.show = true
@@ -420,11 +420,11 @@ export default {
     },
     handleClickDeleteCart (item) {
       this.$Modal.confirm({
-        title: '提示',
+        title: this.$t('mini-cart.index.927209-8'),
         content: '<p>请确认是否移除该商品?</p>',
         onOk: async () => {
           await this.$store.dispatch('cart/delCartInfo', { cart_id: item.cart_id })
-          this.$Message.success('商品删除成功')
+          this.$Message.success(this.$t('mini-cart.index.927209-10'))
         }
       })
     },
@@ -467,7 +467,7 @@ export default {
     // 立即选购
     viewBuy () {
       this.away()
-      this.$router.push('/items?tag=新品')
+      this.$router.push(this.$t('mini-cart.index.927209-11'))
     },
     handleGoodsData (item) {
       return {
@@ -481,12 +481,12 @@ export default {
       let tipmsg
       if (e === 1) {
         if (item.store == 1 && type == 'increase') {
-          tipmsg = '库存不足，最大库存为1件'
+          tipmsg = this.$t('mini-cart.index.927209-12')
         } else if (type == 'decrease') {
-          tipmsg = '此商品的最小购买数量为1件'
+          tipmsg = this.$t('mini-cart.index.927209-13')
         }
       } else if (e === item.store && type == 'increase') {
-        tipmsg = `库存不足，最大库存为${item.store}件`
+        tipmsg = this.$t('mini-cart.index.927209-14', [item.store])
       } else {
         tipmsg = ''
       }

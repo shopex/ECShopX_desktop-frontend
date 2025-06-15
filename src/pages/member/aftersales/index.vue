@@ -3,7 +3,7 @@
 <template>
 <div class="page-refund member page-body container-member">
   <div class="member-top">
-    <p class="member-top-title">会员中心</p>
+    <p class="member-top-title">{{ $t('aftersales.index.616149-0') }}</p>
   </div>
   <div class="member-content">
     <div class="member-content-left">
@@ -11,14 +11,14 @@
     </div>
 
     <div class="member-content-right">
-      <h3 class="page-refund__title">退货/退款列表</h3>
+      <h3 class="page-refund__title">{{ $t('aftersales.index.616149-1') }}</h3>
       <div class="refund-list" v-if="total">
         <div class="refund-list__header clearfix">
-          <div class="refund-id">退单号</div>
-          <div class="refund-reason">售后服务内容</div>
-          <div class="refund-time">申请时间</div>
-          <div class="refund-status">处理状态</div>
-          <div class="refund-action">操作</div>
+          <div class="refund-id">{{ $t('aftersales.index.616149-2') }}</div>
+          <div class="refund-reason">{{ $t('aftersales.index.616149-3') }}</div>
+          <div class="refund-time">{{ $t('aftersales.index.616149-4') }}</div>
+          <div class="refund-status">{{ $t('aftersales.index.616149-5') }}</div>
+          <div class="refund-action">{{ $t('aftersales.index.616149-6') }}</div>
         </div>
         <div class="refund-list__body">
           <div class="refund-list__body-c" v-for="(item, index) in list" :key="index">
@@ -30,17 +30,17 @@
               <div class="refund-time">{{handleDatetime(item.created_time)}}</div>
               <div class="refund-status">{{item.progress_val}}</div>
               <div class="refund-btn">
-                <SpButton class="btn-wrap" type="text" @click="goRefundDetail(item.aftersales_bn)">查看</SpButton>
+                <SpButton class="btn-wrap" type="text" @click="goRefundDetail(item.aftersales_bn)">{{ $t('aftersales.index.616149-7') }}</SpButton>
               </div>
             </div>
 
             <div class="refund-list__body-mb">
-              <div>售后单号：{{item.aftersales_bn}}</div>
-              <div>申请时间：{{handleDatetime(item.created_time)}}</div>
-              <div>状态：{{item.progress_val}}</div>
-              <div class="refund-reason"><span>售后服务内容：{{item.reason}}</span></div>
+              <div>{{ $t('aftersales.index.616149-8') }}{{item.aftersales_bn}}</div>
+              <div>{{ $t('aftersales.index.616149-4') }}：{{handleDatetime(item.created_time)}}</div>
+              <div>{{ $t('aftersales.index.616149-10') }}{{item.progress_val}}</div>
+              <div class="refund-reason"><span>{{ $t('aftersales.index.616149-3') }}：{{item.reason}}</span></div>
               <div class="view-btn">
-                <SpButton type="text" @click="goRefundDetail(item.aftersales_bn)">查看</SpButton>
+                <SpButton type="text" @click="goRefundDetail(item.aftersales_bn)">{{ $t('aftersales.index.616149-7') }}</SpButton>
               </div>
             </div>
           </div>
@@ -49,11 +49,11 @@
 
       <SpTipMessage
         loading
-        loadingText="正在加载退款售后订单列表..."
+        :loadingText="$t('aftersales.index.616149-12')"
         :isLoading="loading"
         v-model="tip"
-        tipText="抱歉！您的退款售后订单列表为空"
-        tipLink="请继续购物。"
+        :tipText="$t('aftersales.index.616149-13')"
+        :tipLink="$t('aftersales.index.616149-14')"
         to="/items"
       ></SpTipMessage>
     </div>

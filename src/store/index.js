@@ -1,9 +1,10 @@
 import S from '@/spx'
 import { getSaaSCompanyId } from '@/utils'
+import { defaultLocale } from '@/utils/language'
 
 export const state = () => ({
   commonWgts: {},
-
+  locale: defaultLocale,
   headerTemplate: [],
   footerTemplate: [],
 
@@ -34,6 +35,10 @@ export const state = () => ({
 })
 
 export const mutations = {
+  SET_LANG(state, locale) {
+    // console.log('SET_LANG-----------', locale)
+    state.locale = locale
+  },
   fetchCommonWgts(state, payload) {
     state.commonWgts = payload
   },

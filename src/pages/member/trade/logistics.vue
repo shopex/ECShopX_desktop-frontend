@@ -3,7 +3,7 @@
 <template>
   <div class="page-logistics page-order-detail member page-body container-member">
     <div class="member-top">
-      <p class="member-top-title">会员中心</p>
+      <p class="member-top-title">{{ $t('trade.logistics.931328-0') }}</p>
     </div>
     <div class="member-content">
       <div class="member-content-left">
@@ -13,7 +13,7 @@
       <!-- <div class="page-logistics__title">物流详情</div> -->
 
         <div class="page-logistics__address" v-if="address">
-          <p>收货地址</p>
+          <p>{{ $t('trade.logistics.931328-1') }}</p>
           <p>{{address.receiver_state + address.receiver_city + address.receiver_district}}</p>
           <p>{{address.receiver_address}}</p>
         </div>
@@ -28,7 +28,7 @@
           </li>
         </ul>
 
-        <Tips v-else tips="您没有相关的物流信息"/>
+        <Tips v-else :tips="$t('trade.logistics.931328-2')"/>
 
       </div>
     </div>

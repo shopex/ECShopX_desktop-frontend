@@ -36,13 +36,13 @@
           </div>
         </div>
         <div class="right">
-          <SpButton type="text">编辑</SpButton>
+          <SpButton type="text">{{ $t('cart.address.280777-0') }}</SpButton>
         </div>
       </div>
     </div>
 
     <div class="btn-container">
-      <SpButton type="primary" long size="large" @click="addAddress">添加地址</SpButton>
+      <SpButton type="primary" long size="large" @click="addAddress">{{ $t('cart.address.280777-1') }}</SpButton>
     </div>
   </div>
 </template>

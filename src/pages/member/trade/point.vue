@@ -5,7 +5,7 @@
         <smenu activeTitle="order" active="trade-point"></smenu>
       </div>
       <div class="member-content-right">
-        <div class="member-content-right-header">积分订单</div>
+        <div class="member-content-right-header">{{ $t('trade.point.120947-0') }}</div>
         <div class="member-content-right-body">
           <div class="tabs-status">
             <template>
@@ -28,12 +28,12 @@
                   </colgroup>
                   <thead>
                     <tr>
-                      <th>订单详情</th>
-                      <th>收货人</th>
-                      <th>积分</th>
-                      <th>金额</th>
-                      <th>状态</th>
-                      <th>操作</th>
+                      <th>{{ $t('trade.point.120947-1') }}</th>
+                      <th>{{ $t('trade.point.120947-2') }}</th>
+                      <th>{{ $t('trade.point.120947-3') }}</th>
+                      <th>{{ $t('trade.point.120947-4') }}</th>
+                      <th>{{ $t('trade.point.120947-5') }}</th>
+                      <th>{{ $t('trade.point.120947-6') }}</th>
                     </tr>
                   </thead>
                   <tbody v-for="(child,index) in list" :key="index">
@@ -44,11 +44,11 @@
                       <td colspan="6">
                         <div class="list-table-header">
                           <span>{{ child.date }}</span>
-                          订单编号：
+                          {{ $t('trade.point.120947-7') }}
                           <span class="ly-fn-a link-black" @click.stop="clickLink(child.order)">{{
                             child.order
                           }}</span>
-                          <span>{{ child.distributor_name ? child.distributor_name : '总店' }}</span>
+                          <span>{{ child.distributor_name ? child.distributor_name : $t('trade.point.120947-8') }}</span>
                         </div>
                       </td>
                     </tr>
@@ -70,8 +70,8 @@
                           <div class="product-num">x {{ item.num }}</div>
                           <!-- <div v-if="child.orderStatus === 'WAIT_BUYER_CONFIRM'" class="product-repair">
                             
-                            <span class="ly-fn-a b-color" @click="clickBtn('申请售后', item)" v-if="!item.aftersales_status">申请售后</span>
-                            <span class="ly-fn-a b-color" v-if="item.aftersales_status" @click="clickBtn('售后', item)">售后</span>
+                            <span class="ly-fn-a b-color" @click="clickBtn($t('trade.point.120947-57'), item)" v-if="!item.aftersales_status">{{ $t('trade.point.120947-57') }}</span>
+                            <span class="ly-fn-a b-color" v-if="item.aftersales_status" @click="clickBtn($t('trade.point.120947-21'), item)">{{ $t('trade.point.120947-21') }}</span>
                           </div> -->
                         </td>
 
@@ -81,7 +81,7 @@
                           </div>
                         </td>
                         <td v-if="index == 0" :rowspan="child.children.length || 2" colspan="1">
-                          <div class="product-price">{{ child.item_point }} 积分</div>
+                          <div class="product-price">{{ child.item_point }} {{ $t('trade.point.120947-3') }}</div>
                         </td>
                         <td v-if="index == 0" :rowspan="child.children.length || 2" colspan="1">
                           <div class="product-price">
@@ -101,7 +101,7 @@
                               @click="clickLink(child.order)"
                               style="text-align: center"
                             >
-                              订单详情
+                              {{ $t('trade.point.120947-1') }}
                             </div>
                           </div>
                         </td>
@@ -116,35 +116,35 @@
                             <!-- <div>等待卖家发货</div> -->
                             <div
                               class="btn btn-primary"
-                              @click="clickBtn('付款', child)"
+                              @click="clickBtn($t('trade.point.120947-9'), child)"
                               v-if="child.orderStatus == 'NOTPAY' && child.total_fee"
                             >
-                              付款
+                              {{ $t('trade.point.120947-9') }}
                             </div>
                             <div
                               class="btn btn-primary"
-                              @click="clickBtn('确认收货', child)"
+                              @click="clickBtn($t('trade.point.120947-10'), child)"
                               v-if="child.orderStatus == 'WAIT_BUYER_CONFIRM'"
                             >
-                              确认收货
+                              {{ $t('trade.point.120947-10') }}
                             </div>
                             <div
                               class="ly-fn-a"
-                              @click="clickBtn('评价', child)"
+                              @click="clickBtn($t('trade.point.120947-11'), child)"
                               v-if="
                                 (child.orderStatus == 'SUCCESS' || child.orderStatus == 'DONE') &&
                                   rate_status &&
                                   child.is_rate == 0
                               "
                             >
-                              评价
+                              {{ $t('trade.point.120947-11') }}
                             </div>
                             <div
                               class="ly-fn-a"
-                              @click="clickBtn('取消订单', child)"
+                              @click="clickBtn($t('trade.point.120947-12'), child)"
                               v-if="child.orderStatus == 'NOTPAY' || child.orderStatus == 'PAYED'"
                             >
-                              取消订单
+                              {{ $t('trade.point.120947-12') }}
                             </div>
                           </div>
                         </td>
@@ -158,7 +158,7 @@
 
           <template>
             <div style="width: 300px; margin: 50px auto">
-              <Tips v-if="list.length == 0" tips="您没有相关的订单。" />
+              <Tips v-if="list.length == 0" :tips="$t('trade.point.120947-13')" />
             </div>
           </template>
           <div>
@@ -173,21 +173,21 @@
         </div>
         <SpModal v-model="dailogCancel" :height="200" :width="450">
           <div class="dailog dailog-cancel">
-            <div class="dailog-hd">取消订单</div>
+            <div class="dailog-hd">{{ $t('trade.point.120947-12') }}</div>
             <div class="dailog-bd">
-              <span>订单号：{{ selectItem.order }}</span>
+              <span>{{ $t('trade.point.120947-14') }}{{ selectItem.order }}</span>
               <div style="padding-top: 20px">
-                <!-- <span style="display:inline-block;width:100px;text-align:right">取消原因：</span>
-                <SpInput placeholder="必填：取消原因" v-model="cancelMean" class="dailog-bd-input" />-->
+                <!-- <span style="display:inline-block;width:100px;text-align:right">{{ $t('trade.point.120947-15') }}</span>
+                <SpInput :placeholder="$t('trade.point.120947-16')" v-model="cancelMean" class="dailog-bd-input" />-->
                 <SpForm ref="form" :model="form" :rules="rules">
                   <SpFormItem prop="cancelMean">
                     <span style="display: inline-block; width: 80px; text-align: right"
-                      >取消原因：</span
+                      >{{ $t('trade.point.120947-15') }}</span
                     >
                     <SpInput
                       class="dailog-bd-input"
                       v-model="form.cancelMean"
-                      placeholder="必填：取消原因"
+                      :placeholder="$t('trade.point.120947-16')"
                     />
                   </SpFormItem>
                 </SpForm>
@@ -195,75 +195,75 @@
             </div>
 
             <div class="dailog-ft">
-              <button class="btn btn-primary" @click="clickBtn('订单取消确认')">确认取消</button>
-              <button class="btn" @click="clickBtn('取消')">暂不取消</button>
+              <button class="btn btn-primary" @click="clickBtn($t('trade.point.120947-17'))">{{ $t('trade.point.120947-18') }}</button>
+              <button class="btn" @click="clickBtn($t('trade.point.120947-19'))">{{ $t('trade.point.120947-20') }}</button>
             </div>
           </div>
         </SpModal>
         <SpModal v-model="dailogClose" :width="520">
           <div class="dailog dailog-close">
-            <div class="dailog-hd">售后</div>
+            <div class="dailog-hd">{{ $t('trade.point.120947-21') }}</div>
             <div class="dailog-bd">
-              <!-- <span>订单号：{{this.$route.params.id}}</span> -->
+              <!-- <span>{{ $t('trade.point.120947-14') }}{{this.$route.params.id}}</span> -->
               <div>
                 <SpForm ref="formClose" :model="formClose" :rules="rulesClose">
                   <SpFormItem prop="num" v-if="selectItemClose.num != 1">
                     <span style="display: inline-block; width: 80px; text-align: right"
-                      >商品数量:</span
+                      >{{ $t('trade.point.120947-22') }}</span
                     >
                     <SpNumInput
                       style="width: 350px"
                       v-model="formClose.num"
                       :min="1"
                       :max="selectItemClose.num"
-                      placeholder="商品数量"
+                      :placeholder="$t('trade.point.120947-23')"
                     ></SpNumInput>
                   </SpFormItem>
                   <SpFormItem prop="type">
                     <span style="display: inline-block; width: 90px; text-align: right"
-                      >服务类型:</span
+                      >{{ $t('trade.point.120947-24') }}</span
                     >
                     <SpSelect
                       style="width: 350px"
                       :data="typeData"
                       v-model="formClose.type"
-                      placeholder="服务类型"
+                      :placeholder="$t('trade.point.120947-25')"
                     ></SpSelect>
                   </SpFormItem>
                   <SpFormItem prop="reason">
                     <span style="display: inline-block; width: 90px; text-align: right"
-                      >退款理由:</span
+                      >{{ $t('trade.point.120947-26') }}</span
                     >
                     <SpSelect
                       style="width: 350px"
                       :data="reasonData"
                       v-model="formClose.reason"
-                      placeholder="退款理由"
+                      :placeholder="$t('trade.point.120947-27')"
                     ></SpSelect>
                   </SpFormItem>
                   <SpFormItem prop="description">
                     <span style="display: inline-block; width: 90px; text-align: right"
-                      >申请退款说明:</span
+                      >{{ $t('trade.point.120947-28') }}</span
                     >
                     <SpInput
                       style="width: 350px"
                       v-model="formClose.description"
-                      placeholder="申请退款说明"
+                      :placeholder="$t('trade.point.120947-29')"
                     />
                   </SpFormItem>
                 </SpForm>
               </div>
             </div>
             <div class="dailog-ft">
-              <button class="btn btn-primary" @click="clickBtn('售后确认')">确认</button>
-              <button class="btn" @click="clickBtn('取消')">取消</button>
+              <button class="btn btn-primary" @click="clickBtn($t('trade.point.120947-30'))">{{ $t('trade.point.120947-31') }}</button>
+              <button class="btn" @click="clickBtn($t('trade.point.120947-19'))">{{ $t('trade.point.120947-19') }}</button>
             </div>
           </div>
         </SpModal>
 
-        <SpModal title="物流信息" v-model="dialogLogistics" :width="520">
+        <SpModal :title="$t('trade.point.120947-32')" v-model="dialogLogistics" :width="520">
           <div class="dailog">
-            <div class="dailog-hd">物流信息</div>
+            <div class="dailog-hd">{{ $t('trade.point.120947-32') }}</div>
             <div class="dailog-bd" style="padding-right: 0">
               <Logistics :id="selectItem.order" :height="240"></Logistics>
             </div>
@@ -306,11 +306,11 @@ export default {
   data() {
     return {
       tabs: [
-        { label: '全部', value: '0' },
-        { label: '待付款', value: '5' },
-        { label: '待收货', value: '1' },
-        { label: '待评价', value: '3' }
-        // { label: '售后', value: '10' },
+        { label: this.$t('trade.point.120947-33'), value: '0' },
+        { label: this.$t('trade.point.120947-34'), value: '5' },
+        { label: this.$t('trade.point.120947-35'), value: '1' },
+        { label: this.$t('trade.point.120947-36'), value: '3' }
+        // { label: this.$t('trade.point.120947-21'), value: '10' },
         // { label: '已完成', value: '11' },
       ],
       list: [],
@@ -324,22 +324,22 @@ export default {
         total: 0
       },
       orderStatusText: {
-        NOTPAY: '未付款',
-        PAYED: '已付款',
-        WAIT_BUYER_CONFIRM: '已发货',
-        FAIL: '已关闭',
-        CLOSED: '已关闭',
-        CANCEL: '已取消',
-        PAYED_WAIT_PROCESS: '退款处理中',
-        PAYED_PARTAIL: '部分发货',
-        SUCCESS: '交易完成',
-        DONE: '交易完成'
+        NOTPAY: this.$t('trade.point.120947-37'),
+        PAYED: this.$t('trade.point.120947-38'),
+        WAIT_BUYER_CONFIRM: this.$t('trade.point.120947-39'),
+        FAIL: this.$t('trade.point.120947-40'),
+        CLOSED: this.$t('trade.point.120947-40'),
+        CANCEL: this.$t('trade.point.120947-41'),
+        PAYED_WAIT_PROCESS: this.$t('trade.point.120947-42'),
+        PAYED_PARTAIL: this.$t('trade.point.120947-43'),
+        SUCCESS: this.$t('trade.point.120947-44'),
+        DONE: this.$t('trade.point.120947-44')
       },
       dailogCancel: false,
       selectItem: {},
       form: { cancelMean: '' },
       rules: {
-        cancelMean: [{ validate: 'required', message: '取消原因必填' }]
+        cancelMean: [{ validate: 'required', message: this.$t('trade.point.120947-45') }]
       },
       dailogClose: false,
       formClose: {
@@ -349,18 +349,18 @@ export default {
         description: ''
       },
       rulesClose: {
-        type: [{ validate: 'required', message: '选择退款类型' }],
-        reason: [{ validate: 'required', message: '选择退款原因' }]
+        type: [{ validate: 'required', message: this.$t('trade.point.120947-46') }],
+        reason: [{ validate: 'required', message: this.$t('trade.point.120947-47') }]
       },
       typeData: [
-        { label: '仅退款', value: 'ONLY_REFUND' },
-        { label: '退货退款', value: 'REFUND_GOODS' }
+        { label: this.$t('trade.point.120947-48'), value: 'ONLY_REFUND' },
+        { label: this.$t('trade.point.120947-49'), value: 'REFUND_GOODS' }
       ],
       reasonData: [
-        { label: '物流破损', value: '物流破损' },
-        { label: '产品描述与实物不符', value: '产品描述与实物不符' },
-        { label: '质量问题', value: '质量问题' },
-        { label: '皮肤过敏', value: '皮肤过敏' }
+        { label: this.$t('trade.point.120947-50'), value: this.$t('trade.point.120947-50') },
+        { label: this.$t('trade.point.120947-51'), value: this.$t('trade.point.120947-51') },
+        { label: this.$t('trade.point.120947-52'), value: this.$t('trade.point.120947-52') },
+        { label: this.$t('trade.point.120947-53'), value: this.$t('trade.point.120947-53') }
       ],
       selectItemClose: {},
       dialogLogistics: false,
@@ -470,57 +470,57 @@ export default {
     },
     clickBtn(type, item) {
       switch (type) {
-        case '付款':
+        case this.$t('trade.point.120947-9'):
           this.$router.push(`/cashier?order_id=${item.order}`)
           break
-        case '确认收货':
+        case this.$t('trade.point.120947-10'):
           confirmOrder({
             order_id: item.order
           }).then((res) => {
-            this.$Message.success('收货成功')
+            this.$Message.success(this.$t('trade.point.120947-54'))
             this.getTradeList()
           })
           break
-        case '查看物流':
+        case this.$t('trade.point.120947-55'):
           this.selectItem = item
           this.dialogLogistics = true
           break
 
-        case '取消订单':
+        case this.$t('trade.point.120947-12'):
           this.selectItem = item
           this.dailogCancel = true
           break
-        case '取消':
+        case this.$t('trade.point.120947-19'):
           this.dailogCancel = false
           this.dailogClose = false
           break
-        case '订单取消确认':
+        case this.$t('trade.point.120947-17'):
           this.$refs['form'].validate((valid, errors) => {
             if (valid) {
               orderCancel({
                 order_id: this.selectItem.order,
                 cancel_reason: this.form.cancelMean
               }).then(() => {
-                this.$Message.success('发起成功')
+                this.$Message.success(this.$t('trade.point.120947-56'))
                 this.getTradeList()
                 this.dailogCancel = false
               })
             }
           })
           break
-        case '售后':
+        case this.$t('trade.point.120947-21'):
           this.$router.push(
             `/member/trade/aftersale?orderId=${item.order_id}&itemId=${item.item_id}`
           )
           break
-        case '申请售后':
+        case this.$t('trade.point.120947-57'):
           this.selectItemClose = item
           this.dailogClose = true
 
           // this.selectItemClose.num=5
           break
 
-        case '售后确认':
+        case this.$t('trade.point.120947-30'):
           this.$refs['formClose'].validate((valid, errors) => {
             if (valid) {
               let arr = JSON.stringify([{ id: this.selectItemClose.id, num: this.formClose.num }])
@@ -534,14 +534,14 @@ export default {
                 description: this.formClose.description
               }
               creatAftersales(params).then(() => {
-                this.$Message.success('发起成功')
+                this.$Message.success(this.$t('trade.point.120947-56'))
                 this.dailogClose = false
                 this.getTradeList()
               })
             }
           })
           break
-        case '评价':
+        case this.$t('trade.point.120947-11'):
           this.$router.push(`/member/trade/rate?id=${item.order}&order_class=${item.order_class}`)
           break
       }

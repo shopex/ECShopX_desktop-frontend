@@ -29,7 +29,7 @@
 <template>
   <div class="page-story page-body">
     <div class="page-story__nav article-title">
-      <div class="title">品牌故事</div>
+      <div class="title">{{ $t('pages.story.441931-0') }}</div>
     </div>
     <div class="story-wall pc">
       <img src="~/assets/imgs/resource/20190712/pc/story_01.jpg" alt />
@@ -53,9 +53,9 @@ export default {
   mounted() {
     analytics.pageReady({
       page: {
-        pageName: '品牌故事',
+        pageName: this.$t('pages.story.441931-0'),
         pageType: 'content',
-        breadcrumb: '品牌故事'
+        breadcrumb: this.$t('pages.story.441931-0')
       }
     })
   },

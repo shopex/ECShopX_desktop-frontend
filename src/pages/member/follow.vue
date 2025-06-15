@@ -11,7 +11,7 @@
           <div class="member-content-right-content">
             <div class="content-head">
               <span class="vertical">|</span>
-              <span class="shop-collection">店铺收藏</span>
+              <span class="shop-collection">{{ $t('member.follow.764248-0') }}</span>
             </div>
             <hr />
             <div>
@@ -24,18 +24,18 @@
                     </div>
                     <div>
                       <div class="shop-name">{{item.name}}</div>
-                      <div class="shop-follow">{{item.fav_num}}个关注</div>
+                      <div class="shop-follow">{{item.fav_num}}{{ $t('member.follow.764248-1') }}</div>
                     </div>
                   </div>
                   <div class="item-bottom">
                     <div class="item-bottom-left" @click="goStore(item.distributor_id)">
                       <i class="ec-icon ec-icon-shoplight"></i>
-                      <span style="color: #8c8c8c;">进入店铺</span>
+                      <span style="color: #8c8c8c;">{{ $t('member.follow.764248-2') }}</span>
                     </div>
                     <div class="item-bottom-right" @click="collectShops(item.distributor_id)">
                       <i v-if="iconShow" class="ec-icon ec-icon-favorfill color-icom"></i>
                       <i v-else class="ec-icon ec-icon-favor_light"></i>
-                      <span style="color: #8c8c8c;" >取消关注</span>
+                      <span style="color: #8c8c8c;" >{{ $t('member.follow.764248-3') }}</span>
                     </div>
                   </div>
                 </div>

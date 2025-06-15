@@ -26,7 +26,7 @@
         v-model="year"
         :disabled="disabled"
         :data="yearDs"
-        placeholder="年"
+        :placeholder="$t('sp-datepicker.index.700493-0')"
         @change="onChangeYear"
       ></SpSelect>
     </div>
@@ -36,7 +36,7 @@
         :disabled="disabled"
         :data="monthDs"
         :value="1"
-        placeholder="月"
+        :placeholder="$t('sp-datepicker.index.700493-1')"
         @change="onChangeMonth"
       ></SpSelect>
     </div>
@@ -46,7 +46,7 @@
         :disabled="disabled"
         :data="dayDs"
         :value="1"
-        placeholder="日"
+        :placeholder="$t('sp-datepicker.index.700493-2')"
         @change="onChangeDay"
       ></SpSelect>
     </div>

@@ -36,7 +36,7 @@ export default {
   props: {
     text: {
       type: String,
-      default: '点击修改'
+      default: this.$t('comps.edit-btn.393972-0')
     }
   },
   methods: {

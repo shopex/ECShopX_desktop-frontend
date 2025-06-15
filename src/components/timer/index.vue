@@ -19,6 +19,7 @@
 
 <script>
 export default {
+  // inject: ['$t'],
   name: 'SpTimer',
   props: {
     duration: {
@@ -28,11 +29,13 @@ export default {
     timerMsg: String,
     defaultMsg: {
       type: String,
-      default: '发送验证码'
+      default: ''
+      // default: this.nuxt.$i18n.$t('timer.index.419920-0')
     },
     msg: {
       type: String,
-      default: '重新发送'
+      default: ''
+      // default: this.nuxt.$i18n.$t('timer.index.419920-1')
     },
     onStart: Function
   },
@@ -40,14 +43,14 @@ export default {
     return {
       countDur: this.duration,
       sent: false,
-      btnMsg: this.timerMsg ? this.timerMsg : this.defaultMsg
+      btnMsg: this.timerMsg ? this.timerMsg : this.defaultMsg  || this.$t('timer.index.419920-0')
     }
   },
   watch: {
     countDur (val) {
       this.btnMsg =
         this.timerMsg ||
-        (this.timer ? `${val}s` : this.sent ? this.msg : this.defaultMsg)
+        (this.timer ? `${val}s` : this.sent ? this.msg || this.$t('timer.index.419920-1') : this.defaultMsg)
     }
   },
   methods: {

@@ -8,7 +8,7 @@ export default {
   props: {
     tips: {
       type: String,
-      default: '暂无数据'
+      default: this.$t('comps.tips.500997-0')
     },
     userInfo: {
       type: Object,

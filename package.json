@@ -34,11 +34,12 @@
     "md5": "^2.2.1",
     "moment": "^2.24.0",
     "nuxt-device-detect": "^1.1.5",
+    "nuxt-i18n": "^6.28.1",
     "qrcode": "^1.4.4",
     "social-share.js": "^1.0.16",
     "ssr-window": "^1.0.1",
     "store": "^2.0.12",
-    "swiper": "^4.5.0",
+    "swiper": "^5.4.5",
     "vant": "^2.0.2",
     "vue": "^2.6.10",
     "vue-awesome-swiper": "^4.1.1",
@@ -46,7 +47,8 @@
     "vue-color": "^2.7.1",
     "vue-hotzone": "^1.1.0",
     "vue-infinite-scroll": "^2.0.2",
-    "vue-lazyload": "^1.2.6"
+    "vue-lazyload": "^1.2.6",
+    "vuex-persistedstate": "3.0.0"
   },
   "devDependencies": {
     "@nuxt/cli": "2.14.12",

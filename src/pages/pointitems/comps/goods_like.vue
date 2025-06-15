@@ -55,10 +55,10 @@
       />
     </div>
 
-    <div class="loading-data" v-if="loading">正在加载</div>
+    <div class="loading-data" v-if="loading">{{ $t('comps.goods_like.366072-0') }}</div>
     <div class="no-data" v-if="!loading && noMore">
-      <span v-if="list.length == 0">暂无数据</span>
-      <span v-if="list.length > pageSize">没有更多了</span>
+      <span v-if="list.length == 0">{{ $t('comps.goods_like.366072-1') }}</span>
+      <span v-if="list.length > pageSize">{{ $t('comps.goods_like.366072-2') }}</span>
     </div>
 
     <!-- <div class="pagination-wrap" v-if="total > 0">
@@ -100,11 +100,11 @@ export default {
       breadcrumb: [],
       sort: 'all',
       sorts: [
-        { label: '综合', value: 'all' },
-        { label: '销量', value: '1' },
-        { label: '上新', value: '4' },
-        { label: '价格降序', value: '2' },
-        { label: '价格升序', value: '3' }
+        { label: this.$t('comps.goods_like.366072-3'), value: 'all' },
+        { label: this.$t('comps.goods_like.366072-4'), value: '1' },
+        { label: this.$t('comps.goods_like.366072-5'), value: '4' },
+        { label: this.$t('comps.goods_like.366072-6'), value: '2' },
+        { label: this.$t('comps.goods_like.366072-7'), value: '3' }
       ],
       category: [],
       start_price: null,
@@ -147,7 +147,7 @@ export default {
   },
   mounted() {
     const { keywords, brand_id } = this.$route.query
-    this.breadcrumb = ['全部商品']
+    this.breadcrumb = [this.$t('comps.goods_like.366072-8')]
     if (keywords) {
       this.keywords = keywords
       this.breadcrumb.push(this.keywords)
@@ -185,7 +185,7 @@ export default {
     init(to) {
       let { query } = to
       this.keywords = query.tag
-      this.breadcrumb = ['全部商品']
+      this.breadcrumb = [this.$t('comps.goods_like.366072-8')]
       if (query.tag) {
         this.breadcrumb.push(this.keywords)
       }

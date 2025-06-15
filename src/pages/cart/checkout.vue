@@ -3,11 +3,11 @@
 <template>
   <div class="page-checkout">
     <div class="container clearfix">
-      <div class="checkout-title">填写并核对订单信息</div>
+      <div class="checkout-title">{{ $t('cart.checkout.032780-0') }}</div>
 
       <div class="content-body clearfix">
         <div class="content-item">
-          <h4 class="content-item-hd">选择取货方式</h4>
+          <h4 class="content-item-hd">{{ $t('cart.checkout.032780-1') }}</h4>
           <div class="content-item-bd address">
             <!-- expressType: {{expressType}} -->
             <SpBtnPickerGroup v-model="expressType" @onChange="onChangeExpress">
@@ -25,14 +25,14 @@
         <!-- 收货地址 -->
         <div class="content-item" v-if="expressType == 'logistics'">
           <h4 class="content-item-hd">
-            收货人信息
+            {{ $t('cart.checkout.032780-2') }}
             <span
               class="btn-text"
               :style="{
                 color: themeColor
               }"
               @click="handleAddAddress"
-              >新增收货地址</span
+              >{{ $t('cart.checkout.032780-3') }}</span
             >
           </h4>
           <div class="content-item-bd address-list">
@@ -58,7 +58,7 @@
                       backgroundColor: themeColor
                     }"
                   >
-                    默认
+                    {{ $t('cart.checkout.032780-4') }}
                   </div>
                   <div class="btn-tools">
                     <!-- <span class="btn btn-text" :style="{
@@ -70,7 +70,7 @@
                         color: themeColor
                       }"
                       @click="handleEditAddress(item)"
-                      >编辑</span
+                      >{{ $t('cart.checkout.032780-5') }}</span
                     >
                     <!-- <span class="btn btn-text" :style="{
                       color: themeColor
@@ -88,9 +88,9 @@
             <div class="ziti-name">{{ zitiAddress.name }}</div>
             <div class="ziti-address">{{ zitiAddress.store_address }}</div>
             <div class="ziti-time">营业时间：{{ zitiAddress.hour }}</div>
-            <div class="ziti-phone">联系电话：{{ zitiAddress.phone }}</div>
+            <div class="ziti-phone">{{ $t('cart.checkout.032780-7') }}{{ zitiAddress.phone }}</div>
           </div> -->
-          <h4 class="content-item-hd">自提点信息</h4>
+          <h4 class="content-item-hd">{{ $t('cart.checkout.032780-6') }}</h4>
 
           <div class="content-item-bd address-list" v-if="zitiList&&zitiList.length>0">
             <!-- defaultAddress: {{defaultAddress}} -->
@@ -100,9 +100,9 @@
                   item.name
                 }}</SpBtnPicker>
                 <div class="address-item-detail">
-                  <div class="phone">联系电话：{{ item.contract_phone }}</div>
+                  <div class="phone">{{ $t('cart.checkout.032780-7') }}{{ item.contract_phone }}</div>
                   <div class="d-detail">
-                    提货地址：{{ item.city }} {{ item.area }} {{ item.address }}
+                    {{ $t('cart.checkout.032780-8') }}{{ item.city }} {{ item.area }} {{ item.address }}
                   </div>
                   <img src="~/assets/imgs/map.png"  @click="initMap(item)" style="margin:0 35px;width: 30px;" />
                 </div>
@@ -110,23 +110,23 @@
             </SpBtnPickerGroup>
           </div>
           <div v-else class="content-item-bd ziti-list">
-            <div class="ziti-list-phone">暂无自提点</div>
+            <div class="ziti-list-phone">{{ $t('cart.checkout.032780-9') }}</div>
           </div>
           <!-- <div id="containerMap" style="width: 100%;height:200px;"></div> -->
           <div v-if="zitiCut" class="ziti-info">
             <div>
-              <span class="ziti-info-name">提货时间：</span>
-              <SpSelect style="width: 200px;" v-model="zitiInfo.pickup_date" :data="zitiDateList" placeholder="请选择自提日期" @change="changeZitiDate"></SpSelect>
-              <SpSelect style="width: 200px;" v-model="zitiInfo.pickup_time" :data="zitiTimeList" placeholder="请选择自提时间"></SpSelect>
+              <span class="ziti-info-name">{{ $t('cart.checkout.032780-10') }}</span>
+              <SpSelect style="width: 200px;" v-model="zitiInfo.pickup_date" :data="zitiDateList" :placeholder="$t('cart.checkout.032780-11')" @change="changeZitiDate"></SpSelect>
+              <SpSelect style="width: 200px;" v-model="zitiInfo.pickup_time" :data="zitiTimeList" :placeholder="$t('cart.checkout.032780-12')"></SpSelect>
             </div>
-            <div><span class="ziti-info-name">提货人：</span><SpInput style="width: 300px;" v-model="zitiInfo.receiver_name"></SpInput></div>
-            <div><span class="ziti-info-name">手机号码：</span><SpInput style="width: 300px;" v-model="zitiInfo.receiver_mobile"></SpInput></div>
+            <div><span class="ziti-info-name">{{ $t('cart.checkout.032780-13') }}</span><SpInput style="width: 300px;" v-model="zitiInfo.receiver_name"></SpInput></div>
+            <div><span class="ziti-info-name">{{ $t('cart.checkout.032780-14') }}</span><SpInput style="width: 300px;" v-model="zitiInfo.receiver_mobile"></SpInput></div>
           </div>
         </div>
 
         <div class="content-body clearfix">
         <div class="content-item">
-          <h4 class="content-item-hd">选择支付方式</h4>
+          <h4 class="content-item-hd">{{ $t('cart.checkout.032780-15') }}</h4>
           <div class="content-item-bd address">
             <!-- expressType: {{expressType}} -->
             <SpBtnPickerGroup v-model="paymentType" @onChange="onChangePaymentType">
@@ -143,7 +143,7 @@
         </div>
 
         <div class="content-item">
-          <h4 class="content-item-hd">商品清单</h4>
+          <h4 class="content-item-hd">{{ $t('cart.checkout.032780-16') }}</h4>
           <div class="content-item-bd goods-list">
             <div
               class="goods-list-item"
@@ -163,7 +163,7 @@
           </div>
           <div>
             <SpInput
-            placeholder="给商家留言：选填"
+            :placeholder="$t('cart.checkout.032780-17')"
             v-model="remark"
             ></SpInput>
           </div>
@@ -171,48 +171,48 @@
 
         <div class="content-item">
           <h4 class="content-item-hd">
-            发票信息
+            {{ $t('cart.checkout.032780-18') }}
             <SpRadio type="checkbox" class="use-invoice" :theme="themeColor" v-model="useInvoice"
-              >需要发票</SpRadio
+              >{{ $t('cart.checkout.032780-19') }}</SpRadio
             >
           </h4>
           <div class="content-item-bd invoice">
             <div v-if="useInvoice">
               <SpRadioGroup v-model="invoiceTyle">
-                <SpRadio label="individual" :theme="themeColor">个人发票</SpRadio>
-                <SpRadio label="unit" :theme="themeColor">企业发票</SpRadio>
+                <SpRadio label="individual" :theme="themeColor">{{ $t('cart.checkout.032780-20') }}</SpRadio>
+                <SpRadio label="unit" :theme="themeColor">{{ $t('cart.checkout.032780-21') }}</SpRadio>
               </SpRadioGroup>
-              <!-- 个人发票 -->
+              <!-- {{ $t('cart.checkout.032780-20') }} -->
               <div class="invoice-info" v-if="invoiceTyle == 'individual'">
                 <div class="invoice-row">
-                  <div class="invoice-row__title">发票抬头*</div>
+                  <div class="invoice-row__title">{{ $t('cart.checkout.032780-22') }}</div>
                   <SpInput v-model="invoice_content.title"></SpInput>
                 </div>
               </div>
-              <!-- 企业发票 -->
+              <!-- {{ $t('cart.checkout.032780-21') }} -->
               <div class="invoice-info" v-if="invoiceTyle == 'unit'">
                 <div class="invoice-row">
-                  <div class="invoice-row__title">公司名称*</div>
+                  <div class="invoice-row__title">{{ $t('cart.checkout.032780-23') }}</div>
                   <SpInput v-model="invoice_content.content"></SpInput>
                 </div>
                 <div class="invoice-row">
-                  <div class="invoice-row__title">税号*</div>
+                  <div class="invoice-row__title">{{ $t('cart.checkout.032780-24') }}</div>
                   <SpInput v-model="invoice_content.registration_number"></SpInput>
                 </div>
                 <div class="invoice-row">
-                  <div class="invoice-row__title">公司地址</div>
+                  <div class="invoice-row__title">{{ $t('cart.checkout.032780-25') }}</div>
                   <SpInput v-model="invoice_content.company_address"></SpInput>
                 </div>
                 <div class="invoice-row">
-                  <div class="invoice-row__title">电话号码</div>
+                  <div class="invoice-row__title">{{ $t('cart.checkout.032780-26') }}</div>
                   <SpInput v-model="invoice_content.company_phone"></SpInput>
                 </div>
                 <div class="invoice-row">
-                  <div class="invoice-row__title">开户银行</div>
+                  <div class="invoice-row__title">{{ $t('cart.checkout.032780-27') }}</div>
                   <SpInput v-model="invoice_content.bankname"></SpInput>
                 </div>
                 <div class="invoice-row">
-                  <div class="invoice-row__title">银行账号</div>
+                  <div class="invoice-row__title">{{ $t('cart.checkout.032780-28') }}</div>
                   <SpInput v-model="invoice_content.bankaccount"></SpInput>
                 </div>
               </div>
@@ -222,24 +222,24 @@
         <div class="content-item" v-if="!orderData.is_distribution">
           <div class="integral">
             <h4 class="content-item-hd">
-              积分抵扣
+              {{ $t('cart.checkout.032780-29') }}
             </h4>
-            <div class="integral-rules" style="cursor:pointer" @click="dailogIntegralVisible=true">使用规则</div>
+            <div class="integral-rules" style="cursor:pointer" @click="dailogIntegralVisible=true">{{ $t('cart.checkout.032780-30') }}</div>
           </div>
-          <div>用户可用积分：{{ orderData.user_point }}；本单最大可用积分：{{ orderData.max_point }}</div>
+          <div>{{ $t('cart.checkout.032780-31') }}{{ orderData.user_point }}{{ $t('cart.checkout.032780-32') }}{{ orderData.max_point }}</div>
           <div class="integral-item">
             <SpRadio type="checkbox" :theme="themeColor" v-model="useIntegral"  @change="handleDeducted"
-              >使用积分</SpRadio
+              >{{ $t('cart.checkout.032780-33') }}</SpRadio
             >
             <input class="integral-input" type="number" v-show="useIntegral" v-model="point_use" @blur="pointBlur">
             <SpRadio type="checkbox" :theme="themeColor" v-model="useAllDeducted" @change="handleAllDeducted" v-show="useIntegral && (orderData.deduct_point_rule&&orderData.deduct_point_rule.full_amount)"
-              >全额抵扣</SpRadio
+              >{{ $t('cart.checkout.032780-34') }}</SpRadio
             >
           </div>
         </div>
 
         <div class="content-item">
-          <h4 class="content-item-hd">使用优惠</h4>
+          <h4 class="content-item-hd">{{ $t('cart.checkout.032780-35') }}</h4>
           <div class="content-item-bd coupon-list">
             <SpBtnPickerGroup v-model="coupon" @onChange="onChangeCoupon" class="couponInfo">
               <SpBtnPicker
@@ -253,7 +253,7 @@
                 <div class="coupon-wrap">
                   <div class="coupon-name">
                     <template v-if="coupon.card_type == 'discount'"
-                      >{{ (100 - coupon.discount) / 10 }}<span class="symbol">折</span></template
+                      >{{ (100 - coupon.discount) / 10 }}<span class="symbol">{{ $t('cart.checkout.032780-36') }}</span></template
                     >
                     <template v-if="coupon.card_type == 'cash'"
                       ><SpPrice :value="coupon.reduce_cost / 100"></SpPrice
@@ -261,10 +261,10 @@
                   </div>
                   <div class="coupon-title">{{ coupon.title }}</div>
                 </div>
-                <div class="coupon-date">{{ `有效期:${coupon.end_date}` }}</div>
+                <div class="coupon-date">{{ $t('cart.checkout.032780-37', [coupon.end_date]) }}</div>
               </SpBtnPicker>
               <SpBtnPicker class="coupon-item not-use" :value="''" :theme="themeColor"
-                >不使用优惠券</SpBtnPicker
+                >{{ $t('cart.checkout.032780-38') }}</SpBtnPicker
               >
             </SpBtnPickerGroup>
           </div>
@@ -272,26 +272,26 @@
         <div class="content-item">
           <div class="content-item-bd checkout-total">
             <div class="total-row">
-              <div class="label">{{ orderData.items_count }}件商品，商品总计：</div>
+              <div class="label">{{ orderData.items_count }}{{ $t('cart.checkout.032780-39') }}</div>
               <div class="value"><SpPrice :value="orderData.item_fee / 100" /></div>
             </div>
             <div class="total-row">
-              <div class="label">运费：</div>
+              <div class="label">{{ $t('cart.checkout.032780-40') }}</div>
               <div class="value"><SpPrice :value="orderData.freight_fee / 100" /></div>
             </div>
             <div class="total-row">
-              <div class="label">优惠：</div>
+              <div class="label">{{ $t('cart.checkout.032780-41') }}</div>
               <div class="value"><SpPrice :value="0 - orderData.discount_fee / 100" /></div>
             </div>
             <div class="total-row">
-              <div class="label">积分抵扣：</div>
+              <div class="label">{{ $t('cart.checkout.032780-29') }}：</div>
               <div class="value"><SpPrice :value="0 - orderData.point_fee / 100" /></div>
             </div>
           </div>
         </div>
         <div class="content-ft">
           <div class="actual-total">
-            <span class="label">应付总计：</span>
+            <span class="label">{{ $t('cart.checkout.032780-43') }}</span>
             <SpPrice :value="orderData.total_fee / 100" />
           </div>
           <div
@@ -301,14 +301,14 @@
               backgroundColor: themeColor
             }"
           >
-            提交订单
+            {{ $t('cart.checkout.032780-44') }}
           </div>
         </div>
       </div>
     </div>
 
     <SpModal
-      :title="addType == 'post' ? '新增地址' : '编辑地址'"
+      :title="addType == 'post' ? $t('cart.checkout.032780-45') : $t('cart.checkout.032780-46')"
       v-model="dailogVisible"
       :width="600"
     >
@@ -321,19 +321,19 @@
       />
     </SpModal>
     <SpModal
-      title="积分使用规则"
+      :title="$t('cart.checkout.032780-47')"
       v-model="dailogIntegralVisible"
       :width="600"
     >
       <div style="height:200px;margin:20px;">
-        <div>使用条件</div>
-        <div>1、积分支付不得超出订单应付总金额的{{orderData.deduct_point_rule&&orderData.deduct_point_rule.deduct_proportion_limit}}%；</div>
-        <div>使用数量</div>
-        <div> 2、{{orderData.deduct_point_rule&&orderData.deduct_point_rule.deduct_point}}积分抵扣1元；</div>
+        <div>{{ $t('cart.checkout.032780-48') }}</div>
+        <div>{{ $t('cart.checkout.032780-49') }}{{orderData.deduct_point_rule&&orderData.deduct_point_rule.deduct_proportion_limit}}%；</div>
+        <div>{{ $t('cart.checkout.032780-50') }}</div>
+        <div> 2、{{orderData.deduct_point_rule&&orderData.deduct_point_rule.deduct_point}}{{ $t('cart.checkout.032780-29') }}1元；</div>
       </div>
     </SpModal>
     <SpModal
-      title="查看店铺位置"
+      :title="$t('cart.checkout.032780-52')"
       v-model="dailogMapVisible"
       :width="700"
     >
@@ -367,14 +367,14 @@ export default {
       addType: 'post', //修改地址类型，post新增，put更新,
       params: {},
       expressType: 'logistics',
-      addressTabs: [{ name: '快递', value: 'logistics' }],
+      addressTabs: [{ name: this.$t('cart.checkout.032780-53'), value: 'logistics' }],
       defaultAddress: '',
       curAddressIndex: 0,
       curAddress: null,
       couponList: [],
       coupon: '',
       paymentType: 'wxpaypc',
-      paymentTypeList: [{name:'在线支付',value:'wxpaypc'},{name:'线下支付',value:'offline_pay'}],
+      paymentTypeList: [{name:this.$t('cart.checkout.032780-54'),value:'wxpaypc'},{name:this.$t('cart.checkout.032780-55'),value:'offline_pay'}],
       zitiAddress: null,
       zitiList: null,
       zitiCut:false,
@@ -468,8 +468,8 @@ export default {
       this.zitiAddress = res
       if (res && res.is_ziti) {
         this.addressTabs = [
-          { name: '快递', value: 'logistics' },
-          { name: '自提', value: 'ziti' }
+          { name: this.$t('cart.checkout.032780-53'), value: 'logistics' },
+          { name: this.$t('cart.checkout.032780-56'), value: 'ziti' }
         ]
       }
     },
@@ -711,7 +711,7 @@ export default {
     // 提交订单
     async handleSubmitOrder() {
       if (this.expressType == 'logistics' && !this.defaultAddress) {
-        this.$Message.error('请选择收货地址')
+        this.$Message.error(this.$t('cart.checkout.032780-57'))
         return
       }else if (this.expressType == 'ziti'){
         const {
@@ -722,16 +722,16 @@ export default {
         } = this.zitiInfo
 
         if (receiver_name.length==0) {
-          this.$Message.error('请填写提货人')
+          this.$Message.error(this.$t('cart.checkout.032780-58'))
           return
         } else if (receiver_mobile.length==0) {
-          this.$Message.error('请填写手机号码')
+          this.$Message.error(this.$t('cart.checkout.032780-59'))
           return
         } else if (pickup_date.length==0) {
-          this.$Message.error('请填写提货日期')
+          this.$Message.error(this.$t('cart.checkout.032780-60'))
           return
         } else if (pickup_time.length==0) {
-          this.$Message.error('请填写提货时间')
+          this.$Message.error(this.$t('cart.checkout.032780-61'))
           return
         }
       }
@@ -749,16 +749,16 @@ export default {
         } = this.invoice_content
         if (this.invoiceTyle == 'individual') {
           if (!title) {
-            this.$Message.error('请填写发票抬头')
+            this.$Message.error(this.$t('cart.checkout.032780-62'))
             return
           }
         } else if (this.invoiceTyle == 'unit') {
           if (!content) {
-            this.$Message.error('请填写公司名称')
+            this.$Message.error(this.$t('cart.checkout.032780-63'))
             return
           }
           if (!validate.checkTax(registration_number)) {
-            this.$Message.error('请填写正确的企业税号')
+            this.$Message.error(this.$t('cart.checkout.032780-64'))
             return
           }
         }
@@ -841,7 +841,7 @@ export default {
       // console.log(pkc);  // 近十天的日期和事件数组
       if(val.wait_pickup_days == 0){
         // 选择当天领取
-        this.zitiDateList= [{ label:'今天', value:pkc[0].date}]
+        this.zitiDateList= [{ label:this.$t('cart.checkout.032780-65'), value:pkc[0].date}]
       }else{
         // 预约领取---1.该时间之后，只能选择第二天的自提时间；如上面最长预约选择只能当天自提，则该时间后下单不能选择自提。
         let sum = this.getHoursFil(val)?-1:0
@@ -879,7 +879,7 @@ export default {
         }
       })
       if(list.length==0){
-        list.push({ label:'无可选时间段', value:'',disabled:true})
+        list.push({ label:this.$t('cart.checkout.032780-66'), value:'',disabled:true})
       }
       this.zitiTimeList = list
     },

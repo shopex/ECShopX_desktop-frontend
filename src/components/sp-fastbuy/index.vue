@@ -65,21 +65,21 @@
 </style>
 <template>
   <SpModal class="sp-fastbuy" v-model="showModal" :width="500" :height="400">
-    <div class="sp-fastbuy-hd">加入购物车</div>
+    <div class="sp-fastbuy-hd">{{ $t('sp-fastbuy.index.869986-0') }}</div>
     <div class="sp-fastbuy-bd" v-if="info">
       <div class="modal-row">
-        <span class="modal-row__title">商品:</span>
+        <span class="modal-row__title">{{ $t('sp-fastbuy.index.869986-1') }}</span>
         <div class="modal-row__value">{{ info.item_name }}</div>
       </div>
       <div class="modal-row">
-        <span class="modal-row__title">价格:</span>
+        <span class="modal-row__title">{{ $t('sp-fastbuy.index.869986-2') }}</span>
         <div class="modal-row__value">
           <SpPrice :value="info.price" unit="cent"></SpPrice>
         </div>
       </div>
       <SkuSelector v-if="itemInfo" :info="itemInfo" @change="handleChangeSku" />
       <div class="modal-row" v-if="itemInfo">
-        <span class="modal-row__title">购买数量:</span>
+        <span class="modal-row__title">{{ $t('sp-fastbuy.index.869986-3') }}</span>
         <div class="modal-row__value">
           <SpNumInput
             class="t-num"
@@ -88,7 +88,7 @@
             size="sm"
             @change="handleQuantityChange($event, curItem, 'change')"
           ></SpNumInput>
-          <span>库存：{{ itemInfo.store }}</span>
+          <span>{{ $t('sp-fastbuy.index.869986-4') }}{{ itemInfo.store }}</span>
         </div>
       </div>
     </div>
@@ -109,7 +109,7 @@
           </template>
           <template v-else>
             <SpButton class="btn-buy btn-cart" @click="!props.buyLoading && listeners['btn-click']('cart')">
-              加入购物车
+              {{ $t('sp-fastbuy.index.869986-0') }}
             </SpButton>
             <SpButton
             class="btn-buy btn-fast-buy"
@@ -121,12 +121,12 @@
     </div>
     <!-- <SkuSelector :info="curItem" @change="handleChangeSku" />
       <div class="modal-row">
-        <span class="modal-row__title">购买数量:</span>
+        <span class="modal-row__title">{{ $t('sp-fastbuy.index.869986-3') }}</span>
         <div class="modal-row__value">
           <SpNumInput class="t-num" :value="curItem.quantity" :max="curItem.store" size="sm" @change="handleQuantityChange($event, curItem, 'change')"></SpNumInput>
-          <span>库存：{{ curItem.store }}</span>
+          <span>{{ $t('sp-fastbuy.index.869986-4') }}{{ curItem.store }}</span>
         </div>
-        <div class="modal-btn" :class="{ disabled: curItem.item_spec_desc&&!curSku}" @click="handleModalAddCart">加入购物车</div>
+        <div class="modal-btn" :class="{ disabled: curItem.item_spec_desc&&!curSku}" @click="handleModalAddCart">{{ $t('sp-fastbuy.index.869986-0') }}</div>
       </div>
     </div> -->
   </SpModal>

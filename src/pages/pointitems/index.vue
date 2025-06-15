@@ -17,10 +17,10 @@
         <img src="http://bbc.market.demo.shopex.cn/images/33/48/60/222f805830e43bd134832f2398e1e715bf2dacda.png" />
       </NuxtLink>
       <div class="shop-info">
-        <div class="shop-type">onexbbc自营店（自营店铺）</div>
+        <div class="shop-type">{{ $t('pointitems.index.871104-0') }}</div>
         <div>TEST SHOP</div>
       </div>
-      <NuxtLink class="shop-link" to="/store">进入店铺 ></NuxtLink>
+      <NuxtLink class="shop-link" to="/store">{{ $t('pointitems.index.871104-1') }} ></NuxtLink>
     </div> -->
 
     <GoodsFilter
@@ -75,10 +75,10 @@
     <!--       
     </div> -->
 
-    <div class="loading-data" v-if="loading">正在加载</div>
+    <div class="loading-data" v-if="loading">{{ $t('pointitems.index.871104-2') }}</div>
     <div class="no-data" v-if="!loading && noMore">
-      <span v-if="list.length == 0">暂无数据</span>
-      <span v-if="list.length > pageSize">没有更多了</span>
+      <span v-if="list.length == 0">{{ $t('pointitems.index.871104-3') }}</span>
+      <span v-if="list.length > pageSize">{{ $t('pointitems.index.871104-4') }}</span>
     </div>
 
     <!-- <div class="pagination-wrap" v-if="total > 0">
@@ -131,11 +131,11 @@ export default {
       breadcrumb: [],
       sort: 'all',
       sorts: [
-        { label: '综合', value: 'all' },
-        { label: '销量', value: '1' },
-        { label: '上新', value: '4' },
-        { label: '价格降序', value: '2' },
-        { label: '价格升序', value: '3' }
+        { label: this.$t('pointitems.index.871104-5'), value: 'all' },
+        { label: this.$t('pointitems.index.871104-6'), value: '1' },
+        { label: this.$t('pointitems.index.871104-7'), value: '4' },
+        { label: this.$t('pointitems.index.871104-8'), value: '2' },
+        { label: this.$t('pointitems.index.871104-9'), value: '3' }
       ],
       category: [],
       start_price: null,
@@ -182,7 +182,7 @@ export default {
   },
   mounted() {
     const { keywords, brand_id, category_id, point_index } = this.$route.query
-    this.breadcrumb = ['全部商品']
+    this.breadcrumb = [this.$t('pointitems.index.871104-10')]
     if (keywords) {
       this.keywords = keywords
       this.breadcrumb.push(this.keywords)
@@ -258,7 +258,7 @@ export default {
     init(to) {
       let { query } = to
       this.keywords = query.tag
-      this.breadcrumb = ['全部商品']
+      this.breadcrumb = [this.$t('pointitems.index.871104-10')]
       if (query.tag) {
         this.breadcrumb.push(this.keywords)
       }

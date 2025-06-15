@@ -100,10 +100,10 @@
           <smenu activeTitle="phone" active="address"></smenu>
         </div>
         <div class="member-content-right">
-          <div class="member-content-right-header">收货地址管理</div>
+          <div class="member-content-right-header">{{ $t('member.address.908954-0') }}</div>
           <div class="member-content-right-body">
-            <div @click="() => (dailogVisible = true)" class="add-btn">新增收货地址</div>
-            <div class="tips">您已创建{{ addressList.length }}个收货地址，最多可创建20个</div>
+            <div @click="() => (dailogVisible = true)" class="add-btn">{{ $t('member.address.908954-1') }}</div>
+            <div class="tips">{{ $t('member.address.908954-2') }}{{ addressList.length }}{{ $t('member.address.908954-3') }}</div>
             <!-- <div class="address-add">
             <addressItemAdd @onClick="addAddressSumbit" :type="addType" @clickCancel="clickCancel" :addressInfoFrom="addressInfoFrom"></addressItemAdd>
           </div> -->
@@ -112,22 +112,22 @@
               <template v-for="item in addressList">
                 <div class="address-item">
                   <h2>{{ item.username }} {{ item.province }}</h2>
-                  <div class="address-item-div">收货人 : {{ item.username }}</div>
+                  <div class="address-item-div">{{ $t('member.address.908954-4') }} {{ item.username }}</div>
                   <div class="address-item-div">
-                    收货地址 :
+                    {{ $t('member.address.908954-5') }}
                     {{ `${item.province}/${item.city}/${item.county}/${item.adrdetail}` }}
                   </div>
-                  <div class="address-item-div">邮政编码 : {{ item.postalCode }}</div>
-                  <div class="address-item-div">手机 : {{ item.telephone }}</div>
+                  <div class="address-item-div">{{ $t('member.address.908954-6') }} {{ item.postalCode }}</div>
+                  <div class="address-item-div">{{ $t('member.address.908954-7') }} {{ item.telephone }}</div>
                   <div class="address-item-crtl">
                     <span
                       class="ly-fn-a"
                       :class="item.is_def ? 'ly-fn-a-red' : ''"
-                      @click.stop="hendelClick('默认', item)"
-                      >{{ item.is_def ? '默认地址' : '设为默认' }}</span
+                      @click.stop="hendelClick($t('member.address.908954-8'), item)"
+                      >{{ item.is_def ? $t('member.address.908954-9') : $t('member.address.908954-10') }}</span
                     >
-                    <span class="ly-fn-a" @click.stop="hendelClick('编辑', item)">编辑</span>
-                    <span class="ly-fn-a" @click.stop="hendelClick('删除', item)">删除</span>
+                    <span class="ly-fn-a" @click.stop="hendelClick($t('member.address.908954-11'), item)">{{ $t('member.address.908954-11') }}</span>
+                    <span class="ly-fn-a" @click.stop="hendelClick($t('member.address.908954-12'), item)">{{ $t('member.address.908954-12') }}</span>
                   </div>
                 </div>
               </template>
@@ -157,9 +157,9 @@
                     <td>{{ item.telephone }}</td>
                     <td>
                       <div>
-                        <span class="ly-fn-a" @click.stop="hendelClick('编辑', item)">编辑</span>
-                        <span class="ly-fn-a" :class="item.is_def ? 'ly-fn-a-red' : ''" @click.stop="hendelClick('默认', item)">{{ item.is_def ? '默认地址' : '设为默认' }}</span>
-                        <span class="ly-fn-a" @click.stop="hendelClick('删除', item)">删除</span>
+                        <span class="ly-fn-a" @click.stop="hendelClick($t('member.address.908954-11'), item)">{{ $t('member.address.908954-11') }}</span>
+                        <span class="ly-fn-a" :class="item.is_def ? 'ly-fn-a-red' : ''" @click.stop="hendelClick($t('member.address.908954-8'), item)">{{ item.is_def ? $t('member.address.908954-9') : $t('member.address.908954-10') }}</span>
+                        <span class="ly-fn-a" @click.stop="hendelClick($t('member.address.908954-12'), item)">{{ $t('member.address.908954-12') }}</span>
                       </div>
                     </td>
                   </tr>
@@ -200,7 +200,7 @@
         </div>
       </div>
       <SpModal v-model="dailogVisible" :width="600">
-        <div slot="title" class="address-add-title">新增地址</div>
+        <div slot="title" class="address-add-title">{{ $t('member.address.908954-13') }}</div>
         <div class="address-add">
           <addressItemAdd
             @onClick="addAddressSumbit"
@@ -284,12 +284,12 @@ export default {
     hendelClick(type, item) {
       let _item = JSON.parse(JSON.stringify(item))
       switch (type) {
-        case '编辑':
+        case this.$t('member.address.908954-11'):
           this.addressInfoFrom = _item
           this.addType = 'put'
           this.dailogVisible = true
           break
-        case '默认':
+        case this.$t('member.address.908954-8'):
           {
             _item.is_def = true
             let obj = {
@@ -301,7 +301,7 @@ export default {
             })
           }
           break
-        case '删除':
+        case this.$t('member.address.908954-12'):
           {
             let obj = {
               id: _item.address_id,

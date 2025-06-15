@@ -3,13 +3,13 @@
     <div class="settle_hd">
       <div class="settle_hd-title">
         <p class="settle_hd-title-text" :class="setPage == 1 ? 'active' : ''">
-          入驻类型<span class="cricle"></span>
+          {{ $t('shop.settleForm.283678-0') }}<span class="cricle"></span>
         </p>
         <p class="settle_hd-title-text" :class="setPage == 2 ? 'active' : ''">
-          商户信息<span class="cricle"></span>
+          {{ $t('shop.settleForm.283678-1') }}<span class="cricle"></span>
         </p>
         <p class="settle_hd-title-text" :class="setPage == 3 ? 'active' : ''">
-          证照信息<span class="cricle"></span>
+          {{ $t('shop.settleForm.283678-2') }}<span class="cricle"></span>
         </p>
       </div>
       <div
@@ -45,7 +45,7 @@
 
         <SpFormItem class="btn-container">
           <div @click="protocolHandle" class="protocolLink">
-            《入驻协议》
+            {{ $t('shop.settleForm.283678-3') }}
           </div>
           <div class="btn-container__login">
             <div
@@ -54,7 +54,7 @@
               :style="{ borderColor: themeColor, color: themeColor }"
               @click="handlePrev"
             >
-              上一页
+              {{ $t('shop.settleForm.283678-4') }}
             </div>
             <div
               class="btn btn-fastbuy"
@@ -62,7 +62,7 @@
               :style="{ borderColor: themeColor, color: themeColor }"
               @click="handleNext('form-settle')"
             >
-              下一页
+              {{ $t('shop.settleForm.283678-5') }}
             </div>
             <div
               class="btn btn-submit"
@@ -70,7 +70,7 @@
               :style="{ backgroundColor: themeColor, borderColor: themeColor }"
               @click="handleSubmit"
             >
-              提交
+              {{ $t('shop.settleForm.283678-6') }}
             </div>
           </div>
         </SpFormItem>
@@ -78,29 +78,29 @@
     </div>
     <!-- 提交时提示信息 -->
     <SpModal v-model="dailogVisible" :width="600">
-      <div slot="title" class="confirm-title">提示</div>
+      <div slot="title" class="confirm-title">{{ $t('shop.settleForm.283678-7') }}</div>
       <div class="confirm-info">
-        <p class="dialog-info">请确认是否提交审核</p>
+        <p class="dialog-info">{{ $t('shop.settleForm.283678-8') }}</p>
         <div class="btns">
-          <div class="btn" @click="clickCancel">取消</div>
-          <div class="btn btn-ok" @click="clickSumbit">确认</div>
+          <div class="btn" @click="clickCancel">{{ $t('shop.settleForm.283678-9') }}</div>
+          <div class="btn btn-ok" @click="clickSumbit">{{ $t('shop.settleForm.283678-10') }}</div>
         </div>
       </div>
     </SpModal>
     <!-- 退出登录弹出框 -->
     <!-- <SpModal v-model="dailogVisible" :width="600">
-      <div slot="title" class="confirm-title">提示</div>
+      <div slot="title" class="confirm-title">{{ $t('shop.settleForm.283678-7') }}</div>
       <div class="confirm-info">
-        <p class="dialog-info">请确认是否提交审核</p>
+        <p class="dialog-info">{{ $t('shop.settleForm.283678-8') }}</p>
         <div class="btns">
-          <div class="btn" @click="clickCancel">取消</div>
-          <div class="btn btn-ok" @click="clickSumbit">确认</div>
+          <div class="btn" @click="clickCancel">{{ $t('shop.settleForm.283678-9') }}</div>
+          <div class="btn btn-ok" @click="clickSumbit">{{ $t('shop.settleForm.283678-10') }}</div>
         </div>
       </div>
     </SpModal> -->
     <!-- 隐私协议弹出框 -->
     <SpModal v-model="visiableProtocolDialog" :width="600">
-      <div slot="title" class="protocol-title">入驻协议</div>
+      <div slot="title" class="protocol-title">{{ $t('shop.settleForm.283678-11') }}</div>
       <div class="protocol-info">
         <p class="dialog-info" v-html="baseContent"></p>
       </div>
@@ -222,7 +222,7 @@ export default {
         .then((res) => {
           this.setPage = 3
           this.$router.push('/shop/review')
-          this.$Message.success('提交成功')
+          this.$Message.success(this.$t('shop.settleForm.283678-12'))
         })
         .catch((err) => {
           return

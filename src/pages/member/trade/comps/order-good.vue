@@ -1,18 +1,18 @@
 <template>
   <div class="order-good">
-    <h4>商品信息</h4>
+    <h4>{{ $t('comps.order-good.196783-0') }}</h4>
     <table class="table">
       <colgroup>
         <col name="table-goods-pic" style="width: 85px" />
       </colgroup>
       <thead>
         <tr>
-          <td colspan="2">商品</td>
+          <td colspan="2">{{ $t('comps.order-good.196783-1') }}</td>
           <!-- <td>单价(元)</td> -->
-          <td colspan="1">数量</td>
+          <td colspan="1">{{ $t('comps.order-good.196783-2') }}</td>
           <!-- 动态判断colspan否则ui会空出一块 -->
-          <td :colspan="!aftersale?'1':'2'">小计</td>
-          <td colspan="2" style="text-align: center" v-if="!aftersale">操作</td>
+          <td :colspan="!aftersale?'1':'2'">{{ $t('comps.order-good.196783-3') }}</td>
+          <td colspan="2" style="text-align: center" v-if="!aftersale">{{ $t('comps.order-good.196783-4') }}</td>
         </tr>
       </thead>
       <tbody>
@@ -26,7 +26,7 @@
             <td>
               <p class="">{{ item.item_name }}</p>
               <p>{{ item.item_spec_desc }}</p>
-              <p class="giftTag" v-if="item.order_item_type == 'gift'"> 赠品</p>
+              <p class="giftTag" v-if="item.order_item_type == 'gift'"> {{ $t('comps.order-good.196783-5') }}</p>
             </td>
             <!-- <td>￥{{item.price|formatPriceToHundred}}</td> -->
             <td>{{ item.num }}</td>
@@ -37,7 +37,7 @@
               <span v-else-if="orderGoodData.order_class != 'pointsmall' && item.aftersales_bn"
                 >￥{{ item.orderItem.item_fee | formatPriceToHundred }}</span
               >
-              <span v-else> {{ item.point }} 积分 </span>
+              <span v-else> {{ item.point }} {{ $t('comps.order-good.196783-6') }} </span>
             </td>
             <td
               style="text-align:center"
@@ -48,10 +48,10 @@
                   orderGoodData.can_apply_aftersales == 1 &&
                     orderGoodData.order_class != 'pointsmall'
                 "
-                @click="clickBtn('申请售后', item)"
+                @click="clickBtn($t('comps.order-good.196783-7'), item)"
                 size="small"
               >
-                申请售后
+                {{ $t('comps.order-good.196783-7') }}
               </button>
               <div
                 v-if="
@@ -66,13 +66,13 @@
                 <button
                   class="btn btn-primary"
                   v-if="item.aftersales_status"
-                  @click="clickBtn('售后', item)"
+                  @click="clickBtn($t('comps.order-good.196783-8'), item)"
                   size="small"
                 >
-                  售后
+                  {{ $t('comps.order-good.196783-8') }}
                 </button>
               </div>
-              <!--<div class="ly-fn-a" @click="clickBtn('评价',item)" v-if="(orderTotalData.order_status_des == 'SUCCESS' || orderTotalData.order_status_des == 'DONE')&&!item.is_rate">评价</div> -->
+              <!--<div class="ly-fn-a" @click="clickBtn($t('comps.order-good.196783-36'),item)" v-if="(orderTotalData.order_status_des == 'SUCCESS' || orderTotalData.order_status_des == 'DONE')&&!item.is_rate">{{ $t('comps.order-good.196783-36') }}</div> -->
             </td>
           </tr>
         </template>
@@ -81,38 +81,38 @@
     <div class="order-total clearfix">
       <div class="orderdtl-box-right">
         <div class="text">
-          <span class="text-right">下单时间</span>
+          <span class="text-right">{{ $t('comps.order-good.196783-9') }}</span>
           <span>{{ orderTotalData.create_time | parseTime }}</span>
         </div>
         <div class="text">
-          <span class="text-right">商品总金额</span>
+          <span class="text-right">{{ $t('comps.order-good.196783-10') }}</span>
           <span v-if="orderGoodData.order_class != 'pointsmall'"
             >￥{{ orderTotalData.item_fee | formatPriceToHundred }}</span
           >
-          <span v-else>{{ orderTotalData.point }} 积分</span>
+          <span v-else>{{ orderTotalData.point }} {{ $t('comps.order-good.196783-6') }}</span>
         </div>
         <div class="text">
-          <span class="text-right">运费</span>
+          <span class="text-right">{{ $t('comps.order-good.196783-11') }}</span>
           <span class="col-lg-2" v-if="orderTotalData.freight_type == 'cash'"
             >￥{{ orderTotalData.freight_fee | formatPriceToHundred }}</span
           >
-          <span class="col-lg-2" v-else>{{ `${orderTotalData.freight_fee} 积分` }}</span>
+          <span class="col-lg-2" v-else>{{ `${orderTotalData.freight_fee} ${$t('comps.order-good.196783-6')}` }}</span>
         </div>
         <div class="text" v-if="orderGoodData.order_class != 'pointsmall'">
-          <span class="text-right">优惠</span>
+          <span class="text-right">{{ $t('comps.order-good.196783-13') }}</span>
           <span class="col-lg-2">￥{{ orderTotalData.discount_fee | formatPriceToHundred }}</span>
         </div>
         <div class="text" v-if="orderGoodData.order_class != 'pointsmall'">
-          <span class="text-right">积分抵扣</span>
+          <span class="text-right">{{ $t('comps.order-good.196783-14') }}</span>
           <span class="col-lg-2">￥{{ orderTotalData.point_fee/100}}</span>
         </div>
         <div class="text-total">
-          <span class="text-right">实付金额</span>
+          <span class="text-right">{{ $t('comps.order-good.196783-15') }}</span>
           <span class="ly-text-red" v-if="orderGoodData.order_class != 'pointsmall'"
             >￥{{ orderTotalData.total_fee | formatPriceToHundred }}</span
           >
           <span class="ly-text-red" v-else
-            ><h6 class="ly-text-red">{{ orderTotalData.point }} 积分</h6>
+            ><h6 class="ly-text-red">{{ orderTotalData.point }} {{ $t('comps.order-good.196783-6') }}</h6>
             <h6 v-if="orderTotalData.total_fee != 0" class="ly-text-red">
               +￥{{ orderTotalData.total_fee | formatPriceToHundred }}
             </h6></span
@@ -122,55 +122,55 @@
     </div>
     <SpModal v-model="dailogClose" :height="320" :width="520">
       <div class="dailog dailog-close">
-        <div class="dailog-hd">售后</div>
+        <div class="dailog-hd">{{ $t('comps.order-good.196783-8') }}</div>
         <div class="dailog-bd">
           <!-- <span>订单号：{{this.$route.params.id}}</span> -->
           <div>
             <SpForm ref="form" :model="form" :rules="rules">
               <SpFormItem prop="num" v-if="selectItem.num != 1">
-                <span style="display: inline-block; width: 90px; text-align: right">商品数量:</span>
+                <span style="display: inline-block; width: 90px; text-align: right">{{ $t('comps.order-good.196783-16') }}</span>
                 <SpNumInput
                   style="width: 350px"
                   v-model="form.num"
                   :min="1"
                   :max="selectItem.num"
-                  placeholder="商品数量"
+                  :placeholder="$t('comps.order-good.196783-17')"
                 ></SpNumInput>
               </SpFormItem>
               <SpFormItem prop="type">
-                <span style="display: inline-block; width: 90px; text-align: right">服务类型:</span>
+                <span style="display: inline-block; width: 90px; text-align: right">{{ $t('comps.order-good.196783-18') }}</span>
                 <SpSelect
                   style="width: 350px"
                   :data="typeData"
                   v-model="form.type"
-                  placeholder="服务类型"
+                  :placeholder="$t('comps.order-good.196783-19')"
                 ></SpSelect>
               </SpFormItem>
               <SpFormItem prop="reason">
-                <span style="display: inline-block; width: 90px; text-align: right">退款理由:</span>
+                <span style="display: inline-block; width: 90px; text-align: right">{{ $t('comps.order-good.196783-20') }}</span>
                 <SpSelect
                   style="width: 350px"
                   :data="reasonData"
                   v-model="form.reason"
-                  placeholder="退款理由"
+                  :placeholder="$t('comps.order-good.196783-21')"
                 ></SpSelect>
               </SpFormItem>
               <SpFormItem prop="description">
                 <span style="display: inline-block; width: 90px; text-align: right"
-                  >申请退款说明:</span
+                  >{{ $t('comps.order-good.196783-22') }}</span
                 >
                 <SpInput
                   style="width: 350px"
                   v-model="form.description"
-                  placeholder="申请退款说明"
+                  :placeholder="$t('comps.order-good.196783-23')"
                 />
               </SpFormItem>
             </SpForm>
           </div>
         </div>
         <div class="dailog-ft">
-          <button class="btn btn-primary" @click="clickBtn('售后确认')">确认</button>
-          <button class="btn" @click="clickBtn('取消')">取消</button>
+          <button class="btn btn-primary" @click="clickBtn($t('comps.order-good.196783-24'))">{{ $t('comps.order-good.196783-25') }}</button>
+          <button class="btn" @click="clickBtn($t('comps.order-good.196783-26'))">{{ $t('comps.order-good.196783-26') }}</button>
         </div>
       </div>
     </SpModal>
@@ -205,18 +205,18 @@ export default {
         description: ''
       },
       rules: {
-        type: [{ validate: 'required', message: '选择退款类型' }],
-        reason: [{ validate: 'required', message: '选择退款原因' }]
+        type: [{ validate: 'required', message: this.$t('comps.order-good.196783-27') }],
+        reason: [{ validate: 'required', message: this.$t('comps.order-good.196783-28') }]
       },
       typeData: [
-        { label: '仅退款', value: 'ONLY_REFUND' },
-        { label: '退货退款', value: 'REFUND_GOODS' }
+        { label: this.$t('comps.order-good.196783-29'), value: 'ONLY_REFUND' },
+        { label: this.$t('comps.order-good.196783-30'), value: 'REFUND_GOODS' }
       ],
       reasonData: [
-        { label: '物流破损', value: '物流破损' },
-        { label: '产品描述与实物不符', value: '产品描述与实物不符' },
-        { label: '质量问题', value: '质量问题' },
-        { label: '皮肤过敏', value: '皮肤过敏' }
+        { label: this.$t('comps.order-good.196783-31'), value: this.$t('comps.order-good.196783-31') },
+        { label: this.$t('comps.order-good.196783-32'), value: this.$t('comps.order-good.196783-32') },
+        { label: this.$t('comps.order-good.196783-33'), value: this.$t('comps.order-good.196783-33') },
+        { label: this.$t('comps.order-good.196783-34'), value: this.$t('comps.order-good.196783-34') }
       ],
       selectItem: {}
     }
@@ -237,17 +237,17 @@ export default {
     },
     clickBtn(type, item) {
       switch (type) {
-        case '申请售后':
+        case this.$t('comps.order-good.196783-7'):
           this.selectItem = item
           this.dailogClose = true
           this.reasonList()
           break
-        case '售后':
+        case this.$t('comps.order-good.196783-8'):
           this.$router.push(
             `/member/trade/aftersale?orderId=${item.order_id}&itemId=${item.item_id}`
           )
           break
-        case '售后确认':
+        case this.$t('comps.order-good.196783-24'):
           this.$refs['form'].validate((valid, errors) => {
             if (valid) {
               let arr = JSON.stringify([{ id: this.selectItem.id, num: this.form.num }])
@@ -262,17 +262,17 @@ export default {
               }
               params.return_type = this.form.type=="REFUND_GOODS"? "logistics": ""
               creatAftersales(params).then(() => {
-                this.$Message.success('发起成功')
+                this.$Message.success(this.$t('comps.order-good.196783-35'))
                 this.$emit('change')
                 Object.assign(this.$data, this.$options.data())
               })
             }
           })
           break
-        case '取消':
+        case this.$t('comps.order-good.196783-26'):
           this.dailogClose = false
           break
-        case '评价':
+        case this.$t('comps.order-good.196783-36'):
           this.$router.push(
             `/member/trade/rate?id=${item.order_id}&order_class=${this.orderTotalData.order_class}`
           )
@@ -372,8 +372,7 @@ export default {
       padding-bottom: 20px;
     }
   }
-  .dailog-close {
-  }
+
   .btn {
     background-color: #fff;
     cursor: pointer;

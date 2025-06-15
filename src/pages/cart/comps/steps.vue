@@ -1,9 +1,9 @@
 <template>
   <div class="cart-steps">
     <ul class="steps-list">
-      <li class="step-item">1. 购物袋</li>
-      <li class="step-item">2. 填写和提交订单信息</li>
-      <li class="step-item">3. 成功提交订单</li>
+      <li class="step-item">{{ $t('comps.steps.003931-0') }}</li>
+      <li class="step-item">{{ $t('comps.steps.003931-1') }}</li>
+      <li class="step-item">{{ $t('comps.steps.003931-2') }}</li>
     </ul>
   </div>
 </template>

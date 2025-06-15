@@ -28,7 +28,7 @@
 
 <template>
   <div class="cashier-wxqrpay">
-    <div class="cashier-wxqrpay__title">您的订单已经提交成功，请尽快付款。</div>
+    <div class="cashier-wxqrpay__title">{{ $t('comps.wxqrpay.841346-0') }}</div>
     <div class="cashier-wxqrpay__warp">
       <div class="cashier-wxqrpay__wxbarcode">
         <img :src="qrcode_url" alt width="630" />

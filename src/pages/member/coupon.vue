@@ -8,7 +8,7 @@
           <smenu activeTitle="coupon" active="coupon"></smenu>
         </div>
         <div class="member-content-right">
-          <div class="member-content-right-header">我的优惠券</div>
+          <div class="member-content-right-header">{{ $t('member.coupon.613454-0') }}</div>
           <div class="page-coupon__content">
             <div class="coupon-toolbar">
               <a class="coupon-type" javascript="void(0)">
@@ -42,7 +42,7 @@
                 <SpLoading class="modal-loading__t" color="#c3c3c3" v-if="!list"></SpLoading>
               </div>
               <div class='no-coupon' v-if="list && list.length == 0">
-                您暂时没有任何优惠劵
+                {{ $t('member.coupon.613454-1') }}
               </div>
             </div>
             
@@ -82,11 +82,11 @@ export default {
       couponType: [
         {
           id: 1,
-          name: '可用优惠券'
+          name: this.$t('member.coupon.613454-2')
         },
         {
           id: 2,
-          name: '不可用优惠券'
+          name: this.$t('member.coupon.613454-3')
         }
       ]
     }

@@ -9,7 +9,7 @@
               >￥{{ i.reduce_cost | formatPriceToHundred }}</span
             >
             <div class="text-time">
-              <span class="text">满{{ i.least_cost > 0 ? i.least_cost / 100 : 0.01 }}可用</span>
+              <span class="text">{{ $t('comps.coupon.291157-0') }}{{ i.least_cost > 0 ? i.least_cost / 100 : 0.01 }}{{ $t('comps.coupon.291157-1') }}</span>
               <span class="time"
                 >{{ i.begin_date | parseTime('{y}-{m}-{d}') }}—{{
                   i.end_date | parseTime('{y}-{m}-{d}')
@@ -23,7 +23,7 @@
               i.title
             }}</span>
             <div class="text-time">
-              <span class="text">兑换券</span>
+              <span class="text">{{ $t('comps.coupon.291157-2') }}</span>
               <span class="time"
                 >{{ i.begin_date | parseTime('{y}-{m}-{d}') }}—{{
                   i.end_date | parseTime('{y}-{m}-{d}')
@@ -34,10 +34,10 @@
           <div v-else-if="i.card_type === 'discount'" class="left-bd">
             <!-- <span class="text">{{i.title}}</span> -->
             <span :class="i.getted === 1 || i.getted === 2 ? 'text-title-g' : 'text-title'"
-              >{{ (100 - i.discount) / 10 }}折</span
+              >{{ (100 - i.discount) / 10 }}{{ $t('comps.coupon.291157-3') }}</span
             >
             <div class="text-time">
-              <span class="text">满{{ i.least_cost > 0 ? i.least_cost / 100 : 0.01 }}可用</span>
+              <span class="text">{{ $t('comps.coupon.291157-0') }}{{ i.least_cost > 0 ? i.least_cost / 100 : 0.01 }}{{ $t('comps.coupon.291157-1') }}</span>
               <span class="time"
                 >{{ i.begin_date | parseTime('{y}-{m}-{d}') }}—{{
                   i.end_date | parseTime('{y}-{m}-{d}')
@@ -45,13 +45,13 @@
               >
             </div>
           </div>
-          <div v-else class="left-bd">会员折扣</div>
+          <div v-else class="left-bd">{{ $t('comps.coupon.291157-4') }}</div>
           <!-- <span class="time">{{i.begin_date|parseTime('{y}-{m}-{d}')}}~{{i.end_date|parseTime('{y}-{m}-{d}')}}</span> -->
         </div>
         <div class="right">
-          <div v-if="i.getted === 1" class="btn-disable">已领取</div>
-          <div v-else-if="i.getted === 2" class="btn-disable">已领完</div>
-          <div v-else class="btn" @click="handelClick(i)">领取</div>
+          <div v-if="i.getted === 1" class="btn-disable">{{ $t('comps.coupon.291157-5') }}</div>
+          <div v-else-if="i.getted === 2" class="btn-disable">{{ $t('comps.coupon.291157-6') }}</div>
+          <div v-else class="btn" @click="handelClick(i)">{{ $t('comps.coupon.291157-7') }}</div>
         </div>
       </div>
     </template>
@@ -99,7 +99,7 @@ export default {
         card_id: item.card_id
       }
       receiveCard(obj).then((res) => {
-        this.$Message.success('领取成功')
+        this.$Message.success(this.$t('comps.coupon.291157-8'))
         this.getCardList()
       })
     }

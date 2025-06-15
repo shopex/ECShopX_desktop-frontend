@@ -6,7 +6,7 @@
           <smenu activeTitle="order" active="aftersale"></smenu>
         </div>
         <div class="member-content-right">
-          <div class="member-content-right-header">售后订单</div>
+          <div class="member-content-right-header">{{ $t('trade.aftersale-list.245771-0') }}</div>
           <div class="member-content-right-body">
             <div class="tabs-status">
               <template >
@@ -39,11 +39,11 @@
                     </colgroup>
                     <thead>
                       <tr>
-                        <th>订单详情</th>
-                        <th>金额</th>
-                        <th>积分</th>
-                        <th>状态</th>
-                        <th>操作</th>
+                        <th>{{ $t('trade.aftersale-list.245771-1') }}</th>
+                        <th>{{ $t('trade.aftersale-list.245771-2') }}</th>
+                        <th>{{ $t('trade.aftersale-list.245771-3') }}</th>
+                        <th>{{ $t('trade.aftersale-list.245771-4') }}</th>
+                        <th>{{ $t('trade.aftersale-list.245771-5') }}</th>
                       </tr>
                     </thead>
                     <tbody v-for="(child,index) in list" :key="index">
@@ -54,11 +54,11 @@
                         <td colspan="5">
                           <div class="list-table-header">
                             <span>{{ child.date }}</span>
-                            售后编号：
+                            {{ $t('trade.aftersale-list.245771-6') }}
                             <span class="ly-fn-a link-black" @click.stop="clickLink(child.order)">{{
                               child.order
                             }}</span>
-                            <span>{{ child.distributor_info ? child.distributor_info : '总店' }}</span>
+                            <span>{{ child.distributor_info ? child.distributor_info : $t('trade.aftersale-list.245771-7') }}</span>
                           </div>
                         </td>
                       </tr>
@@ -84,7 +84,7 @@
                               <div class="p-status-text" :class="child.orderStatus == '1' ? 'nopay-color' : ''">
                                 {{ afterStatusText[child.orderStatus] }}
                               </div>
-                              <div class="ly-fn-a b-color" @click="clickLink(child.order)"> 售后详情</div>
+                              <div class="ly-fn-a b-color" @click="clickLink(child.order)"> {{ $t('trade.aftersale-list.245771-8') }}</div>
                             </div>
                           </td>
                           <td
@@ -98,28 +98,28 @@
 
                               <!-- <div
                                 class="ly-fn-a"
-                                @click="clickBtn('查看物流',child)"
+                                @click="clickBtn($t('trade.aftersale-list.245771-45'),child)"
                                 v-if="child.orderStatus == 'WAIT_BUYER_CONFIRM' || child.orderStatus == 'DONE' || child.orderStatus == 'SUCCESS'"
-                              >查看物流</div> -->
+                              >{{ $t('trade.aftersale-list.245771-45') }}</div> -->
 
                               <!--  -->
                               <div
                                 class="btn btn-primary"
                                 v-if="child.orderStatus === '3'"
-                                @click="clickBtn('再次申请', child)"
+                                @click="clickBtn($t('trade.aftersale-list.245771-9'), child)"
                               >
-                                再次申请
+                                {{ $t('trade.aftersale-list.245771-9') }}
                               </div>
                               <div
                                 class="btn btn-primary"
                                 v-if="child.orderStatus === '1'"
-                                @click="clickBtn('修改申请', child)"
+                                @click="clickBtn($t('trade.aftersale-list.245771-10'), child)"
                               >
-                                修改申请
+                                {{ $t('trade.aftersale-list.245771-10') }}
                               </div>
 
                               <!-- <span class="ly-fn-a" @click="clickBtn('申请售后', item)" v-if="!item.aftersales_status">申请售后</span>
-                                <span class="ly-fn-a" v-if="item.aftersales_status" @click="clickBtn('售后', item)">售后</span>
+                                <span class="ly-fn-a" v-if="item.aftersales_status" @click="clickBtn($t('trade.aftersale-list.245771-12'), item)">{{ $t('trade.aftersale-list.245771-12') }}</span>
                               -->
                               <!-- <div class="ly-fn-a" @click="clickLink(child.order)">查看详情</div> -->
                             </div>
@@ -133,7 +133,7 @@
             </div>
             <template>
               <div class="tips" style="width: 300px; margin: 50px auto">
-                <Tips v-if="list.length == 0" tips="您没有相关的订单。" />
+                <Tips v-if="list.length == 0" :tips="$t('trade.aftersale-list.245771-11')" />
               </div>
             </template>
             <div>
@@ -149,50 +149,50 @@
 
           <SpModal v-model="dailogClose" :height="320" :width="520">
             <div class="dailog dailog-close">
-              <div class="dailog-hd">售后</div>
+              <div class="dailog-hd">{{ $t('trade.aftersale-list.245771-12') }}</div>
               <div class="dailog-bd">
                 <!-- <span>订单号：{{this.$route.params.id}}</span> -->
                 <div>
                   <SpForm ref="formClose" :model="formClose" :rules="rulesClose">
                     <SpFormItem prop="type">
-                      <span class="type-reason-des">服务类型:</span>
+                      <span class="type-reason-des">{{ $t('trade.aftersale-list.245771-13') }}</span>
                       <SpSelect
                         style="width: 350px"
                         :data="typeData"
                         v-model="formClose.type"
-                        placeholder="服务类型"
+                        :placeholder="$t('trade.aftersale-list.245771-14')"
                       ></SpSelect>
                     </SpFormItem>
                     <SpFormItem prop="reason">
-                      <span class="type-reason-des">退款理由:</span>
+                      <span class="type-reason-des">{{ $t('trade.aftersale-list.245771-15') }}</span>
                       <SpSelect
                         style="width: 350px"
                         :data="reasonData"
                         v-model="formClose.reason"
-                        placeholder="退款理由"
+                        :placeholder="$t('trade.aftersale-list.245771-16')"
                       ></SpSelect>
                     </SpFormItem>
                     <SpFormItem prop="description">
-                      <span class="type-reason-des">申请退款说明:</span>
+                      <span class="type-reason-des">{{ $t('trade.aftersale-list.245771-17') }}</span>
                       <SpInput
                         style="width: 350px"
                         v-model="formClose.description"
-                        placeholder="申请退款说明"
+                        :placeholder="$t('trade.aftersale-list.245771-18')"
                       />
                     </SpFormItem>
                   </SpForm>
                 </div>
               </div>
               <div class="dailog-ft">
-                <button class="btn btn-primary" @click="clickBtn('售后确认')">确认</button>
-                <button class="btn" @click="clickBtn('取消')">取消</button>
+                <button class="btn btn-primary" @click="clickBtn($t('trade.aftersale-list.245771-19'))">{{ $t('trade.aftersale-list.245771-20') }}</button>
+                <button class="btn" @click="clickBtn($t('trade.aftersale-list.245771-21'))">{{ $t('trade.aftersale-list.245771-21') }}</button>
               </div>
             </div>
           </SpModal>
 
-          <SpModal title="物流信息" v-model="dialogLogistics" :height="320" :width="520">
+          <SpModal :title="$t('trade.aftersale-list.245771-22')" v-model="dialogLogistics" :height="320" :width="520">
             <div class="dailog">
-              <div class="dailog-hd">物流信息</div>
+              <div class="dailog-hd">{{ $t('trade.aftersale-list.245771-22') }}</div>
               <div class="dailog-bd">
                 <Logistics :id="selectItem.order" :height="240"></Logistics>
               </div>
@@ -236,12 +236,12 @@ export default {
   data() {
     return {
       tabs: [
-        { label: '全部', value: undefined },
-        { label: '待处理', value: '0' },
-        { label: '处理中', value: '1' },
-        { label: '已处理', value: '2' },
-        { label: '已驳回', value: '3' },
-        { label: '已关闭', value: '4' }
+        { label: this.$t('trade.aftersale-list.245771-23'), value: undefined },
+        { label: this.$t('trade.aftersale-list.245771-24'), value: '0' },
+        { label: this.$t('trade.aftersale-list.245771-25'), value: '1' },
+        { label: this.$t('trade.aftersale-list.245771-26'), value: '2' },
+        { label: this.$t('trade.aftersale-list.245771-27'), value: '3' },
+        { label: this.$t('trade.aftersale-list.245771-28'), value: '4' }
       ],
       list: [],
       logisticsList: [],
@@ -254,29 +254,29 @@ export default {
         total: 0
       },
       orderStatusText: {
-        NOTPAY: '未付款',
-        PAYED: '已付款',
-        WAIT_BUYER_CONFIRM: '已发货',
-        FAIL: '已关闭',
-        CLOSED: '已关闭',
-        CANCEL: '已取消',
-        PAYED_WAIT_PROCESS: '退款处理中',
-        PAYED_PARTAIL: '部分发货',
-        SUCCESS: '交易完成',
-        DONE: '交易完成'
+        NOTPAY: this.$t('trade.aftersale-list.245771-29'),
+        PAYED: this.$t('trade.aftersale-list.245771-30'),
+        WAIT_BUYER_CONFIRM: this.$t('trade.aftersale-list.245771-31'),
+        FAIL: this.$t('trade.aftersale-list.245771-28'),
+        CLOSED: this.$t('trade.aftersale-list.245771-28'),
+        CANCEL: this.$t('trade.aftersale-list.245771-32'),
+        PAYED_WAIT_PROCESS: this.$t('trade.aftersale-list.245771-33'),
+        PAYED_PARTAIL: this.$t('trade.aftersale-list.245771-34'),
+        SUCCESS: this.$t('trade.aftersale-list.245771-35'),
+        DONE: this.$t('trade.aftersale-list.245771-35')
       },
       afterStatusText: {
-        0: '待处理',
-        1: '处理中',
-        2: '已处理',
-        3: '已驳回',
-        4: '已关闭'
+        0: this.$t('trade.aftersale-list.245771-24'),
+        1: this.$t('trade.aftersale-list.245771-25'),
+        2: this.$t('trade.aftersale-list.245771-26'),
+        3: this.$t('trade.aftersale-list.245771-27'),
+        4: this.$t('trade.aftersale-list.245771-28')
       },
       dailogCancel: false,
       selectItem: {},
       form: { cancelMean: '' },
       rules: {
-        cancelMean: [{ validate: 'required', message: '取消原因必填' }]
+        cancelMean: [{ validate: 'required', message: this.$t('trade.aftersale-list.245771-36') }]
       },
       dailogClose: false,
       formClose: {
@@ -285,18 +285,18 @@ export default {
         description: ''
       },
       rulesClose: {
-        type: [{ validate: 'required', message: '选择退款类型' }],
-        reason: [{ validate: 'required', message: '选择退款原因' }]
+        type: [{ validate: 'required', message: this.$t('trade.aftersale-list.245771-37') }],
+        reason: [{ validate: 'required', message: this.$t('trade.aftersale-list.245771-38') }]
       },
       typeData: [
-        { label: '仅退款', value: 'ONLY_REFUND' },
-        { label: '退货退款', value: 'REFUND_GOODS' }
+        { label: this.$t('trade.aftersale-list.245771-39'), value: 'ONLY_REFUND' },
+        { label: this.$t('trade.aftersale-list.245771-40'), value: 'REFUND_GOODS' }
       ],
       reasonData: [
-        { label: '物流破损', value: '物流破损' },
-        { label: '产品描述与实物不符', value: '产品描述与实物不符' },
-        { label: '质量问题', value: '质量问题' },
-        { label: '皮肤过敏', value: '皮肤过敏' }
+        { label: this.$t('trade.aftersale-list.245771-41'), value: this.$t('trade.aftersale-list.245771-41') },
+        { label: this.$t('trade.aftersale-list.245771-42'), value: this.$t('trade.aftersale-list.245771-42') },
+        { label: this.$t('trade.aftersale-list.245771-43'), value: this.$t('trade.aftersale-list.245771-43') },
+        { label: this.$t('trade.aftersale-list.245771-44'), value: this.$t('trade.aftersale-list.245771-44') }
       ],
       selectItemClose: {},
       dialogLogistics: false,
@@ -373,11 +373,11 @@ export default {
     },
     clickBtn(type, item) {
       switch (type) {
-        case '查看物流':
+        case this.$t('trade.aftersale-list.245771-45'):
           this.selectItem = item
           this.dialogLogistics = true
           break
-        case '取消':
+        case this.$t('trade.aftersale-list.245771-21'):
           this.dailogCancel = false
           this.dailogClose = false
           this.formClose = {
@@ -386,24 +386,24 @@ export default {
             description: ''
           }
           break
-        case '修改申请':
+        case this.$t('trade.aftersale-list.245771-10'):
           this.selectItem = item
           let formClose = JSON.parse(JSON.stringify(this.formClose))
           formClose.type = item.aftersales_type
           this.formClose = formClose
           this.dailogClose = true
           break
-        case '售后':
+        case this.$t('trade.aftersale-list.245771-12'):
           this.$router.push(
             `/member/trade/aftersale?orderId=${item.order_id}&itemId=${item.item_id}`
           )
           break
-        case '再次申请':
+        case this.$t('trade.aftersale-list.245771-9'):
           this.selectItemClose = item
           this.dailogClose = true
           break
 
-        case '售后确认':
+        case this.$t('trade.aftersale-list.245771-19'):
           this.$refs['formClose'].validate((valid, errors) => {
             if (valid) {
               let params = {
@@ -415,7 +415,7 @@ export default {
                 description: this.formClose.description
               }
               creatAftersales(params).then(() => {
-                this.$Message.success('发起成功')
+                this.$Message.success(this.$t('trade.aftersale-list.245771-46'))
                 this.dailogClose = false
                 Object.assign(this.$data, this.$options.data())
                 this.getAftersalesList()

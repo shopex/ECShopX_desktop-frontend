@@ -17,8 +17,8 @@
             <div v-if="shopInfo.name" class="favor-content">
               <i class="ec-icon ec-icon-favor_light left-icon" v-if="iconShow"></i>
               <i class="ec-icon ec-icon-favorfill color-icom" v-else></i>
-              <span v-if="iconShow">关注店铺</span>
-              <span v-else>取消关注</span>
+              <span v-if="iconShow">{{ $t('items._id.894430-0') }}</span>
+              <span v-else>{{ $t('items._id.894430-1') }}</span>
             </div>
           </div>
         </div>
@@ -26,7 +26,7 @@
           <div class="goods-qrcode">
             <i class="new_iconfont icon-new-pc-erweima"></i>
           </div>
-          <div  class="phone-show">手机逛</div>
+          <div  class="phone-show">{{ $t('items._id.894430-2') }}</div>
           <div v-show="qrcodeHover" class="goods-qrcode-content">
             <img  v-if="showDefaultQrcode" width="188" height="188" class="goods-qrcode-content__img"
             :src="qrcodePath"
@@ -39,9 +39,9 @@
           </div>
         </div>
         <div class="details-right">
-          <input placeholder="请输入" v-model="inputText" type="text" />
-          <button v-if="shopInfo.name && info && info.distributor_id != 0" @click="goToShopInfo">搜本店</button>
-          <button @click="goToItems">搜商城</button>
+          <input :placeholder="$t('items._id.894430-3')" v-model="inputText" type="text" />
+          <button v-if="shopInfo.name && info && info.distributor_id != 0" @click="goToShopInfo">{{ $t('items._id.894430-4') }}</button>
+          <button @click="goToItems">{{ $t('items._id.894430-5') }}</button>
         </div>
       </div>
 
@@ -58,7 +58,7 @@
       <div class="goods-details">
         <div class="details-left">
           <div class="goods-sort" v-if="info && info.distributor_id != 0">
-            <div class="sort-title">商品分类</div>
+            <div class="sort-title">{{ $t('items._id.894430-6') }}</div>
             <div class="list-boby">
               <ul>
                 <li v-for="(item, index) of menu" :key="index">
@@ -109,7 +109,7 @@
 
           <div class="tab-content" v-if="curTabIdx == 0">
             <div class="goods-params">
-              <div class="goods-brannd">品牌：{{ info.goods_brand }}</div>
+              <div class="goods-brannd">{{ $t('items._id.894430-7') }}{{ info.goods_brand }}</div>
               <div class="params-items">
                 <div class="params-item" v-for="(item, index) in info.item_params" :key="`params-item__${index}`">
                   {{ item.attribute_name }}：{{ item.attribute_value_name }}
@@ -132,7 +132,7 @@
               </div>
             </div>
             <div class="goods-intro__detail" v-else v-html="goodsDesc" v-lazy-container="{ selector: 'img' }">
-              正在加载详情...
+              {{ $t('items._id.894430-8') }}
             </div>
           </div>
 
@@ -142,7 +142,7 @@
                 @on-reply="(count) => handleReply(count, index)" />
             </div>
             <div class="loading-data" v-if="evaluationList.length == 0">
-              暂无评价
+              {{ $t('items._id.894430-9') }}
             </div>
           </div>
         </div>
@@ -224,7 +224,7 @@
     },
     head() {
       return {
-        title: this.tdk_data&&this.tdk_data.title=="-无" ? this.info.item_name : this.tdk_data&&this.tdk_data!="-无" ? this.tdk_data.title : '商品详情',
+        title: this.tdk_data&&this.tdk_data.title==this.$t('items._id.894430-10') ? this.info.item_name : this.tdk_data&&this.tdk_data!=this.$t('items._id.894430-10') ? this.tdk_data.title : this.$t('items._id.894430-11'),
         meta: [{
             hid: 'keywords',
             name: 'keywords',
@@ -263,7 +263,7 @@
         keyword: '',
         showprice: true,
         info: null,
-        tabList: ['商品介绍', '商品评价'],
+        tabList: [this.$t('items._id.894430-12'), this.$t('items._id.894430-13')],
         curTabIdx: 0,
         evaluationList: [],
         evaluationTotal: 0,
@@ -288,7 +288,7 @@
           item_category_info
         } = this.info
         let ret = [{
-          name: '首页',
+          name: this.$t('items._id.894430-14'),
           url: `/`
         }]
         item_category_info.map((item) => {
@@ -356,13 +356,13 @@
           const data = await this.$api.member.addCollectionStore(this.info.distributor_id)
           if (!data.message) {
             this.iconShow = false
-            this.$Message.success('关注成功')
+            this.$Message.success(this.$t('items._id.894430-15'))
           }
         } else {
           const data = await this.$api.member.removeCollectionStore(this.info.distributor_id)
           if (!data.message) {
             this.iconShow = true
-            this.$Message.success('取消关注')
+            this.$Message.success(this.$t('items._id.894430-1'))
           }
         }
       },

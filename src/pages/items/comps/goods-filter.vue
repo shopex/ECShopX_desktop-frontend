@@ -69,7 +69,7 @@
 <template>
   <div class="filter-container">
     <div class="brand-wrap clearfix">
-      <div class="brand-title">品牌:</div>
+      <div class="brand-title">{{ $t('comps.goods-filter.752935-0') }}</div>
       <div class="brand-list">
         <a
           class="brand-list__link"

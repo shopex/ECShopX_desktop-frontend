@@ -2,7 +2,7 @@
 <template>
   <div class="page-member member page-body container-member">
     <div class="member-top">
-      <p class="member-top-title">会员中心</p>
+      <p class="member-top-title">{{ $t('member.index.047969-0') }}</p>
     </div>
     <div class="member-content">
       <div class="member-content-left">
@@ -33,10 +33,10 @@ const CARD_MAP = {
 export default {
   head() {
     return {
-      title: '会员中心_Aigle官方网站',
+      title: this.$t('member.index.047969-1'),
       meta: [
-        { hid: 'keywords', name: 'keywords', content: '我的账户_Aigle官方网站' },
-        { hid: 'description', name: 'description', content: '我的账户_Aigle官方网站' }
+        { hid: 'keywords', name: 'keywords', content: this.$t('member.index.047969-2') },
+        { hid: 'description', name: 'description', content: this.$t('member.index.047969-2') }
       ]
     }
   },

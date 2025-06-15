@@ -139,8 +139,8 @@
         <slot></slot>
       </div>
       <div class="sp-modal__footer" v-if="showFooter">
-        <SpButton @click="cancel">取消</SpButton>
-        <SpButton type="primary" @click="ok">确定</SpButton>
+        <SpButton @click="cancel">{{ $t('src.index.522104-0') }}</SpButton>
+        <SpButton type="primary" @click="ok">{{ $t('src.index.522104-1') }}</SpButton>
       </div>
     </div>
     <!-- </div> -->

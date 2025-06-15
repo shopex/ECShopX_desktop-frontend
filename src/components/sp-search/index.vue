@@ -6,7 +6,7 @@
       <input
         type="text"
         ref="input"
-        :placeholder="placeholder"
+        :placeholder="placeholder || $t('sp-search.index.457496-0')"
         v-model="searchValue"
         @input="handleChangeSearch"
         @focus="handleOnFocus"
@@ -62,7 +62,7 @@ export default {
     },
     placeholder: {
       type: String,
-      default: "搜索"
+      default: ""
     },
     isFocus: {
       type: Boolean

@@ -1,19 +1,19 @@
 <template>
   <div class="receive-wrap">
-    <h4>发票信息</h4>
+    <h4>{{ $t('comps.InvoiceInfo.892977-0') }}</h4>
     <div class="invoice">
-        <div class="invoice-item">类型：{{ invoiceInfo.title=='individual'?'个人': invoiceInfo.title=='unit'?'企业':'' }}</div>
-        <div class="invoice-item">开票状态：{{ receiveData.is_invoiced==true?'已开票':receiveData.is_invoiced==false?'未开票':'' }}</div>
-        <!-- 个人 -->
-        <div class="invoice-item"  v-if="invoiceInfo.title=='individual'">发票抬头：{{ invoiceInfo.content }}</div>
-        <!-- 企业 -->
+        <div class="invoice-item">{{ $t('comps.InvoiceInfo.892977-1') }}{{ invoiceInfo.title=='individual'?$t('comps.InvoiceInfo.892977-2'): invoiceInfo.title=='unit'?$t('comps.InvoiceInfo.892977-3'):'' }}</div>
+        <div class="invoice-item">{{ $t('comps.InvoiceInfo.892977-4') }}{{ receiveData.is_invoiced==true?$t('comps.InvoiceInfo.892977-5'):receiveData.is_invoiced==false?$t('comps.InvoiceInfo.892977-6'):'' }}</div>
+        <!-- {{ $t('comps.InvoiceInfo.892977-2') }} -->
+        <div class="invoice-item"  v-if="invoiceInfo.title=='individual'">{{ $t('comps.InvoiceInfo.892977-7') }}{{ invoiceInfo.content }}</div>
+        <!-- {{ $t('comps.InvoiceInfo.892977-3') }} -->
         <div v-else-if="invoiceInfo.title=='unit'" class="invoice-list">
-            <div>公司名称：{{ invoiceInfo.content }}</div>
-            <div>税号：{{ invoiceInfo.registration_number }}</div>
-            <div>公司地址：{{ invoiceInfo.company_address }}</div>
-            <div>电话号码：{{ invoiceInfo.company_phone }}</div>
-            <div>开户银行：{{ invoiceInfo.bankname }}</div>
-            <div>银行账号：{{ invoiceInfo.bankaccount }}</div>
+            <div>{{ $t('comps.InvoiceInfo.892977-8') }}{{ invoiceInfo.content }}</div>
+            <div>{{ $t('comps.InvoiceInfo.892977-9') }}{{ invoiceInfo.registration_number }}</div>
+            <div>{{ $t('comps.InvoiceInfo.892977-10') }}{{ invoiceInfo.company_address }}</div>
+            <div>{{ $t('comps.InvoiceInfo.892977-11') }}{{ invoiceInfo.company_phone }}</div>
+            <div>{{ $t('comps.InvoiceInfo.892977-12') }}{{ invoiceInfo.bankname }}</div>
+            <div>{{ $t('comps.InvoiceInfo.892977-13') }}{{ invoiceInfo.bankaccount }}</div>
         </div>
     </div>
   </div>

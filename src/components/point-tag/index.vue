@@ -13,7 +13,7 @@
 </style>
 
 <template>
-  <div class="point-tag">积</div>
+  <div class="point-tag">{{ $t('point-tag.index.265385-0') }}</div>
 </template>
 
 <script>

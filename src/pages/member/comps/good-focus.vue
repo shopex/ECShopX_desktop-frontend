@@ -10,7 +10,7 @@
       <!-- 左按钮 -->
       <div
         class="left clickIcon"
-        @click="handelClick('左边')"
+        @click="handelClick($t('comps.good-focus.219508-0'))"
         :class="{ disable: (num == 1) | (active == 1) }"
       >
         <i class="ec-icon ec-icon-back"></i>
@@ -27,7 +27,7 @@
       <!-- 右按钮 -->
       <div
         class="right clickIcon"
-        @click="handelClick('右边')"
+        @click="handelClick($t('comps.good-focus.219508-1'))"
         :class="{ disable: (num == 1) | (active == num) }"
       >
         <i class="ec-icon ec-icon-right"></i>
@@ -78,11 +78,11 @@ export default {
         //   if (this.active == i) return false
         //   this.active = i
         //   break
-        case '左边':
+        case this.$t('comps.good-focus.219508-0'):
           if (this.active == 1) return false
           this.active--
           break
-        case '右边':
+        case this.$t('comps.good-focus.219508-1'):
           if (this.active == this.num) return false
           this.active++
           break

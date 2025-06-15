@@ -38,7 +38,7 @@ export default {
   props: ['guessLikeList'],
   data() {
     return {
-      tabList: ['猜你喜欢'],
+      tabList: [this.$t('comps.guess-like.884315-0')],
       curTabIdx: 0
     }
   },

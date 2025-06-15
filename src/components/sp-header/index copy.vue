@@ -10,29 +10,29 @@
               <NuxtLink
                 to="/auth/login"
                 class="topbar-login__link"
-                >登录</NuxtLink
+                >{{ $t('sp-header.index copy.249207-0') }}</NuxtLink
               >
               <NuxtLink
                 to="/auth/reg"
                 class="topbar-login__link"
-                >注册</NuxtLink
+                >{{ $t('sp-header.index copy.249207-1') }}</NuxtLink
               >
             </template>
             <template v-else>
-              <span class="sys-hello">你好</span>
+              <span class="sys-hello">{{ $t('sp-header.index copy.249207-2') }}</span>
               <span class="member-phone">{{ userInfo.memberInfo.mobile }}</span>
-              <span class="exit-btn" @click="handleLogout()">退出</span>
+              <span class="exit-btn" @click="handleLogout()">{{ $t('sp-header.index copy.249207-3') }}</span>
             </template>
           </div>
         </div>
         <div class="topbar-member fr">
-          <NuxtLink to="/cart" style="margin-right:0;">我的购物车</NuxtLink>
+          <NuxtLink to="/cart" style="margin-right:0;">{{ $t('sp-header.index copy.249207-4') }}</NuxtLink>
           <span>|</span>
-          <NuxtLink to="/member/user-info">会员中心</NuxtLink>
+          <NuxtLink to="/member/user-info">{{ $t('sp-header.index copy.249207-5') }}</NuxtLink>
           <span>|</span>
           <!-- 隐藏商家中心 -->
           <!-- <NuxtLink to="/member/user-info">商家中心</NuxtLink> -->
-          <NuxtLink to="/member/trade">我的订单</NuxtLink>
+          <NuxtLink to="/member/trade">{{ $t('sp-header.index copy.249207-6') }}</NuxtLink>
         </div>
       </div>
     </div>
@@ -56,9 +56,9 @@
               <i class="ec-icon ec-icon-cart"></i>
               <span class="count">{{ cartCount }}</span>
             </div>
-            查看购物车
+            {{ $t('sp-header.index copy.249207-7') }}
           </NuxtLink> -->
-          <minicart title="查看购物车"></minicart>
+          <minicart :title="$t('sp-header.index copy.249207-7')"></minicart>
         </div>
       </div>
     </div>
@@ -66,7 +66,7 @@
     <div class="header-bar__nav">
       <div class="container clearfix">
         <div class="all-category">
-          <div class="all-category__btn">全部商品分类</div>
+          <div class="all-category__btn">{{ $t('sp-header.index copy.249207-8') }}</div>
           <div class="category-list">
             <div class="category-main" v-for="item in category" :key="`category-${item.category_id}`">
               <div class="category-main__btn">{{ item.category_name }}</div>

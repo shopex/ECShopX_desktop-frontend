@@ -5,11 +5,11 @@
     <div class="profile-container" v-if="info">
       <div class="profile-reg__success">
         <img src="~/assets/imgs/success.png" width="30" />
-        <span>注册成功</span>
+        <span>{{ $t('auth.profile.118339-0') }}</span>
       </div>
       <ul class="profile-tab">
         <li>
-          <span>填写个人资料</span>
+          <span>{{ $t('auth.profile.118339-1') }}</span>
         </li>
       </ul>
 
@@ -65,13 +65,13 @@
           </SpFormItem>
         </template>
         <SpFormItem class="btn-container">
-          <SpButton class="button-dark" @click="SubmitFormInfo('form-profile')">保存</SpButton>
+          <SpButton class="button-dark" @click="SubmitFormInfo('form-profile')">{{ $t('auth.profile.118339-2') }}</SpButton>
         </SpFormItem>
       </SpForm>
 
       <div class="jump">
         <a class="license-content" href="javascript:void(0);" @click="jumpTo()">
-          点击跳过此步骤
+          {{ $t('auth.profile.118339-3') }}
           <i class="mb-iconfont mb-iconfont-right"></i>
         </a>
       </div>
@@ -87,17 +87,17 @@ import { analytics } from '@/plugins/analytics'
 export default {
   head() {
     return {
-      title: '会员中心_Aigle官方网站',
+      title: this.$t('auth.profile.118339-4'),
       meta: [
         {
           hid: 'keywords',
           name: 'keywords',
-          content: '我的账户_Aigle官方网站'
+          content: this.$t('auth.profile.118339-5')
         },
         {
           hid: 'description',
           name: 'description',
-          content: '我的账户_Aigle官方网站'
+          content: this.$t('auth.profile.118339-5')
         }
       ]
     }
@@ -124,7 +124,7 @@ export default {
             user_attr: JSON.stringify(this.info)
           })
           this.orgin_info = { ...this.info }
-          this.$Message.success('保存成功')
+          this.$Message.success(this.$t('auth.profile.118339-6'))
           this.$router.push('/')
           // this.getAttrData()
         }
@@ -137,7 +137,7 @@ export default {
       user_attr.forEach((item) => {
         // 验证规则
         if (item.attr_required === 1) {
-          this.rules[item.attr_column] = [{ validate: 'required', message: '不能为空' }]
+          this.rules[item.attr_column] = [{ validate: 'required', message: this.$t('auth.profile.118339-7') }]
         }
 
         // 下拉选择

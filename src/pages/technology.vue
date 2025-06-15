@@ -29,7 +29,7 @@
 <template>
   <div class="page-technology page-body">
     <div class="page-technology__nav">
-      <div class="title">法国工艺</div>
+      <div class="title">{{ $t('pages.technology.568453-0') }}</div>
     </div>
     <div class="story-wall pc">
       <img src="~/assets/imgs/resource/201911/pc/fggy/fgzx-1.jpg" alt />
@@ -52,9 +52,9 @@ export default {
   mounted() {
     analytics.pageReady({
       page: {
-        pageName: '法国工艺',
+        pageName: this.$t('pages.technology.568453-0'),
         pageType: 'content',
-        breadcrumb: '法国工艺'
+        breadcrumb: this.$t('pages.technology.568453-0')
       }
     })
   },

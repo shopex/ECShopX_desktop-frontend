@@ -77,18 +77,18 @@
           <smenu activeTitle="account" active="change-password"></smenu>
         </div>
         <div class="member-content-right">
-          <div class="member-content-right-header">修改密码</div>
+          <div class="member-content-right-header">{{ $t('member.change-password.132231-0') }}</div>
           <div class="password member-content-right-body">
             <SpForm ref="form-forget-password" :model="info" :rules="rules">
               <SpFormItem prop="yzm" class="yzm-feild">
-                <span class="label-text">图片验证码</span>
+                <span class="label-text">{{ $t('member.change-password.132231-1') }}</span>
                 <SpInput v-model="info.yzm" />
                 <div class="yzm-img" @click="handleClickImgcode">
                   <img :src="imgInfo.imageData" alt />
                 </div>
               </SpFormItem>
               <SpFormItem prop="vcode" class="yzm-feild">
-                <span class="label-text">动态验证码</span>
+                <span class="label-text">{{ $t('member.change-password.132231-2') }}</span>
                 <SpInput v-model="info.vcode" />
                 <div class="vcode-btn">
                   <SpTimer
@@ -101,20 +101,20 @@
                 </div>
               </SpFormItem>
               <SpFormItem prop="password">
-                <span class="label-text">设置密码</span>
+                <span class="label-text">{{ $t('member.change-password.132231-3') }}</span>
                 <SpInput
                   v-model="info.password"
                   type="password"
-                  placeholder="建议使用两种或两种以上的字符组合"
+                  :placeholder="$t('member.change-password.132231-4')"
                 />
               </SpFormItem>
               <SpFormItem prop="password1">
-                <span class="label-text">确认密码</span>
-                <SpInput v-model="info.password1" type="password" placeholder="再次输入密码" />
+                <span class="label-text">{{ $t('member.change-password.132231-5') }}</span>
+                <SpInput v-model="info.password1" type="password" :placeholder="$t('member.change-password.132231-6')" />
               </SpFormItem>
               <SpFormItem class="btn-container-member">
                 <SpButton long type="primary" @click="modifyPasswordBtn('form-forget-password')"
-                  >确认修改</SpButton
+                  >{{ $t('member.change-password.132231-7') }}</SpButton
                 >
               </SpFormItem>
             </SpForm>
@@ -142,8 +142,8 @@ export default {
         password1: ''
       },
       rules: {
-        yzm: [{ validate: 'required', trigger: 'blur', message: '请输入图形验证码' }],
-        vcode: [{ validate: 'required', trigger: 'blur', message: '请输入验证码' }],
+        yzm: [{ validate: 'required', trigger: 'blur', message: this.$t('member.change-password.132231-8') }],
+        vcode: [{ validate: 'required', trigger: 'blur', message: this.$t('member.change-password.132231-9') }],
         password: [
           {
             validate: (rule, value, callback) => {
@@ -177,7 +177,7 @@ export default {
         ]
       },
       imgInfo: {},
-      timerMsg: '发送验证码'
+      timerMsg: this.$t('member.change-password.132231-10')
     }
   },
   mounted() {
@@ -206,14 +206,14 @@ export default {
         token: this.imgInfo.imageToken
       }
       await this.$api.auth.regSmsCode(query)
-      this.$Message.success('发送成功')
+      this.$Message.success(this.$t('member.change-password.132231-11'))
       cb()
     },
     handleUpdateTimer(e) {
-      this.timerMsg = `${e}秒后重发`
+      this.timerMsg = this.$t('member.change-password.132231-12', [])
     },
     handleTimerStop() {
-      this.timerMsg = `重发验证码`
+      this.timerMsg = this.$t('member.change-password.132231-13')
     },
     modifyPasswordBtn(name) {
       this.$refs[name].validate((valid, errors) => {
@@ -229,7 +229,7 @@ export default {
         vcode: this.info.vcode
       }
       await this.$api.auth.modifyPassword(query)
-      this.$Message.success('新密码已经设置成功')
+      this.$Message.success(this.$t('member.change-password.132231-14'))
       Object.assign(this.$data, this.$options.data())
     }
   }

@@ -3,7 +3,7 @@
   <div class="vip-card__hd">
     <span>{{info.username || info.mobile}}</span>
     <nuxt-link to="/member/rights">
-      <span class="vip-card__rights">会员权益 &gt;</span>
+      <span class="vip-card__rights">{{ $t('comps.vip-card.642296-0') }}</span>
     </nuxt-link>
   </div>
   <p class="vip-card__code">{{info.member_tier}} {{info.member_code}}</p>

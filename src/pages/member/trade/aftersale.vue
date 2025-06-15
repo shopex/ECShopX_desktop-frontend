@@ -149,13 +149,13 @@
         <div class="member-content-right"  style="padding: 15px 0 0 15px;">
           <div class="member-content-right-body">
             <div class="member-content-right-hd clearfix">
-              <span style="cursor: pointer;" @click="clickToList"><i class="ec-icon ec-icon-back_android"></i>返回售后列表</span>
-              <span class="order-id">订单：{{ orderInfo.order_id }}</span>
+              <span style="cursor: pointer;" @click="clickToList"><i class="ec-icon ec-icon-back_android"></i>{{ $t('trade.aftersale.414246-0') }}</span>
+              <span class="order-id">{{ $t('trade.aftersale.414246-1') }}{{ orderInfo.order_id }}</span>
             </div>
             <div class="member-content-right-bd">
               <div class="clearfix status-log">
                 <div class="status-code">
-                  售后单号：{{ orderInfo.order_id }}
+                  {{ $t('trade.aftersale.414246-2') }}{{ orderInfo.order_id }}
                   <div class="status-text">{{ aftersalesTypeText[aftersalesInfo.progress] }}</div>
                   <div style="color:#797979">
                     {{aftersalesTypeTextContent[aftersalesInfo.progress]}}
@@ -178,10 +178,10 @@
               /> -->
               <p class="bd-border"></p>
               <div class="aftersales">
-                <h4>售后原因</h4>
-                <p>售后原因：{{ aftersalesInfo.reason }}</p>
-                <p>退款说明：{{ aftersalesInfo.description }}</p>
-                <p>售后凭证：</p>
+                <h4>{{ $t('trade.aftersale.414246-3') }}</h4>
+                <p>{{ $t('trade.aftersale.414246-3') }}：{{ aftersalesInfo.reason }}</p>
+                <p>{{ $t('trade.aftersale.414246-5') }}{{ aftersalesInfo.description }}</p>
+                <p>{{ $t('trade.aftersale.414246-6') }}</p>
                 <!-- <p>{{aftersalesTypeText[aftersalesInfo.progress]}}</p> -->
                 <!-- <p>退换货类型：{{aftersalesTypeText[aftersalesInfo.aftersales_type]}}</p>
                 <p>退换货编号：{{aftersalesInfo.aftersales_bn}}</p>
@@ -191,16 +191,16 @@
                 >退款金额：{{ orderGoodData[0].items[0].refunded_fee | formatPriceToHundred}}</p> -->
                 <div v-if="this.orderInfo.order_status_des !== 'DONE'">
                   <div class="btns" v-if="aftersalesInfo.progress === 0">
-                    <!-- <button class="btn btn-primary" @click="clickBtn('修改申请')">修改申请</button> -->
-                    <button class="btn" @click="clickBtn('撤销申请')">撤销申请</button>
+                    <!-- <button class="btn btn-primary" @click="clickBtn($t('trade.aftersale.414246-61'))">{{ $t('trade.aftersale.414246-61') }}</button> -->
+                    <button class="btn" @click="clickBtn($t('trade.aftersale.414246-7'))">{{ $t('trade.aftersale.414246-7') }}</button>
                   </div>
                   <div class="btns" v-if="aftersalesInfo.progress === 1">
-                    <button class="btn btn-primary" @click="clickBtn('填写物流')">填写物流</button>
-                    <button class="btn" @click="clickBtn('撤销申请')">撤销申请</button>
+                    <button class="btn btn-primary" @click="clickBtn($t('trade.aftersale.414246-8'))">{{ $t('trade.aftersale.414246-8') }}</button>
+                    <button class="btn" @click="clickBtn($t('trade.aftersale.414246-7'))">{{ $t('trade.aftersale.414246-7') }}</button>
                   </div>
                   <div class="btns" v-if="aftersalesInfo.progress === 3 || aftersalesInfo.progress === 5">
-                    <button class="btn btn-primary" @click="clickBtn('再次申请')">再次申请</button>
-                    <button class="btn" @click="clickBtn('撤销申请')">撤销申请</button>
+                    <button class="btn btn-primary" @click="clickBtn($t('trade.aftersale.414246-9'))">{{ $t('trade.aftersale.414246-9') }}</button>
+                    <button class="btn" @click="clickBtn($t('trade.aftersale.414246-7'))">{{ $t('trade.aftersale.414246-7') }}</button>
                   </div>
                 </div>
               </div>
@@ -218,54 +218,54 @@
     </div>
     <SpModal v-model="dailogClose" :height="320" :width="520">
       <div class="dailog dailog-close">
-        <div class="dailog-hd">售后</div>
+        <div class="dailog-hd">{{ $t('trade.aftersale.414246-10') }}</div>
         <div class="dailog-bd">
           <!-- <span>订单号：{{this.$route.params.id}}</span> -->
           <div>
             <SpForm ref="formClose" :model="formClose" :rules="rulesClose">
               <SpFormItem prop="type">
-                <span style="display: inline-block; width: 90px; text-align: right">服务类型:</span>
-                <SpSelect style="width: 350px" :data="typeData" v-model="formClose.type" placeholder="服务类型"></SpSelect>
+                <span style="display: inline-block; width: 90px; text-align: right">{{ $t('trade.aftersale.414246-11') }}</span>
+                <SpSelect style="width: 350px" :data="typeData" v-model="formClose.type" :placeholder="$t('trade.aftersale.414246-12')"></SpSelect>
               </SpFormItem>
               <SpFormItem prop="reason">
-                <span style="display: inline-block; width: 90px; text-align: right">退款理由:</span>
-                <SpSelect style="width: 350px" :data="reasonData" v-model="formClose.reason" placeholder="退款理由"></SpSelect>
+                <span style="display: inline-block; width: 90px; text-align: right">{{ $t('trade.aftersale.414246-13') }}</span>
+                <SpSelect style="width: 350px" :data="reasonData" v-model="formClose.reason" :placeholder="$t('trade.aftersale.414246-14')"></SpSelect>
               </SpFormItem>
               <SpFormItem prop="description">
-                <span style="display: inline-block; width: 90px; text-align: right">申请退款说明:</span>
-                <SpInput style="width: 350px" v-model="formClose.description" placeholder="申请退款说明" />
+                <span style="display: inline-block; width: 90px; text-align: right">{{ $t('trade.aftersale.414246-15') }}</span>
+                <SpInput style="width: 350px" v-model="formClose.description" :placeholder="$t('trade.aftersale.414246-16')" />
               </SpFormItem>
             </SpForm>
           </div>
         </div>
         <div class="dailog-ft">
-          <button class="btn btn-primary" @click="clickBtn('售后确认')">确认</button>
-          <button class="btn" @click="clickBtn('取消')">取消</button>
+          <button class="btn btn-primary" @click="clickBtn($t('trade.aftersale.414246-17'))">{{ $t('trade.aftersale.414246-18') }}</button>
+          <button class="btn" @click="clickBtn($t('trade.aftersale.414246-19'))">{{ $t('trade.aftersale.414246-19') }}</button>
         </div>
       </div>
     </SpModal>
     <!-- 填写物流信息 -->
     <SpModal v-model="dialogLog" :height="320" :width="520">
       <div class="dailog dailog-close">
-        <div class="dailog-hd">填写物流</div>
+        <div class="dailog-hd">{{ $t('trade.aftersale.414246-8') }}</div>
         <div class="dailog-bd">
           <!-- <span>订单号：{{this.$route.params.id}}</span> -->
           <div>
             <SpForm ref="logisticsForm" :model="logisticsForm" :rules="logisticsRules">
               <SpFormItem prop="corp_code">
-                <span style="display: inline-block; width: 90px; text-align: right">物流公司:</span>
-                <SpSelect style="width: 350px" class="logSpSelect" :data="logisticsText" v-model="logisticsForm.corp_code" placeholder="请选择物流公司"></SpSelect>
+                <span style="display: inline-block; width: 90px; text-align: right">{{ $t('trade.aftersale.414246-20') }}</span>
+                <SpSelect style="width: 350px" class="logSpSelect" :data="logisticsText" v-model="logisticsForm.corp_code" :placeholder="$t('trade.aftersale.414246-21')"></SpSelect>
               </SpFormItem>
               <SpFormItem prop="logi_no">
-                <span style="display: inline-block; width: 90px; text-align: right">物流单号:</span>
-                <SpInput style="width: 350px" v-model="logisticsForm.logi_no" placeholder="物流单号" />
+                <span style="display: inline-block; width: 90px; text-align: right">{{ $t('trade.aftersale.414246-22') }}</span>
+                <SpInput style="width: 350px" v-model="logisticsForm.logi_no" :placeholder="$t('trade.aftersale.414246-23')" />
               </SpFormItem>
             </SpForm>
           </div>
         </div>
         <div class="dailog-ft">
-          <button class="btn btn-primary" @click="clickBtn('物流确认')">确认</button>
-          <button class="btn" @click="clickBtn('取消')">取消</button>
+          <button class="btn btn-primary" @click="clickBtn($t('trade.aftersale.414246-24'))">{{ $t('trade.aftersale.414246-18') }}</button>
+          <button class="btn" @click="clickBtn($t('trade.aftersale.414246-19'))">{{ $t('trade.aftersale.414246-19') }}</button>
         </div>
       </div>
     </SpModal>
@@ -486,23 +486,23 @@ export default {
   data() {
     return {
       step: 0,
-      // stepsText: ['待处理', '处理中', '已处理', '已驳回', '已关闭'],
+      // stepsText: [this.$t('trade.aftersale.414246-39'), '处理中', this.$t('trade.aftersale.414246-43'), this.$t('trade.aftersale.414246-42'), this.$t('trade.aftersale.414246-32')],
       stepsData:[{
         icon:'ec-icon-post',
-        text:'提交申请',
+        text:this.$t('trade.aftersale.414246-25'),
         // time:'2020-10-02 18:15:46'
         time:''
       },{
         icon:'ec-icon-time',
-        text:'等待审核',
+        text:this.$t('trade.aftersale.414246-26'),
         time:''
       },{
         icon:'ec-icon-deliver',
-        text:'等待寄回',
+        text:this.$t('trade.aftersale.414246-27'),
         time:''
       },{
         icon:'ec-icon-vipcard',
-        text:'处理退款',
+        text:this.$t('trade.aftersale.414246-28'),
         time:''
       }],
       orderInfo: {},
@@ -510,50 +510,50 @@ export default {
       orderGoodData: {}, //商品信息
       orderTotalData: {}, //总价信息
       orderStatusText: {
-        NOTPAY: '未付款',
-        PAYED: '已付款',
-        WAIT_BUYER_CONFIRM: '已发货，待收货',
-        FAIL: '已关闭',
-        CANCEL: '已取消',
-        PAYED_WAIT_PROCESS: '退款处理中',
-        PAYED_PARTAIL: '部分发货',
-        CLOSED: '已关闭',
+        NOTPAY: this.$t('trade.aftersale.414246-29'),
+        PAYED: this.$t('trade.aftersale.414246-30'),
+        WAIT_BUYER_CONFIRM: this.$t('trade.aftersale.414246-31'),
+        FAIL: this.$t('trade.aftersale.414246-32'),
+        CANCEL: this.$t('trade.aftersale.414246-33'),
+        PAYED_WAIT_PROCESS: this.$t('trade.aftersale.414246-34'),
+        PAYED_PARTAIL: this.$t('trade.aftersale.414246-35'),
+        CLOSED: this.$t('trade.aftersale.414246-32'),
       }, //状态字典
       // aftersalesTypeText: {
-      //   ONLY_REFUND: '仅退款',
-      //   REFUND_GOODS: '退货退款',
-      //   EXCHANGING_GOODS: '换货',
+      //   ONLY_REFUND: this.$t('trade.aftersale.414246-36'),
+      //   REFUND_GOODS: this.$t('trade.aftersale.414246-37'),
+      //   EXCHANGING_GOODS: this.$t('trade.aftersale.414246-38'),
       //   0: '等待商家审核',
       //   1: '商家接受申请，等回寄',
       //   2: '消费者回寄，等待商家收货确认',
       //   3: '申请已驳回',
       //   4: '商家已发货',
-      //   5: '退款驳回',
-      //   6: '退款成功',
+      //   5: this.$t('trade.aftersale.414246-44'),
+      //   6: this.$t('trade.aftersale.414246-58'),
       //   7: '售后关闭',
       // },
       aftersalesTypeText: {
-        ONLY_REFUND: '仅退款',
-        REFUND_GOODS: '退货退款',
-        EXCHANGING_GOODS: '换货',
-        0: '待处理',
-        1: '待回寄',
-        2: '已回寄',
-        3: '已驳回',
-        4: '已处理',
-        5: '退款驳回',
-        6: '退款完成',
-        7: '已关闭',
+        ONLY_REFUND: this.$t('trade.aftersale.414246-36'),
+        REFUND_GOODS: this.$t('trade.aftersale.414246-37'),
+        EXCHANGING_GOODS: this.$t('trade.aftersale.414246-38'),
+        0: this.$t('trade.aftersale.414246-39'),
+        1: this.$t('trade.aftersale.414246-40'),
+        2: this.$t('trade.aftersale.414246-41'),
+        3: this.$t('trade.aftersale.414246-42'),
+        4: this.$t('trade.aftersale.414246-43'),
+        5: this.$t('trade.aftersale.414246-44'),
+        6: this.$t('trade.aftersale.414246-45'),
+        7: this.$t('trade.aftersale.414246-32'),
       },
       aftersalesTypeTextContent: {
-        0: '等待商家处理',
-        1: '待回寄',
-        2: '已回寄',
-        3: '您的申请已驳回',
-        4: '已发货',
-        5: '您的申请已驳回',
-        6: '退款已处理',
-        7: '售后已关闭',
+        0: this.$t('trade.aftersale.414246-46'),
+        1: this.$t('trade.aftersale.414246-40'),
+        2: this.$t('trade.aftersale.414246-41'),
+        3: this.$t('trade.aftersale.414246-47'),
+        4: this.$t('trade.aftersale.414246-48'),
+        5: this.$t('trade.aftersale.414246-47'),
+        6: this.$t('trade.aftersale.414246-49'),
+        7: this.$t('trade.aftersale.414246-50'),
       },
       orderStatus: '',
       aftersalesInfo: {},
@@ -563,16 +563,16 @@ export default {
         reason: '',
         description: '',
       },
-      rulesClose: { type: [{ validate: 'required', message: '选择退款类型' }], reason: [{ validate: 'required', message: '选择退款原因' }] },
+      rulesClose: { type: [{ validate: 'required', message: this.$t('trade.aftersale.414246-51') }], reason: [{ validate: 'required', message: this.$t('trade.aftersale.414246-52') }] },
       typeData: [
-        { label: '仅退款', value: 'ONLY_REFUND' },
-        { label: '退货退款', value: 'REFUND_GOODS' },
+        { label: this.$t('trade.aftersale.414246-36'), value: 'ONLY_REFUND' },
+        { label: this.$t('trade.aftersale.414246-37'), value: 'REFUND_GOODS' },
       ],
       reasonData: [
-        { label: '物流破损', value: '物流破损' },
-        { label: '产品描述与实物不符', value: '产品描述与实物不符' },
-        { label: '质量问题', value: '质量问题' },
-        { label: '皮肤过敏', value: '皮肤过敏' },
+        { label: this.$t('trade.aftersale.414246-53'), value: this.$t('trade.aftersale.414246-53') },
+        { label: this.$t('trade.aftersale.414246-54'), value: this.$t('trade.aftersale.414246-54') },
+        { label: this.$t('trade.aftersale.414246-55'), value: this.$t('trade.aftersale.414246-55') },
+        { label: this.$t('trade.aftersale.414246-56'), value: this.$t('trade.aftersale.414246-56') },
       ],
       dialogLog: false,
       logisticsForm: {
@@ -580,8 +580,8 @@ export default {
         logi_no: '',
       },
       logisticsRules: {
-        corp_code: [{ validate: 'required', message: '请选择物流公司', trigger: 'change' }],
-        logi_no: [{ validate: 'required', message: '请输入物流单号', trigger: 'blur' }],
+        corp_code: [{ validate: 'required', message: this.$t('trade.aftersale.414246-21'), trigger: 'change' }],
+        logi_no: [{ validate: 'required', message: this.$t('trade.aftersale.414246-57'), trigger: 'blur' }],
       },
     }
   },
@@ -668,76 +668,76 @@ export default {
         // 正常退款
         0:[{
           icon:'ec-icon-post',
-          text:'提交申请',
+          text:this.$t('trade.aftersale.414246-25'),
           // time:'2020-10-02 18:15:46'
           time:''
         },{
           icon:'ec-icon-time',
-          text:'等待审核',
+          text:this.$t('trade.aftersale.414246-26'),
           time:''
         },{
           icon:'ec-icon-vipcard',
-          text:'退款成功',//审核驳回
+          text:this.$t('trade.aftersale.414246-58'),//审核驳回
           time:''
         }],
         // 审核驳回
         1:[{
           icon:'ec-icon-post',
-          text:'提交申请',
+          text:this.$t('trade.aftersale.414246-25'),
           time:''
         },{
           icon:'ec-icon-time',
-          text:'等待审核',
+          text:this.$t('trade.aftersale.414246-26'),
           time:''
         },{
           icon:'ec-icon-vipcard',
-          text:'审核驳回',
+          text:this.$t('trade.aftersale.414246-59'),
           time:''
         }],
         // 退款退款待寄回
         2:[{
           icon:'ec-icon-post',
-          text:'提交申请',
+          text:this.$t('trade.aftersale.414246-25'),
           time:''
         },{
           icon:'ec-icon-time',
-          text:'等待审核',
+          text:this.$t('trade.aftersale.414246-26'),
           time:''
         },{
           icon:'ec-icon-deliver',
-          text:'等待寄回',
+          text:this.$t('trade.aftersale.414246-27'),
           time:''
         },{
           icon:'ec-icon-vipcard',
-          text:'处理退款',
+          text:this.$t('trade.aftersale.414246-28'),
           time:''
         }],
         // 退款退款已寄回之后驳回
         3:[{
           icon:'ec-icon-post',
-          text:'提交申请',
+          text:this.$t('trade.aftersale.414246-25'),
           time:''
         },{
           icon:'ec-icon-time',
-          text:'等待审核',
+          text:this.$t('trade.aftersale.414246-26'),
           time:''
         },{
           icon:'ec-icon-deliver',
-          text:'等待寄回',
+          text:this.$t('trade.aftersale.414246-27'),
           time:''
         },{
           icon:'ec-icon-vipcard',
-          text:'退款驳回',
+          text:this.$t('trade.aftersale.414246-44'),
           time:''
         }],
         // 用户撤销或关闭
         4:[{
           icon:'ec-icon-post',
-          text:'提交申请',
+          text:this.$t('trade.aftersale.414246-25'),
           time:''
         },{
           icon:'ec-icon-time',
-          text:'用户撤销或关闭',
+          text:this.$t('trade.aftersale.414246-60'),
           time:''
         }]
       }
@@ -760,9 +760,9 @@ export default {
         this.stepsData = stepTextStatus[3]
       }else if(progress == 7){
         this.stepsData = stepTextStatus[4]
-      }else if(aftersales_type == 'ONLY_REFUND'){     // ONLY_REFUND: '仅退款',
+      }else if(aftersales_type == 'ONLY_REFUND'){     // ONLY_REFUND: this.$t('trade.aftersale.414246-36'),
         this.stepsData = stepTextStatus[0]
-      }else if(aftersales_type == 'REFUND_GOODS'){    // REFUND_GOODS: '退货退款',
+      }else if(aftersales_type == 'REFUND_GOODS'){    // REFUND_GOODS: this.$t('trade.aftersale.414246-37'),
         this.stepsData = stepTextStatus[2]
       }
 
@@ -779,22 +779,22 @@ export default {
     },
     clickBtn(type) {
       switch (type) {
-        case '取消':
+        case this.$t('trade.aftersale.414246-19'):
           this.dailogClose = false
           break
-        case '修改申请':
+        case this.$t('trade.aftersale.414246-61'):
           let formClose = JSON.parse(JSON.stringify(this.aftersalesInfo))
           formClose.type = formClose.aftersales_type
           this.formClose = formClose
           this.dailogClose = true
           break
-        case '填写物流':
+        case this.$t('trade.aftersale.414246-8'):
           this.dialogLog = true
           break
 
-        case '撤销申请':
+        case this.$t('trade.aftersale.414246-7'):
           this.$Modal.confirm({
-            title: '提示',
+            title: this.$t('trade.aftersale.414246-62'),
             content: '<p>请确认是否撤销?</p>',
             onOk: async () => {
               await closeAftersales({ aftersales_bn: this.aftersalesInfo.aftersales_bn })
@@ -804,7 +804,7 @@ export default {
           })
 
           break
-        case '售后确认':
+        case this.$t('trade.aftersale.414246-17'):
           {
             this.$refs['formClose'].validate((valid, errors) => {
               if (valid) {
@@ -819,14 +819,14 @@ export default {
                 if (this.aftersalesInfo.progress == 0) {
                   params.aftersales_bn = this.aftersalesInfo.aftersales_bn
                   editAftersales(params).then(() => {
-                    this.$Message.success('修改成功')
+                    this.$Message.success(this.$t('trade.aftersale.414246-64'))
                     Object.assign(this.$data, this.$options.data())
                     this.getInfo()
                   })
                 } else {
                   params.return_type = this.formClose.type=="REFUND_GOODS"? "logistics": ""
                   creatAftersales(params).then(() => {
-                    this.$Message.success('发起成功')
+                    this.$Message.success(this.$t('trade.aftersale.414246-65'))
                     this.getInfo()
                   })
                 }
@@ -834,7 +834,7 @@ export default {
             })
           }
           break
-        case '物流确认':
+        case this.$t('trade.aftersale.414246-24'):
           {
             // console.log(this.$refs['logisticsForm'],this.$refs['logisticsForm'].validate(),"this.$refs['formClose'].validate")
 
@@ -846,7 +846,7 @@ export default {
                   corp_code: this.logisticsForm.corp_code,
                 }
                 sendbackAftersales(params).then((res) => {
-                  this.$Message.success('填写成功')
+                  this.$Message.success(this.$t('trade.aftersale.414246-66'))
                   this.getInfo()
                   Object.assign(this.$data, this.$options.data())
                   

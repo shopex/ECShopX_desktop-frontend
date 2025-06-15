@@ -26,11 +26,11 @@
   <div class="sp-address-picker" :class="{'vertical' : vertical}">
     <div class="y-s">
       <!-- {{this.province}} -->
-      <SpSelect v-model="province" :disabled="disabled" :data="provinceDs" placeholder="请选择省" @change="onChangeProvince"></SpSelect>
+      <SpSelect v-model="province" :disabled="disabled" :data="provinceDs" :placeholder="$t('address-picker.index.863802-0')" @change="onChangeProvince"></SpSelect>
     </div>
     <div class="y-s">
       <!-- {{this.city}} -->
-      <SpSelect v-model="city" :disabled="disabled" :data="cityDs" :value="1" placeholder="请选择市" @change="onChangeCity"></SpSelect>
+      <SpSelect v-model="city" :disabled="disabled" :data="cityDs" :value="1" :placeholder="$t('address-picker.index.863802-1')" @change="onChangeCity"></SpSelect>
     </div>
     <div class="y-s" v-if="showCountry">
       <SpSelect
@@ -38,7 +38,7 @@
         :disabled="disabled || county_disabled"
         :data="countyDs"
         :value="1"
-        placeholder="区"
+        :placeholder="$t('address-picker.index.863802-2')"
         @change="onChangeCounty"
       ></SpSelect>
     </div>

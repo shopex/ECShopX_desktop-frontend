@@ -8,70 +8,70 @@
       style="{height: 372px;}"
     >
       <SpFormItem prop="merchant_name" class="form-select">
-        <span class="label-text"><span class="must-icon">*</span>企业名称</span>
+        <span class="label-text"><span class="must-icon">*</span>{{ $t('comp.settleformTwo.800885-0') }}</span>
         <SpInput v-model="info.merchant_name" />
       </SpFormItem>
       <SpFormItem prop="social_credit_code_id" class="form-select">
-        <span class="label-text"><span class="must-icon">*</span>统一社会信用代码</span>
+        <span class="label-text"><span class="must-icon">*</span>{{ $t('comp.settleformTwo.800885-1') }}</span>
         <SpInput v-model="info.social_credit_code_id" />
       </SpFormItem>
       <SpFormItem prop="regions_id" class="form-select">
-        <span class="label-text"><span class="must-icon">*</span>所在省市</span>
+        <span class="label-text"><span class="must-icon">*</span>{{ $t('comp.settleformTwo.800885-2') }}</span>
         <div class="member-input-text">
           <SpAddress v-model="info.regions_id" @onChange="changeRegions" />
         </div>
       </SpFormItem>
       <SpFormItem prop="address" class="form-select">
-        <span class="label-text"><span class="must-icon">*</span>详细地址</span>
+        <span class="label-text"><span class="must-icon">*</span>{{ $t('comp.settleformTwo.800885-3') }}</span>
         <SpInput class="address-input" v-model="info.address" />
       </SpFormItem>
       <SpFormItem prop="legal_name" class="form-select">
-        <span class="label-text"><span class="must-icon">*</span>{{nameTip}}姓名</span>
+        <span class="label-text"><span class="must-icon">*</span>{{nameTip}}{{ $t('comp.settleformTwo.800885-4') }}</span>
         <SpInput v-model="info.legal_name" />
       </SpFormItem>
       <SpFormItem prop="legal_cert_id" class="form-select">
-        <span class="label-text"> <span class="must-icon">*</span>身份证号码</span>
+        <span class="label-text"> <span class="must-icon">*</span>{{ $t('comp.settleformTwo.800885-5') }}</span>
         <SpInput v-model="info.legal_cert_id" />
       </SpFormItem>
       <SpFormItem prop="legal_mobile" class="form-select">
-        <span class="label-text"> <span class="must-icon">*</span>手机号码</span>
+        <span class="label-text"> <span class="must-icon">*</span>{{ $t('comp.settleformTwo.800885-6') }}</span>
         <SpInput v-model="info.legal_mobile" />
       </SpFormItem>
       <SpFormItem prop="bank_acct_type" class="form-select ">
         <span class="label-text">
           <span class="must-icon">*</span>
-          结算银行类型
+          {{ $t('comp.settleformTwo.800885-7') }}
         </span>
         <SpRadioGroup v-model="info.bank_acct_type">
-          <SpRadio label="1" :theme="themeColor">对公</SpRadio>
-          <SpRadio label="2" :theme="themeColor">对私</SpRadio>
+          <SpRadio label="1" :theme="themeColor">{{ $t('comp.settleformTwo.800885-8') }}</SpRadio>
+          <SpRadio label="2" :theme="themeColor">{{ $t('comp.settleformTwo.800885-9') }}</SpRadio>
         </SpRadioGroup>
       </SpFormItem>
       <SpFormItem prop="card_id_mask" class="form-select">
-        <span class="label-text"> <span class="must-icon">*</span>结算银行账号</span>
+        <span class="label-text"> <span class="must-icon">*</span>{{ $t('comp.settleformTwo.800885-10') }}</span>
         <SpInput v-model="info.card_id_mask" />
       </SpFormItem>
       <SpFormItem prop="bank_name" v-if="info.bank_acct_type == 1" class="form-select bank_info">
-        <span class="label-text"> <span class="must-icon">*</span>结算银行</span>
+        <span class="label-text"> <span class="must-icon">*</span>{{ $t('comp.settleformTwo.800885-11') }}</span>
         <div @click="showBank" class="bank_input">
-          <SpInput v-model="info.bank_name" class="bank_input" placeholder="搜索银行名称" />
+          <SpInput v-model="info.bank_name" class="bank_input" :placeholder="$t('comp.settleformTwo.800885-12')" />
         </div>
         <div v-if="!info.bank_name && rulesShow" class="form-item__error-message">
-          请请选择结算银行
+          {{ $t('comp.settleformTwo.800885-13') }}
         </div>
       </SpFormItem>
       <SpFormItem prop="bank_mobile	" v-if="info.bank_acct_type == 2" class="form-select">
-        <span class="label-text"> <span class="must-icon">*</span>绑定手机号</span>
+        <span class="label-text"> <span class="must-icon">*</span>{{ $t('comp.settleformTwo.800885-14') }}</span>
         <SpInput v-model="info.bank_mobile" />
         <div v-if="!info.bank_mobile && rulesShow" class="form-item__error-message">
-          请填写绑定手机号
+          {{ $t('comp.settleformTwo.800885-15') }}
         </div>
       </SpFormItem>
     </SpForm>
-    <p class="tips">• 结算银行卡持卡人姓名要与{{nameTip}}姓名一致</p>
+    <p class="tips">{{ $t('comp.settleformTwo.800885-16') }}{{nameTip}}{{ $t('comp.settleformTwo.800885-17') }}</p>
     <!-- 银行弹出框 -->
     <SpModal v-model="dailogVisible" :width="600">
-      <div slot="title" class="confirm-title">选择结算银行</div>
+      <div slot="title" class="confirm-title">{{ $t('comp.settleformTwo.800885-18') }}</div>
       <div class="confirm-info">
         <SpInput v-model="searchBank.bank_name" @input="changeSearch" />
         <!-- <div class="chooseBanck" @click="changeSearch">{{searchBank.bank_name}}</div> -->
@@ -94,8 +94,8 @@
           />
         </div>
         <div class="btns">
-          <div class="btn" @click="clickCancel">取消</div>
-          <div class="btn btn-ok" @click="clickSumbit">确认</div>
+          <div class="btn" @click="clickCancel">{{ $t('comp.settleformTwo.800885-19') }}</div>
+          <div class="btn btn-ok" @click="clickSumbit">{{ $t('comp.settleformTwo.800885-20') }}</div>
         </div>
       </div>
     </SpModal>
@@ -111,63 +111,63 @@ export default {
     var unifiedCode = (rule, value, callback) => {
       let reg = /^([0-9A-HJ-NPQRTUWXY]{2}\d{6}[0-9A-HJ-NPQRTUWXY]{10}|[1-9]\d{14})$/
       if (!value) {
-        callback('请填写统一社会信用代码')
+        callback(this.$t('comp.settleformTwo.800885-21'))
       } else if (!reg.test(value)) {
-        callback('请填写正确的统一社会信用代码')
+        callback(this.$t('comp.settleformTwo.800885-22'))
       }
       callback()
     }
     var idCard = (rule, value, callback) => {
       let reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/
       if (!value) {
-        callback('请输入身份证号码')
+        callback(this.$t('comp.settleformTwo.800885-23'))
       } else if (!reg.test(value)) {
-        callback('请填写正确的身份证号码')
+        callback(this.$t('comp.settleformTwo.800885-24'))
       }
       callback()
     }
     var mobile = (rule, value, callback) => {
       let reg = /^1\d{10}$/
       if (!value) {
-        callback('请输入手机号码')
+        callback(this.$t('comp.settleformTwo.800885-25'))
       } else if (!reg.test(value)) {
-        callback('请填写正确的手机号码')
+        callback(this.$t('comp.settleformTwo.800885-26'))
       }
       callback()
     }
     var area = (rule, value, callback) => {
       if (value.length == 0) {
-        callback('请选择所在省市')
+        callback(this.$t('comp.settleformTwo.800885-27'))
       }
       callback()
     }
     var companyName = (rule, value, callback) => {
       if (!value) {
-        callback('请填写企业名称')
+        callback(this.$t('comp.settleformTwo.800885-28'))
       }
       callback()
     }
     var address = (rule, value, callback) => {
       if (!value) {
-        callback('请输入详细地址')
+        callback(this.$t('comp.settleformTwo.800885-29'))
       }
       callback()
     }
     var nameInput = (rule, value, callback) => {
       if (!value) {
-        callback('请输入法人姓名')
+        callback(this.$t('comp.settleformTwo.800885-30'))
       }
       callback()
     }
     var bankType = (rule, value, callback) => {
       if (!value) {
-        callback('请选择请选择结算银行类型所在省市')
+        callback(this.$t('comp.settleformTwo.800885-31'))
       }
       callback()
     }
     var bankCardId = (rule, value, callback) => {
       if (!value) {
-        callback('请输入结算银行账号')
+        callback(this.$t('comp.settleformTwo.800885-32'))
       }
       callback()
     }
@@ -199,26 +199,26 @@ export default {
       },
       chooseBanks: '',
       total: 0,
-      nameTip: '负责人',
+      nameTip: this.$t('comp.settleformTwo.800885-33'),
       accountRules: {
-        merchant_name: [{ validate: companyName, message: '请填写企业名称' }],
+        merchant_name: [{ validate: companyName, message: this.$t('comp.settleformTwo.800885-28') }],
         social_credit_code_id: [{ validate: unifiedCode }],
-        regions_id: [{ validate: area, message: '请选择所在省市' }],
-        address: [{ validate: address, message: '请输入详细地址' }],
-        legal_name: [{ validate: nameInput, message: '请输入法人姓名' }],
-        legal_cert_id: [{ validate: idCard, message: '请输入身份证号码' }],
-        legal_mobile: [{ validate: mobile, message: '请输入手机号码' }],
-        bank_acct_type: [{ validate: bankType, message: '请选择结算银行类型' }],
-        card_id_mask: [{ validate: bankCardId, message: '请输入结算银行账号' }]
+        regions_id: [{ validate: area, message: this.$t('comp.settleformTwo.800885-27') }],
+        address: [{ validate: address, message: this.$t('comp.settleformTwo.800885-29') }],
+        legal_name: [{ validate: nameInput, message: this.$t('comp.settleformTwo.800885-30') }],
+        legal_cert_id: [{ validate: idCard, message: this.$t('comp.settleformTwo.800885-23') }],
+        legal_mobile: [{ validate: mobile, message: this.$t('comp.settleformTwo.800885-25') }],
+        bank_acct_type: [{ validate: bankType, message: this.$t('comp.settleformTwo.800885-34') }],
+        card_id_mask: [{ validate: bankCardId, message: this.$t('comp.settleformTwo.800885-32') }]
         // bank_name: [{ validate: bankName, message: '请选择结算银行' }]
       }
     }
   },
   created() {
     if (this.typeName == 'enterprise') {
-      this.nameTip = '法人';
+      this.nameTip = this.$t('comp.settleformTwo.800885-35');
     } else if (this.typeName == 'soletrader') {
-      this.nameTip = '负责人';
+      this.nameTip = this.$t('comp.settleformTwo.800885-33');
     }
     console.log('this.formInfo',this.formInfo);
 

@@ -5,7 +5,7 @@
     <div class="container">
       <div class="container__btn" :style="{ backgroundColor: '#FF5D02', color: '#FFFFFF', fontWeight:'800'}"
         @mousedown="tagClicked(-1)">
-        全部分类
+        {{ $t('shops.near.137693-0') }}
       </div>
       <div class="navs-con">
         <span class="nav-item" v-for="(item, index) in navList" :key="`nav-item__${index}`"
@@ -13,7 +13,7 @@
           {{ item }}
         </span>
         <div class="shop_serch">
-          <input class="search-input" v-model="keywords" placeholder="请输入" type="text" />
+          <input class="search-input" v-model="keywords" :placeholder="$t('shops.near.137693-1')" type="text" />
           <i class="espier-icon espier-icon-sousuo-01" @click="shopSearch"></i>
         </div>
       </div>
@@ -37,15 +37,15 @@
                   <div class="shop_list_item_right__concern" @click="collectShops(shop)">
                     <div class="shop_collection_not" v-if="!shop.collection">
                       <i class="new_iconfont icon-new-pc-shoucang"></i>
-                      <span class="shop_list_item_right__concern_text">关注店铺</span>
+                      <span class="shop_list_item_right__concern_text">{{ $t('shops.near.137693-2') }}</span>
                     </div>
                     <div class="shop_collection" v-else>
                       <i class="new_iconfont icon-new-pc-shoucang" style="color: #FF5D02;"></i>
-                      <span class="shop_list_item_right__concern_text" style="color: #FF5D02;">取消关注</span>
+                      <span class="shop_list_item_right__concern_text" style="color: #FF5D02;">{{ $t('shops.near.137693-3') }}</span>
                     </div>
                   </div>
                   <div class="shop_list_item_right__distance">
-                    <span class="shop_list_item_right__distance_text">距离
+                    <span class="shop_list_item_right__distance_text">{{ $t('shops.near.137693-4') }}
                       {{parseFloat(shop.distance).toFixed(2)}}{{shop.distance_unit}}</span>
                   </div>
                 </div>
@@ -60,7 +60,7 @@
                   </NuxtLink>
 
                   <br />
-                  <span class="shop_list_item_content__info">评论 {{shop.business}} 月销 {{shop.sales_count}}</span>
+                  <span class="shop_list_item_content__info">{{ $t('shops.near.137693-5') }} {{shop.business}} {{ $t('shops.near.137693-6') }} {{shop.sales_count}}</span>
                 </div>
 
               </li>
@@ -83,7 +83,7 @@
     components: {},
     data() {
       return {
-        navList: ["综合排序", "销量", "距离"],
+        navList: [this.$t('shops.near.137693-7'), this.$t('shops.near.137693-8'), this.$t('shops.near.137693-4')],
         keywords: '',
         tagList: [],
         allShopList: [],
@@ -111,10 +111,10 @@
         script.charset = 'utf-8'
         script.src = `https://api.map.baidu.com/api?v=2.0&ak=${baiduKey}&callback=init`
         document.body.appendChild(script)
-        console.log("动态加载SDK")
+        console.log(this.$t('shops.near.137693-9'))
       },
       initMap(id) {
-        console.log("地图初始化")
+        console.log(this.$t('shops.near.137693-10'))
         // eslint-disable-next-line no-undef
         var map = new BMap.Map("map-container1")
         this.localPosition()
@@ -145,9 +145,9 @@
                 lng: r.point.lng,
                 show_discount: 1,
                 company_id: 1,
-                province: r.point.lat ? addComp.province : '北京市',
-                city: r.point.lat ? addComp.city : '北京市',
-                area: r.point.lat ? addComp.district : '昌平区',
+                province: r.point.lat ? addComp.province : this.$t('shops.near.137693-11'),
+                city: r.point.lat ? addComp.city : this.$t('shops.near.137693-11'),
+                area: r.point.lat ? addComp.district : this.$t('shops.near.137693-12'),
                 // 根据经纬度或地区查询
                 type: r.point.lat ? 0 : 1,
                 sort_type: 1
@@ -203,13 +203,13 @@
           const data = await this.$api.member.removeCollectionStore(shop.distributor_id)
           if (!data.message) {
             shop.collection = !shop.collection
-            this.$Message.success('取消成功')
+            this.$Message.success(this.$t('shops.near.137693-14'))
           }
         } else {
           const data = await this.$api.member.addCollectionStore(shop.distributor_id)
           if (!data.message) {
             shop.collection = !shop.collection
-            this.$Message.success('收藏成功')
+            this.$Message.success(this.$t('shops.near.137693-15'))
           }
         }
         var list = []

@@ -319,11 +319,11 @@
 <template>
   <div class="page-checkout">
     <div class="container clearfix">
-      <div class="checkout-title">商品结算</div>
+      <div class="checkout-title">{{ $t('pointitems.checkout.946036-0') }}</div>
 
       <div class="content-body clearfix">
         <div class="content-item">
-          <h4 class="content-item-hd">选择取货方式</h4>
+          <h4 class="content-item-hd">{{ $t('pointitems.checkout.946036-1') }}</h4>
           <div class="content-item-bd address">
             <div
               class="pick-btn"
@@ -341,7 +341,7 @@
         </div>
         <!-- 收货地址 -->
         <div class="address-list content-item" v-if="curAddressIndex == 0">
-          <h4 class="content-item-hd">取货地址</h4>
+          <h4 class="content-item-hd">{{ $t('pointitems.checkout.946036-2') }}</h4>
           <div class="content-item-bd">
             <template v-for="(item, index) in addressList">
               <div
@@ -353,27 +353,27 @@
                 :key="index"
               >
                 <span class="address">{{ addressItem(item) }}</span>
-                <span class="ly-fn-a" @click.stop="clickAddress(item, 'put')">修改本地址</span>
+                <span class="ly-fn-a" @click.stop="clickAddress(item, 'put')">{{ $t('pointitems.checkout.946036-3') }}</span>
                 <span v-if="item.is_def" style="display: inline-block; padding-left: 20px"
-                  >默认地址</span
+                  >{{ $t('pointitems.checkout.946036-4') }}</span
                 >
               </div>
             </template>
           </div>
-          <div class="content-item-btn" @click.stop="clickAddress('', 'post')">使用新地址</div>
+          <div class="content-item-btn" @click.stop="clickAddress('', 'post')">{{ $t('pointitems.checkout.946036-5') }}</div>
         </div>
         <div class="content-item" v-if="curAddressIndex == 1">
-          <h4 class="content-item-hd">收货信息</h4>
+          <h4 class="content-item-hd">{{ $t('pointitems.checkout.946036-6') }}</h4>
           <div class="content-item-bd ziti" v-if="zitiAddress">
             <div class="ziti-name">{{ zitiAddress.name }}</div>
             <div class="ziti-address">{{ zitiAddress.store_address }}</div>
-            <div class="ziti-time">营业时间：{{ zitiAddress.hour }}</div>
-            <div class="ziti-phone">联系电话：{{ zitiAddress.phone }}</div>
+            <div class="ziti-time">{{ $t('pointitems.checkout.946036-7') }}{{ zitiAddress.hour }}</div>
+            <div class="ziti-phone">{{ $t('pointitems.checkout.946036-8') }}{{ zitiAddress.phone }}</div>
           </div>
         </div>
 
         <div class="content-item">
-          <h4 class="content-item-hd">商品清单</h4>
+          <h4 class="content-item-hd">{{ $t('pointitems.checkout.946036-9') }}</h4>
           <div class="content-item-bd">
             <!-- <h4>onexbbc自营店（自营店铺）自营店</h4> -->
             <table class="table-body">
@@ -398,7 +398,7 @@
                         item.item_name
                       }}</span>
                     </td>
-                    <td class="text-center">{{ item.item_point }} 积分</td>
+                    <td class="text-center">{{ item.item_point }} {{ $t('pointitems.checkout.946036-10') }}</td>
                     <td class="text-center">
                       <span class="text-red">x{{ item.num }}</span>
                     </td>
@@ -470,27 +470,27 @@
             <!-- 总重量：
             <span class="text-red">26kg</span>-->
             <div class="total-row">
-              {{ orderData.items_count }}件商品，商品总计：
-              <span class="text-red">{{ orderData.item_point }} 积分</span>
+              {{ orderData.items_count }}{{ $t('pointitems.checkout.946036-11') }}
+              <span class="text-red">{{ orderData.item_point }} {{ $t('pointitems.checkout.946036-10') }}</span>
             </div>
             <div class="total-row">
-              运费：
+              {{ $t('pointitems.checkout.946036-12') }}
               <span class="text-red" v-if="orderData.freight_type == 'cash'"
                 >￥{{ orderData.freight_fee | formatPriceToHundred }}</span
               >
-              <span class="text-red" v-else>{{ `${orderData.freight_fee} 积分` }}</span>
+              <span class="text-red" v-else>{{ `${orderData.freight_fee} ${$t('pointitems.checkout.946036-10')}` }}</span>
             </div>
           </div>
         </div>
         <div class="content-ft">
           <div class="actual-total">
-            应付总额<span
-              >{{ orderData.point }} 积分<span v-if="orderData.total_fee != 0"
+            {{ $t('pointitems.checkout.946036-14') }}<span
+              >{{ orderData.point }} {{ $t('pointitems.checkout.946036-10') }}<span v-if="orderData.total_fee != 0"
                 >+￥{{ orderData.total_fee | formatPriceToHundred }}</span
               ></span
             >
           </div>
-          <div class="content-ft-btn" @click="clickSumit()">提交订单</div>
+          <div class="content-ft-btn" @click="clickSumit()">{{ $t('pointitems.checkout.946036-15') }}</div>
         </div>
       </div>
     </div>
@@ -531,7 +531,7 @@ export default {
       pickActive: 1,
       params: {},
       addressTabs: [
-        { name: '快递', value: 'logistics' }
+        { name: this.$t('pointitems.checkout.946036-16'), value: 'logistics' }
         // { name: '自提', value: 'ziti' },
       ],
       curAddressIndex: 0,
@@ -554,11 +554,11 @@ export default {
       },
       invoiceList: [
         {
-          name: '个人发票',
+          name: this.$t('pointitems.checkout.946036-17'),
           checked: false
         },
         {
-          name: '企业发票',
+          name: this.$t('pointitems.checkout.946036-18'),
           checked: false
         }
       ],
@@ -697,7 +697,7 @@ export default {
       }
       let receipt_type = this.addressTabs[this.curAddressIndex].value
       if (receipt_type == 'logistics' && !this.curAddress) {
-        this.$Message.error('请选择地址')
+        this.$Message.error(this.$t('pointitems.checkout.946036-20'))
         return
       }
       let params = {}
@@ -714,13 +714,13 @@ export default {
             status = false
           }
           if (!status) {
-            this.$Message.error('请输入发票信息')
+            this.$Message.error(this.$t('pointitems.checkout.946036-21'))
             return
           }
         } else {
           if (!invoice.title1) {
             this.invoiceTip.title1 = true
-            this.$Message.error('请输入发票信息')
+            this.$Message.error(this.$t('pointitems.checkout.946036-21'))
             return
           }
         }

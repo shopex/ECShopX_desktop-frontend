@@ -26,7 +26,7 @@
 <template>
   <div class="sp-recommend">
     <div class="sp-recommend__warp">
-      <div class="title">相似单品</div>
+      <div class="title">{{ $t('comps.recommend copy.474596-0') }}</div>
       <GoodsRecommend :data="recList" :slidesPerView="5" :spaceBetween="22"></GoodsRecommend>
     </div>
   </div>

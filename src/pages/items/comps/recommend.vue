@@ -38,7 +38,7 @@
 <template>
   <div class="comps-recommend">
     <div class="recommend-header">
-      <span class="recommend-header__title">推荐商品</span>
+      <span class="recommend-header__title">{{ $t('comps.recommend.573213-0') }}</span>
     </div>
     <div class="recommend-list">
       <div class="recommend-item" v-for="(item, index) in recommendList" :key="`recommend-item__${index}`">

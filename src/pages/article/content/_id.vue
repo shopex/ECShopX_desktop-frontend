@@ -256,7 +256,7 @@
 <template>
   <div class="page-content page-body">
     <div class="page-content__nav">
-      <div class="title"><p>联系我们</p></div>
+      <div class="title"><p>{{ $t('content._id.824364-0') }}</p></div>
     </div>
     <!-- <div class="story-wall pc">
       <img src="~/assets/imgs/resource/20190712/pc/story_01.jpg" alt />
@@ -268,7 +268,7 @@
       <img src="~/assets/imgs/resource/20190712/pc/story_07.jpg" alt />
     </div> -->
     <div class="story-wall pc">
-      <!-- 联系我们 -->
+      <!-- {{ $t('content._id.824364-0') }} -->
       <!-- <div class="article-contanier">
       <div class="des-title">您可以通过以下方式联系我们</div>
       <ul>
@@ -519,29 +519,29 @@
         <div class="content">
           <ul>
             <li>
-              <div class="subtitle">8.8折</div>
-              <h4 class="h4">优惠礼遇</h4>
+              <div class="subtitle">{{ $t('content._id.824364-1') }}</div>
+              <h4 class="h4">{{ $t('content._id.824364-2') }}</h4>
               <div class="des">
-                <b>VIP会员</b>可享天猫AIGLE官方旗舰店内<b>所有正价商品8.8折优惠</b>
+                <b>{{ $t('content._id.824364-3') }}</b>{{ $t('content._id.824364-4') }}<b>{{ $t('content._id.824364-5') }}</b>
               </div>
             </li>
             <li>
               <div class="subtitle">
                 <img src="~/assets/imgs/resource/201911/pc/vip/vip_2.png" alt="" />
               </div>
-              <h4 class="h4">生日礼遇</h4>
+              <h4 class="h4">{{ $t('content._id.824364-6') }}</h4>
               <div class="des">
-                只为在生日遇见最好的您，完善信息，<b>生日月可享单件商品6.6折优惠</b><br />
-                (仅线下店铺)
+                {{ $t('content._id.824364-7') }}<b>{{ $t('content._id.824364-8') }}</b><br />
+                ({{ $t('content._id.824364-9') }})
               </div>
             </li>
             <li>
               <div class="subtitle">
                 <img src="~/assets/imgs/resource/201911/pc/vip/vip_3.png" alt="" />
               </div>
-              <h4 class="h4">尽享礼遇</h4>
+              <h4 class="h4">{{ $t('content._id.824364-10') }}</h4>
               <div class="des">
-                一卡尽享，除天猫AIGLE官方旗舰店外，VIP会员权益同样<b>适用于中国大陆所有AIGLE店铺</b>
+                {{ $t('content._id.824364-11') }}<b>{{ $t('content._id.824364-12') }}</b>
               </div>
             </li>
           </ul>
@@ -567,9 +567,9 @@ export default {
   mounted() {
     analytics.pageReady({
       page: {
-        pageName: '联系我们',
+        pageName: this.$t('content._id.824364-0'),
         pageType: 'content',
-        breadcrumb: '联系我们'
+        breadcrumb: this.$t('content._id.824364-0')
       }
     })
   },

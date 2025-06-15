@@ -4,50 +4,50 @@
 <template>
   <div class="page-cart page-checkout page-body">
     <div class="container">
-      <h2 class="page-title">确认订单</h2>
+      <h2 class="page-title">{{ $t('cart.checkout-old.371702-0') }}</h2>
 
       <div class="cart-wrap">
         <div class="cart-side" v-if="total">
           <div class="checkout-total">
-            <div class="checkout-total-count">共 {{ total.totalQuantity }} 件商品</div>
+            <div class="checkout-total-count">{{ $t('cart.checkout-old.371702-1') }} {{ total.totalQuantity }} {{ $t('cart.checkout-old.371702-2') }}</div>
             <div class="checkout-item">
-              <div class="checkout-item__hd">商品金额：</div>
+              <div class="checkout-item__hd">{{ $t('cart.checkout-old.371702-3') }}</div>
               <div class="checkout-item__bd"><SpPrice :value="total.totalPrice" /></div>
             </div>
             <div class="checkout-item">
-              <div class="checkout-item__hd">运费：</div>
+              <div class="checkout-item__hd">{{ $t('cart.checkout-old.371702-4') }}</div>
               <div class="checkout-item__bd"><SpPrice :value="total.postFee" /></div>
             </div>
             <div class="checkout-item" v-if="total.totalDiscount > 0">
-              <div class="checkout-item__hd">活动优惠：</div>
+              <div class="checkout-item__hd">{{ $t('cart.checkout-old.371702-5') }}</div>
               <div class="checkout-item__bd">-<SpPrice :value="total.totalDiscount" /></div>
             </div>
             <div class="checkout-item" v-if="total.memberDiscount > 0">
-              <div class="checkout-item__hd">会员折扣：</div>
+              <div class="checkout-item__hd">{{ $t('cart.checkout-old.371702-6') }}</div>
               <div class="checkout-item__bd">-<SpPrice :value="total.memberDiscount" /></div>
             </div>
             <div class="checkout-item" v-if="total.pointDiscount > 0">
-              <div class="checkout-item__hd">积分抵扣：</div>
+              <div class="checkout-item__hd">{{ $t('cart.checkout-old.371702-7') }}</div>
               <div class="checkout-item__bd">-<SpPrice :value="total.pointDiscount" /></div>
             </div>
             <div class="checkout-item">
-              <div class="checkout-item__hd">合计：</div>
+              <div class="checkout-item__hd">{{ $t('cart.checkout-old.371702-8') }}</div>
               <div class="checkout-item__bd"><SpPrice :value="total.totalPay" /></div>
             </div>
           </div>
 
           <div class="cart-sec">
-            <div class="cart-sec-hd">付款方式：</div>
+            <div class="cart-sec-hd">{{ $t('cart.checkout-old.371702-9') }}</div>
             <div class="cart-sec-bd">
               <Payments :value="payment" :list="payments" @change="handlePaymentChange" />
             </div>
           </div>
 
           <div class="cart-sec">
-            <div class="cart-sec-hd">发票信息：</div>
+            <div class="cart-sec-hd">{{ $t('cart.checkout-old.371702-10') }}</div>
             <div class="cart-sec-bd">
               <SpRadio class="invoice-radio" type="checkbox" @change="handleToggleInvoiceEditor"
-                >需要发票</SpRadio
+                >{{ $t('cart.checkout-old.371702-11') }}</SpRadio
               >
               <InvoiceEditor
                 v-if="isInvoiceEditorShow"
@@ -58,7 +58,7 @@
           </div>
 
           <div class="checkout-actions">
-            <SpButton type="primary" @click="handleCheckout">立即结算</SpButton>
+            <SpButton type="primary" @click="handleCheckout">{{ $t('cart.checkout-old.371702-12') }}</SpButton>
           </div>
         </div>
 
@@ -69,9 +69,9 @@
                 v-if="addressList && addressList.length > 0"
                 class="btn-edit"
                 @click="toggleAddressPicker"
-                >修改</span
+                >{{ $t('cart.checkout-old.371702-13') }}</span
               >
-              <h3 class="address-h">收货地址</h3>
+              <h3 class="address-h">{{ $t('cart.checkout-old.371702-14') }}</h3>
             </div>
             <div class="cart-sec-bd">
               <div v-if="address" class="address-info">
@@ -90,10 +90,10 @@
                 />
               </SpDpTransition>
               <template v-if="!address && !isAddressPickerShow">
-                <div class="address-info__label">您还没有默认的收货地址，请添加</div>
+                <div class="address-info__label">{{ $t('cart.checkout-old.371702-15') }}</div>
                 <div class="address-info__addbtn">
                   <SpButton type="primary" class="button-dark" @click="toggleAddressPicker"
-                    >添加新地址</SpButton
+                    >{{ $t('cart.checkout-old.371702-16') }}</SpButton
                   >
                 </div>
               </template>
@@ -117,7 +117,7 @@
                 <SpSelect
                   class="coupon-group__select"
                   :value="couponCode"
-                  :placeholder="couponList.length > 0 ? '选择优惠券' : '无优惠券可使用'"
+                  :placeholder="couponList.length > 0 ? $t('cart.checkout-old.371702-17') : $t('cart.checkout-old.371702-18')"
                   :disabled="couponList.length == 0 || !!code"
                   :data="couponList"
                   @change="handleChangeCoupon"
@@ -147,7 +147,7 @@
             </div>
           </no-ssr>
 
-          <div class="cart-bottom-tips">温馨提示：请您提交30分钟候完成支付，逾时订单将被取消。</div>
+          <div class="cart-bottom-tips">{{ $t('cart.checkout-old.371702-19') }}</div>
         </div>
       </div>
     </div>
@@ -408,7 +408,7 @@ export default {
     },
     async handleChangePoint(data) {
       if (this.couponCode) {
-        this.$Message.error('积分和优惠券只能选择一种优惠方式')
+        this.$Message.error(this.$t('cart.checkout-old.371702-20'))
       }
       const { usePoint, value: point } = data
       if (usePoint !== undefined) this.usePoint = usePoint
@@ -421,7 +421,7 @@ export default {
     // 选择优惠券
     async handleChangeCoupon(coupon) {
       if (this.usePoint) {
-        this.$Message.error('积分和优惠券只能选择一种优惠方式')
+        this.$Message.error(this.$t('cart.checkout-old.371702-20'))
       }
       try {
         if (coupon) {
@@ -547,12 +547,12 @@ export default {
     },
     async handleCheckout() {
       if (!this.address) {
-        this.$Message.error('请选择地址')
+        this.$Message.error(this.$t('cart.checkout-old.371702-21'))
         return
       }
 
       if (!this.payment) {
-        this.$Message.error('请选择支付方式')
+        this.$Message.error(this.$t('cart.checkout-old.371702-22'))
         return
       }
 

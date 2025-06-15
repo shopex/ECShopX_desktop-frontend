@@ -254,27 +254,27 @@ $num-color : #FF5D02;
     						<div class="all-category open">
     							<div class="all-category__btn"
     								style="background-color:#FF5D02;color:#FFFFFF;font-weight:800;">
-    								全部商品分类
+    								{{ $t('member.user-info.869309-0') }}
     							</div>
     						</div>
     						<div class="navs-con"><span class="link-page nav-item"><a href="/custompage?pageid=3"
-    									style="color:#333333;" class="">首页</a>
+    									style="color:#333333;" class="">{{ $t('member.user-info.869309-1') }}</a>
     								<!---->
     								<!---->
     							</span><span class="link-page nav-item"><a href="/cart" style="color:#333333;"
-    									class="">女装</a>
+    									class="">{{ $t('member.user-info.869309-2') }}</a>
     								<!---->
     								<!---->
     							</span><span class="link-page nav-item"><a href="/member/user-info" style="color:#333333;"
-    									class="">男装</a>
+    									class="">{{ $t('member.user-info.869309-3') }}</a>
     								<!---->
     								<!---->
     							</span><span class="link-page nav-item">
     								<!---->
-    								<!----> <a style="color:#333333;">美妆</a>
+    								<!----> <a style="color:#333333;">{{ $t('member.user-info.869309-4') }}</a>
     							</span><span class="link-page nav-item">
     								<!---->
-    								<!----> <a style="color:#333333;">积分商城</a>
+    								<!----> <a style="color:#333333;">{{ $t('member.user-info.869309-5') }}</a>
     							</span><span class="link-page nav-item">
     								<!---->
     								<!----> <a style="color:#333333;"></a>
@@ -293,7 +293,7 @@ $num-color : #FF5D02;
     							<div class="minicart-btn"
     								style="background-color:rgba(255,255,255,1);color:rgba(255,93,2,1);border:1px solid rgba(245,166,35,1);">
     								<i class="new_iconfont icon-new-pc-cart"></i>
-    								我的购物车
+    								{{ $t('member.user-info.869309-6') }}
 
     								<span class="count" style="background:rgba(255,93,2,1);">0</span>
     							</div>
@@ -301,7 +301,7 @@ $num-color : #FF5D02;
     								<div class="cart-main-wrap"></div>
     								<div class="cart-total">
     									<div class="cart-total__hd">
-    										共件商品，合计
+    										{{ $t('member.user-info.869309-7') }}
     										<span
     											class="goods-price widgets-goods-price widgets-goods-price__default clearfix"
     											style="color:#e1251b;font-size:18px;"><span class="price__symbol"
@@ -311,10 +311,10 @@ $num-color : #FF5D02;
     										</span>
     									</div>
     									<div class="cart-total__bd">
-    										<div class="btn btn-cart">进入购物车</div>
+    										<div class="btn btn-cart">{{ $t('member.user-info.869309-8') }}</div>
     										<div class="btn btn-checkout"
     											style="background-color:rgba(255,255,255,1);color:rgba(255,93,2,1);">
-    											结算
+    											{{ $t('member.user-info.869309-9') }}
     										</div>
     									</div>
     								</div>
@@ -331,31 +331,31 @@ $num-color : #FF5D02;
     					<div class="widget-w0008-body widget-body"
     						style="width:630px;height:66px;margin-right:auto;margin-left:auto;position:relative;left:;">
     						<div class="widget-w0008__wrap" style="border-color:rgba(255,0,54,1);"><i
-    								class="espier-icon espier-icon-sousuo-01"></i> <input placeholder="搜索" type="text"
+    								class="espier-icon espier-icon-sousuo-01"></i> <input :placeholder="$t('member.user-info.869309-10')" type="text"
     								value="" class="search-input">
     							<div class="search-icon"
     								style="color: rgb(255, 255, 255); background: linear-gradient(90deg, rgb(255, 90, 0) 0%, rgb(255, 134, 0) 100%);">
-    								搜索
+    								{{ $t('member.user-info.869309-10') }}
     							</div>
     						</div>
     						<div class="hot-keyword"><span class="link-page hot-keyword__item">
     								<!---->
-    								<!----> <a style="color:rgba(140,140,140,1);">新款连衣裙</a>
+    								<!----> <a style="color:rgba(140,140,140,1);">{{ $t('member.user-info.869309-11') }}</a>
     							</span><span class="link-page hot-keyword__item">
     								<!---->
-    								<!----> <a style="color:rgba(140,140,140,1);">四件套</a>
+    								<!----> <a style="color:rgba(140,140,140,1);">{{ $t('member.user-info.869309-12') }}</a>
     							</span><span class="link-page hot-keyword__item">
     								<!---->
-    								<!----> <a style="color:rgba(255,93,2,1);">潮流T恤</a>
+    								<!----> <a style="color:rgba(255,93,2,1);">{{ $t('member.user-info.869309-13') }}</a>
     							</span><span class="link-page hot-keyword__item">
     								<!---->
-    								<!----> <a style="color:#8C8C8C;">时尚女鞋</a>
+    								<!----> <a style="color:#8C8C8C;">{{ $t('member.user-info.869309-14') }}</a>
     							</span><span class="link-page hot-keyword__item">
     								<!---->
-    								<!----> <a style="color:#8C8C8C;">苹果手机</a>
+    								<!----> <a style="color:#8C8C8C;">{{ $t('member.user-info.869309-15') }}</a>
     							</span><span class="link-page hot-keyword__item">
     								<!---->
-    								<!----> <a style="color:#8C8C8C;">无线耳机</a>
+    								<!----> <a style="color:#8C8C8C;">{{ $t('member.user-info.869309-16') }}</a>
     							</span></div>
     					</div>
     				</div>
@@ -392,11 +392,11 @@ $num-color : #FF5D02;
                 <div class="title" v-if="vipgrade.is_vip">{{ vipgrade.guide_title }}</div>
               </div>
               <div class="avatar-info">
-                <div class="title">尊享VIP
+                <div class="title">{{ $t('member.user-info.869309-17') }}
                 <br />
-                天天享受特权</div>
+                {{ $t('member.user-info.869309-18') }}</div>
                 <div class="btn-buy" @click="toLink('/member/vip')" >
-                  {{ vipgrade.is_had_vip ? '续费' : '立即开通' }}
+                  {{ vipgrade.is_had_vip ? $t('member.user-info.869309-19') : $t('member.user-info.869309-20') }}
                 </div>
               </div>
             </div>
@@ -405,7 +405,7 @@ $num-color : #FF5D02;
               <div class="user-tabs">
                 <template v-for="tab in userTabs">
                   <!-- <div class="tab" :style="{ width: `${100 / userTabs.length}%` }"> -->
-                  <div class="tab" :style="{ width: `${100 / (userTabs.length-1)}%` }" v-show="tab.title!='储值余额'">
+                  <div class="tab" :style="{ width: `${100 / (userTabs.length-1)}%` }" :v-show="tab.title!=$t('member.user-info.869309-21')">
                     <router-link :to="tab.link">
                       <h4 class="num">
                         <span v-if="tab.icon" class="icon">{{ tab.icon }}</span>
@@ -423,9 +423,9 @@ $num-color : #FF5D02;
             <div class="member-bd-left">
               <div class="order-container">
                 <div class="block-hd">
-                  <span class="title">我的订单</span>
+                  <span class="title">{{ $t('member.user-info.869309-22') }}</span>
                   <nuxt-link class="more" to="/member/trade">
-                    查看全部<i class="ec-icon ec-icon-right"></i>
+                    {{ $t('member.user-info.869309-23') }}<i class="ec-icon ec-icon-right"></i>
                   </nuxt-link>
                 </div>
 
@@ -447,9 +447,9 @@ $num-color : #FF5D02;
 
               <div class="follow-goods">
                 <div class="block-hd">
-                  <span class="title">我的收藏</span>
+                  <span class="title">{{ $t('member.user-info.869309-24') }}</span>
                   <nuxt-link class="more" to="/member/collector">
-                    查看全部<i class="ec-icon ec-icon-right"></i>
+                    {{ $t('member.user-info.869309-23') }}<i class="ec-icon ec-icon-right"></i>
                   </nuxt-link>
                 </div>
                 <div class="block-bd">
@@ -471,9 +471,9 @@ $num-color : #FF5D02;
             <div class="member-bd-right">
               <div class="footprint-container">
                 <div class="block-hd">
-                  <span class="title">我的足迹</span>
+                  <span class="title">{{ $t('member.user-info.869309-25') }}</span>
                   <nuxt-link class="more" to="/member/foottrace">
-                    查看全部<i class="ec-icon ec-icon-right"></i>
+                    {{ $t('member.user-info.869309-23') }}<i class="ec-icon ec-icon-right"></i>
                   </nuxt-link>
                 </div>
                 <div class="block-bd">
@@ -520,21 +520,21 @@ export default {
       userTabs: [
         {
           num: 0,
-          title: '优惠券',
-          button: '领券',
+          title: this.$t('member.user-info.869309-26'),
+          button: this.$t('member.user-info.869309-27'),
           link: '/member/coupon'
         },
         {
           num: 0,
-          title: '积分',
-          button: '赚积分',
+          title: this.$t('member.user-info.869309-28'),
+          button: this.$t('member.user-info.869309-29'),
           link: '/member/point'
         },
         {
           icon: '￥',
           num: '0',
-          title: '储值余额',
-          button: '去储值',
+          title: this.$t('member.user-info.869309-21'),
+          button: this.$t('member.user-info.869309-30'),
           link: '/member/user-info'
         }
       ],
@@ -542,31 +542,31 @@ export default {
         normal_notpay_notdelivery: {
           num: 0,
           icon: 'icon-new-pc-daifukuan',
-          title: '待付款',
+          title: this.$t('member.user-info.869309-31'),
           link: '/member/trade?status=5'
         },
         normal_payed_daishouhuo: {
           num: 0,
           icon: 'icon-new-pc-daishouhuo',
-          title: '待收货',
+          title: this.$t('member.user-info.869309-32'),
           link: '/member/trade?status=1'
         },
         daipingjia: {
           icon: 'icon-new-pc-daipingjia',
           num: '',
-          title: '待评价',
+          title: this.$t('member.user-info.869309-33'),
           link: '/member/trade?status=3'
         },
         normal_payed_daiziti: {
           num: 0,
           icon: 'icon-new-pc-daiziti',
-          title: '待自提',
+          title: this.$t('member.user-info.869309-34'),
           link: '/member/trade?status=6'
         },
         aftersales: {
           num: 0,
           icon: 'icon-new-pc-shouhou',
-          title: '售后',
+          title: this.$t('member.user-info.869309-35'),
           link: '/member/trade/aftersale-list'
         }
       },

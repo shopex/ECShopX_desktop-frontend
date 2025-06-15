@@ -10,7 +10,7 @@
 
 <template>
   <div class="page-finish page-body container">
-    <div class="txt">请稍后，正在查询支付结果...</div>
+    <div class="txt">{{ $t('finish.index.507775-0') }}</div>
   </div>
 </template>
 

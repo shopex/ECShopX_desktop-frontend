@@ -6,19 +6,19 @@
       </div>
       <div class="reg-modal__bd">
         <slot name="content">
-          <p class="reg-modal__h1">很高兴您能加入我们！</p>
+          <p class="reg-modal__h1">{{ $t('comps.modal-tips.870430-0') }}</p>
           <ul class="reg-modal__p">
             <!-- <li>您已获得500积分奖励，可以到“我的积分”查询</li>
             <li>同时100元优惠券也已放入“我的优惠券”</li>
             <li>现在完善个人信息，更可再获得500积分哦！</li> -->
-            <li>现在去完善个人信息吧~</li>
+            <li>{{ $t('comps.modal-tips.870430-1') }}</li>
           </ul>
         </slot>
       </div>
       <div class="reg-modal__actions">
         <slot>
-          <SpButton class="button-dark">前往完善个人信息</SpButton>
-          <SpButton class="button-dark ml20">跳过</SpButton>
+          <SpButton class="button-dark">{{ $t('comps.modal-tips.870430-2') }}</SpButton>
+          <SpButton class="button-dark ml20">{{ $t('comps.modal-tips.870430-3') }}</SpButton>
         </slot>
       </div>
     </div>

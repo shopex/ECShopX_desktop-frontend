@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import 'swiper/dist/css/swiper.css'
+import 'swiper/css/swiper.css'
 import { resolveImgPath } from '@/utils'
 export default {
   props: {

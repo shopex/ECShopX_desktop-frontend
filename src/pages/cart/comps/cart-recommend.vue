@@ -1,7 +1,7 @@
 <template>
   <div class="cart-recommend">
     <div class="hd">
-      你可能还需要
+      {{ $t('comps.cart-recommend.090104-0') }}
     </div>
 
     <div class="bd">
@@ -10,7 +10,7 @@
           <GoodItem class="goods-img" :item="item" />
           <div class="goods-item-ft">
             <SpPrice :value="item.price / 100" />
-            <div class="goods-buy" @click="handleClickAddToCart(item)">加入购物车</div>
+            <div class="goods-buy" @click="handleClickAddToCart(item)">{{ $t('comps.cart-recommend.090104-1') }}</div>
           </div>
         </div>
       </div>
@@ -103,7 +103,7 @@ export default {
       //     1
       //   )
 
-      //   this.$Message.success('添加成功')
+      //   this.$Message.success(this.$t('comps.cart-recommend.090104-2'))
       //   this.$store.dispatch('cart/getCartInfo')
       // }
     },
@@ -125,7 +125,7 @@ export default {
     },
     handleAddCart(params) {
       this.$api.cart.add(params, params.num).then((res) => {
-        this.$Message.success('添加成功')
+        this.$Message.success(this.$t('comps.cart-recommend.090104-2'))
         this.$store.dispatch('cart/getCartCount')
         this.showModal = false
         this.$emit('change')

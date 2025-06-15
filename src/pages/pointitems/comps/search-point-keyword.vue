@@ -1,7 +1,7 @@
 <template>
   <div class="price-point-wrap-keyword">
     <input type="text" placeholder="" v-model="keywords" autocomplete="off" class="search-input" />
-    <div class="search-click" @click="search">搜索</div>
+    <div class="search-click" @click="search">{{ $t('comps.search-point-keyword.802752-0') }}</div>
   </div>
 </template>
 

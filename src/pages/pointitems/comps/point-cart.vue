@@ -9,7 +9,7 @@
       :top16="true"
     >
       <div class="header-title" :class="{ gradualTitleBackground: true }">
-        积分兑换
+        {{ $t('comps.point-cart.059340-0') }}
       </div>
       <div class="modal-goods point-goods">
         <div class="modal-row flexbox">
@@ -21,19 +21,19 @@
               {{ info.item_name }}
             </div>
             <div class="column2_div">
-              <span class="modal-row__title">价格:</span>
+              <span class="modal-row__title">{{ $t('comps.point-cart.059340-1') }}</span>
               <div class="modal-row__value">
                 <SpPrice
-                  :defaultValue="`${curSku.point}积分`"
+                  :defaultValue="$t('comps.point-cart.059340-2', [curSku.point])"
                   unit=""
                   symbol=""
                   v-if="curSku"
                 ></SpPrice>
-                <SpPrice :defaultValue="`${info.point}积分`" unit="" symbol="" v-else></SpPrice>
+                <SpPrice :defaultValue="$t('comps.point-cart.059340-3', [info.point])" unit="" symbol="" v-else></SpPrice>
               </div>
             </div>
             <div v-if="curSku || info.nospec" class="column2_div">
-              <span class="modal-row__title">库存:</span>
+              <span class="modal-row__title">{{ $t('comps.point-cart.059340-4') }}</span>
               <div class="modal-row__value">
                 <span class="name">{{ curSku ? curSku.store : info.store }}</span>
               </div>
@@ -77,7 +77,7 @@
             ></SpNumInput>
           </div>
           <div class="modal-btn" :class="{ disabled: isDisabled }" @click="handleModalAddCart()">
-            立即兑换
+            {{ $t('comps.point-cart.059340-5') }}
           </div>
         </div>
       </div>

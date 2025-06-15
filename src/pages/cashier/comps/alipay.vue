@@ -14,9 +14,9 @@
 
 <template>
   <div class="cashier-alipay">
-    <div class="cashier-alipay__title">正在支付...</div>
+    <div class="cashier-alipay__title">{{ $t('comps.alipay.268516-0') }}</div>
     <div class="cashier-alipay__warp">
-      <div>支付单号: {{ payment_id }}</div>
+      <div>{{ $t('comps.alipay.268516-1') }} {{ payment_id }}</div>
     </div>
   </div>
 </template>

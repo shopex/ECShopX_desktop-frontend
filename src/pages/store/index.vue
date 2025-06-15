@@ -150,7 +150,7 @@
 <template>
   <div class="page-store page-body clearfix">
     <div class="page-store__nav">
-      <div class="title">门店位置</div>
+      <div class="title">{{ $t('store.index.407028-0') }}</div>
     </div>
     <div id="map-container1" class="map"></div>
     <div class="search-form">
@@ -168,7 +168,7 @@
       </div>
       <div class="local-position" @click="localPosition">
         <i class="aicon aicon-navigation"></i>
-        使用我的当前位置
+        {{ $t('store.index.407028-1') }}
       </div>
       <div class="search-form__result">
         <ul v-if="list.length > 0">
@@ -197,7 +197,7 @@
             </div>
           </li>
         </ul>
-        <p v-else class="no-store">请选择您想搜索的门店</p>
+        <p v-else class="no-store">{{ $t('store.index.407028-2') }}</p>
       </div>
     </div>
   </div>
@@ -228,10 +228,10 @@ export default {
   },
   head () {
     return {
-      title: '门店搜索_Aigle官方网站',
+      title: this.$t('store.index.407028-3'),
       meta: [
-        { hid: 'keywords', name: 'keywords', content: '门店搜索_Aigle官方网站' },
-        { hid: 'description', name: 'description', content: '门店搜索_Aigle官方网站' }
+        { hid: 'keywords', name: 'keywords', content: this.$t('store.index.407028-3') },
+        { hid: 'description', name: 'description', content: this.$t('store.index.407028-3') }
       ]
     }
   },
@@ -245,12 +245,12 @@ export default {
     this.loadScript()
     analytics.pageReady({
       page: {
-        pageName: '门店查询',
+        pageName: this.$t('store.index.407028-4'),
         pageType: 'store search',
-        breadcrumb: '门店查询'
+        breadcrumb: this.$t('store.index.407028-4')
       }
     })
-    this.addressLable = ['上海', '上海市']
+    this.addressLable = [this.$t('store.index.407028-5'), this.$t('store.index.407028-6')]
     this.handleSearch()
   },
   methods: {
@@ -302,7 +302,7 @@ export default {
         })
 
         if (list.length === 0) {
-          this.$Message.error('没有查询到店铺')
+          this.$Message.error(this.$t('store.index.407028-7'))
           return
         }
 

@@ -100,7 +100,7 @@
   <div class="sortbar">
     <div class="sort-list pointitem">
       <div>
-        <span>排序：</span>
+        <span>{{ $t('comps.goods-sort.643792-0') }}</span>
         <div
           class="sort-item"
           :class="{ active: sort == item.value, small: index < 3, big: index > 2 }"

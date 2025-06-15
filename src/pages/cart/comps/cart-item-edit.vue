@@ -6,12 +6,12 @@
       </slot>
     </SpGoodsItem>
     <div class="cart-item-edit-actions">
-      <span @click="handleClose">关闭</span>
+      <span @click="handleClose">{{ $t('comps.cart-item-edit.878898-0') }}</span>
     </div>
     <slot name="btns">
       <div class="cart-item-edit-btns">
-        <SpButton @click="handleClickBtn('fav')">移入我的收藏</SpButton>
-        <SpButton type="primary" @click="handleClickBtn('confirm')">确定</SpButton>
+        <SpButton @click="handleClickBtn('fav')">{{ $t('comps.cart-item-edit.878898-1') }}</SpButton>
+        <SpButton type="primary" @click="handleClickBtn('confirm')">{{ $t('comps.cart-item-edit.878898-2') }}</SpButton>
       </div>
     </slot>
   </div>
@@ -63,7 +63,7 @@ export default {
     async handleClickBtn(type) {
       if (type === 'confirm') {
         if (!this.curSku) {
-          this.$Message.error('请选择规格')
+          this.$Message.error(this.$t('comps.cart-item-edit.878898-3'))
           return
         }
         this.updateCartItem()
@@ -74,7 +74,7 @@ export default {
         try {
           await this.$api.member.favoriteItemAdd({ item_id })
           await this.$store.dispatch('cart/delCartInfo', { cart_id: this.cartInfo.cart_id })
-          this.$Message.success('商品已加入收藏')
+          this.$Message.success(this.$t('comps.cart-item-edit.878898-4'))
           this.$emit('add-fav', item_id)
         } catch (e) {
           console.info(e)

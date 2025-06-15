@@ -8,7 +8,7 @@
       />
     </div> -->
     <div class="reg-main">
-      <div class="reg-title">用户注册</div>
+      <div class="reg-title">{{ $t('auth.reg.399355-0') }}</div>
       <div class="auth reg">
           <!-- <div class="reg-process" v-if="step != '3'">
             <div class="process-item active">
@@ -40,16 +40,16 @@
             <SpForm ref="form-reg" :model="info" :rules="rules">
               <!-- <template v-if="step == '1'"> -->
                 <SpFormItem prop="mobile">
-                  <SpInput v-model="info.mobile" placeholder="手机号" />
+                  <SpInput v-model="info.mobile" :placeholder="$t('auth.reg.399355-1')" />
                 </SpFormItem>
                 <SpFormItem prop="yzm" class="yzm-feild">
-                  <SpInput v-model="info.yzm" placeholder="图片验证码" />
+                  <SpInput v-model="info.yzm" :placeholder="$t('auth.reg.399355-2')" />
                   <div class="yzm-img" @click="handleClickImgcode">
                     <img :src="imgInfo.imageData" alt />
                   </div>
                 </SpFormItem>
                 <SpFormItem prop="vcode" class="vcode-feild">
-                  <SpInput v-model="info.vcode" placeholder="动态验证码" />
+                  <SpInput v-model="info.vcode" :placeholder="$t('auth.reg.399355-3')" />
                   <div class="vcode-btn">
                     <SpTimer
                       :onStart="handleTimerStart"
@@ -64,19 +64,19 @@
 
               <!-- <template v-if="step == '2'"> -->
                 <SpFormItem prop="password">
-                  <SpInput v-model="info.password" type="password" placeholder="设置密码" />
+                  <SpInput v-model="info.password" type="password" :placeholder="$t('auth.reg.399355-4')" />
                 </SpFormItem>
                 <SpFormItem prop="password2">
-                  <SpInput v-model="info.password2" type="password" placeholder="请再输入确认密码" />
+                  <SpInput v-model="info.password2" type="password" :placeholder="$t('auth.reg.399355-5')" />
                 </SpFormItem>
                 <!-- <div class="dash-line"></div> -->
                 <template v-for="(item, name) in registerParam">
                   <SpFormItem :prop="name" :key="name" v-if="item.is_open && name == 'sex'">
-                    <SpSelect v-model="info.sex" :data="sexOpt" placeholder="请选择性别"></SpSelect>
+                    <SpSelect v-model="info.sex" :data="sexOpt" :placeholder="$t('auth.reg.399355-6')"></SpSelect>
                   </SpFormItem>
                   <SpFormItem :prop="name" :key="name" v-if="item.is_open && name == 'birthday'">
                     <SpDatePicker v-model="info.birthday"></SpDatePicker>
-                    <div class="form-item-desc">请选择生日日期</div>
+                    <div class="form-item-desc">{{ $t('auth.reg.399355-7') }}</div>
                   </SpFormItem>
                   <SpFormItem
                     :prop="name"
@@ -88,29 +88,29 @@
                 </template>
                 <div class="reg-protocol">
                   <SpRadio type="checkbox" size="small" v-model="isCkeckTips" theme="#337ab7"/>
-                  已阅读并同意<span class="protocol" @click="handleShowModal('register')">《注册协议》</span>和<span class="protocol" @click="handleShowModal('privacy')">《隐私政策》</span>
+                  {{ $t('auth.reg.399355-8') }}<span class="protocol" @click="handleShowModal('register')">{{ $t('auth.reg.399355-9') }}</span>{{ $t('auth.reg.399355-10') }}<span class="protocol" @click="handleShowModal('privacy')">{{ $t('auth.reg.399355-11') }}</span>
                 </div>
               <!-- </template> -->
               <SpFormItem class="btn-container" style="margin-top: 10px;">
                 <!-- <SpButton long type="primary" @click="regBtn('form-reg')" v-if="step == '1'" >下一步</SpButton >
-                <SpButton long type="primary" @click="regBtn('form-reg')" v-if="step == '2'">注册</SpButton
+                <SpButton long type="primary" @click="regBtn('form-reg')" v-if="step == '2'">{{ $t('auth.reg.399355-12') }}</SpButton
                 > -->
-                <SpButton long type="primary" @click="regBtn('form-reg')" >注册</SpButton >
+                <SpButton long type="primary" @click="regBtn('form-reg')" >{{ $t('auth.reg.399355-12') }}</SpButton >
               </SpFormItem>
             </SpForm>
           </div>
 
           <div class="reg-complete" v-if="regSuccess">
             <img class="reg-img" src="~/assets/imgs/reg-img.svg" />
-            <div class="name">恭喜您 {{ this.info.username }}</div>
-            <div class="vip">您已成功申请为{{ website_name }}的会员</div>
-            <!-- <SpButton class="go-to-login" long type="primary" @click="regBtn('form-reg')" v-if="step == '3'" >去登录</SpButton> -->
-            <SpButton class="go-to-login" long type="primary" @click="regBtn('form-reg')">去登录</SpButton>
+            <div class="name">{{ $t('auth.reg.399355-13') }} {{ this.info.username }}</div>
+            <div class="vip">{{ $t('auth.reg.399355-14') }}{{ website_name }}{{ $t('auth.reg.399355-15') }}</div>
+            <!-- <SpButton class="go-to-login" long type="primary" @click="regBtn('form-reg')" v-if="step == '3'" >{{ $t('auth.reg.399355-16') }}</SpButton> -->
+            <SpButton class="go-to-login" long type="primary" @click="regBtn('form-reg')">{{ $t('auth.reg.399355-16') }}</SpButton>
           </div>
         </div>
     </div>
     <SpModal v-model="showModal" @Cancel="handleCloseModal" :width="600">
-      <div class="protocol-title">{{protocolType == 'register' ? '《注册协议》' : '《隐私政策》'}}</div>
+      <div class="protocol-title">{{protocolType == 'register' ? $t('auth.reg.399355-9') : $t('auth.reg.399355-11')}}</div>
       <div class="protocol-body">
         <div class="protocol-content">
           <div v-if="protocolType == 'register'" v-html="registerContent" v-lazy-container="{ selector: 'img' }"></div>
@@ -130,12 +130,12 @@ import ModalTips from './comps/modal-tips'
 
 const sexOpt = [
   {
-    label: '男',
-    value: '男'
+    label: this.$t('auth.reg.399355-17'),
+    value: this.$t('auth.reg.399355-17')
   },
   {
-    label: '女',
-    value: '女'
+    label: this.$t('auth.reg.399355-18'),
+    value: this.$t('auth.reg.399355-18')
   }
 ]
 export default {
@@ -163,14 +163,14 @@ export default {
       sexOpt,
       rules: {
         mobile: [
-          { validate: 'required', message: '请输入手机号', trigger: 'blur' },
+          { validate: 'required', message: this.$t('auth.reg.399355-19'), trigger: 'blur' },
           {
             validate: (rule, value, callback) => {
               const valid = validate.validatePhone(value)
               if (valid) {
                 callback()
               } else {
-                callback('请输入正确的手机号')
+                callback(this.$t('auth.reg.399355-20'))
               }
             }
           }
@@ -213,16 +213,16 @@ export default {
                 callback()
               } else {
                 // eslint-disable-next-line standard/no-callback-literal
-                callback('请输入图形验证码')
+                callback(this.$t('auth.reg.399355-21'))
               }
             },
             trigger: 'blur'
           }
         ],
-        vcode: [{ validate: 'required', message: '请输入验证码', trigger: 'blur' }]
+        vcode: [{ validate: 'required', message: this.$t('auth.reg.399355-22'), trigger: 'blur' }]
       },
       imgInfo: {},
-      timerMsg: '获取验证码',
+      timerMsg: this.$t('auth.reg.399355-23'),
       license: false,
       showModal: false,
       // step: '1',
@@ -262,7 +262,7 @@ export default {
           this.rules[key] = [
             {
               validate: 'required',
-              message: `${item.element_type == 'input' ? '请输入' : '请选择'}${item.name}`,
+              message: `${item.element_type == 'input' ? this.$t('auth.reg.399355-24') : this.$t('auth.reg.399355-25')}${item.name}`,
               trigger: 'blur'
             }
           ]
@@ -272,7 +272,7 @@ export default {
     // 注册
     async regBtn(name) {
       if(!this.isCkeckTips) {
-        this.$Message.error("请先同意注册协议和隐私协议");
+        this.$Message.error(this.$t('auth.reg.399355-26'));
         return
       }
       this.$refs[name].validate((valid, errors) => {
@@ -311,7 +311,7 @@ export default {
         S.setAuthToken(token)
         this.regSuccess = true;
         this.$cookies.set('ECSHOPX_TOKEN', token)
-        this.$Message.success("登录成功")
+        this.$Message.success(this.$t('auth.reg.399355-27'))
         this.$router.push('/')
       }else{
         this.$Message.error(message)
@@ -330,11 +330,11 @@ export default {
       const { mobile, yzm } = this.info
       const { imageToken } = this.imgInfo
       if (!validate.validatePhone(mobile)) {
-        this.$Message.error('请输入正确的手机号')
+        this.$Message.error(this.$t('auth.reg.399355-20'))
         return false
       }
       if(!yzm) {
-        this.$Message.error('请输入图形验证码')
+        this.$Message.error(this.$t('auth.reg.399355-21'))
         return false
       }
       const query = {
@@ -363,14 +363,14 @@ export default {
         return false
       }
 
-      this.$Message.success('发送成功')
+      this.$Message.success(this.$t('auth.reg.399355-28'))
       cb()
     },
     handleUpdateTimer(e) {
-      this.timerMsg = `${e}秒后重发`
+      this.timerMsg = this.$t('auth.reg.399355-29', [])
     },
     handleTimerStop() {
-      this.timerMsg = `重发验证码`
+      this.timerMsg = this.$t('auth.reg.399355-30')
     }
   }
 }

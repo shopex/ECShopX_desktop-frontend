@@ -39,8 +39,8 @@
                 </div>
               </div>
               <div :class="[prefixCls + '-footer']">
-                <SpButton type="text" @click.native="cancel">取消</SpButton>
-                <SpButton type="text" @click.native="ok">确定</SpButton>
+                <SpButton type="text" @click.native="cancel">{{ $t('poptip.index.416903-0') }}</SpButton>
+                <SpButton type="text" @click.native="ok">{{ $t('poptip.index.416903-1') }}</SpButton>
               </div>
             </div>
             <div :class="[prefixCls + '-inner']" v-if="!confirm">

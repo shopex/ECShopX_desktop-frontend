@@ -11,8 +11,8 @@
   <div class="header-bar" >
     <div class="header-bar__topbar">
       <div class="container container-shop" >
-        <span>商家入驻</span>
-        <span class="exit-btn" @click="handleLogout()">退出</span>
+        <span>{{ $t('shop-header.index.645099-0') }}</span>
+        <span class="exit-btn" @click="handleLogout()">{{ $t('shop-header.index.645099-1') }}</span>
       </div>
     </div>
 

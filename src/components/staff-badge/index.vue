@@ -30,13 +30,13 @@
     <no-ssr>
     <div class="sp-staff-badge" v-if="!!value.product_type && (userInfo && userInfo.is_staff == '1')">
       <span class="sp-staff-badge__staff-icon" v-if="value.product_type === 'sale'">
-        {{'特卖商品'}}
+        {{$t('staff-badge.index.772336-0')}}
       </span>
       <span class="sp-staff-badge__staff-icon" v-if="value.product_type === 'bag'">
-        {{'福袋'}}
+        {{$t('staff-badge.index.772336-1')}}
       </span>
       <span class="sp-staff-badge__staff-icon" v-if="value.product_type === 'normal' && value.staff_goods == 1">
-        {{'常规员工内购商品'}}
+        {{$t('staff-badge.index.772336-2')}}
       </span>
     </div>
     </no-ssr>

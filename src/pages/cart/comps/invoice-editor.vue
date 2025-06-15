@@ -3,40 +3,40 @@
     <div class="form-group form-group-type">
       <SpForm ref="form-submit" :rules="rules" :model="value">
         <label
-          ><input type="radio" v-model="value.title" value="individual" /> <span>个人</span></label
+          ><input type="radio" v-model="value.title" value="individual" /> <span>{{ $t('comps.invoice-editor.536909-0') }}</span></label
         >
-        <label><input type="radio" v-model="value.title" value="unit" /> <span>公司</span></label>
+        <label><input type="radio" v-model="value.title" value="unit" /> <span>{{ $t('comps.invoice-editor.536909-1') }}</span></label>
 
         <template v-if="value.title === 'individual'">
           <SpFormItem prop="content" key="content">
-            <span class="label-text label-required">发票抬头</span>
+            <span class="label-text label-required">{{ $t('comps.invoice-editor.536909-2') }}</span>
             <SpInput class="input-text" v-model="value.content" />
           </SpFormItem>
         </template>
 
         <template v-if="value.title === 'unit'">
           <SpFormItem prop="company_name" key="company_name">
-            <span class="label-text label-required">公司名称</span>
+            <span class="label-text label-required">{{ $t('comps.invoice-editor.536909-3') }}</span>
             <SpInput class="input-text" v-model="value.company_name" />
           </SpFormItem>
           <SpFormItem prop="registration_number" key="registration_number">
-            <span class="label-text label-required">税号</span>
+            <span class="label-text label-required">{{ $t('comps.invoice-editor.536909-4') }}</span>
             <SpInput class="input-text" v-model="value.registration_number" />
           </SpFormItem>
           <SpFormItem prop="company_address" key="company_address">
-            <span class="label-text">公司地址</span>
+            <span class="label-text">{{ $t('comps.invoice-editor.536909-5') }}</span>
             <SpInput class="input-text" v-model="value.company_address" />
           </SpFormItem>
           <SpFormItem prop="company_phone" key="company_phone">
-            <span class="label-text">电话号码</span>
+            <span class="label-text">{{ $t('comps.invoice-editor.536909-6') }}</span>
             <SpInput class="input-text" v-model="value.company_phone" />
           </SpFormItem>
           <SpFormItem prop="bankname" key="bankname">
-            <span class="label-text">开户银行</span>
+            <span class="label-text">{{ $t('comps.invoice-editor.536909-7') }}</span>
             <SpInput class="input-text" v-model="value.bankname" />
           </SpFormItem>
           <SpFormItem prop="bankaccount" key="bankaccount">
-            <span class="label-text">银行账户</span>
+            <span class="label-text">{{ $t('comps.invoice-editor.536909-8') }}</span>
             <SpInput class="input-text" v-model="value.bankaccount" />
           </SpFormItem>
         </template>
@@ -58,12 +58,12 @@ const defaultModel = () => ({
 })
 
 const rules1 = {
-  content: [{ validate: 'required', message: '请输入发票抬头' }]
+  content: [{ validate: 'required', message: this.$t('comps.invoice-editor.536909-9') }]
 }
 
 const rules2 = {
-  company_name: [{ validate: 'required', message: '请输入公司名称' }],
-  registration_number: [{ validate: 'required', message: '请输入税号' }]
+  company_name: [{ validate: 'required', message: this.$t('comps.invoice-editor.536909-10') }],
+  registration_number: [{ validate: 'required', message: this.$t('comps.invoice-editor.536909-11') }]
 }
 
 export default {

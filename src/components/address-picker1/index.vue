@@ -11,7 +11,7 @@
     <label><input name="address" type="radio" v-model="item.addr_id === value"> {{ item.name }} {{ item.area }} {{ item.addr }}</label>
   </div>
   <div class="address-picker__btns">
-    <SpButton type="primary" @click="setValue()">确认收货信息</SpButton>
+    <SpButton type="primary" @click="setValue()">{{ $t('address-picker1.index.033322-0') }}</SpButton>
   </div>
 </div>
 </template>

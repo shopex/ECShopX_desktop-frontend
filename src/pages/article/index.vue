@@ -5,7 +5,7 @@
 
 <template>
   <div class="page-article page-body container">
-    列表
+    {{ $t('article.index.147915-0') }}
   </div>
 </template>
 

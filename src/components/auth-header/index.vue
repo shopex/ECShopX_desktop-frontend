@@ -6,11 +6,11 @@
         <img class="login-header-logo" referrerpolicy="no-referrer" :src="logo" />
       </NuxtLink>
       <div class="login-header-span">
-        <span class="login-header-span1">还没有账号</span>
+        <span class="login-header-span1">{{ $t('auth-header.index.243996-0') }}</span>
         <NuxtLink v-if="this.$route.path != '/auth/reg'" to="/auth/reg" class="login-header-span2"
-          >免费注册</NuxtLink
+          >{{ $t('auth-header.index.243996-1') }}</NuxtLink
         >
-        <NuxtLink v-else to="/auth/login" class="login-header-span2">现在登录</NuxtLink>
+        <NuxtLink v-else to="/auth/login" class="login-header-span2">{{ $t('auth-header.index.243996-2') }}</NuxtLink>
       </div>
     </div>
   </div>

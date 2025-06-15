@@ -8,7 +8,7 @@
           <smenu activeTitle="coupcollectoron" active="collector"></smenu>
         </div>
         <div class="member-content-right">
-          <div class="member-content-right-header">我的收藏</div>
+          <div class="member-content-right-header">{{ $t('member.collector.299067-0') }}</div>
           <div class="member-content-right-body">
             <div v-if="!loading" class="collect-list clearfix">
               <template v-if="list && list.length > 0">
@@ -24,7 +24,7 @@
               <div class="collector__blank" v-else>
                 <Tips
                   :userInfo="userInfo"
-                  tips="您的收藏清单是空白的，保存你的心仪单品，实时掌握商品动态。"
+                  :tips="$t('member.collector.299067-1')"
                 />
               </div>
             </div>
@@ -41,11 +41,11 @@
           <ModalTips v-if="showModal" @close="handleCloseModal">
             <div slot="content">
               <p class="reg-modal__h1">
-                {{ userInfo.username ? userInfo.username + '，' : '' }}您的收藏夹已成功添加入购物袋
+                {{ userInfo.username ? userInfo.username + '，' : '' }}{{ $t('member.collector.299067-2') }}
               </p>
             </div>
-            <SpButton class="button-dark" @click="handleCloseModal">返回</SpButton>
-            <SpButton class="button-dark ml20" @click="handleGoCart">前往购物袋</SpButton>
+            <SpButton class="button-dark" @click="handleCloseModal">{{ $t('member.collector.299067-3') }}</SpButton>
+            <SpButton class="button-dark ml20" @click="handleGoCart">{{ $t('member.collector.299067-4') }}</SpButton>
           </ModalTips>
         </div>
       </div>
@@ -64,17 +64,17 @@ import { mapState } from 'vuex'
 export default {
   head() {
     return {
-      title: '我的收藏',
+      title: this.$t('member.collector.299067-0'),
       meta: [
         {
           hid: 'keywords',
           name: 'keywords',
-          content: '我的账户_标品官方网站'
+          content: this.$t('member.collector.299067-5')
         },
         {
           hid: 'description',
           name: 'description',
-          content: '我的账户_标品官方网站'
+          content: this.$t('member.collector.299067-5')
         }
       ]
     }
@@ -124,11 +124,11 @@ export default {
 
     itemRemove(item_id) {
       this.$Modal.confirm({
-        title: '提示',
+        title: this.$t('member.collector.299067-6'),
         content: '<p>请确认是否移除收藏?</p>',
         onOk: async () => {
           await this.$api.member.removeCollection({ item_ids: [item_id], is_empty: false })
-          this.$Message.success('已成功删除')
+          this.$Message.success(this.$t('member.collector.299067-8'))
           this.fetch()
         },
         onCancel: () => {}

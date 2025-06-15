@@ -54,7 +54,7 @@
 <template>
   <div class="sp-scroll-loading" >
     <div class="loader" :style="{ backgroundColor: theme }" v-if="loading" ></div>
-    <div class="no-more" v-if="noMore" >--没有更多数据--</div>
+    <div class="no-more" v-if="noMore" >{{ $t('sp-scroll-loading.index.291488-0') }}</div>
   </div>
 </template>
 

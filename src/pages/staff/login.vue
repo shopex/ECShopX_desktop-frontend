@@ -5,30 +5,30 @@
     <div class="login-container">
       <ul class="login-tab">
         <li>
-          <span>员工登录</span>
+          <span>{{ $t('staff.login.275114-0') }}</span>
         </li>
       </ul>
       <SpForm ref="form-login" :model="info" :rules="rules">
         <SpFormItem prop="account">
           <SpInput v-model="info.account" :maxlength="6" @change="handleBlurWorkId"
-          placeholder="请输入6位数的workday ID"/>
+          :placeholder="$t('staff.login.275114-1')"/>
           <span class="mobile">{{mobile}}</span>
         </SpFormItem>
         <SpFormItem prop="yzm" class="sms-yzm">
           <div class="yzm-field">
             <div class="c-yzm">
-              <SpInput v-model="info.yzm" placeholder="图形验证码"/>
+              <SpInput v-model="info.yzm" :placeholder="$t('staff.login.275114-2')"/>
             </div>
             <div class="c-img" @click="handleClickImgcode">
               <img :src="imgInfo.base64Image" alt height="24">
-              <span>看不清楚?<br>换一个</span>
+              <span>{{ $t('staff.login.275114-3') }}<br>{{ $t('staff.login.275114-4') }}</span>
             </div>
           </div>
         </SpFormItem>
         <SpFormItem prop="vcode" class="sms-vcode">
           <div class="vcode-field">
             <div class="c-vcode">
-              <SpInput v-model="info.vcode" placeholder="短信验证码"/>
+              <SpInput v-model="info.vcode" :placeholder="$t('staff.login.275114-5')"/>
             </div>
             <div class="c-btnvcode">
               <SpTimer
@@ -44,20 +44,20 @@
         <SpFormItem class="clearfix">
           <SpRadio type="checkbox" size="small" v-model="license">
             <span class="license-info">
-              我已阅读并同意Aigle的<nuxt-link class="license-content" to="/license/staff">《员工登录协议》</nuxt-link>
+              {{ $t('staff.login.275114-6') }}<nuxt-link class="license-content" to="/license/staff">{{ $t('staff.login.275114-7') }}</nuxt-link>
             </span>
           </SpRadio>
         </SpFormItem>
         <SpFormItem class="btn-container">
           <div class="btn-container__login">
-            <SpButton type="warning" size="large" long :disabled="!license" @click="login('form-login')">员工登录</SpButton>
+            <SpButton type="warning" size="large" long :disabled="!license" @click="login('form-login')">{{ $t('staff.login.275114-0') }}</SpButton>
           </div>
         </SpFormItem>
       </SpForm>
       <div class="jump">
         <nuxt-link class="license-content" to="/auth/login">
-            切换会员登录<i class="mb-iconfont mb-iconfont-right"></i><br>
-            (将无法享受员工折扣价)
+            {{ $t('staff.login.275114-8') }}<i class="mb-iconfont mb-iconfont-right"></i><br>
+            ({{ $t('staff.login.275114-9') }})
         </nuxt-link>
       </div>
     </div>
@@ -89,23 +89,23 @@ export default {
       },
       rules: {
         account: [
-          { validate: 'required', message: '员工工号填写错误' },
+          { validate: 'required', message: this.$t('staff.login.275114-10') },
           {
             validate: (rule, value, callback) => {
               if (value.length !== 6) {
                 // eslint-disable-next-line standard/no-callback-literal
-                callback('请输入6位员工工号')
+                callback(this.$t('staff.login.275114-11'))
               } else {
                 callback()
               }
             }
           }
         ],
-        yzm: [{ validate: 'required', message: '图形验证码填写错误' }],
-        vcode: [{ validate: 'required', message: '请输入验证码' }]
+        yzm: [{ validate: 'required', message: this.$t('staff.login.275114-12') }],
+        vcode: [{ validate: 'required', message: this.$t('staff.login.275114-13') }]
       },
       imgInfo: {},
-      timerMsg: '获取验证码',
+      timerMsg: this.$t('staff.login.275114-14'),
       license: false,
       mobile: ''
     }
@@ -149,7 +149,7 @@ export default {
       // console.log(activityInfo)
       S.setAuthToken(accessToken)
       this.initStore()
-      this.$Message.success('登录成功')
+      this.$Message.success(this.$t('staff.login.275114-15'))
       analytics.event({
         login_type: 'normal'
       }, 'newLogin')
@@ -173,17 +173,17 @@ export default {
       }
       try {
         await this.$api.staff.sendVcode(query)
-        this.$Message.success('发送成功')
+        this.$Message.success(this.$t('staff.login.275114-16'))
         cb()
       } catch (e) {
         this.yzmImg()
       }
     },
     handleUpdateTimer (e) {
-      this.timerMsg = `${e}秒后重发`
+      this.timerMsg = this.$t('staff.login.275114-17', [])
     },
     handleTimerStop () {
-      this.timerMsg = `重发验证码`
+      this.timerMsg = this.$t('staff.login.275114-18')
     }
   }
 }

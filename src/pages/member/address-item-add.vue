@@ -55,15 +55,15 @@
   <div class="address-item-add">
     <SpForm ref="form" :model="addressInfo" :rules="addressInfoRules">
       <SpFormItem prop="username">
-        <span class="label-text">收货人：</span>
+        <span class="label-text">{{ $t('member.address-item-add.704004-0') }}</span>
         <SpInput class="input-text" v-model="addressInfo.username" />
       </SpFormItem>
       <SpFormItem prop="telephone">
-        <span class="label-text">手机号：</span>
+        <span class="label-text">{{ $t('member.address-item-add.704004-1') }}</span>
         <SpInput class="input-text" v-model="addressInfo.telephone" />
       </SpFormItem>
       <SpFormItem prop="tmp_code">
-        <span class="label-text">所在城市：</span>
+        <span class="label-text">{{ $t('member.address-item-add.704004-2') }}</span>
         <SpAddressPicker
           class="input-text"
           v-model="addressInfo.tmp_code"
@@ -71,23 +71,23 @@
         />
       </SpFormItem>
       <SpFormItem prop="adrdetail">
-        <span class="label-text">详细地址：</span>
+        <span class="label-text">{{ $t('member.address-item-add.704004-3') }}</span>
         <SpInput class="input-text" v-model="addressInfo.adrdetail" />
       </SpFormItem>
       <SpFormItem prop="postalCode">
-        <span class="label-text">邮编：</span>
+        <span class="label-text">{{ $t('member.address-item-add.704004-4') }}</span>
         <SpInput class="input-text" v-model="addressInfo.postalCode" />
       </SpFormItem>
       <SpFormItem>
         <span class="label-text"></span>
         <SpRadio type="checkbox" :theme="theme" v-model="addressInfo.is_def">
-          <span class="set-default-addr">设置为默认收货地址</span>
+          <span class="set-default-addr">{{ $t('member.address-item-add.704004-5') }}</span>
         </SpRadio>
       </SpFormItem>
     </SpForm>
     <div class="btns">
-      <div class="btn btn-ok" @click="clickSumbit">确认</div>
-      <div class="btn" @click="clickCancel">取消</div>
+      <div class="btn btn-ok" @click="clickSumbit">{{ $t('member.address-item-add.704004-6') }}</div>
+      <div class="btn" @click="clickCancel">{{ $t('member.address-item-add.704004-7') }}</div>
     </div>
   </div>
 </template>
@@ -108,11 +108,11 @@ export default {
         postalCode: ''
       },
       addressInfoRules: {
-        username: [{ validate: 'required', message: '收件人必填' }],
-        telephone: [{ validate: 'required', message: '电话号码必填' }],
-        tmp_code: [{ validate: 'required', message: '地址必填' }],
-        adrdetail: [{ validate: 'required', message: '详细地址必填' }],
-        postalCode: [{ validate: 'required', message: '邮政编码必填' }]
+        username: [{ validate: 'required', message: this.$t('member.address-item-add.704004-8') }],
+        telephone: [{ validate: 'required', message: this.$t('member.address-item-add.704004-9') }],
+        tmp_code: [{ validate: 'required', message: this.$t('member.address-item-add.704004-10') }],
+        adrdetail: [{ validate: 'required', message: this.$t('member.address-item-add.704004-11') }],
+        postalCode: [{ validate: 'required', message: this.$t('member.address-item-add.704004-12') }]
       }
     }
   },
@@ -182,7 +182,7 @@ export default {
             is_def: this.addressInfo.is_def ? 1 : 0
           }
           addressUpdate(params, obj).then((res) => {
-            let message = obj.method == 'post' ? '地址新增成功' : '地址更新成功'
+            let message = obj.method == 'post' ? this.$t('member.address-item-add.704004-13') : this.$t('member.address-item-add.704004-14')
             this.$Message.success(message)
             this.$options.data()
             this.$emit('onClick')

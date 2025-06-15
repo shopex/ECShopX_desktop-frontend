@@ -6,11 +6,11 @@
       </slot>
     </SpGoodsItem>
     <div class="cart-gift-item-edit-actions">
-      <span @click="handleClose">关闭</span>
+      <span @click="handleClose">{{ $t('comps.cart-gift-item-edit.650824-0') }}</span>
     </div>
     <slot name="btns">
       <div class="cart-gift-item-edit-btns">
-        <SpButton type="primary" @click="handleClickBtn('confirm')">确定</SpButton>
+        <SpButton type="primary" @click="handleClickBtn('confirm')">{{ $t('comps.cart-gift-item-edit.650824-1') }}</SpButton>
       </div>
     </slot>
   </div>
@@ -46,7 +46,7 @@ export default {
 
     async handleClickBtn() {
       if (!this.curSku) {
-        this.$Message.error('请选择规格')
+        this.$Message.error(this.$t('comps.cart-gift-item-edit.650824-2'))
         return
       }
       this.$emit('confirm', this.curSku)

@@ -3,13 +3,13 @@
 <template>
 <no-ssr>
   <div class="social-share">
-    <a href="javascript:;" class="mb-iconfont mb-iconfont-weibo icon-weibo" title="分享到微博" @click="handleShare('weibo')"></a>
-    <a href="javascript:;" class="mb-iconfont mb-iconfont-weixin" title="分享到微信" @mouseover="handleClickShareImg" @click="handleShare('weixin')">
+    <a href="javascript:;" class="mb-iconfont mb-iconfont-weibo icon-weibo" :title="$t('src.index.918636-0')" @click="handleShare('weibo')"></a>
+    <a href="javascript:;" class="mb-iconfont mb-iconfont-weixin" :title="$t('src.index.918636-1')" @mouseover="handleClickShareImg" @click="handleShare('weixin')">
       <SharePanel :info="shareInfo" :is-product="isProduct" />
     </a>
     <!-- <a href="javascript:;" class="mb-iconfont mb-iconfont-douban icon-douban" title="分享到豆瓣" @click="handleShare('douban')"></a> -->
-    <a href="javascript:;" class="mb-iconfont mb-iconfont-qq icon-qq" title="分享到QQ" @click="handleShare('QQ')"></a>
-    <a href="javascript:;" class="mb-iconfont mb-iconfont-qzone icon-qzone" title="分享到QZone" @click="handleShare('QZone')"></a>
+    <a href="javascript:;" class="mb-iconfont mb-iconfont-qq icon-qq" :title="$t('src.index.918636-2')" @click="handleShare('QQ')"></a>
+    <a href="javascript:;" class="mb-iconfont mb-iconfont-qzone icon-qzone" :title="$t('src.index.918636-3')" @click="handleShare('QZone')"></a>
     <!-- <a href="javascript:;" class="mb-iconfont mb-iconfont-xhs" title="分享到小红书" @mouseover="handleClickShareImg" @click="handleShare('小红书')">
       <SharePanel :info="shareInfo" :is-product="isProduct" />
     </a> -->
@@ -56,7 +56,7 @@ export default {
           initialized: true,
           sites: ['weibo', 'wechat', 'douban', 'qq', 'qzone'],
           source: `${loc.protocol}//${loc.host}/`,
-          wechatQrcodeTitle: '微信扫一扫：分享',
+          wechatQrcodeTitle: this.$t('src.index.918636-4'),
           wechatQrcodeHelper: '<p>微信里点“发现”，扫一下</p><p>二维码便可将本文分享至朋友圈。</p>',
           ...this.info
         })

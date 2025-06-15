@@ -31,7 +31,8 @@ import logoImage from '@/assets/imgs/login_yundian.jpg'
 export default {
   data() {
     return {
-      bg: ''
+      bg: '',
+      logo:''
     }
   },
   watch: {

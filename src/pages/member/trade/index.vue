@@ -6,7 +6,7 @@
           <smenu activeTitle="order" active="trade"></smenu>
         </div>
         <div class="member-content-right">
-          <div class="member-content-right-header">我的订单</div>
+          <div class="member-content-right-header">{{ $t('trade.index.786380-0') }}</div>
           <div class="member-content-right-body">
             <div class="tabs-status">
               <template v-for="(tab ,idx ) in tabs" >
@@ -33,11 +33,11 @@
                     </colgroup>
                     <thead>
                       <tr>
-                        <th>订单详情</th>
-                        <th>收货人</th>
-                        <th>金额</th>
-                        <th>状态</th>
-                        <th>操作</th>
+                        <th>{{ $t('trade.index.786380-1') }}</th>
+                        <th>{{ $t('trade.index.786380-2') }}</th>
+                        <th>{{ $t('trade.index.786380-3') }}</th>
+                        <th>{{ $t('trade.index.786380-4') }}</th>
+                        <th>{{ $t('trade.index.786380-5') }}</th>
                       </tr>
                     </thead>
                     <tbody v-for="(child,index) in list" :key="index">
@@ -48,9 +48,9 @@
                         <td colspan="5">
                           <div class="list-table-header">
                             <span>{{ child.date }}</span>
-                            订单编号：
+                            {{ $t('trade.index.786380-6') }}
                             <span class="ly-fn-a link-black" @click.stop="clickLink(child.order)">{{ child.order}}</span>
-                            <span>{{ child.shop_name ? child.shop_name : '总店' }}</span>
+                            <span>{{ child.shop_name ? child.shop_name : $t('trade.index.786380-7') }}</span>
                           </div>
                         </td>
                       </tr>
@@ -72,11 +72,11 @@
                             <div v-if="child.orderStatus === 'WAIT_BUYER_CONFIRM'" class="product-repair">
                               <!-- <span
                                 class="ly-fn-a b-color"
-                                @click="clickBtn('申请售后', item)"
+                                @click="clickBtn($t('trade.index.786380-12'), item)"
                                 v-if="!item.aftersales_status && child.order_class !== 'pointsmall'"
-                                >申请售后</span
+                                >{{ $t('trade.index.786380-12') }}</span
                               > -->
-                              <span class="ly-fn-a b-color" v-if="item.aftersales_status" @click="clickBtn('售后', item)">售后</span>
+                              <span class="ly-fn-a b-color" v-if="item.aftersales_status" @click="clickBtn($t('trade.index.786380-8'), item)">{{ $t('trade.index.786380-8') }}</span>
                             </div>
                           </td>
 
@@ -101,7 +101,7 @@
                                 @click="clickLink(child.order)"
                                 style="text-align: center"
                               >
-                                订单详情
+                                {{ $t('trade.index.786380-1') }}
                               </div>
                             </div>
                           </td>
@@ -116,58 +116,58 @@
                               <!-- <div>等待卖家发货</div> -->
                               <div
                                 class="btn btn-primary"
-                                @click="clickBtn('付款', child)"
+                                @click="clickBtn($t('trade.index.786380-9'), child)"
                                 v-if="child.offlinePayCheckStatus != 0 && child.orderStatus == 'NOTPAY' "
                               >
-                                付款
+                                {{ $t('trade.index.786380-9') }}
                               </div>
                               <div
                                 class="btn btn-primary btn-long-txt"
-                                @click="clickBtn('付款', child)"
+                                @click="clickBtn($t('trade.index.786380-9'), child)"
                                 v-if="child.orderStatus == 'NOTPAY' && child.offlinePayCheckStatus == 2"
                               >
-                                修改付款凭证
+                                {{ $t('trade.index.786380-10') }}
                               </div>
                               <div
                                 class="btn btn-primary"
-                                @click="clickBtn('确认收货', child)"
+                                @click="clickBtn($t('trade.index.786380-11'), child)"
                                 v-if="child.orderStatus == 'WAIT_BUYER_CONFIRM'"
                               >
-                                确认收货
+                                {{ $t('trade.index.786380-11') }}
                               </div>
                               <span
                                 class="ly-fn-a b-color"
-                                @click="clickBtn('申请售后', item)"
+                                @click="clickBtn($t('trade.index.786380-12'), item)"
                                 v-if="
                                   !item.aftersales_status &&
                                     child.order_class !== 'pointsmall' &&
                                     child.orderStatus === 'WAIT_BUYER_CONFIRM'
                                 "
-                                >申请售后</span
+                                >{{ $t('trade.index.786380-12') }}</span
                               >
                               <!-- <div
                                 class="ly-fn-a"
-                                @click="clickBtn('查看物流',child)"
+                                @click="clickBtn($t('trade.index.786380-59'),child)"
                                 v-if="child.orderStatus == 'WAIT_BUYER_CONFIRM' || child.orderStatus == 'DONE' || child.orderStatus == 'SUCCESS'"
-                              >查看物流</div> -->
+                              >{{ $t('trade.index.786380-59') }}</div> -->
                               <div
                                 class="ly-fn-a"
-                                @click="clickBtn('评价', child)"
+                                @click="clickBtn($t('trade.index.786380-13'), child)"
                                 v-if="
                                   (child.orderStatus == 'SUCCESS' || child.orderStatus == 'DONE') &&
                                     rate_status &&
                                     child.is_rate == 0
                                 "
                               >
-                                评价
+                                {{ $t('trade.index.786380-13') }}
                               </div>
-                              <!-- PAYED_PENDING-待自提 -->
+                              <!-- PAYED_PENDING-{{ $t('trade.index.786380-37') }} -->
                               <div
                                 class="ly-fn-a"
-                                @click="clickBtn('取消订单', child)"
+                                @click="clickBtn($t('trade.index.786380-14'), child)"
                                 v-if="child.offlinePayCheckStatus != 0 && (child.orderStatus == 'NOTPAY' || child.orderStatus == 'PAYED' || child.orderStatus == 'PAYED_PENDING')"
                               >
-                                取消订单
+                                {{ $t('trade.index.786380-14') }}
                               </div>
                             </div>
                           </td>
@@ -181,7 +181,7 @@
 
             <template>
               <div style="width: 300px; margin: 50px auto">
-                <Tips v-if="list.length == 0" tips="您没有相关的订单。" />
+                <Tips v-if="list.length == 0" :tips="$t('trade.index.786380-15')" />
               </div>
             </template>
             <div>
@@ -196,21 +196,21 @@
           </div>
           <SpModal v-model="dailogCancel" :height="200" :width="450">
             <div class="dailog dailog-cancel">
-              <div class="dailog-hd">取消订单</div>
+              <div class="dailog-hd">{{ $t('trade.index.786380-14') }}</div>
               <div class="dailog-bd">
-                <span>订单号：{{ selectItem.order }}</span>
+                <span>{{ $t('trade.index.786380-16') }}{{ selectItem.order }}</span>
                 <div style="padding-top: 20px">
-                  <!-- <span style="display:inline-block;width:100px;text-align:right">取消原因：</span>
-                  <SpInput placeholder="必填：取消原因" v-model="cancelMean" class="dailog-bd-input" />-->
+                  <!-- <span style="display:inline-block;width:100px;text-align:right">{{ $t('trade.index.786380-17') }}</span>
+                  <SpInput :placeholder="$t('trade.index.786380-18')" v-model="cancelMean" class="dailog-bd-input" />-->
                   <SpForm ref="form" :model="form" :rules="rules">
                     <SpFormItem prop="cancelMean">
                       <span style="display: inline-block; width: 80px; text-align: right"
-                        >取消原因：</span
+                        >{{ $t('trade.index.786380-17') }}</span
                       >
                       <SpInput
                         class="dailog-bd-input"
                         v-model="form.cancelMean"
-                        placeholder="必填：取消原因"
+                        :placeholder="$t('trade.index.786380-18')"
                       />
                     </SpFormItem>
                   </SpForm>
@@ -218,75 +218,75 @@
               </div>
 
               <div class="dailog-ft">
-                <button class="btn btn-primary" @click="clickBtn('订单取消确认')">确认取消</button>
-                <button class="btn" @click="clickBtn('取消')">暂不取消</button>
+                <button class="btn btn-primary" @click="clickBtn($t('trade.index.786380-19'))">{{ $t('trade.index.786380-20') }}</button>
+                <button class="btn" @click="clickBtn($t('trade.index.786380-21'))">{{ $t('trade.index.786380-22') }}</button>
               </div>
             </div>
           </SpModal>
           <SpModal v-model="dailogClose" :width="520">
             <div class="dailog dailog-close">
-              <div class="dailog-hd">售后</div>
+              <div class="dailog-hd">{{ $t('trade.index.786380-8') }}</div>
               <div class="dailog-bd">
-                <!-- <span>订单号：{{this.$route.params.id}}</span> -->
+                <!-- <span>{{ $t('trade.index.786380-16') }}{{this.$route.params.id}}</span> -->
                 <div>
                   <SpForm ref="formClose" :model="formClose" :rules="rulesClose">
                     <SpFormItem prop="num" v-if="selectItemClose.num != 1">
                       <span style="display: inline-block; width: 80px; text-align: right"
-                        >商品数量:</span
+                        >{{ $t('trade.index.786380-23') }}</span
                       >
                       <SpNumInput
                         style="width: 350px"
                         v-model="formClose.num"
                         :min="1"
                         :max="selectItemClose.num"
-                        placeholder="商品数量"
+                        :placeholder="$t('trade.index.786380-24')"
                       ></SpNumInput>
                     </SpFormItem>
                     <SpFormItem prop="type">
                       <span style="display: inline-block; width: 90px; text-align: right"
-                        >服务类型:</span
+                        >{{ $t('trade.index.786380-25') }}</span
                       >
                       <SpSelect
                         style="width: 350px"
                         :data="typeData"
                         v-model="formClose.type"
-                        placeholder="服务类型"
+                        :placeholder="$t('trade.index.786380-26')"
                       ></SpSelect>
                     </SpFormItem>
                     <SpFormItem prop="reason">
                       <span style="display: inline-block; width: 90px; text-align: right"
-                        >退款理由:</span
+                        >{{ $t('trade.index.786380-27') }}</span
                       >
                       <SpSelect
                         style="width: 350px"
                         :data="reasonData"
                         v-model="formClose.reason"
-                        placeholder="退款理由"
+                        :placeholder="$t('trade.index.786380-28')"
                       ></SpSelect>
                     </SpFormItem>
                     <SpFormItem prop="description">
                       <span style="display: inline-block; width: 90px; text-align: right"
-                        >申请退款说明:</span
+                        >{{ $t('trade.index.786380-29') }}</span
                       >
                       <SpInput
                         style="width: 350px"
                         v-model="formClose.description"
-                        placeholder="申请退款说明"
+                        :placeholder="$t('trade.index.786380-30')"
                       />
                     </SpFormItem>
                   </SpForm>
                 </div>
               </div>
               <div class="dailog-ft">
-                <button class="btn btn-primary" @click="clickBtn('售后确认')">确认</button>
-                <button class="btn" @click="clickBtn('取消')">取消</button>
+                <button class="btn btn-primary" @click="clickBtn($t('trade.index.786380-31'))">{{ $t('trade.index.786380-32') }}</button>
+                <button class="btn" @click="clickBtn($t('trade.index.786380-21'))">{{ $t('trade.index.786380-21') }}</button>
               </div>
             </div>
           </SpModal>
 
-          <SpModal title="物流信息" v-model="dialogLogistics" :width="520">
+          <SpModal :title="$t('trade.index.786380-33')" v-model="dialogLogistics" :width="520">
             <div class="dailog">
-              <div class="dailog-hd">物流信息</div>
+              <div class="dailog-hd">{{ $t('trade.index.786380-33') }}</div>
               <div class="dailog-bd" style="padding-right: 0">
                 <Logistics :id="selectItem.order" :height="240"></Logistics>
               </div>
@@ -331,12 +331,12 @@ export default {
   data() {
     return {
       tabs: [
-        { label: '全部', value: '0' },
-        { label: '待付款', value: '5' },
-        { label: '待收货', value: '1' },
-        { label: '待自提', value: '4' },
-        { label: '待评价', value: '3' }
-        // { label: '售后', value: '10' },
+        { label: this.$t('trade.index.786380-34'), value: '0' },
+        { label: this.$t('trade.index.786380-35'), value: '5' },
+        { label: this.$t('trade.index.786380-36'), value: '1' },
+        { label: this.$t('trade.index.786380-37'), value: '4' },
+        { label: this.$t('trade.index.786380-38'), value: '3' }
+        // { label: this.$t('trade.index.786380-8'), value: '10' },
         // { label: '已完成', value: '11' },
       ],
       list: [],
@@ -350,23 +350,23 @@ export default {
         total: 0
       },
       orderStatusText: {
-        NOTPAY: '未付款',
-        PAYED: '已付款',
-        WAIT_BUYER_CONFIRM: '已发货',
-        FAIL: '已关闭',
-        CLOSED: '已关闭',
-        CANCEL: '已取消',
-        PAYED_WAIT_PROCESS: '退款处理中',
-        PAYED_PARTAIL: '部分发货',
-        SUCCESS: '交易完成',
-        DONE: '交易完成',
-        PAYED_PENDING: '待自提',
+        NOTPAY: this.$t('trade.index.786380-39'),
+        PAYED: this.$t('trade.index.786380-40'),
+        WAIT_BUYER_CONFIRM: this.$t('trade.index.786380-41'),
+        FAIL: this.$t('trade.index.786380-42'),
+        CLOSED: this.$t('trade.index.786380-42'),
+        CANCEL: this.$t('trade.index.786380-43'),
+        PAYED_WAIT_PROCESS: this.$t('trade.index.786380-44'),
+        PAYED_PARTAIL: this.$t('trade.index.786380-45'),
+        SUCCESS: this.$t('trade.index.786380-46'),
+        DONE: this.$t('trade.index.786380-46'),
+        PAYED_PENDING: this.$t('trade.index.786380-37'),
       },
       dailogCancel: false,
       selectItem: {},
       form: { cancelMean: '' },
       rules: {
-        cancelMean: [{ validate: 'required', message: '取消原因必填' }]
+        cancelMean: [{ validate: 'required', message: this.$t('trade.index.786380-47') }]
       },
       dailogClose: false,
       formClose: {
@@ -376,18 +376,18 @@ export default {
         description: ''
       },
       rulesClose: {
-        type: [{ validate: 'required', message: '选择退款类型' }],
-        reason: [{ validate: 'required', message: '选择退款原因' }]
+        type: [{ validate: 'required', message: this.$t('trade.index.786380-48') }],
+        reason: [{ validate: 'required', message: this.$t('trade.index.786380-49') }]
       },
       typeData: [
-        { label: '仅退款', value: 'ONLY_REFUND' },
-        { label: '退货退款', value: 'REFUND_GOODS' }
+        { label: this.$t('trade.index.786380-50'), value: 'ONLY_REFUND' },
+        { label: this.$t('trade.index.786380-51'), value: 'REFUND_GOODS' }
       ],
       reasonData: [
-        { label: '物流破损', value: '物流破损' },
-        { label: '产品描述与实物不符', value: '产品描述与实物不符' },
-        { label: '质量问题', value: '质量问题' },
-        { label: '皮肤过敏', value: '皮肤过敏' }
+        { label: this.$t('trade.index.786380-52'), value: this.$t('trade.index.786380-52') },
+        { label: this.$t('trade.index.786380-53'), value: this.$t('trade.index.786380-53') },
+        { label: this.$t('trade.index.786380-54'), value: this.$t('trade.index.786380-54') },
+        { label: this.$t('trade.index.786380-55'), value: this.$t('trade.index.786380-55') }
       ],
       selectItemClose: {},
       dialogLogistics: false,
@@ -504,7 +504,7 @@ export default {
       const { order_class, freight_type, freight_fee, point, total_fee } = orderItem
       if (order_class === 'pointsmall') {
         if (freight_type === 'point' || (freight_type === 'cash' && freight_fee == 0)) {
-          return `${point}积分`
+          return this.$t('trade.index.786380-56', [point])
         } else if (freight_type === 'cash' && freight_fee != 0) {
           return `${point}积分 + ￥${formatPriceToHundred(total_fee)}`
         }
@@ -526,31 +526,31 @@ export default {
     },
     clickBtn(type, item) {
       switch (type) {
-        case '付款':
+        case this.$t('trade.index.786380-9'):
           this.$router.push(`/cashier?order_id=${item.order}&has_check=${item.offlinePayCheckStatus !== null}`)
           break
-        case '确认收货':
+        case this.$t('trade.index.786380-11'):
           confirmOrder({
             order_id: item.order
           }).then((res) => {
-            this.$Message.success('收货成功')
+            this.$Message.success(this.$t('trade.index.786380-58'))
             this.getTradeList()
           })
           break
-        case '查看物流':
+        case this.$t('trade.index.786380-59'):
           this.selectItem = item
           this.dialogLogistics = true
           break
 
-        case '取消订单':
+        case this.$t('trade.index.786380-14'):
           this.selectItem = item
           this.dailogCancel = true
           break
-        case '取消':
+        case this.$t('trade.index.786380-21'):
           this.dailogCancel = false
           this.dailogClose = false
           break
-        case '订单取消确认':
+        case this.$t('trade.index.786380-19'):
           this.$refs['form'].validate((valid, errors) => {
             if (valid) {
               orderCancel({
@@ -560,7 +560,7 @@ export default {
                 if ( res.message ) {
                   this.$Message.error(res.message)
                 } else{
-                  this.$Message.success('发起成功')
+                  this.$Message.success(this.$t('trade.index.786380-60'))
                   this.getTradeList()
                   this.dailogCancel = false
                 }
@@ -568,19 +568,19 @@ export default {
             }
           })
           break
-        case '售后':
+        case this.$t('trade.index.786380-8'):
           this.$router.push(
             `/member/trade/aftersale?orderId=${item.order_id}&itemId=${item.item_id}`
           )
           break
-        case '申请售后':
+        case this.$t('trade.index.786380-12'):
           this.selectItemClose = item
           this.dailogClose = true
 
           // this.selectItemClose.num=5
           break
 
-        case '售后确认':
+        case this.$t('trade.index.786380-31'):
           this.$refs['formClose'].validate((valid, errors) => {
             if (valid) {
               let arr = JSON.stringify([{ id: this.selectItemClose.id, num: this.formClose.num }])
@@ -596,14 +596,14 @@ export default {
               // 目前写死退货退款-快递寄回（return_type = 'logistics'）
               params.return_type = this.formClose.type=="REFUND_GOODS"? "logistics": ""
               creatAftersales(params).then(() => {
-                this.$Message.success('发起成功')
+                this.$Message.success(this.$t('trade.index.786380-60'))
                 this.dailogClose = false
                 this.getTradeList()
               })
             }
           })
           break
-        case '评价':
+        case this.$t('trade.index.786380-13'):
           this.$router.push(`/member/trade/rate?id=${item.order}`)
           break
       }

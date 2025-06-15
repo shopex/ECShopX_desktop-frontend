@@ -1,9 +1,9 @@
 <template>
   <div class="timer-index">
-    <span>{{time.dd}}天</span>
-    <span>{{time.hh}}时</span>
-    <span>{{time.mm}}分</span>
-    <span>{{time.ss}}秒</span>
+    <span>{{time.dd}}{{ $t('comps.timerIndex.792449-0') }}</span>
+    <span>{{time.hh}}{{ $t('comps.timerIndex.792449-1') }}</span>
+    <span>{{time.mm}}{{ $t('comps.timerIndex.792449-2') }}</span>
+    <span>{{time.ss}}{{ $t('comps.timerIndex.792449-3') }}</span>
   </div>
 </template>
 

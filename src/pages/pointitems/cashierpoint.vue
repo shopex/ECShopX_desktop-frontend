@@ -25,7 +25,7 @@
       <div class="point_wrapper">
         <div class="img"></div>
 
-        <div class="text">积分支付成功，您的商品正在出库中…</div>
+        <div class="text">{{ $t('pointitems.cashierpoint.173269-0') }}</div>
       </div>
       <GuessLike :guessLikeList="guessLikeList" />
     </div>
@@ -65,7 +65,7 @@ export default {
       keyword: '',
       showprice: true,
       info: null,
-      tabList: ['商品介绍', '商品评价'],
+      tabList: [this.$t('pointitems.cashierpoint.173269-1'), this.$t('pointitems.cashierpoint.173269-2')],
       curTabIdx: 0,
       evaluationList: [],
       evaluationTotal: 0,
@@ -90,7 +90,7 @@ export default {
       const { item_category_main } = this.info
       let ret = [
         {
-          name: '首页',
+          name: this.$t('pointitems.cashierpoint.173269-3'),
           url: `/`
         }
       ]

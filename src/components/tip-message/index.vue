@@ -26,12 +26,12 @@
 <template>
   <div class="sp-tip-message" v-if="isLoading || showTip">
     <div class="sp-tip-message__loading" v-if="loading && isLoading">
-      <SpLoading>{{loadingText}}</SpLoading>
+      <SpLoading>{{loadingText || $t('tip-message.index.587556-0')}}</SpLoading>
     </div>
     <div class="sp-tip-message__warp" v-if="showTip">
       <img class="sp-tip-message__img" v-if="img" :src="require(`~/assets/imgs/${img}`)" alt>
       <span>
-        <span class="sp-tip-message__txt">{{tipText}}</span>
+        <span class="sp-tip-message__txt">{{tipText || $t('tip-message.index.587556-1')}}</span>
         <nuxt-link v-if="tipLink" :to="to">{{tipLink}}</nuxt-link>
       </span>
     </div>
@@ -47,13 +47,13 @@ export default {
     isLoading: Boolean,
     loadingText: {
       type: String,
-      default: '正在加载...'
+      default: ''
     },
     img: String,
     value: Boolean,
     tipText: {
       type: String,
-      default: '提示信息'
+      default: ''
     },
     tipLink: String,
     to: String

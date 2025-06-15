@@ -3,7 +3,7 @@
 <template>
   <div class="page-address member page-body container-member">
     <div class="member-top">
-      <p class="member-top-title">会员中心</p>
+      <p class="member-top-title">{{ $t('member.address-add.594384-0') }}</p>
     </div>
     <div class="member-content">
       <div class="member-content-left">
@@ -14,35 +14,35 @@
           <template>
             <SpForm ref="form-address" :model="info" :rules="rules">
               <SpFormItem prop="name">
-                <span class="label-text">收货人</span>
+                <span class="label-text">{{ $t('member.address-add.594384-1') }}</span>
                 <SpInput class="member-input-text" v-model="info.name" />
               </SpFormItem>
               <SpFormItem prop="phone">
-                <span class="label-text">手机号</span>
+                <span class="label-text">{{ $t('member.address-add.594384-2') }}</span>
                 <SpInput class="member-input-text" v-model="info.phone" />
               </SpFormItem>
               <SpFormItem prop="address">
-                <span class="label-text">所在城市</span>
+                <span class="label-text">{{ $t('member.address-add.594384-3') }}</span>
                 <div class="member-input-text">
                   <SpAddressPicker v-model="info.address" />
                 </div>
               </SpFormItem>
               <SpFormItem prop="addressdetail">
-                <span class="label-text">详细地址</span>
+                <span class="label-text">{{ $t('member.address-add.594384-4') }}</span>
                 <SpInput class="member-input-text" v-model="info.addressdetail" />
               </SpFormItem>
               <SpFormItem prop="zcode">
-                <span class="label-text">邮编</span>
+                <span class="label-text">{{ $t('member.address-add.594384-5') }}</span>
                 <SpInput class="member-input-text" v-model="info.zcode" />
               </SpFormItem>
               <SpFormItem>
                 <span class="label-text"></span>
                 <SpRadio type="checkbox" size="small" v-model="info.def_addr">
-                  <span class="set-default-addr">设置为默认收货地址</span>
+                  <span class="set-default-addr">{{ $t('member.address-add.594384-6') }}</span>
                 </SpRadio>
               </SpFormItem>
               <SpFormItem class="btn-container-member">
-                <SpButton class="button-dark" @click="addressSubmit('form-address')">保存</SpButton>
+                <SpButton class="button-dark" @click="addressSubmit('form-address')">{{ $t('member.address-add.594384-7') }}</SpButton>
               </SpFormItem>
             </SpForm>
           </template>
@@ -68,17 +68,17 @@ export default {
 
   head() {
     return {
-      title: '会员中心_Aigle官方网站',
+      title: this.$t('member.address-add.594384-8'),
       meta: [
         {
           hid: 'keywords',
           name: 'keywords',
-          content: '我的账户_Aigle官方网站'
+          content: this.$t('member.address-add.594384-9')
         },
         {
           hid: 'description',
           name: 'description',
-          content: '我的账户_Aigle官方网站'
+          content: this.$t('member.address-add.594384-9')
         }
       ]
     }
@@ -95,8 +95,8 @@ export default {
         def_addr: 0
       },
       rules: {
-        // name: [{ validate: 'required', message: '请输入收货人姓名' }],
-        // addressdetail: [{ validate: 'required', message: '请输入详细地址' }],
+        // name: [{ validate: 'required', message: this.$t('member.address-add.594384-10') }],
+        // addressdetail: [{ validate: 'required', message: this.$t('member.address-add.594384-11') }],
         // phone: [{ validate: 'required', message: '请输入11位手机号' }],
         name: [
           {
@@ -105,7 +105,7 @@ export default {
               if (value) {
                 callback()
               } else {
-                callback('请输入收货人姓名')
+                callback(this.$t('member.address-add.594384-10'))
               }
             },
             trigger: 'blur'
@@ -132,7 +132,7 @@ export default {
               if (value) {
                 callback()
               } else {
-                callback('请输入详细地址')
+                callback(this.$t('member.address-add.594384-11'))
               }
             },
             trigger: 'blur'
@@ -188,11 +188,11 @@ export default {
           addr_id: this.info.addr_id
         }
         await this.$api.member.addressUpdate(params)
-        this.$Message.success('修改成功！')
+        this.$Message.success(this.$t('member.address-add.594384-12'))
       } else {
         // 新增
         await this.$api.member.addressCreate(params)
-        this.$Message.success('保存成功！')
+        this.$Message.success(this.$t('member.address-add.594384-13'))
         analytics.event({}, 'addNewAddressSuccess')
       }
       setTimeout(() => {

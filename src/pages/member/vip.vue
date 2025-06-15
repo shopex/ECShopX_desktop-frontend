@@ -19,14 +19,14 @@
           @click="handelDay(item.name)"
         >
           <span class="h-text">{{ item.price }}</span
-          ><span>元/{{ item.desc }}</span>
-          <div class="ellipsis">现时特惠，自动续费</div>
-          <p class="tips">连续包月</p>
+          ><span>{{ $t('member.vip.041323-0') }}{{ item.desc }}</span>
+          <div class="ellipsis">{{ $t('member.vip.041323-1') }}</div>
+          <p class="tips">{{ $t('member.vip.041323-2') }}</p>
         </div>
       </template>
     </div>
     <div class="ft">
-      <div class="btn" @click="submit">支付</div>
+      <div class="btn" @click="submit">{{ $t('member.vip.041323-3') }}</div>
     </div>
   </div>
 </template>

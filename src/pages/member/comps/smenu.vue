@@ -38,57 +38,57 @@
 <template>
   <ul class="sp-smenu">
     <li class="menu-block">
-      <p class="submenu-title"><i class="new_iconfont icon-new-pc-huiyuanxinxi"></i>会员信息</p>
+      <p class="submenu-title"><i class="new_iconfont icon-new-pc-huiyuanxinxi"></i>{{ $t('comps.smenu.182568-0') }}</p>
       <ul class="submenu-con">
         <li class="submenu-item">
           <nuxt-link to="/member/user-info" :style="getActiveColor('user-info')"
-            >个人资料</nuxt-link
+            >{{ $t('comps.smenu.182568-1') }}</nuxt-link
           >
         </li>
         <li class="submenu-item">
           <nuxt-link to="/member/change-password" :style="getActiveColor('change-password')"
-            >更改密码</nuxt-link
+            >{{ $t('comps.smenu.182568-2') }}</nuxt-link
           >
         </li>
         <li class="submenu-item">
-          <nuxt-link to="/member/address" :style="getActiveColor('address')">收货地址</nuxt-link>
+          <nuxt-link to="/member/address" :style="getActiveColor('address')">{{ $t('comps.smenu.182568-3') }}</nuxt-link>
         </li>
       </ul>
     </li>
     <li class="menu-block">
-      <p class="submenu-title"><i class="new_iconfont icon-new-pc-dingdan"></i>我的订单</p>
+      <p class="submenu-title"><i class="new_iconfont icon-new-pc-dingdan"></i>{{ $t('comps.smenu.182568-4') }}</p>
       <ul class="submenu-con">
         <li class="submenu-item">
-          <nuxt-link to="/member/trade" :style="getActiveColor('trade')">所有订单</nuxt-link>
+          <nuxt-link to="/member/trade" :style="getActiveColor('trade')">{{ $t('comps.smenu.182568-5') }}</nuxt-link>
         </li>
         <li class="submenu-item">
           <nuxt-link to="/member/trade/aftersale-list" :style="getActiveColor('aftersale')"
-            >售后订单</nuxt-link
+            >{{ $t('comps.smenu.182568-6') }}</nuxt-link
           >
         </li>
       </ul>
     </li>
     <li class="menu-block">
-      <!-- <p class="submenu-title"><i class="new_iconfont icon-new-pc-youhuiquan"></i>我的优惠券</p> -->
+      <!-- <p class="submenu-title"><i class="new_iconfont icon-new-pc-youhuiquan"></i>{{ $t('comps.smenu.182568-7') }}</p> -->
       <ul class="submenu-con">
         <li class="submenu-item">
-          <nuxt-link to="/member/coupon" :style="getActiveColor('coupon')">我的优惠券</nuxt-link>
+          <nuxt-link to="/member/coupon" :style="getActiveColor('coupon')">{{ $t('comps.smenu.182568-7') }}</nuxt-link>
         </li>
         <li class="submenu-item">
           <nuxt-link to="/member/collector" :style="getActiveColor('collector')"
-            >我的收藏</nuxt-link
+            >{{ $t('comps.smenu.182568-8') }}</nuxt-link
           >
         </li>
         <li class="submenu-item">
           <nuxt-link to="/member/foottrace" :style="getActiveColor('foottrace')"
-            >我的足迹</nuxt-link
+            >{{ $t('comps.smenu.182568-9') }}</nuxt-link
           >
         </li>
         <li class="submenu-item">
-          <nuxt-link to="/member/point" :style="getActiveColor('point')">我的积分</nuxt-link>
+          <nuxt-link to="/member/point" :style="getActiveColor('point')">{{ $t('comps.smenu.182568-10') }}</nuxt-link>
         </li>
         <li class="submenu-item">
-          <nuxt-link to="/member/follow" :style="getActiveColor('follow')">关注店铺</nuxt-link>
+          <nuxt-link to="/member/follow" :style="getActiveColor('follow')">{{ $t('comps.smenu.182568-11') }}</nuxt-link>
         </li>
       </ul>
     </li>
@@ -113,13 +113,13 @@ export default {
       SHOW_TABS_MAP,
       orderType: '',
       tabs: [
-        { label: '所有订单', value: '' },
-        { label: '售后订单', value: 's' }
+        { label: this.$t('comps.smenu.182568-5'), value: '' },
+        { label: this.$t('comps.smenu.182568-6'), value: 's' }
       ],
       couponType: '',
       couponTabs: [
-        { label: '可使用优惠券', value: '1' },
-        { label: '失效优惠券', value: '2' }
+        { label: this.$t('comps.smenu.182568-12'), value: '1' },
+        { label: this.$t('comps.smenu.182568-13'), value: '2' }
       ],
       showTabs: ''
     }
