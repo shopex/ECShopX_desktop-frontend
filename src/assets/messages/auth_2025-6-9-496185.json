@@ -17,7 +17,7 @@
 		"auth.login.961430-14": "请输入正确的手机号",
 		"auth.login.961430-15": "请输入图形验证码",
 		"auth.login.961430-16": "发送成功",
-		"auth.login.961430-17": "${e}秒后重发",
+		"auth.login.961430-17": "{0}秒后重发",
 		"auth.login.961430-18": "重发验证码",
 		"auth.login.961430-19": "登录成功"
 	},
@@ -39,7 +39,7 @@
 		"auth.login.961430-14": "Please enter the correct phone number",
 		"auth.login.961430-15": "Please enter the graphic verification code",
 		"auth.login.961430-16": "Successfully sent",
-		"auth.login.961430-17": "Resend in ${e} seconds",
+		"auth.login.961430-17": "Resend in {0} seconds",
 		"auth.login.961430-18": "Resend verification code",
 		"auth.login.961430-19": "Login succeeded"
 	}

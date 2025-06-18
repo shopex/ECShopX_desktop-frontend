@@ -253,7 +253,8 @@ export default {
       }
     },
     handleUpdateTimer(e) {
-      this.timerMsg = this.$t('auth.login.961430-17', [])
+      console.log('s',e)
+      this.timerMsg = this.$t('auth.login.961430-17', [e]) 
     },
     handleTimerStop() {
       this.timerMsg = this.$t('auth.login.961430-18')

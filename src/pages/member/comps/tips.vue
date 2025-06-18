@@ -8,7 +8,7 @@ export default {
   props: {
     tips: {
       type: String,
-      default: this.$t('comps.tips.500997-0')
+      default: ''
     },
     userInfo: {
       type: Object,
@@ -17,7 +17,7 @@ export default {
   },
   computed: {
     showTips: function () {
-      return formatUsername(this.userInfo, this.tips)
+      return formatUsername(this.userInfo, this.tips || this.$t('comps.tips.500997-0'))
     }
 
   }

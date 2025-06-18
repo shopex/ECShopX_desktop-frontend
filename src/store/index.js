@@ -124,48 +124,48 @@ export const actions = {
       // console.error(e)
     }
     console.log('promise staring...')
-    const [headerTemplate, bodyTemplate, footerTemplate, seoInfo] = await Promise.all([
-      app.$api.theme.getHeaderOrFooter({
-        page_name: 'header'
-      }),
-      app.$api.theme.getTemplateContent(),
-      app.$api.theme.getHeaderOrFooter({
-        page_name: 'footer'
-      } ),
-      app.$api.global.getGlobalTdk()
-    ] )
-    console.log('promise ending...')
-    commit('setSeoInfo', seoInfo)
+    // const [headerTemplate, bodyTemplate, footerTemplate, seoInfo] = await Promise.all([
+    //   app.$api.theme.getHeaderOrFooter({
+    //     page_name: 'header'
+    //   }),
+    //   app.$api.theme.getTemplateContent(),
+    //   app.$api.theme.getHeaderOrFooter({
+    //     page_name: 'footer'
+    //   } ),
+    //   app.$api.global.getGlobalTdk()
+    // ] )
+    // console.log('promise ending...')
+    // commit('setSeoInfo', seoInfo)
 
-    const _bodyTemplate = []
-    bodyTemplate.forEach((item) => {
-      const config = JSON.parse(item.config)
-      if (config.type != 'W0000') {
-        _bodyTemplate.push(config)
-      } else {
-        commit('setPageConfig', config)
-      }
-    })
+    // const _bodyTemplate = []
+    // bodyTemplate.forEach((item) => {
+    //   const config = JSON.parse(item.config)
+    //   if (config.type != 'W0000') {
+    //     _bodyTemplate.push(config)
+    //   } else {
+    //     commit('setPageConfig', config)
+    //   }
+    // })
 
     // console.log("_bodyTemplate:", _bodyTemplate);
 
-    const _headerTemplate = {
-      params: '[]'
-    }
-    if (typeof headerTemplate.params != 'undefined') {
-      _headerTemplate.params = headerTemplate.params
-    }
+    // const _headerTemplate = {
+    //   params: '[]'
+    // }
+    // if (typeof headerTemplate.params != 'undefined') {
+    //   _headerTemplate.params = headerTemplate.params
+    // }
 
-    const _footerTemplate = {
-      params: '[]'
-    }
-    if (typeof footerTemplate.params != 'undefined') {
-      _footerTemplate.params = footerTemplate.params
-    }
+    // const _footerTemplate = {
+    //   params: '[]'
+    // }
+    // if (typeof footerTemplate.params != 'undefined') {
+    //   _footerTemplate.params = footerTemplate.params
+    // }
 
-    commit( 'setHeaderTemplate', headerTemplate )
+    // commit( 'setHeaderTemplate', headerTemplate )
 
-    commit('setFooterTemplate', footerTemplate)
+    // commit('setFooterTemplate', footerTemplate)
 
     // const commonWgts = {
     //   headerTemplate: _headerTemplate,

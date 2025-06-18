@@ -173,7 +173,7 @@ const install = function(Vue, opts = {}) {
 }
 
 install(Vue)
-  Vue.use( Widgets )
+  // Vue.use( Widgets )
 
 // ie9 console
 if (Function.prototype.bind && global.console && typeof console.log === 'object') {

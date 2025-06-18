@@ -10,7 +10,7 @@ const CUSTOME_PATH = path.resolve(
 const SRC_PATH = path.resolve(__dirname, '../src')
 const exts = ['vue', 'js', 'ts', 'tsx']
 
-function resolveCustomeRoutes( routes ) {
+function resolveCustomeRoutes(routes) {
   if (!process.env.npm_config_t) {
     return routes;
   }
@@ -41,7 +41,7 @@ function resolveCustomeRoutes( routes ) {
   return routes
 }
 
-export default function extendRoutes (routes) {
+export default function extendRoutes(routes) {
   this.scrollBehavior = function (to, from, savedPosition) {
     if (savedPosition && to.meta.isKeepAlive) {
       this.app.$store.commit('savedPosition', savedPosition)
@@ -69,6 +69,10 @@ export default function extendRoutes (routes) {
       path: '/product/*',
       component: `${SRC_PATH}/pages/custom`
     }
+    , {
+      path: '/website/decorate',
+      component: `${SRC_PATH}/pages/template`
+    },
     // {
     //   path: `/shopadmin/path/${encodeURIComponent('item/list')}`,
     //   component: `${SRC_PATH}/pages/item/list`

@@ -48,7 +48,7 @@
     </div>
 
     <!-- 挂件 -->
-    <component
+    <!-- <component
       mode="render"
       v-for="(wgt, index) in wgts"
       :is="wgt.type"
@@ -56,7 +56,7 @@
       :page-props="pageConfig"
       :key="`wgt-${index}`"
       @callback="handleCallback"
-    ></component>
+    ></component> -->
   </div>
 </template>
 
@@ -86,10 +86,10 @@ export default {
   computed: {
     ...mapState({
       userInfo: (state) => state.user.userInfo,
-      wgts: (state) => {
-        const res = state.headerTemplate
-        return res ? JSON.parse(res.params) : []
-      },
+      // wgts: (state) => {
+      //   const res = state.headerTemplate
+      //   return res ? JSON.parse(res.params) : []
+      // },
       pageConfig: (state) => {
         return state.pageConfig
       }
