@@ -79,7 +79,7 @@
       <div class="price-wrap">
         <div class="price-label" v-if="info.member_price || info.activity_price" :style="{
           backgroundColor: theme
-        }">{{ info | FilterPriceLabel}}</div>
+        }">{{FilterPriceLabel(info)}}</div>
         <SpPrice :value="info | FilterPrice"/>
         <SpPrice class="market-price" :value="info.market_price / 100" />
       </div>
@@ -96,6 +96,7 @@
 </template>
 
 <script>
+// import i18n from '@/i18n'
 export default {
   name: 'SpGoodsCard',
   props: {
@@ -107,7 +108,7 @@ export default {
 
     }
   },
-  filters: {
+  methods: {
     FilterPriceLabel(info) {
       const { activity_price, member_price } = info
       if(activity_price) {
@@ -116,6 +117,9 @@ export default {
         return this.$t('sp-goods-card.index.699394-1')
       }
     },
+  },
+  filters: {
+
     FilterPrice(info) {
       const { activity_price, member_price,  price } = info
       if(activity_price) {

@@ -271,7 +271,7 @@
       </div>
       <div class="goodsinfo-f">
         <div class="r-w">
-          <div class="r-c-label">{{ info | FilterPriceLabel }}</div>
+          <div class="r-c-label">{{ FilterPriceLabel(info) }}</div>
           <SpPrice :value="filterPrice(info)" size="large" />
           <SpPrice class="market-price" :value="(curSku ? curSku.market_price : info.market_price) / 100" />
         </div>
@@ -429,17 +429,7 @@ export default {
     }
   },
   filters: {
-    FilterPriceLabel(info) {
-      const { act_price, member_price } = info
-
-      if (act_price) {
-        return this.$t('sp-goods-info.index.091195-17')
-      } else if (member_price) {
-        return this.$t('sp-goods-info.index.091195-18')
-      } else {
-        return this.$t('sp-goods-info.index.091195-19')
-      }
-    },
+   
     FilterPrice(info) {
       const { act_price, activity_info, member_price, price } = info
       if (activity_info) {
@@ -484,6 +474,17 @@ export default {
     }
   },
   methods: {
+    FilterPriceLabel(info) {
+      const { act_price, member_price } = info
+
+      if (act_price) {
+        return this.$t('sp-goods-info.index.091195-17')
+      } else if (member_price) {
+        return this.$t('sp-goods-info.index.091195-18')
+      } else {
+        return this.$t('sp-goods-info.index.091195-19')
+      }
+    },
     async handleClickCollect() {
       const { distributor_id, item_id } = this.info
       if (this.collected) {

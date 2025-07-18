@@ -3,7 +3,15 @@
 <template>
   <div class="page-index" :style="{ backgroundColor: backgroundColor }">
     <!-- 挂件 -->
-    <!-- <SpTemplate :list="wgts" />  -->
+    <component
+      mode="render"
+      v-for="(wgt, index) in wgts"
+      :is="wgt.type"
+      :value="wgt"
+      :page-props="pageConfig"
+      :key="`wgt-${index}`"
+      @callback="handleCallback"
+    ></component>
   </div>
 </template>
 
@@ -18,19 +26,21 @@ export default {
   async asyncData({ app, route ,query ,store}) {
     let { pageid } = query
 
-    // const bodyTemplate = await app.$api.theme.getTemplateContent()
-    // const _bodyTemplate = []
-    // bodyTemplate.forEach((item) => {
-    //   const config = JSON.parse(item.config)
-    //   if (config.type != 'W0000') {
-    //     _bodyTemplate.push(config)
-    //   }else{
-    //     store.commit('setPageConfig', config)
-    //   }
-    // })
-    // return {
-    //   wgts: _bodyTemplate
-    // }
+    const bodyTemplate = await app.$api.theme.getTemplateContent({
+        theme_pc_template_id: pageid
+      })
+    const _bodyTemplate = []
+    bodyTemplate.forEach((item) => {
+      const config = JSON.parse(item.config)
+      if (config.type != 'W0000') {
+        _bodyTemplate.push(config)
+      }else{
+        store.commit('setPageConfig', config)
+      }
+    })
+    return {
+      wgts: _bodyTemplate
+    }
   },
   data() {
     return {

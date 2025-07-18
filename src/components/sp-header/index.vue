@@ -15,19 +15,21 @@
           <div class="no-login active">
             <NuxtLink to="/" class="index-link">{{ $t('sp-header.index.663900-0') }}</NuxtLink>
             <template v-if="!userInfo">
-              <NuxtLink to="/auth/login" class="topbar-login__link " style="color:#FF5D02;"
-                >{{ $t('sp-header.index.663900-1') }}</NuxtLink
-              >
-              <NuxtLink to="/auth/reg" class="topbar-login__link topbar-register__link "
-                >{{ $t('sp-header.index.663900-2') }}</NuxtLink
-              >
+              <NuxtLink to="/auth/login" class="topbar-login__link " style="color:#FF5D02;">{{
+                $t('sp-header.index.663900-1') }}</NuxtLink>
+              <NuxtLink to="/auth/reg" class="topbar-login__link topbar-register__link ">{{
+                $t('sp-header.index.663900-2') }}</NuxtLink>
               <!-- <img src="../../assets/imgs/top.png" /> -->
             </template>
+
             <template v-else>
               <span class="sys-hello">{{ $t('sp-header.index.663900-3') }}</span>
               <span class="member-phone">{{ userInfo.memberInfo.mobile }}</span>
               <span class="exit-btn" @click="handleLogout()">{{ $t('sp-header.index.663900-4') }}</span>
             </template>
+            <span @click="handleChangeLanguage">
+              {{ $t('sp-header.index.061123-0') }}{{ $i18n.locale == 'zh' ? $t('sp-header.index.061123-1') : $t('sp-header.index.061123-2') }}
+            </span>
           </div>
         </div>
         <div class="topbar-member fr">
@@ -35,7 +37,7 @@
           <span>|</span>
           <NuxtLink to="/member/trade" style="margin-right:0;">{{ $t('sp-header.index.663900-6') }}</NuxtLink>
           <span>|</span>
-          <NuxtLink to="/member/user-info" style="margin-right:0;" >{{ $t('sp-header.index.663900-7') }}</NuxtLink>
+          <NuxtLink to="/member/user-info" style="margin-right:0;">{{ $t('sp-header.index.663900-7') }}</NuxtLink>
           <span>|</span>
           <NuxtLink to="/shop">{{ $t('sp-header.index.663900-8') }}</NuxtLink>
           <!-- 隐藏商家中心 -->
@@ -96,6 +98,10 @@ export default {
     })
   },
   methods: {
+    handleChangeLanguage() {
+      this.$store.commit('SET_LANG', this.$i18n.locale == 'zh' ? 'en' : 'zh')
+      this.$i18n.setLocale(this.$i18n.locale == 'zh' ? 'en' : 'zh')
+    },
     handleLogout() {
       this.$cookies.remove('ECSHOPX_TOKEN')
       S.logout()
