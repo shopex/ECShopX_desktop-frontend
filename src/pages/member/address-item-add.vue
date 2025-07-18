@@ -97,7 +97,10 @@ import { addressUpdate } from '@/api/member'
 import { mapActions, mapState } from 'vuex'
 
 export default {
+  
   data() {
+    
+    console.log('this',this)
     return {
       addressInfo: {
         username: '',
@@ -107,13 +110,7 @@ export default {
         is_def: false,
         postalCode: ''
       },
-      addressInfoRules: {
-        username: [{ validate: 'required', message: this.$t('member.address-item-add.704004-8') }],
-        telephone: [{ validate: 'required', message: this.$t('member.address-item-add.704004-9') }],
-        tmp_code: [{ validate: 'required', message: this.$t('member.address-item-add.704004-10') }],
-        adrdetail: [{ validate: 'required', message: this.$t('member.address-item-add.704004-11') }],
-        postalCode: [{ validate: 'required', message: this.$t('member.address-item-add.704004-12') }]
-      }
+      addressInfoRules: null
     }
   },
   props: {
@@ -151,6 +148,15 @@ export default {
       },
       immediate: true
     }
+  },
+  created() {
+    this.addressInfoRules = {
+        username: [{ validate: 'required', message: this.$t('member.address-item-add.704004-8') }],
+        telephone: [{ validate: 'required', message: this.$t('member.address-item-add.704004-9') }],
+        tmp_code: [{ validate: 'required', message: this.$t('member.address-item-add.704004-10') }],
+        adrdetail: [{ validate: 'required', message: this.$t('member.address-item-add.704004-11') }],
+        postalCode: [{ validate: 'required', message: this.$t('member.address-item-add.704004-12') }]
+      }
   },
   mounted() {
     // if (this.type == 'put') {
