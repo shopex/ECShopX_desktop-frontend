@@ -24,7 +24,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+    <style lang="scss" scoped>
   .member__tips{
     font-size: 16px;
     // color: $color-primary-text;

@@ -78,7 +78,7 @@ export default {
       right: 0px;
       width: 116px;
       height: 36px;
-      background: url('~@/assets/imgs/coupons/圆角矩形.png');
+      background: url('~assets/imgs/coupons/圆角矩形.png');
       background-size: 100% 100%;
       padding-top: 6px;
       & > span {

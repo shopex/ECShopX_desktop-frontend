@@ -127,7 +127,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+    <style lang="scss" scoped>
 .add-cart-modal {
   .header-title {
     line-height: 24px;

@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="scss" scoped>
 .address-item-add {
   .form {
     .label-text {

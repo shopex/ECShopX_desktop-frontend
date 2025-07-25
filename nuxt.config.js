@@ -149,9 +149,20 @@ module.exports = {
     // publicPath: process.env.VUE_APP_PUBLIC_PATH || "/_nuxt/",
     // publicPath: "https://ecshopx.shopex123.com/pc/_nuxt/",
     extend(config, { isDev, isClient, isServer }) {
+
+      config.module.rules.forEach(rule => {
+        if (rule.test && rule.test.toString().includes('scss')) {
+          console.log('SCSS RULE:', JSON.stringify(rule, null, 2));
+        }
+      });
+
       config.resolve = merge(config.resolve, {
         alias: {
-          lodash$: 'lodash-es'
+          lodash$: 'lodash-es',
+          '~': path.resolve(__dirname, 'src'),
+          '~assets': path.resolve(__dirname, 'src/assets'),
+          '@': path.resolve(__dirname, 'src'),
+          '@assets': path.resolve(__dirname, 'src/assets')
         }
       })
       if (isClient) {
@@ -171,11 +182,34 @@ module.exports = {
     },
     unknownContextCritical: false,
     cssSourceMap: false,
+    
+    optimization: {
+      splitChunks: {
+        cacheGroups: {
+          styles: {
+            name: 'styles',
+            test: /\.scss$/,
+            chunks: 'all',
+            enforce: true,
+          },
+        },
+      },
+    },
     loaders: {
+      css:{
+        modules:false
+      },
+      cssModules: {
+        modules:false
+      },
       scss: {
-        includePaths: [path.resolve(CUSTOME_PATH, './style'), path.resolve(SRC_PATH, './style')],
-        data: `@import 'theme';
-        @import 'imports';`
+        // modules:false,
+        implementation: require('sass'),
+        additionalData: `@import '${path.resolve(SRC_PATH, './style/theme.scss')}';
+        @import '${path.resolve(SRC_PATH, './style/imports.scss')}';`,
+        sassOptions: {
+          includePaths: [path.resolve(SRC_PATH, './style')]
+        }
       }
     }
   },
@@ -190,6 +224,12 @@ module.exports = {
 
   render: {
     static: {}
+  },
+
+  postcss: {
+    plugins: {
+      autoprefixer: {}
+    }
   },
 
   watch: ['~/custome']

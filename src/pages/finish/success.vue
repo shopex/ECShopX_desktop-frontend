@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="scss" scoped>
 .page-trade-status {
   padding: 20px;
   margin-bottom: 0;

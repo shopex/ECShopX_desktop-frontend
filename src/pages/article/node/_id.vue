@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="scss" scoped>
 .page-article-node {
   // padding: 50px 30px;
   &__nav {

@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="scss" scoped>
 .page-content {
   // padding-bottom: 100px;
   &__nav {

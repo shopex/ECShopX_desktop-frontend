@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="scss" scoped>
 .t-bar {
   &__header {
     background: #efefef;

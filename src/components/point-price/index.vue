@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="scss" scoped>
 .sp-price-point {
   display: inline-block;
   vertical-align: middle;

@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="scss" scoped>
 .sortbar {
   @include clearfix();
   .sort-list {

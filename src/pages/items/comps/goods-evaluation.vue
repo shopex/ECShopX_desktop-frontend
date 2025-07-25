@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="scss" scoped>
 .comps-evaluation {
   &__item {
     margin-bottom: 10px;

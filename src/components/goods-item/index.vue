@@ -79,7 +79,8 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+
 $img-ratio:0.723;
 .goods-item {
   width: 100%;
@@ -108,7 +109,7 @@ $img-ratio:0.723;
   }
   &__img {
     @include pdt-img(100px);
-    height: (100 / $img-ratio)+px;
+          height: calc(100 / #{$img-ratio})+px;
     border: 1px solid $color-brand-primary;
     float: left;
     margin-right: 10px;

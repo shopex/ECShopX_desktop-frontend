@@ -54,7 +54,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+    <style lang="scss" scoped>
 .vip-card{
   position: relative;
   width: 536px;

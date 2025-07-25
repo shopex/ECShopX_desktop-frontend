@@ -1,4 +1,4 @@
-<style lang="scss" src="./index.scss"></style>
+<style lang="scss" scoped src="./index.scss"></style>
 
 <template>
 <div class="sp-address-picker">

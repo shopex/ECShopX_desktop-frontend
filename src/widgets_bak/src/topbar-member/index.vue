@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="scss" scoped>
 .topbar-member__exit-btn{
   margin-left: 40px;
 }

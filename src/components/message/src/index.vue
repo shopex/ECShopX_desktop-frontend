@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="scss" scoped>
 .sp-message {
   position: fixed;
   left: 50%;

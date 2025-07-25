@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="scss" scoped>
 .page-address {
   .address-body {
     padding: $edge-size $edge-margin;

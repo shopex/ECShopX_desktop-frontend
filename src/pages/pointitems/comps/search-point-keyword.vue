@@ -20,7 +20,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+    <style lang="scss" scoped>
 .price-point-wrap-keyword {
   display: inline-block;
   .search-label {

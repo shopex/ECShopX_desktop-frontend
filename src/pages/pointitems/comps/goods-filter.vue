@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="scss" scoped>
 $border-color: #dcdcdc;
 .filter-content {
   color: $border-color;

@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="scss" scoped>
 .size-picker {
     &__item {
         width: 35px;

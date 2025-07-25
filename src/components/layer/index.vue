@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="scss" scoped>
 .sp-layer {
   background: rgba(#000, 0.6);
   z-index: $z-index-modal;

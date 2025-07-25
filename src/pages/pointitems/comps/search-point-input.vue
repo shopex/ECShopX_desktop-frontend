@@ -23,7 +23,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+    <style lang="scss" scoped>
 .price-point-wrap {
   display: inline-block;
   display: flex;

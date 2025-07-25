@@ -19,39 +19,36 @@
     "upload": "node build/upload.js"
   },
   "dependencies": {
-    "@babel/polyfill": "^7.7.0",
-    "@nuxtjs/component-cache": "^1.1.5",
+    "nuxt": "^2.15.8",
+    "nuxt-i18n": "^6.28.1",
     "@nuxtjs/device": "^1.2.4",
+    "@nuxtjs/component-cache": "^1.1.5",
     "@nuxtjs/proxy": "^1.3.3",
     "axios": "^0.26.0",
     "cache-manager": "^2.10.0",
-    "cookie-universal-nuxt": "^2.1.4",
+    "cookie-universal-nuxt": "^2.2.2",
     "copy-to-clipboard": "^3.2.0",
     "hammerjs": "^2.0.8",
     "lodash-es": "^4.17.11",
-    "lru-cache": "^5.1.1",
-    "matchmedia-polyfill": "^0.3.2",
     "md5": "^2.2.1",
     "moment": "^2.24.0",
-    "nuxt-device-detect": "^1.1.5",
-    "nuxt-i18n": "^6.28.1",
     "qrcode": "^1.4.4",
     "social-share.js": "^1.0.16",
     "ssr-window": "^1.0.1",
     "store": "^2.0.12",
     "swiper": "^5.4.5",
     "vant": "^2.0.2",
-    "vue": "^2.6.10",
+    "vue": "^2.7.10",
     "vue-awesome-swiper": "^4.1.1",
     "vue-clickaway": "^2.2.2",
     "vue-color": "^2.7.1",
     "vue-hotzone": "^1.1.0",
     "vue-infinite-scroll": "^2.0.2",
     "vue-lazyload": "^1.2.6",
-    "vuex-persistedstate": "3.0.0"
+    "vuex-persistedstate": "3.0.0",
+    "vue-template-compiler": "^2.7.10"
   },
   "devDependencies": {
-    "@nuxt/cli": "2.14.12",
     "@vue/babel-preset-app": "^3.7.0",
     "@vue/cli-plugin-babel": "^3.7.0",
     "@vue/cli-plugin-eslint": "^3.7.0",
@@ -69,21 +66,22 @@
     "glob": "^7.1.4",
     "husky": "^4.3.0",
     "lint-staged": "^10.5.4",
-    "node-sass": "^4.12.0",
-    "nuxt": "2.14.12",
     "prettier-eslint-cli": "^5.0.0",
     "process-argv-parser": "0.0.1",
     "qn-webpack": "^2.0.3",
-    "sass": "^1.20.1",
-    "sass-loader": "^7.1.0",
+    "sass": "1.77.6",
+    "sass-loader": "10.5.2",
+      "postcss-html":"^1.5.0",
     "standard-version": "^9.3.0",
-    "vue-template-compiler": "^2.5.21",
     "webpack-merge": "^4.2.1"
   },
   "postcss": {
     "plugins": {
       "autoprefixer": {}
     }
+  },
+  "volta": {
+    "node": "16.16.0"
   },
   "browserslist": [
     "> 1%",

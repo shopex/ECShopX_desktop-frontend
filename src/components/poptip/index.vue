@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="scss" scoped>
 .sp-poptip {
   display: inline-block;
   &-rel {

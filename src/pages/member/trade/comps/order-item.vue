@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="scss" scoped>
 $img-ratio:0.723;
 .order-item {
   padding-top: 20px;

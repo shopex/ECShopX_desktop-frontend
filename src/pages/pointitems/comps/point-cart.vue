@@ -180,7 +180,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+    <style lang="scss" scoped>
 .add-cart-modal {
   .modal-btn {
     line-height: 36px !important;

@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="scss" scoped>
 .float-menus__item {
   .sp-float-menu {
     &-item {

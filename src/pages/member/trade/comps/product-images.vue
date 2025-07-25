@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="scss" scoped>
 .product-swiper {
     position: relative;
     .swiperBox {

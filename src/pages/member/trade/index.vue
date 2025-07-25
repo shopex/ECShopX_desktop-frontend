@@ -623,7 +623,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+    <style lang="scss" scoped>
 @import '../member.scss';
 .page-order {
       background: #f5f5f5;

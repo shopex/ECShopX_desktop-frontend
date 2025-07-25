@@ -1,7 +1,7 @@
 <style lang="scss" src="./login.scss"></style>
 
 <template>
-<div class="page-auth-login container">
+<div class="page-auth-login ">
   <!--<div class="login-logo">
      <img
       referrerpolicy="no-referrer"

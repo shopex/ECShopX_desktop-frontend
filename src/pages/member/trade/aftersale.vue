@@ -112,7 +112,7 @@
     padding-top: 20px;
   }
   .logSpSelect {
-    /deep/.sort-select__dropdown-list {
+    ::v-deep .sort-select__dropdown-list {
       height: 220px !important;
     }
   }

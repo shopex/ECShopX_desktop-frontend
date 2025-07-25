@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="scss" scoped>
 .collapse {
   &__title {
     padding: 10px 0;

@@ -1,4 +1,4 @@
-<style lang="scss" src="./index.scss"></style>
+<style lang="scss" src="./index.scss" scoped></style>
 
 <template>
 <div class="sp-float-menu">

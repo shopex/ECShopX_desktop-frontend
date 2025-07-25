@@ -1,6 +1,6 @@
 .page-body {
   background: #eeeeee;
-  min-height: 100vh;
+  // min-height: 100vh;
   padding-bottom: 10px;
 }
 .container-shop{
@@ -8,7 +8,7 @@
 }
 .container{
   background: #eeeeee;
-  min-height: 100vh;
+  // min-height: 100vh;
   // 设置填写信息顶部步骤
   .settle_hd{
     min-height: 60px;
@@ -108,7 +108,7 @@
             max-height: 364px;
           }
           .bank_input{
-            /deep/.sp-input__input{
+            ::v-deep .sp-input__input{
               cursor: pointer;
             }
           }

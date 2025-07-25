@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="scss" scoped>
 $finish-success-color: rgba(87, 184, 70, 1);
 $finish-fail-color: #e23038;
 

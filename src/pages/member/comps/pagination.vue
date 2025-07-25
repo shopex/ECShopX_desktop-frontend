@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="scss" scoped>
 .mini-pagination {
   display: inline-block;
   line-height: 14px;

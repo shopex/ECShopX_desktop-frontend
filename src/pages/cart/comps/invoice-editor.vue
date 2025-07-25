@@ -91,7 +91,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+    <style lang="scss" scoped>
 .invoice-editor {
   .form-group {
     margin: 0 0 4px;

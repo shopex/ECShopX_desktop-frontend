@@ -70,7 +70,8 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+
 $img-ratio: 0.723;
 
 .cart-item {
@@ -101,7 +102,7 @@ $img-ratio: 0.723;
     @include clearfix();
     &__img {
       @include pdt-img(152px);
-      height: (152 / $img-ratio) + px;
+      height: calc(152 / #{$img-ratio}) + px;
       border: 1px solid #ccc;
       position: absolute;
       float: left;

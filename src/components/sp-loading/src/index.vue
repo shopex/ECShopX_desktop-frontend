@@ -1,4 +1,5 @@
-<style lang="scss">
+<style lang="scss" scoped>
+
 $sp-loading-size: 42px !default;
 
 @keyframes sp-loading-circular {
@@ -42,7 +43,7 @@ $sp-loading-size: 42px !default;
       display: block;
       position: absolute;
       top: 50%;
-      margin-top: -$sp-loading-size / 2;
+      margin-top: calc(-1 * #{$sp-loading-size} / 2);
       width: 100%;
     }
   }

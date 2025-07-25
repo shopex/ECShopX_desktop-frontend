@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="scss" scoped>
   .sp-recommend {
     float: left;
     width: 210px;

@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="scss" scoped>
 .goods-card {
   // float: left;
   // width: 278px;

@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="scss" scoped>
 .page-fail {
   text-align: center;
   margin-bottom: 0;

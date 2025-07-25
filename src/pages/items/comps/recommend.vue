@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="scss" scoped>
   .comps-recommend {
     border: 1px solid #ddd;
     .recommend-header {

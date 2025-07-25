@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="scss" scoped>
 .sp-evaluation {
   &__list {
     padding: 10px 20px 0;

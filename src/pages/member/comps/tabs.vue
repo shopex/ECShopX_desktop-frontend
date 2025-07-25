@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="scss" scoped>
 .sp-smenu__sub-title-ul{
   li{
     cursor: pointer;

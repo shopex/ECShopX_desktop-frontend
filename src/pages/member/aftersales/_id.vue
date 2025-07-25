@@ -1,5 +1,5 @@
 <style lang="scss" src='./apply-refund.scss'></style>
-<style lang="scss">
+<style lang="scss" scoped>
 .page-aftersales-detail{
   .goods-item{
     margin-bottom: 20px;

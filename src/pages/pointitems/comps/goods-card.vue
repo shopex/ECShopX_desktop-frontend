@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="scss" scoped>
 $good_color: #f0f0f0;
 
 .goods-card {

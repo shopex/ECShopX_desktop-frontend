@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="scss" scoped>
 .cashier-wxpayh5 {
   &__title {
     font-size: 28px;

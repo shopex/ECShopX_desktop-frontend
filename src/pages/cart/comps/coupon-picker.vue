@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="scss" scoped>
 .coupon-picker {
   position: relative;
   height: 33px;

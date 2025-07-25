@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="scss" scoped>
 $goods-color-primary: #1f201f;
 .good-card {
   display: inline-block;

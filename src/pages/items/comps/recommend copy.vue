@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="scss" scoped>
 .sp-recommend {
   padding: 70px 0 100px 0;
   .title {

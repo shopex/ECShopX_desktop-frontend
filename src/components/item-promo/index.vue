@@ -21,7 +21,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .item-promo {
   color: $color-brand-primary;
   font-size: 13px;

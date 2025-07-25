@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="scss" scoped>
 .sp-smenu {
   padding: 20px;
   padding-left: 42px;

@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="scss" scoped>
 .sp-photo-zoom-pointitem {
   height: 100%;
   .img-container {

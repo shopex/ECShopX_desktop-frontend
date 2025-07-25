@@ -60,7 +60,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+    <style lang="scss" scoped>
 .page-member-rights {
   .member-content-right {
     padding: 40px;

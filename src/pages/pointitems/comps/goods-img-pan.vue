@@ -147,7 +147,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+    <style lang="scss" scoped>
 .goods-img-pan {
   background: #fff;
   position: relative;

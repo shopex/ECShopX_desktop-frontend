@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="scss" scoped>
 .bread-crumb {
   font-size: 14px;
   padding:  20px 0;

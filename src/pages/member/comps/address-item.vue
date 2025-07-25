@@ -41,7 +41,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+    <style lang="scss" scoped>
 .address__item {
   position: relative;
   padding: 17px 0 20px 20px;

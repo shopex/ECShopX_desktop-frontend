@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="scss" scoped>
 .member-address-picker {
   &__list {
     height: 60px;

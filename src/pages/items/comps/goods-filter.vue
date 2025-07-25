@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="scss" scoped>
 .filter-container {
   border-radius: 3px;
   font-size: 12px;

@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="scss" scoped>
 .sp-mini-cart {
   position: relative;
   display: inline-block;

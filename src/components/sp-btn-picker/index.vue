@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="scss" scoped>
 .sp-btn-picker {
   margin-right: 10px;
   width: 150px;

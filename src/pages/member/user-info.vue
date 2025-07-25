@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="scss" scoped>
 $num-color : #FF5D02;
 @import './member.scss';
 .page-userinfo {

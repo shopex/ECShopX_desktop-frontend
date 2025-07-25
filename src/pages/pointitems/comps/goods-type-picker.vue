@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="scss" scoped>
     .good-type-picker {
       margin-bottom: 10px;
       &__title {

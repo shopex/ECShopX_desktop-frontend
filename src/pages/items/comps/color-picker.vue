@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="scss" scoped>
 .color-picker {
   &__item {
     margin: 0 0 8px;

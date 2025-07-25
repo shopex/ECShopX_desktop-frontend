@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="scss" scoped>
 $sp-loading-size: 42px !default;
 
 @keyframes sp-loading-circular {

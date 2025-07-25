@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="scss" scoped>
 .point-tag {
   position: absolute;
   width: 24px;

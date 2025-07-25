@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="scss" scoped>
 $color-coupon-text: #1f201f;
 .comps-coupon-item {
   position: relative;

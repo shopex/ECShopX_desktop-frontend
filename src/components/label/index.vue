@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="scss" scoped>
 .sp-label {
   // font-size: $font-size;
   display: inline-block;

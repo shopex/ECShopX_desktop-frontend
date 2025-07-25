@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="scss" scoped>
 .staff-label {
   color: #fff;
   background-color: $color-invalid;

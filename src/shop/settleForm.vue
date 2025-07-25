@@ -245,4 +245,4 @@ export default {
   watch: {}
 }
 </script>
-<style lang="scss" src="./settleForm.scss"></style>
+<style scoped lang="scss" src="./settleForm.scss"></style>

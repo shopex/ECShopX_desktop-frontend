@@ -4,7 +4,7 @@
   </div>
 </template>
 
-<style lang="scss">
+    <style lang="scss" scoped>
 .vip-progress {
   width: 100%;
   height: 7px;

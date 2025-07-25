@@ -19,7 +19,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+    <style lang="scss" scoped>
 .cart-steps {
   padding: 20px 0;
   font-size: $font-size-large;
