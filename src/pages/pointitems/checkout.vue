@@ -490,7 +490,10 @@
               ></span
             >
           </div>
-          <div class="content-ft-btn" @click="clickSumit()">{{ $t('pointitems.checkout.946036-15') }}</div>
+          <div class="content-ft-btn" @click="clickSumit()" :style="{
+              backgroundColor: themeColor
+            }"
+          >{{ $t('pointitems.checkout.946036-15') }}</div>
         </div>
       </div>
     </div>
