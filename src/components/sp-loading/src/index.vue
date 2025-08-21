@@ -108,6 +108,10 @@ export default {
       type: [Number, String],
       default: 32
     },
+    loadingText: {
+      type: String,
+      default: '正在加载...'
+    },
     onOpen: {
       type: Function,
       default: () => {}
@@ -131,6 +135,24 @@ export default {
 
     circleStyles() {
       return [{ 'stroke-width': this.stroke }, { 'stroke': this.color }]
+    },
+
+    displayText() {
+      // 优先使用传入的 loadingText prop
+      if (this.loadingText) {
+        return this.loadingText
+      }
+      
+      // 检查 $t 方法是否可用
+      if (this.$t && typeof this.$t === 'function') {
+        try {
+          return this.$t('src.index.305922-0')
+        } catch (error) {
+          console.warn('i18n translation failed:', error)
+        }
+      }
+      // 提供默认值
+      return '正在加载...'
     }
   },
 
@@ -185,7 +207,7 @@ export default {
           this.mask ? (
             <div
               class='sp-loading__mask'
-              style={{ background: this.background, text: this.$t('src.index.305922-0') }}
+              style={{ background: this.background, text: this.displayText }}
             >
               {spinner}
             </div>

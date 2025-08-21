@@ -105,8 +105,8 @@ module.exports = {
     '~/plugins/axios',
     { src: '~/plugins/vue-swiper.js' },
     { src: '~plugins/vue-infinite-scroll', ssr: false },
-    { src: '~/plugins/route', ssr: true }
-
+    { src: '~/plugins/route', ssr: true },
+    { src: '~/plugins/persistedState', ssr: false }
   ],
 
   serverMiddleware: [],
@@ -221,6 +221,9 @@ module.exports = {
     middleware: 'i18n',
     extendRoutes
   },
+
+  // Vuex store 配置
+  store: true,
 
   render: {
     static: {}

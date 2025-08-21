@@ -9,7 +9,8 @@ export default {
       }
     }),
     getThemeColor() {
-      const { themeColor } = this.pageConfig
+      const { themeColor } = this.pageConfig;
+      console.log('themeColor', themeColor)
       return {
         color: themeColor
       }
@@ -22,6 +23,7 @@ export default {
     },
     themeColor() {
       const { themeColor } = this.pageConfig
+      console.log('themeColor', themeColor)
       return themeColor
     }
   },

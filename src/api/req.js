@@ -15,6 +15,34 @@ function reqErr(res, msg = '') {
   return err
 }
 
+const setCountryCode = (config) => {
+  // 客户端请求时，添加多语言 country_code 字段
+  if (process.client) {
+    // 从 nuxti18n 获取当前语言
+    let country_code = 'zh-CN'
+    try {
+      // 兼容不同 nuxt 版本的 i18n 获取方式
+      let locale
+      if (window.$nuxt && window.$nuxt.$i18n) {
+        locale = window.$nuxt.$i18n.locale
+      } else if (window.__NUXT__ && window.__NUXT__.state && window.__NUXT__.state.i18n) {
+        locale = window.__NUXT__.state.i18n.locale
+      }
+      if (locale === 'en') {
+        country_code = 'en-CN'
+      } else {
+        country_code = 'zh-CN'
+      }
+    } catch (e) {
+      country_code = 'zh-CN'
+    }
+    return {
+      ...config,
+      country_code
+    }
+  }
+  return config
+}
 function getDomain() {
   let id
   try {
@@ -113,11 +141,13 @@ class CreateAxios {
             ...config.params
           }
         }
+       config.params = setCountryCode(config.params)
       } else {
         config.data = {
           ...config.data,
           company_id: companyid
         }
+        config.data = setCountryCode(config.data)
       }
 
       config.showError = showError
