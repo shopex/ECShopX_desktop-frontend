@@ -59,7 +59,7 @@ function getDomain() {
 function resolveGetMethod(inst) {
   const origGetMethod = inst.get
 
-  inst.get = function(url, params, config = {}) {
+  inst.get = function (url, params, config = {}) {
     config = {
       params,
       ...config
@@ -141,7 +141,7 @@ class CreateAxios {
             ...config.params
           }
         }
-       config.params = setCountryCode(config.params)
+        config.params = setCountryCode(config.params)
       } else {
         config.data = {
           ...config.data,
@@ -153,7 +153,7 @@ class CreateAxios {
       config.showError = showError
 
       config.transformRequest = [
-        function(data, headers) {
+        function (data, headers) {
           return qs.stringify(data)
         }
       ]
@@ -178,14 +178,14 @@ class CreateAxios {
         if (status === 200) {
           if (data.data) {
             const { status_code, message } = data.data
-            if(status_code && status_code > 300){
+            if (status_code && status_code > 300) {
               errorMessage(message)
               return Promise.reject(message)
             }
             return data.data
           } else {
             const { status_code, message } = data
-            if(status_code && status_code > 300){
+            if (status_code && status_code > 300) {
               errorMessage(message)
               return Promise.reject(message)
             }
