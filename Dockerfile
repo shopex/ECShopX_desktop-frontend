@@ -1,7 +1,8 @@
-FROM node:lts-alpine3.9
-RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories \
-    && apk --no-cache add ca-certificates tzdata
+# FROM node:lts-alpine3.9
+# RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories \
+#     && apk --no-cache add ca-certificates tzdata
 
+FROM reg.ishopex.cn/base-images/node-python3:16.16.0-alpine3.16 AS builder
     
 ARG CMD
 ARG VUE_APP_TITLE
