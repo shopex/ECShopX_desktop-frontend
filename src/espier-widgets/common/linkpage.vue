@@ -15,14 +15,26 @@ a {
       ><slot></slot
     ></a>
     <template v-else>
-      <!-- 绑定router -->
-      <!-- <nuxt-link class="link-page__a" v-if="to && !isTargetLink(to)" :to="to" :style = "{color:ctitleColor}"><slot></slot></nuxt-link> -->
-      <!-- 未绑定router -->
-      <!-- <a class="link-page__a" v-if="to && isTargetLink(to)" :style = "{color:ctitleColor}" :href="to" target="_bank"><slot></slot></a> -->
-      <a class="link-page__a" v-if="to" :style="{ color: ctitleColor }" :href="to"><slot></slot></a>
+      <!-- 使用 router.push 进行跳转 -->
+      <a 
+        class="link-page__a" 
+        v-if="to" 
+        :style="{ color: ctitleColor }" 
+        @click="handleClick"
+        href="javascript:void(0)"
+      >
+        <slot></slot>
+      </a>
       <!-- 自定义连接 -->
-      <!-- <a class="link-page__a" v-if="!to" :style = "{color:ctitleColor}"><slot></slot></a> -->
-      <a class="link-page__a" v-if="!to" :style="{ color: ctitleColor }"><slot></slot></a>
+      <a 
+        class="link-page__a" 
+        v-if="!to" 
+        :style="{ color: ctitleColor }"
+        @click="handleClick"
+        href="javascript:void(0)"
+      >
+        <slot></slot>
+      </a>
     </template>
   </span>
 </template>
@@ -47,6 +59,17 @@ export default {
         return true
       } else {
         return false
+      }
+    },
+    handleClick() {
+      if (this.to) {
+        if (this.isTargetLink(this.to)) {
+          // 外部链接，使用 window.open 打开
+          window.open(this.to, '_blank')
+        } else {
+          // 内部路由，使用 router.push
+          this.$router.push(this.to)
+        }
       }
     }
   }
