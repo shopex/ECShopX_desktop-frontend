@@ -1,6 +1,7 @@
 <style lang="scss" src="@/style/index.scss"></style>
 
 <template>
+  <LayoutHoc>
   <div class="system-container">
     <SpHeader />
     <div class="page-body">
@@ -8,6 +9,7 @@
     </div>
     <SpFooter />
   </div>
+</LayoutHoc>
 </template>
 
 <script>
@@ -20,7 +22,7 @@ import { mixin } from '@/mixins'
 
 export default {
   mixins: [mixin],
-  head () {
+  head() {
     return {
       // title: this.pageSeo.title,
       title: "首页",
@@ -59,34 +61,34 @@ export default {
   },
   methods: {
     // ...mapActions(["initStore"])
-    changeRoute(to){
-      if(to==='cart'){
+    changeRoute(to) {
+      if (to === 'cart') {
         document.title = "购物车"
-      }else if(to==='member-trade'){
+      } else if (to === 'member-trade') {
         document.title = "我的订单"
-      }else if(to==='member-user-info'){
+      } else if (to === 'member-user-info') {
         document.title = "会员中心"
-      }else if(to==='member-change-password'){
+      } else if (to === 'member-change-password') {
         document.title = "更改密码"
-      }else if(to==='member-address'){
+      } else if (to === 'member-address') {
         document.title = "收货地址"
-      }else if(to==='member-trade'){
+      } else if (to === 'member-trade') {
         document.title = "所有订单"
-      }else if(to==='member-trade-id'){
+      } else if (to === 'member-trade-id') {
         document.title = "订单详情"
-      }else if(to==='cart-checkout'){
+      } else if (to === 'cart-checkout') {
         document.title = "订单信息"
-      }else if(to==='member-trade-aftersale-list'){
+      } else if (to === 'member-trade-aftersale-list') {
         document.title = "售后订单"
-      }else if(to==='member-trade-aftersale'){
+      } else if (to === 'member-trade-aftersale') {
         document.title = "售后详情"
-      }else if(to==='member-coupon'){
+      } else if (to === 'member-coupon') {
         document.title = "优惠券"
-      }else if(to==='member-collector'){
+      } else if (to === 'member-collector') {
         document.title = "我的收藏"
-      }else if(to==='member-foottrace'){
+      } else if (to === 'member-foottrace') {
         document.title = "我的足迹"
-      }else if(to==='member-point'){
+      } else if (to === 'member-point') {
         document.title = "我的积分"
       }
     }

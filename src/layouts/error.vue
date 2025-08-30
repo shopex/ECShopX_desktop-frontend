@@ -19,6 +19,7 @@
 </style>
 
 <template>
+  <LayoutHoc>
   <div class="page-error page-body">
     <div v-if="statusCode === 404" class="page-error__container">
       <div class="icon">
@@ -41,6 +42,7 @@
     </div>
     <!-- <Recommend /> -->
   </div>
+</LayoutHoc>
 </template>
 
 <script>

@@ -9,6 +9,7 @@
 <style lang="scss" src="@/style/index.scss"></style>
 
 <template>
+  <LayoutHoc>
   <div class="shop-auth">
     <shop-header v-if="show" />
     <div class="page-body">
@@ -16,6 +17,7 @@
     </div>
     <sp-footer />
   </div>
+</LayoutHoc>
 </template>
 
 <script>

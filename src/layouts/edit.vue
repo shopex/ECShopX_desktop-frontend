@@ -7,6 +7,7 @@
 </style>
 
 <template>
+<LayoutHoc>
 <div>
   <SpHeader />
 
@@ -59,6 +60,7 @@
   </div>
 
 </div>
+</LayoutHoc>
 </template>
 
 <script>

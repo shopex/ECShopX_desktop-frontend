@@ -9,7 +9,7 @@
 <style lang="scss" src="@/style/index.scss"></style>
 
 <template>
-
+  <LayoutHoc>
   <div class="system-auth">
     <auth-header :logo="logo" />
     <div class="page-body" :style="{ backgroundImage: `url(${bg})` }">
@@ -18,6 +18,7 @@
     <sp-footer />
 
   </div>
+</LayoutHoc>
 </template>
 
 <script>

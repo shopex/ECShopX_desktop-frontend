@@ -19,7 +19,7 @@
               fontWeight: '800'
             }"
           >
-            全部商品分类
+            {{ $t('sp-header.index copy.249207-8') }}
           </div>
           <div class="category-list">
             <div

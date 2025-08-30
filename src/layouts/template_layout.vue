@@ -1,10 +1,10 @@
 <template>
-  <!-- <TemplateHoc> -->
+  <LayoutHoc>
     <!-- <HmNavigationHeader /> -->
     <div class="page-body">
       <Nuxt />
     </div>
-  <!-- </TemplateHoc> -->
+  </LayoutHoc>
 </template>
 
 <script>

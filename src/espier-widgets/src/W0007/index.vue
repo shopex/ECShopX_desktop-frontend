@@ -19,7 +19,7 @@
               fontWeight: '800'
             }"
           >
-            全部商品分类
+            {{ $t('W0007.index.969379-0') }}
           </div>
           <div class="category-list">
             <div
@@ -125,34 +125,46 @@ const WIDGET_NAME = 'W0007'
 export default {
   name: WIDGET_NAME,
   icon: 'icon-caidan1',
-  title: '导航菜单',
   mixins: [mixins],
   panel: braidStyle,
   navs: ['nav2', 'nav2-1'],
   // 挂件类型
   widgetType: ['pc', 'h5'],
-  setting: {
-    // 元件名称
-    name: '导航菜单',
-    alias: '导航菜单',
-    text: '导航菜单',
-    type: WIDGET_NAME,
-    ...attrs,
-    proportion: 'disabled',
-    height: 40,
-    heightDisabled: true,
-    customerThemeEnabled: true,
-    wgtTypeBackgroundColor: '#FF5D02',
-    wgtTypeLabelColor: '#FFFFFF',
-    wgtBackgroundColor: '#FFFFFF',
-    wgtSelectColor: '#F5F6FA',
-    wgtTextColor: '#3B3B3B',
-    wgtSubTextColor: '#8C8C8C',
-    // 分类数据
-    categoryData: [],
-    hover: true,
-    // 展开菜单位置
-    menuTop: 40
+  // 使用计算属性来获取翻译后的 setting
+  computed: {
+    title() {
+      return this.$t('W0007.index.969379-1')
+    },
+    // 动态获取翻译后的 setting 配置
+    setting() {
+ 
+      
+      // 如果 $t 可用，返回翻译后的配置
+      return {
+        name: this.$t('W0007.index.969379-1'),
+        alias: this.$t('W0007.index.969379-1'),
+        text: this.$t('W0007.index.969379-1'),
+        type: WIDGET_NAME,
+        ...attrs,
+        proportion: 'disabled',
+        height: 40,
+        heightDisabled: true,
+        customerThemeEnabled: true,
+        wgtTypeBackgroundColor: '#FF5D02',
+        wgtTypeLabelColor: '#FFFFFF',
+        wgtBackgroundColor: '#FFFFFF',
+        wgtSelectColor: '#F5F6FA',
+        wgtTextColor: '#3B3B3B',
+        wgtSubTextColor: '#8C8C8C',
+        categoryData: [],
+        hover: true,
+        menuTop: 40
+      }
+    },
+    // 提供翻译后的标题
+    translatedTitle() {
+      return this.$t ? this.$t('W0007.index.969379-1') : '导航菜单'
+    }
   },
   data() {
     return {
@@ -163,7 +175,6 @@ export default {
     ImgWrap,
     linkPage
   },
-  computed: {},
   mounted() {},
   methods: {
     handleMainBtnHover() {

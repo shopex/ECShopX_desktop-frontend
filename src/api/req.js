@@ -16,32 +16,44 @@ function reqErr(res, msg = '') {
 }
 
 const setCountryCode = (config) => {
-  // 客户端请求时，添加多语言 country_code 字段
-  if (process.client) {
-    // 从 nuxti18n 获取当前语言
-    let country_code = 'zh-CN'
-    try {
-      // 兼容不同 nuxt 版本的 i18n 获取方式
-      let locale
+  // 添加多语言 country_code 字段
+  let country_code = 'zh-CN'
+  
+  try {
+    let locale
+    
+    if (process.client) {
+      // 客户端：从 nuxti18n 获取当前语言
       if (window.$nuxt && window.$nuxt.$i18n) {
         locale = window.$nuxt.$i18n.locale
       } else if (window.__NUXT__ && window.__NUXT__.state && window.__NUXT__.state.i18n) {
         locale = window.__NUXT__.state.i18n.locale
       }
-      if (locale === 'en') {
-        country_code = 'en-CN'
-      } else {
-        country_code = 'zh-CN'
+    } else if (process.server) {
+      // 服务端：从 CreateAxios.content 中的 app 对象获取语言信息
+      if (CreateAxios.content && CreateAxios.content.app && CreateAxios.content.app.i18n) {
+        locale = CreateAxios.content.app.i18n.locale
+      } else if (CreateAxios.content && CreateAxios.content.store && CreateAxios.content.store.state.locale) {
+        // 从 Vuex store 获取语言信息
+        locale = CreateAxios.content.store.state.locale
       }
-    } catch (e) {
+    }
+    
+    // 根据语言设置 country_code
+    if (locale === 'en') {
+      country_code = 'en-CN'
+    } else {
       country_code = 'zh-CN'
     }
-    return {
-      ...config,
-      country_code
-    }
+  } catch (e) {
+    console.warn('Failed to get locale, using default zh-CN:', e)
+    country_code = 'zh-CN'
   }
-  return config
+  console.log('country_code:', country_code)
+  return {
+    ...config,
+    country_code
+  }
 }
 function getDomain() {
   let id
