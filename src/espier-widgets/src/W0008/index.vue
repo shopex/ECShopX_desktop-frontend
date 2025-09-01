@@ -27,7 +27,7 @@
             @click="handleClickSearch"
             v-if="value.isShowBtn"
           >
-            搜索
+            {{ $t('W0008.index.695137-0') }}
           </div>
         </div>
         <div class="hot-keyword" v-if="value.data.length > 0">
@@ -92,7 +92,7 @@ export default {
   computed: {
     // focusStyle() {
     //   const { value, translatePx2Device, focusStatus } = this
-    //   if (focusStatus) {
+    //   if (focusStatus) { 
     //     value.x = value.x - 100
     //     return {
     //       left: translatePx2Device(value.x)

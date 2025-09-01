@@ -15,7 +15,7 @@
             }"
           >
             <i class="new_iconfont icon-new-pc-cart" :style="{ color: value.wgtTextColor }"></i>
-            我的购物车
+            {{ $t('W0010.index.258451-0') }}
 
             <span class="count" v-if="true" :style="{ background: value.wgtTextColor }">{{
               cartTotal
@@ -46,14 +46,14 @@
             </div>
             <div class="cart-total">
               <div class="cart-total__hd">
-                {{ `共${cartInfo ? getCartTotal(cartInfo).totalCount : ''}件商品，合计` }}
+                {{ $t('W0010.index.258451-1', [cartInfo ? getCartTotal(cartInfo).totalCount : '']) }}
                 <goodsPrice
                   class="goods-price"
                   :value="cartInfo ? getCartTotal(cartInfo).totalPrice / 100 : 0"
                 ></goodsPrice>
               </div>
               <div class="cart-total__bd">
-                <div class="btn btn-cart" @click="handleClickCart">进入购物车</div>
+                <div class="btn btn-cart" @click="handleClickCart">{{ $t('W0010.index.258451-2') }}</div>
                 <!-- <div
                   class="btn btn-checkout"
                   :style="{ backgroundColor: getThemeColor, color: value.wgtTextColor }"
