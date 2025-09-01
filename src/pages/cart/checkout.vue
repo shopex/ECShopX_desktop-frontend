@@ -300,6 +300,8 @@
             :style="{
               backgroundColor: themeColor
             }"
+
+
           >
             {{ $t('cart.checkout.032780-44') }}
           </div>

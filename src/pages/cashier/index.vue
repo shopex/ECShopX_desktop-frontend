@@ -118,6 +118,40 @@
     }
   }
 
+  .qr-payment-area {
+    margin-top: 20px;
+    text-align: center;
+    
+    .qr-code-image {
+      margin-bottom: 20px;
+    }
+  }
+
+  .countdown-info {
+    text-align: center;
+    margin-top: 20px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    
+    .countdown-text {
+      font-size: 16px;
+      color: #333;
+      margin-bottom: 8px;
+      
+      .countdown-time {
+        color: #e74c3c;
+        font-weight: bold;
+        font-size: 18px;
+      }
+    }
+    
+    .countdown-tip {
+      font-size: 14px;
+      color: #666;
+    }
+  }
+
 
   .offline-pay {
     display: flex;
@@ -336,15 +370,32 @@
           :style="{
             backgroundColor: themeColor
           }"
-          v-if="!isView"
+          v-if="!isView && showPayButton"
         >
          {{ paymentType == 'offline_pay' ? $t('cashier.index.984361-23'):$t('cashier.index.984361-24') }}
         </div>
+        
       </div>
 
-      <div class="wxpay-bg" v-show="!isPayment">
-        <canvas id="qr"></canvas>
+      <!-- 二维码支付区域 -->
+      <div class="qr-payment-area" v-if="!isView && !showPayButton && (paymentType == 'alipay' || paymentType == 'alipay_qr' || paymentType == 'wxpaypc' || paymentType == 'wx_qr')">
+        <!-- 二维码显示 -->
+        <div class="qr-code-image" v-if="qrCodeUrl">
+          <img :src="qrCodeUrl" alt="支付二维码" style="width: 200px; height: 200px; display: block; margin: 0 auto;" />
+        </div>
+        
+        <!-- 倒计时显示 -->
+        <div class="countdown-info" v-if="countdown <= 300">
+          <div class="countdown-text">
+            请在 <span class="countdown-time">{{ formatCountdown }}</span> 内完成支付
+          </div>
+          <div class="countdown-tip">超时二维码将失效</div>
+        </div>
+        
+
       </div>
+
+      <!-- 微信支付背景已移除，现在使用统一的二维码显示方式 -->
     </div>
   </div>
 </template>
@@ -400,10 +451,42 @@ export default {
       home_url: '',
       accountId:'',
       isView:false,
+      showPayButton: true, // 控制支付按钮显示状态
+      isInitialized: false, // 标记是否已初始化
+      countdown: 300, // 倒计时秒数（5分钟 = 300秒）
+      countdownTimer: null, // 倒计时定时器
+      qrCodeUrl: '', // 二维码URL
     }
   },
   created() {
     this.initFunc()
+  },
+  computed: {
+    formatCountdown() {
+      const minutes = Math.floor(this.countdown / 60)
+      const seconds = this.countdown % 60
+      return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
+    }
+  },
+  watch: {
+    paymentType() {
+      // 只有在初始化完成后才执行清除逻辑
+      if (!this.isInitialized) return
+      
+      // 当支付方式切换时，重新显示支付按钮
+      this.showPayButton = true
+      // 清除二维码内容
+      this.clearQRCode()
+      // 重置支付状态
+      this.isPayment = true
+      // 清除定时器
+      if (this.timer) {
+        clearInterval(this.timer)
+        this.timer = null
+      }
+      // 重置倒计时
+      this.resetCountdown()
+    }
   },
   methods: {
     async initFunc(){
@@ -417,6 +500,8 @@ export default {
         //编辑,数据回显
         this.getVoucher()
       }
+      // 标记初始化完成
+      this.isInitialized = true
     },
     async getVoucher(){
       const { order_id } = this.$route.query
@@ -454,9 +539,11 @@ export default {
       this.total_fee = total_fee
       this.transferInfo.total_fee = total_fee
       if(pay_type == 'offline_pay'){
-        this.paymentType = pay_type
+        // 避免在初始化时触发watch
+        this.$nextTick(() => {
+          this.paymentType = pay_type
+        })
       }
-
     },
     handleVerPicClick(url){
       if(!this.isView)return
@@ -467,14 +554,15 @@ export default {
       const res = await this.$api.cart.getPaymentList(params)
       this.paymentList = res.map((item) => {
         return {
-          type: item.pay_type_code,
+          type: item.pay_channel,
           img:
             item.pay_type_code === 'wxpaypc'
               ? wxpayImage
               : item.pay_type_code === 'alipay'
               ? alipayImage
               : '',
-          title: item.pay_type_name
+          title: item.pay_type_name,
+          pay_type_code: item.pay_type_code
         }
       })
 
@@ -485,14 +573,16 @@ export default {
       const { order_id } = this.$route.query
       let params = {
         order_id,
-        pay_type: this.paymentType, // 支付宝/微信
+        pay_type: this.paymentList.find(item=>item.type == this.paymentType).pay_type_code, // 支付宝/微信
         return_url: this.home_url,
       }
 
-      if(this.paymentType == 'offline_pay'){
+      // if(this.paymentType == 'offline_pay'){
         params.pay_channel = this.paymentType
-      }
+      // }
 
+      console.log('params',params)
+      console.log( this.paymentList.find(item=>item.type == this.paymentType))
       // 找到支付方式的对应支付是否汇付   --如果非汇付，微信或支付宝支付使用pay_type，但有汇付pay_type是汇付字段，pay_channel是微信或支付宝支付
       this.paymentList.map((ele) => {
         if (ele.type == this.paymentType && ele.pay_type) {
@@ -504,27 +594,20 @@ export default {
       const res = await this.$api.cart.payMent(params)
 
       if (this.paymentType == 'alipay' || this.paymentType == 'alipay_qr') {
-        const div = document.createElement('div')
-        div.innerHTML = res.payment // 此处form就是后台返回接收到的数据
-        document.body.appendChild(div)
-        document.forms['alipay_submit'].submit()
+        this.handleQRCodePayment(res.qrcode_url, res)
         return
       } else if (this.paymentType == 'wxpaypc' || this.paymentType == 'wx_qr') {
-        const { code_url, trade_info, appId } = res
-        this.isPayment = false
-        const msg = document.getElementById('qr')
-        const val = `${code_url}`
-        this.codeImg = QRCode.toCanvas(msg, val, (err) => console.log(err))
+        const { qrcode_url:code_url, trade_info, appId } = res
         this.payment_id = trade_info.trade_id
         this.app_id = appId
-        this.timer = setInterval(() => {
-          this.tradePaymentFinish()
-        }, 3000)
+        this.handleQRCodePayment(code_url, res)
       } else if (this.paymentType == 'deposit') {
+        this.showPayButton = false // 隐藏支付按钮
         this.timer = setInterval(() => {
           this.tradePaymentFinish()
         }, 2000)
       } else if (this.paymentType == 'point') {
+        this.showPayButton = false // 隐藏支付按钮
         this.timer = setInterval(() => {
           this.tradePaymentFinish()
         }, 2000)
@@ -540,6 +623,127 @@ export default {
           }
         })
       }
+    },
+    // 处理二维码支付（支付宝和微信支付通用方法）
+    handleQRCodePayment(qrcodeUrl, responseData) {
+      // 隐藏支付按钮
+      this.showPayButton = false
+      this.isPayment = false
+      
+      // 设置二维码URL，模板会自动显示
+      this.qrCodeUrl = qrcodeUrl || ''
+      
+      // 启动倒计时
+      this.startCountdown()
+      
+      // 延迟10秒后开始检查支付状态，给用户足够时间扫码
+      setTimeout(() => {
+        this.timer = setInterval(() => {
+          this.tradePaymentFinish()
+        }, 3000) // 改为3秒检查一次
+      }, 5000)
+    },
+    
+    // 启动倒计时
+    startCountdown() {
+      this.countdown = 300 // 重置为5分钟
+      this.countdownTimer = setInterval(() => {
+        this.countdown--
+        if (this.countdown <= 0) {
+          this.handleCountdownTimeout()
+        }
+      }, 1000)
+    },
+    
+    // 重置倒计时
+    resetCountdown() {
+      if (this.countdownTimer) {
+        clearInterval(this.countdownTimer)
+        this.countdownTimer = null
+      }
+      this.countdown = 300
+      // 清除二维码URL
+      this.qrCodeUrl = ''
+    },
+    
+    // 处理倒计时超时
+    async handleCountdownTimeout() {
+      // 清除所有定时器
+      if (this.timer) {
+        clearInterval(this.timer)
+        this.timer = null
+      }
+      if (this.countdownTimer) {
+        clearInterval(this.countdownTimer)
+        this.countdownTimer = null
+      }
+      
+      // 清除二维码
+      this.clearQRCode()
+      
+      // 显示超时提示
+      this.$Message.error('支付超时，二维码已失效')
+      
+      // 强制清理所有消息组件
+      this.forceClearMessages()
+      
+      // 延迟跳转，给消息显示时间
+      setTimeout(() => {
+        // 跳转到订单列表
+        this.$router.push('/member/trade')
+      }, 1000)
+    },
+    
+    // 强制清理所有消息组件
+    forceClearMessages() {
+      // 查找并移除所有消息组件
+      const messageElements = document.querySelectorAll('.sp-message, [class*="message"], [class*="Message"]')
+      messageElements.forEach(el => {
+        if (el && el.parentNode) {
+          el.parentNode.removeChild(el)
+        }
+      })
+      
+      // 清理可能存在的全局消息实例
+      if (window.messageInstance) {
+        try {
+          window.messageInstance.remove && window.messageInstance.remove()
+        } catch (e) {
+          console.log('清理消息实例失败:', e)
+        }
+      }
+    },
+    
+    clearQRCode() {
+      // 清除微信支付二维码（虽然现在不再使用，但保留以防万一）
+      const qrCanvas = document.getElementById('qr')
+      if (qrCanvas) {
+        const ctx = qrCanvas.getContext('2d')
+        ctx.clearRect(0, 0, qrCanvas.width, qrCanvas.height)
+      }
+      
+      // 清除二维码URL
+      this.qrCodeUrl = ''
+      
+      // 清除所有动态创建的二维码元素（包括支付宝和微信）
+      const allQrDivs = document.querySelectorAll('div[style*="justify-content: center"]')
+      allQrDivs.forEach(div => {
+        if (div.querySelector('img') && div.style.margin === '20px 0px') {
+          div.remove()
+        }
+      })
+      
+      // 更彻底地清除所有可能残留的二维码元素
+      const allImages = document.querySelectorAll('img[src*="qrcode"], img[src*="alipay"], img[src*="weixin"]')
+      allImages.forEach(img => {
+        const parentDiv = img.closest('div[style*="justify-content: center"]')
+        if (parentDiv) {
+          parentDiv.remove()
+        }
+      })
+      
+      // 重置支付状态显示
+      this.isPayment = true
     },
     async handleVoucherFunc(){
       const { has_check, order_id } = this.$route.query
@@ -598,23 +802,41 @@ export default {
     },
     async tradePaymentFinish() {
       const { order_id } = this.$route.query
-      // if (this.payment_id) {
-      const {
-        orderInfo: { total_fee, order_status, order_class }
-        // tradeInfo
-      } = await this.$api.member.getOrderInfo({ id: order_id })
-      if (order_status === 'PAYED' || order_status === 'CANCEL') {
-        //订单完成支付
-        clearInterval(this.timer)
-        this.$router.push(
-          `/finish/result?order_id=${order_id}&total_fee=${total_fee}&order_class=${order_class}&pay_status=${order_status}`
-        )
+      
+      try {
+        const {
+          orderInfo: { total_fee, order_status, order_class }
+        } = await this.$api.member.getOrderInfo({ id: order_id })
+        
+        // 只有当订单状态确实是已支付时才跳转
+        if (order_status === 'PAYED') {
+          // 订单完成支付
+          clearInterval(this.timer)
+          // 清除倒计时
+          this.resetCountdown()
+          // 清除二维码后再跳转
+          this.clearQRCode()
+          this.$router.push(
+            `/finish/result?order_id=${order_id}&total_fee=${total_fee}&order_class=${order_class}&pay_status=${order_status}`
+          )
+        }
+        // 注意：不再检查 CANCEL 状态，因为新订单可能初始状态就是 CANCEL
+      } catch (error) {
+        console.error('检查订单状态失败:', error)
       }
     }
     // }
   },
   beforeDestroy() {
     clearInterval(this.timer)
+    // 清除倒计时定时器
+    if (this.countdownTimer) {
+      clearInterval(this.countdownTimer)
+      this.countdownTimer = null
+    }
+    // 组件销毁时清除二维码
+    this.clearQRCode()
   }
 }
 </script>
+
