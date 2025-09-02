@@ -69,7 +69,7 @@
                       class="category-child__btn"
                       ctitleColor="#3B3B3B"
                       :mode="mode"
-                      :to="`/items?main_category=${sitem.category_id}`"
+                      :to="`/items?cat_id=${sitem.category_id}`"
                       >{{ sitem.category_name }}</linkPage
                     >
 
@@ -86,7 +86,7 @@
                         <linkPage
                           class="category-subchild__btn"
                           :mode="mode"
-                          :to="`/items?main_category=${titem.category_id}`"
+                          :to="`/items?cat_id=${titem.category_id}`"
                         >
                           {{ titem.category_name }}</linkPage
                         >
