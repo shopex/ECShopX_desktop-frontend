@@ -554,7 +554,7 @@ export default {
       const res = await this.$api.cart.getPaymentList(params)
       this.paymentList = res.map((item) => {
         return {
-          type: item.pay_channel,
+          type: item.pay_channel|| item.pay_type_code,
           img:
             item.pay_type_code === 'wxpaypc'
               ? wxpayImage
