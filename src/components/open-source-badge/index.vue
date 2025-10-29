@@ -18,58 +18,49 @@
 // +----------------------------------------------------------------------
 -->
 
-<style lang="scss">
-.sp-footer {
-  // Footer样式
-}
-</style>
-
 <template>
-  <div class="sp-footer">
-    <!-- 挂件 -->
-    <!-- <component
-      mode="render"
-      v-for="(wgt, index) in wgts"
-      :is="wgt.type"
-      :value="wgt"
-      :page-props="pageConfig"
-      :key="`wgt-${index}`"
-    ></component> -->
-    
-    <!-- 开源标识 -->
-    <OpenSourceBadge />
+  <div class="open-source-badge">
+    <img src="~/assets/imgs/powered-logo.png" alt="Powered by ECShopX" />
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
-import OpenSourceBadge from '@/components/open-source-badge'
-
 export default {
-  name: 'SpFooter',
-  components: {
-    OpenSourceBadge
-  },
+  name: 'OpenSourceBadge',
   data() {
-    return {
-      index: 0
-    }
-  },
-
-  computed: {
-    ...mapState({
-      // wgts: (state) => {
-      //   const res = state.footerTemplate
-      //   return res ? JSON.parse(res.params) : []
-      // },
-      pageConfig: (state) => {
-        return state.pageConfig
-      }
-    })
-  },
-
-  methods: {
-    toggleMenu(m) {}
+    return {}
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.open-source-badge {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px 0;
+  margin-top: 20px;
+  
+  img {
+    max-width: 120px;
+    height: auto;
+    object-fit: contain;
+  }
+  
+  // 响应式设计
+  @media (max-width: 768px) {
+    padding: 12px 0;
+    margin-top: 16px;
+    
+    img {
+      max-width: 100px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    img {
+      max-width: 80px;
+    }
+  }
+}
+</style>
