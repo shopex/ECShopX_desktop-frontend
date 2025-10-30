@@ -32,6 +32,6 @@ export const locales = [
   ]
   
   export const languageKey = 'i18n_redirected'
-  
-  export const defaultLocale = 'zh'
+  console.log('process.env.DEFAULT_LANG:', process.env.DEFAULT_LANG)
+  export const defaultLocale = process.env.DEFAULT_LANG || 'en'
   

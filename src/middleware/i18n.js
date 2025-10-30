@@ -26,7 +26,9 @@ export default function (context) {
   const zhPath = 'zh'
 
   const pathLang = getlanguageByPath(route.path) 
-
+  console.log('pathLang:', pathLang)
+  console.log('app.i18n.locale:', app.i18n.locale)
+  console.log('defaultLocale:', defaultLocale)
   let lang = pathLang || app.i18n.locale || defaultLocale
   const routePath = route.path;
   store.commit('SET_LANG', lang)
