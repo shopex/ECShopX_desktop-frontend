@@ -23,10 +23,10 @@ function reqErr(res, msg = '') {
 const setCountryCode = (config) => {
   // 添加多语言 country_code 字段
   let country_code = 'zh-CN'
-  
+
   try {
     let locale
-    
+
     if (process.client) {
       // 客户端：从 nuxti18n 获取当前语言
       if (window.$nuxt && window.$nuxt.$i18n) {
@@ -43,7 +43,7 @@ const setCountryCode = (config) => {
         locale = CreateAxios.content.store.state.locale
       }
     }
-    
+
     // 根据语言设置 country_code
     if (locale === 'en') {
       country_code = 'en-CN'
@@ -54,7 +54,7 @@ const setCountryCode = (config) => {
     console.warn('Failed to get locale, using default zh-CN:', e)
     country_code = 'zh-CN'
   }
-  console.log('country_code:', country_code)
+  // console.log('country_code:', country_code)
   return {
     ...config,
     country_code
@@ -105,14 +105,11 @@ class CreateAxios {
   }
 
   created() {
-    // console.log('CreateAxios Class created......')
     this.inst = axios.create()
     this.inst.defaults.timeout = process.env.NODE_ENV === 'production' ? 10000 : 30 * 1000
     this.inst.defaults.baseURL = process.env.VUE_APP_API_BASE_URL || '/'
     this.inst.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
     this.inst.interceptors.request.use((config) => {
-      console.log('interceptors.request 1:', config)
-      // console.log(config);
       const isGetMethod = config.method === 'get'
       const showError = config.showError === undefined ? true : config.showError
       let token, companyid
@@ -139,14 +136,9 @@ class CreateAxios {
           config.headers['origin'] = host
         }
       }
-      // console.log('request header:', config.headers)
       if (token) {
         config.headers.common['Authorization'] = `Bearer ${token}`
       }
-      // console.log('ECSHOPX_PC :', JSON.stringify(config))
-      // console.log(`[ECSHOPX_TOKEN]: ${token}`)
-      // console.log(`[COMPANY ID IS]: ${companyid}`)
-      // console.log('[CONFIG DATA IS]:', config.params, config.data)
       if (isGetMethod) {
         if (config.url != '/api/h5app/wxapp/trade/payment/alipay/result') {
           config.params = {

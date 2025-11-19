@@ -117,7 +117,6 @@ export const actions = {
     // }catch(err){
     //   console.log(err)
     // }
-    console.log('req.headers', req.headers)
     try {
       // const token = unescape(cookie.match(reg)[2]);
       // console.log("[token]:", token);
@@ -128,7 +127,6 @@ export const actions = {
     } catch (e) {
       // console.error(e)
     }
-    console.log('promise staring...')
     // const [headerTemplate, bodyTemplate, footerTemplate, seoInfo] = await Promise.all([
     //   app.$api.theme.getHeaderOrFooter({
     //     page_name: 'header'

@@ -40,7 +40,6 @@ export default {
       if (config.type != 'W0000') {
         _bodyTemplate.push(config)
       }else{
-      console.log('config', config)
         store.commit('setPageConfig', config)
       }
     })
@@ -110,7 +109,7 @@ export default {
         }
       })
     }
-    
+
     const query = this.$route.query;
     if (query) {
       this.alipayCallBack(query);

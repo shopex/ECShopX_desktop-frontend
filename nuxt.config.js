@@ -115,7 +115,7 @@ module.exports = {
    ** Nuxt.js modules
    */
   modules: [
-    
+
     ['nuxt-i18n', i18n],
     '@nuxtjs/device',
     // ['~/modules/axios'],
@@ -152,7 +152,7 @@ module.exports = {
 
       config.module.rules.forEach(rule => {
         if (rule.test && rule.test.toString().includes('scss')) {
-          console.log('SCSS RULE:', JSON.stringify(rule, null, 2));
+          // console.log('SCSS RULE:', JSON.stringify(rule, null, 2));
         }
       });
 
@@ -182,7 +182,7 @@ module.exports = {
     },
     unknownContextCritical: false,
     cssSourceMap: false,
-    
+
     optimization: {
       splitChunks: {
         cacheGroups: {
