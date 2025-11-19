@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.0.0](https://git.ishopex.cn/onex/ecshopx-newpc/compare/v3.21.0...v4.0.0) (2025-11-19)
+
+
+### Bug Fixes
+
+* 去除一些非必要文档 ([9ae272f](https://git.ishopex.cn/onex/ecshopx-newpc/commit/9ae272fd384479cfc020f4120cd68bb5e1784aaa))
+* **scope:** update package ([d733a9c](https://git.ishopex.cn/onex/ecshopx-newpc/commit/d733a9c64a652b38483f3db16a483296806f3669))
+* **scope:** update readme ([958707f](https://git.ishopex.cn/onex/ecshopx-newpc/commit/958707f09f91aa2b6716012aa0d0791cd90b1f28))
+
 ## [3.21.0](https://git.ishopex.cn/onex/ecshopx-newpc/compare/v3.20.0...v3.21.0) (2025-05-29)
 
 ## [3.20.0](https://git.ishopex.cn/onex/ecshopx-newpc/compare/v3.19.4...v3.20.0) (2025-04-27)
