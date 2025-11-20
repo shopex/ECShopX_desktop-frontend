@@ -22,7 +22,7 @@ VUE_APP_HOST=
 # Backend API Base URL
 VUE_APP_API_BASE_URL=
 
-# Default Language
+# Default Language Version（Chinese:zhcn/English:en)
 VUE_APP_DEFAULT_LANG=en
 ```
 
