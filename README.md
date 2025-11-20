@@ -32,3 +32,12 @@ npm run dev
 ```
 npm run build
 ```
+
+## License
+Each ECShopX source file included in this distribution is licensed under Apache 2.0 or the terms and conditions of the applicable Commercial License agreement between Licensee/Customer and shopeX.
+
+Open Software License (Apache 2.0) – Please see LICENSE.txt for the full text of the Apache 2.0 license.
+
+Subject to Licensee's/Customer's payment of fees and compliance with the terms and conditions of the applicable Commercial License agreement between Licensee/Customer and shopeX, the terms and conditions of the applicable Commercial License agreement between Licensee/Customer and shopeX supersede the Apache 2.0 license for each source file.  
+
+每个包含在本发行版中的 ECShopX 源文件，均依据 Apache 2.0 开源许可证 或者 被许可方/客户与商派之间适用的商业授权文件中的条款与条件 进行授权。
