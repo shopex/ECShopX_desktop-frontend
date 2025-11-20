@@ -21,6 +21,9 @@ VUE_APP_HOST=
 
 # Backend API Base URL
 VUE_APP_API_BASE_URL=
+
+# Default Language
+VUE_APP_DEFAULT_LANG=en
 ```
 
 ### Run project 
